@@ -3,310 +3,826 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d172d">
 <title>Rota Aprova</title>
 
 <style>
 :root {
+  --bg: #f4f7fc;
+  --card: #ffffff;
+  --text: #17243a;
+  --muted: #64748b;
+  --border: #e1e7f0;
+  --primary: #2878e8;
+  --header: rgba(255,255,255,.94);
+  --shadow: 0 8px 28px rgba(20,40,75,.07);
+}
+
+body.dark {
   --bg: #0d172d;
   --card: #162440;
   --text: #ffffff;
   --muted: #b8c5dc;
   --border: #263653;
-  --accent: #315b91;
-}
-
-body.light {
-  --bg: #ffffff;
-  --card: #f0f4fa;
-  --text: #244778;
-  --muted: #53647e;
-  --border: #dce3f0;
-  --accent: #426da5;
+  --primary: #4d9aff;
+  --header: rgba(13,23,45,.95);
+  --shadow: 0 8px 28px rgba(0,0,0,.16);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, sans-serif;
-  transition: .3s;
+  transition: background .2s, color .2s;
+}
+
+button, input, select { font: inherit; }
+
+button { cursor: pointer; }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.container {
+  width: min(1120px, 92%);
+  margin: auto;
 }
 
 header {
-  height: 65px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 0 18px;
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
+  z-index: 100;
+  background: var(--header);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 
-header h2 { margin: 0; }
-
-.menu-btn {
-  font-size: 25px;
-  background: none;
-  color: var(--text);
-  padding: 5px;
-}
-
-.layout {
+.header-content {
+  min-height: 70px;
   display: flex;
-  min-height: calc(100vh - 65px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 }
 
-aside {
-  width: 230px;
-  background: var(--card);
-  padding: 20px 12px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border);
+.brand {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
 }
 
-aside button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 8px;
+.brand span { color: var(--primary); }
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.top-nav a {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.btn {
+  border: 0;
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+}
+
+.btn-outline {
   background: transparent;
   color: var(--text);
+  border: 1px solid var(--border);
 }
 
-aside button:hover,
-aside button.active {
-  background: var(--accent);
-  color: white;
+.theme-button {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 9px 11px;
+  background: var(--card);
+  color: var(--text);
 }
 
-main {
-  flex: 1;
-  padding: 25px;
-  min-width: 0;
+.hero {
+  padding: 85px 0 75px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(40,120,232,.16), transparent 55%);
+}
+
+.hero-content { max-width: 790px; margin: auto; }
+
+.hero h1 {
+  font-size: clamp(34px, 6vw, 57px);
+  line-height: 1.12;
+  margin: 0 0 20px;
+  letter-spacing: -1.5px;
+}
+
+.hero h1 span { color: var(--primary); }
+
+.hero p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0 auto 28px;
+  max-width: 650px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section {
+  padding: 55px 0;
+}
+
+.section-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 30px;
+}
+
+.section-heading h2 { font-size: 29px; }
+
+.section-heading p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
 }
 
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 15px;
   padding: 23px;
-  margin-bottom: 18px;
-}
-
-h1 { font-size: 30px; }
-p { color: var(--muted); line-height: 1.6; }
-
-button {
-  border: none;
-  border-radius: 9px;
-  padding: 12px 16px;
-  background: white;
-  color: black;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
+  box-shadow: var(--shadow);
 }
 
 .card h3 { margin-top: 0; }
 
-#tema {
-  margin-left: auto;
+.card p {
+  color: var(--muted);
+  line-height: 1.6;
 }
+
+.card-icon {
+  font-size: 27px;
+  margin-bottom: 12px;
+}
+
+.cta {
+  background: #174c91;
+  color: white;
+  border-radius: 18px;
+  padding: 38px 25px;
+  text-align: center;
+  margin: 35px auto 60px;
+}
+
+.cta p {
+  color: #dceaff;
+  line-height: 1.6;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+
+/* TELAS DE LOGIN E PAINEL */
 
 .page { display: none; }
 .page.active { display: block; }
 
-input {
-  width: 100%;
-  padding: 13px;
-  margin: 8px 0 15px;
+.auth-wrapper {
+  max-width: 460px;
+  margin: 55px auto;
+  padding: 28px;
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
 }
 
-@media(max-width: 650px) {
-  aside {
-    position: fixed;
-    top: 65px;
-    bottom: 0;
-    left: -250px;
-    z-index: 10;
-    transition: .3s;
-    box-shadow: 4px 0 15px #0003;
+.auth-wrapper h2 { margin-top: 0; }
+
+.auth-wrapper input {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.auth-wrapper button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 17px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.auth-wrapper .secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.auth-note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 75vh;
+  gap: 22px;
+  padding: 25px 0;
+}
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 16px;
+  align-self: flex-start;
+  position: sticky;
+  top: 85px;
+}
+
+.sidebar h3 { margin: 5px 8px 15px; }
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 12px;
+  margin: 3px 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+  background: rgba(40,120,232,.16);
+  color: var(--primary);
+}
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-page { display: none; }
+.student-page.active { display: block; }
+
+.welcome-card {
+  padding: 25px;
+  border-radius: 16px;
+  background: linear-gradient(120deg,#174c91,#2878e8);
+  color: white;
+  margin-bottom: 20px;
+}
+
+.welcome-card h2 { margin-top: 0; }
+
+.stats-grid, .content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 15px;
+  margin: 18px 0;
+}
+
+.stat-card, .content-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 18px;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 25px;
+  margin-top: 8px;
+}
+
+.content-card h3 { margin-top: 0; }
+
+.content-card p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.student-page h2 { margin-top: 8px; }
+
+.action-btn {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 17px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+}
+
+.settings-select {
+  padding: 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  max-width: 100%;
+}
+
+.mobile-menu-button { display: none; }
+
+@media(max-width:760px) {
+  .header-content {
+    flex-wrap: wrap;
+    padding: 12px 0;
   }
 
-  aside.open { left: 0; }
+  .top-nav { display: none; }
 
-  main { padding: 17px; }
-  h1 { font-size: 25px; }
+  .brand { font-size: 19px; }
+
+  .header-actions { gap: 6px; }
+
+  .header-actions .btn {
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+
+  .hero { padding: 60px 0; }
+
+  .hero p { font-size: 16px; }
+
+  .dashboard { display: block; }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 65px;
+    left: 10px;
+    bottom: 10px;
+    width: min(270px,80vw);
+    overflow-y: auto;
+    box-shadow: 0 10px 35px rgba(0,0,0,.3);
+  }
+
+  .sidebar.open { display: block; }
+
+  .mobile-menu-button {
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+
+  .dashboard-main { width: 100%; }
+
+  .auth-wrapper { margin: 25px 10px; }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <button class="menu-btn" onclick="menu()">☰</button>
-  <h2>📚 Rota Aprova</h2>
-  <button id="tema" onclick="trocarTema()">☀️ Claro</button>
+<!-- CABEÇALHO -->
+<header id="mainHeader">
+  <div class="container header-content">
+    <a class="brand" href="#" onclick="showPublic();return false;">
+      📚 Rota <span>Aprova</span>
+    </a>
+
+    <nav class="top-nav">
+      <a href="#inicio">Início</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-button" id="themeButton" type="button"
+        aria-label="Alternar tema">◐</button>
+      <button class="btn btn-outline" type="button"
+        onclick="showPage('login')">Entrar</button>
+      <button class="btn" type="button"
+        onclick="showPage('signup')">Criar conta</button>
+    </div>
+  </div>
 </header>
 
-<div class="layout">
+<!-- PÁGINA INICIAL -->
+<div id="publicSite">
 
-<aside id="sidebar">
-  <button class="active" onclick="pagina('inicio',this)">🏠 Início</button>
-  <button onclick="pagina('entrar',this)">🔑 Entrar</button>
-  <button onclick="pagina('cadastro',this)">👤 Criar conta</button>
-  <button onclick="pagina('concursos',this)">🎓 Concursos</button>
-  <button onclick="pagina('estudos',this)">📖 Métodos de estudo</button>
-  <button onclick="pagina('privacidade',this)">🔒 Privacidade (LGPD)</button>
-</aside>
+  <section class="hero" id="inicio">
+    <div class="container hero-content">
+      <h1>Sua preparação começa com a <span>Rota certa.</span></h1>
+      <p>
+        Organize seus estudos, conheça oportunidades e prepare-se
+        para alcançar seus objetivos com o Rota Aprova.
+      </p>
 
-<main>
-
-<section id="inicio" class="page active">
-  <div class="card">
-    <h1>Seu futuro começa aqui!</h1>
-    <p>Reforço escolar e preparação para os concursos do Ensino Médio.</p>
-    <p>Aprenda, pratique e prepare-se para conquistar seus objetivos.</p>
-    <button onclick="pagina('cadastro')">Criar conta gratuita</button>
-    <button onclick="pagina('entrar')">Já tenho conta</button>
-  </div>
-
-  <div class="cards">
-    <div class="card">
-      <h3>📝 Avaliação inicial</h3>
-      <p>Descubra o que precisa estudar primeiro.</p>
+      <div class="hero-actions">
+        <button class="btn" onclick="showPage('signup')">
+          Começar agora
+        </button>
+        <button class="btn btn-outline" onclick="showPage('login')">
+          Já tenho uma conta
+        </button>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>🎯 Concursos</h3>
-      <p>Conheça provas e instituições.</p>
+  <section class="section" id="recursos">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Tudo para sua preparação</h2>
+        <p>
+          Um espaço pensado para ajudar você a estudar,
+          praticar e acompanhar sua jornada.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Concursos</h3>
+          <p>Conheça instituições, oportunidades e informações importantes.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📝</div>
+          <h3>Questões</h3>
+          <p>Pratique seus conhecimentos com exercícios por matéria.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⏱️</div>
+          <h3>Simulados</h3>
+          <p>Prepare-se com atividades para testar seus conhecimentos.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Materiais</h3>
+          <p>Organize apostilas, resumos e conteúdos de estudo.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Métodos de estudo</h3>
+          <p>Descubra maneiras de organizar sua rotina e revisar conteúdos.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <h3>Cronograma</h3>
+          <p>Planeje sua preparação e acompanhe suas atividades.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>📚 Métodos de estudo</h3>
-      <p>Aprenda novas estratégias de aprendizagem.</p>
+  <section class="section" id="sobre">
+    <div class="container">
+      <div class="cta">
+        <h2>Seu próximo objetivo começa hoje.</h2>
+        <p>
+          Dê o primeiro passo e organize sua jornada de preparação.
+        </p>
+        <button class="btn" onclick="showPage('signup')">
+          Conhecer o Rota Aprova
+        </button>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>⏱️ Simulados</h3>
-      <p>Prepare-se para testar seus conhecimentos.</p>
+  <footer>
+    <div class="container">
+      © 2026 Rota Aprova — Educação e preparação.
     </div>
-  </div>
-</section>
-
-<section id="entrar" class="page">
-  <div class="card">
-    <h1>Entrar</h1>
-    <p>Acesse sua área de estudante.</p>
-    <label>E-mail</label>
-    <input type="email" placeholder="Digite seu e-mail">
-    <label>Senha</label>
-    <input type="password" placeholder="Digite sua senha">
-    <button onclick="alert('O sistema de login será desenvolvido na próxima etapa!')">Entrar</button>
-  </div>
-</section>
-
-<section id="cadastro" class="page">
-  <div class="card">
-    <h1>Criar conta</h1>
-    <p>Comece sua jornada de aprendizagem.</p>
-    <label>Nome completo</label>
-    <input type="text" placeholder="Seu nome">
-    <label>E-mail</label>
-    <input type="email" placeholder="Seu e-mail">
-    <label>Senha</label>
-    <input type="password" placeholder="Crie uma senha">
-    <button onclick="alert('O cadastro será ativado na próxima etapa!')">Cadastrar</button>
-  </div>
-</section>
-
-<section id="concursos" class="page">
-  <div class="card">
-    <h1>Concursos</h1>
-    <p>Conheça as instituições acompanhadas pelo Rota Aprova.</p>
-    <div class="cards">
-      <div class="card">Colégio Militar</div>
-      <div class="card">Colégio Naval</div>
-      <div class="card">EPCAR</div>
-      <div class="card">CEFET</div>
-    </div>
-  </div>
-</section>
-
-<section id="estudos" class="page">
-  <div class="card">
-    <h1>Métodos de estudo</h1>
-    <p>Organize sua rotina e desenvolva bons hábitos de aprendizagem.</p>
-    <h3>📖 Estudo ativo</h3>
-    <p>Pratique respondendo perguntas sobre o conteúdo.</p>
-    <h3>⏱️ Organização do tempo</h3>
-    <p>Divida seus estudos em períodos e faça pausas.</p>
-    <h3>🔄 Revisão</h3>
-    <p>Revise os conteúdos para reforçar o aprendizado.</p>
-  </div>
-</section>
-
-<section id="privacidade" class="page">
-  <div class="card">
-    <h1>Privacidade e LGPD</h1>
-    <p>A proteção dos dados dos estudantes é importante para o Rota Aprova.</p>
-    <p>Esta seção será ampliada com nossa política de privacidade antes de disponibilizarmos cadastros reais.</p>
-  </div>
-</section>
-
-</main>
+  </footer>
 </div>
 
+<!-- LOGIN E CADASTRO -->
+<section id="authApp" class="page">
+  <div class="auth-wrapper" id="loginPanel">
+    <h2>Entrar na sua conta</h2>
+    <p class="auth-note">Acesse a área do estudante do Rota Aprova.</p>
+
+    <label for="loginEmail">E-mail</label>
+    <input id="loginEmail" type="email" placeholder="Seu e-mail">
+
+    <label for="loginPassword">Senha</label>
+    <input id="loginPassword" type="password" placeholder="Sua senha">
+
+    <button type="button" onclick="enterDemo()">Entrar</button>
+
+    <p class="auth-note">
+      Esta versão é apenas uma demonstração visual.
+      Não use uma senha real.
+    </p>
+
+    <p>Não tem uma conta?
+      <a href="#" onclick="showSignup();return false;">Criar conta</a>
+    </p>
+
+    <button class="secondary" type="button" onclick="showPublic()">
+      Voltar ao início
+    </button>
+  </div>
+
+  <div class="auth-wrapper" id="signupPanel" style="display:none">
+    <h2>Criar sua conta</h2>
+    <p class="auth-note">Comece sua jornada de preparação.</p>
+
+    <label for="signupName">Nome</label>
+    <input id="signupName" type="text" placeholder="Seu nome">
+
+    <label for="signupEmail">E-mail</label>
+    <input id="signupEmail" type="email" placeholder="Seu e-mail">
+
+    <label for="signupPassword">Senha</label>
+    <input id="signupPassword" type="password" placeholder="Crie uma senha">
+
+    <button type="button" onclick="enterDemo()">Criar conta</button>
+
+    <p class="auth-note">
+      Cadastro demonstrativo: os dados não serão enviados nem salvos.
+    </p>
+
+    <p>Já tem uma conta?
+      <a href="#" onclick="showLogin();return false;">Entrar</a>
+    </p>
+
+    <button class="secondary" type="button" onclick="showPublic()">
+      Voltar ao início
+    </button>
+  </div>
+</section>
+
+<!-- PAINEL DO ESTUDANTE -->
+<section id="studentApp" class="page">
+  <div class="container dashboard">
+
+    <aside class="sidebar" id="studentSidebar">
+      <h3>📚 Rota Aprova</h3>
+
+      <button class="active" onclick="studentPage('student-home',this)">🏠 Visão geral</button>
+      <button onclick="studentPage('student-contests',this)">🎯 Concursos</button>
+      <button onclick="studentPage('student-questions',this)">📝 Questões</button>
+      <button onclick="studentPage('student-simulations',this)">⏱️ Simulados</button>
+      <button onclick="studentPage('student-materials',this)">📚 Materiais</button>
+      <button onclick="studentPage('student-methods',this)">🧠 Métodos de estudo</button>
+      <button onclick="studentPage('student-schedule',this)">📅 Cronograma</button>
+      <button onclick="studentPage('student-profile',this)">👤 Perfil</button>
+      <button onclick="studentPage('student-settings',this)">⚙️ Configurações</button>
+      <button onclick="showPublic()">↩ Sair do painel</button>
+    </aside>
+
+    <main class="dashboard-main">
+      <button class="mobile-menu-button action-btn"
+        onclick="toggleStudentMenu()">☰ Menu</button>
+
+      <!-- VISÃO GERAL -->
+      <section id="student-home" class="student-page active">
+        <div class="welcome-card">
+          <h2>Bem-vindo ao Rota Aprova!</h2>
+          <p>Sua jornada de preparação começa aqui.</p>
+          <p>Organize seus estudos, pratique e acompanhe sua evolução.</p>
+        </div>
+
+        <h2>Seu espaço de estudos</h2>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span>Questões respondidas</span>
+            <strong>0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Simulados realizados</span>
+            <strong>0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Matérias estudadas</span>
+            <strong>0</strong>
+          </div>
+        </div>
+
+        <h2>Acesso rápido</h2>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>🎯 Concursos</h3>
+            <p>Conheça as opções de concursos e processos seletivos.</p>
+            <button class="action-btn"
+              onclick="studentPage('student-contests')">Acessar</button>
+          </div>
+
+          <div class="content-card">
+            <h3>📝 Questões</h3>
+            <p>Pratique seus conhecimentos com exercícios.</p>
+            <button class="action-btn"
+              onclick="studentPage('student-questions')">Acessar</button>
+          </div>
+
+          <div class="content-card">
+            <h3>📅 Cronograma</h3>
+            <p>Organize sua rotina de preparação.</p>
+            <button class="action-btn"
+              onclick="studentPage('student-schedule')">Acessar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONCURSOS -->
+      <section id="student-contests" class="student-page">
+        <h2>Concursos e instituições</h2>
+        <p>Explore algumas opções para conhecer melhor.</p>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>Colégio Militar</h3>
+            <p>Informações sobre ingresso, preparação e conteúdos.</p>
+          </div>
+          <div class="content-card">
+            <h3>Colégio Naval</h3>
+            <p>Conheça o processo seletivo e as etapas de preparação.</p>
+          </div>
+          <div class="content-card">
+            <h3>EPCAR</h3>
+            <p>Informações gerais sobre a seleção e os estudos.</p>
+          </div>
+          <div class="content-card">
+            <h3>CEFET</h3>
+            <p>Conheça as oportunidades de ingresso e os conteúdos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUESTÕES -->
+      <section id="student-questions" class="student-page">
+        <h2>Questões</h2>
+        <p>Área destinada à prática de exercícios por matéria.</p>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>Matemática</h3>
+            <p>Exercícios e atividades de matemática.</p>
+          </div>
+          <div class="content-card">
+            <h3>Português</h3>
+            <p>Interpretação de texto e gramática.</p>
+          </div>
+          <div class="content-card">
+            <h3>Ciências</h3>
+            <p>Questões de ciências e conhecimentos gerais.</p>
+          </div>
+          <div class="content-card">
+            <h3>História e Geografia</h3>
+            <p>Pratique os conteúdos dessas matérias.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIMULADOS -->
+      <section id="student-simulations" class="student-page">
+        <h2>Simulados</h2>
+        <p>Prepare-se com simulados organizados por instituição e matéria.</p>
+
+        <div class="content-card">
+          <h3>Meus simulados</h3>
+          <p>Quando os simulados forem adicionados, eles aparecerão nesta área.</p>
+        </div>
+      </section>
+
+      <!-- MATERIAIS -->
+      <section id="student-materials" class="student-page">
+        <h2>Materiais de estudo</h2>
+        <p>Um espaço para reunir conteúdos e materiais de preparação.</p>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>📄 Apostilas</h3>
+            <p>Materiais organizados por matéria.</p>
+          </div>
+          <div class="content-card">
+            <h3>📌 Resumos</h3>
+            <p>Revisões e conteúdos importantes.</p>
+          </div>
+          <div class="content-card">
+            <h3>🎥 Aulas</h3>
+            <p>Espaço para conteúdos em vídeo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MÉTODOS DE ESTUDO -->
+      <section id="student-methods" class="student-page">
+        <h2>Métodos de estudo</h2>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>Estudo ativo</h3>
+            <p>Aprenda praticando, respondendo perguntas e explicando o conteúdo com suas palavras.</p>
+          </div>
+          <div class="content-card">
+            <h3>Gestão do tempo</h3>
+            <p>Divida o estudo em períodos e faça pausas para manter a organização.</p>
+          </div>
+          <div class="content-card">
+            <h3>Revisão</h3>
+            <p>Retome os assuntos estudados para reforçar a aprendizagem.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CRONOGRAMA -->
+      <section id="student-schedule" class="student-page">
+        <h2>Meu cronograma</h2>
+        <p>Organize os horários e as matérias que deseja estudar.</p>
+
+        <div class="content-card">
+          <h3>Planejamento semanal</h3>
+          <p>Em breve, você poderá organizar sua rotina de estudos nesta área.</p>
+        </div>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="student-profile" class="student-page">
+        <h2>Meu perfil</h2>
+
+        <div class="content-card">
+          <h3>Estudante</h3>
+          <p>Esta é uma área demonstrativa do perfil do estudante.</p>
+          <p>Uma versão futura poderá permitir a personalização do perfil.</p>
+        </div>
+      </section>
+
+      <!-- CONFIGURAÇÕES -->
+      <section id="student-settings" class="student-page">
+        <h2>Configurações</h2>
+
+        <div class="content-card">
+          <h3>Aparência</h3>
+          <p>Escolha como deseja visualizar o Rota Aprova.</p>
+
+          <label for="themePreference">Tema do site</label>
+          <br><br>
+
+          <select id="themePreference" class="settings-select"
+            onchange="setThemePreference(this.value)">
+            <option value="system">Seguir o tema do aparelho</option>
+            <option value="light">Modo claro</option>
+            <option value="dark">Modo escuro</option>
+          </select>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</section>
+
+<!-- FUNÇÕES DO SITE -->
 <script>
-function menu() {
-  document.getElementById("sidebar").classList.toggle("open");
-}
 
-function pagina(id, botao) {
-  document.querySelectorAll(".page").forEach(p => {
-    p.classList.remove("active");
-  });
+/* NAVEGAÇÃO ENTRE AS ÁREAS */
 
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll("aside button").forEach(b => {
-    b.classList.remove("active");
-  });
-
-  if (botao) botao.classList.add("active");
-
-  document.getElementById("sidebar").classList.remove("open");
-  window.scrollTo(0, 0);
-}
-
-function trocarTema() {
-  document.body.classList.toggle("light");
-
-  const claro = document.body.classList.contains("light");
-
-  document.getElementById("tema").textContent =
-    claro ? "🌙 Escuro" : "☀️ Claro";
-
-  localStorage.setItem("tema", claro ? "claro" : "escuro");
-}
-
-if (localStorage.getItem("tema") === "claro") {
-  document.body.classList.add("light");
-  document.getElementById("tema").textContent = "🌙 Escuro";
-}
-</script>
-
-</body>
-</html>
+function showPage(page) {
+  document.getElementById("publicSite").style.disp
