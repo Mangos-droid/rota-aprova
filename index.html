@@ -1,96 +1,312 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rota Aprova</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rota Aprova</title>
 
-    <style>
-        :root {
-            --fundo: #0d172d;
-            --cartao: #162440;
-            --texto: #ffffff;
-            --secundario: #b8c5dc;
-            --botao: #ffffff;
-            --borda: #263653;
-        }
+<style>
+:root {
+  --bg: #0d172d;
+  --card: #162440;
+  --text: #ffffff;
+  --muted: #b8c5dc;
+  --border: #263653;
+  --accent: #315b91;
+}
 
-        body.claro {
-            --fundo: #ffffff;
-            --cartao: #f0f4fa;
-            --texto: #244778;
-            --secundario: #53647e;
-            --botao: #ffffff;
-            --borda: #dce3f0;
-        }
+body.light {
+  --bg: #ffffff;
+  --card: #f0f4fa;
+  --text: #244778;
+  --muted: #53647e;
+  --border: #dce3f0;
+  --accent: #426da5;
+}
 
-        body {
-            background: var(--fundo);
-            color: var(--texto);
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 25px;
-            transition: 0.3s;
-        }
+* { box-sizing: border-box; }
 
-        .cartao {
-            background: var(--cartao);
-            border: 1px solid var(--borda);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 400px;
-        }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  transition: .3s;
+}
 
-        p {
-            color: var(--secundario);
-        }
+header {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 18px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+}
 
-        button {
-            background: var(--botao);
-            color: #000000;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            margin: 8px;
-            cursor: pointer;
-        }
-    </style>
+header h2 { margin: 0; }
+
+.menu-btn {
+  font-size: 25px;
+  background: none;
+  color: var(--text);
+  padding: 5px;
+}
+
+.layout {
+  display: flex;
+  min-height: calc(100vh - 65px);
+}
+
+aside {
+  width: 230px;
+  background: var(--card);
+  padding: 20px 12px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+}
+
+aside button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+  background: transparent;
+  color: var(--text);
+}
+
+aside button:hover,
+aside button.active {
+  background: var(--accent);
+  color: white;
+}
+
+main {
+  flex: 1;
+  padding: 25px;
+  min-width: 0;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 23px;
+  margin-bottom: 18px;
+}
+
+h1 { font-size: 30px; }
+p { color: var(--muted); line-height: 1.6; }
+
+button {
+  border: none;
+  border-radius: 9px;
+  padding: 12px 16px;
+  background: white;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.card h3 { margin-top: 0; }
+
+#tema {
+  margin-left: auto;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0 15px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+@media(max-width: 650px) {
+  aside {
+    position: fixed;
+    top: 65px;
+    bottom: 0;
+    left: -250px;
+    z-index: 10;
+    transition: .3s;
+    box-shadow: 4px 0 15px #0003;
+  }
+
+  aside.open { left: 0; }
+
+  main { padding: 17px; }
+  h1 { font-size: 25px; }
+}
+</style>
 </head>
 
 <body>
 
-    <button onclick="trocarTema()" id="tema">
-        ☀️ Modo claro
-    </button>
+<header>
+  <button class="menu-btn" onclick="menu()">☰</button>
+  <h2>📚 Rota Aprova</h2>
+  <button id="tema" onclick="trocarTema()">☀️ Claro</button>
+</header>
 
-    <h1>Rota Aprova</h1>
+<div class="layout">
 
-    <div class="cartao">
-        <h2>Seu espaço de aprendizagem!</h2>
-        <p>Aqui você aprende e pratica!</p>
-        <button>Começar a estudar</button>
+<aside id="sidebar">
+  <button class="active" onclick="pagina('inicio',this)">🏠 Início</button>
+  <button onclick="pagina('entrar',this)">🔑 Entrar</button>
+  <button onclick="pagina('cadastro',this)">👤 Criar conta</button>
+  <button onclick="pagina('concursos',this)">🎓 Concursos</button>
+  <button onclick="pagina('estudos',this)">📖 Métodos de estudo</button>
+  <button onclick="pagina('privacidade',this)">🔒 Privacidade (LGPD)</button>
+</aside>
+
+<main>
+
+<section id="inicio" class="page active">
+  <div class="card">
+    <h1>Seu futuro começa aqui!</h1>
+    <p>Reforço escolar e preparação para os concursos do Ensino Médio.</p>
+    <p>Aprenda, pratique e prepare-se para conquistar seus objetivos.</p>
+    <button onclick="pagina('cadastro')">Criar conta gratuita</button>
+    <button onclick="pagina('entrar')">Já tenho conta</button>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>📝 Avaliação inicial</h3>
+      <p>Descubra o que precisa estudar primeiro.</p>
     </div>
 
-    <script>
-        function trocarTema() {
-            document.body.classList.toggle("claro");
+    <div class="card">
+      <h3>🎯 Concursos</h3>
+      <p>Conheça provas e instituições.</p>
+    </div>
 
-            const claro = document.body.classList.contains("claro");
+    <div class="card">
+      <h3>📚 Métodos de estudo</h3>
+      <p>Aprenda novas estratégias de aprendizagem.</p>
+    </div>
 
-            document.getElementById("tema").innerHTML =
-                claro ? "🌙 Modo escuro" : "☀️ Modo claro";
+    <div class="card">
+      <h3>⏱️ Simulados</h3>
+      <p>Prepare-se para testar seus conhecimentos.</p>
+    </div>
+  </div>
+</section>
 
-            localStorage.setItem("tema", claro ? "claro" : "escuro");
-        }
+<section id="entrar" class="page">
+  <div class="card">
+    <h1>Entrar</h1>
+    <p>Acesse sua área de estudante.</p>
+    <label>E-mail</label>
+    <input type="email" placeholder="Digite seu e-mail">
+    <label>Senha</label>
+    <input type="password" placeholder="Digite sua senha">
+    <button onclick="alert('O sistema de login será desenvolvido na próxima etapa!')">Entrar</button>
+  </div>
+</section>
 
-        if (localStorage.getItem("tema") === "claro") {
-            document.body.classList.add("claro");
-            document.getElementById("tema").innerHTML = "🌙 Modo escuro";
-        }
-    </script>
+<section id="cadastro" class="page">
+  <div class="card">
+    <h1>Criar conta</h1>
+    <p>Comece sua jornada de aprendizagem.</p>
+    <label>Nome completo</label>
+    <input type="text" placeholder="Seu nome">
+    <label>E-mail</label>
+    <input type="email" placeholder="Seu e-mail">
+    <label>Senha</label>
+    <input type="password" placeholder="Crie uma senha">
+    <button onclick="alert('O cadastro será ativado na próxima etapa!')">Cadastrar</button>
+  </div>
+</section>
+
+<section id="concursos" class="page">
+  <div class="card">
+    <h1>Concursos</h1>
+    <p>Conheça as instituições acompanhadas pelo Rota Aprova.</p>
+    <div class="cards">
+      <div class="card">Colégio Militar</div>
+      <div class="card">Colégio Naval</div>
+      <div class="card">EPCAR</div>
+      <div class="card">CEFET</div>
+    </div>
+  </div>
+</section>
+
+<section id="estudos" class="page">
+  <div class="card">
+    <h1>Métodos de estudo</h1>
+    <p>Organize sua rotina e desenvolva bons hábitos de aprendizagem.</p>
+    <h3>📖 Estudo ativo</h3>
+    <p>Pratique respondendo perguntas sobre o conteúdo.</p>
+    <h3>⏱️ Organização do tempo</h3>
+    <p>Divida seus estudos em períodos e faça pausas.</p>
+    <h3>🔄 Revisão</h3>
+    <p>Revise os conteúdos para reforçar o aprendizado.</p>
+  </div>
+</section>
+
+<section id="privacidade" class="page">
+  <div class="card">
+    <h1>Privacidade e LGPD</h1>
+    <p>A proteção dos dados dos estudantes é importante para o Rota Aprova.</p>
+    <p>Esta seção será ampliada com nossa política de privacidade antes de disponibilizarmos cadastros reais.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+function menu() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+function pagina(id, botao) {
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll("aside button").forEach(b => {
+    b.classList.remove("active");
+  });
+
+  if (botao) botao.classList.add("active");
+
+  document.getElementById("sidebar").classList.remove("open");
+  window.scrollTo(0, 0);
+}
+
+function trocarTema() {
+  document.body.classList.toggle("light");
+
+  const claro = document.body.classList.contains("light");
+
+  document.getElementById("tema").textContent =
+    claro ? "🌙 Escuro" : "☀️ Claro";
+
+  localStorage.setItem("tema", claro ? "claro" : "escuro");
+}
+
+if (localStorage.getItem("tema") === "claro") {
+  document.body.classList.add("light");
+  document.getElementById("tema").textContent = "🌙 Escuro";
+}
+</script>
 
 </body>
 </html>
