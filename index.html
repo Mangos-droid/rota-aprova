@@ -49,13 +49,12 @@ a { color: var(--primary); text-decoration: none; }
 
 .container {
   width: 100%;
-  max-width: none;
   margin: auto;
   padding-left: clamp(16px, 3vw, 48px);
   padding-right: clamp(16px, 3vw, 48px);
 }
 
-/* CABEÇALHO */
+/* Cabeçalho */
 
 header {
   position: sticky;
@@ -98,8 +97,7 @@ header {
   border-bottom: 3px solid transparent;
 }
 
-.top-nav a.active,
-.top-nav a[aria-current="location"] {
+.top-nav a.active {
   font-weight: 900;
   color: var(--primary);
   border-bottom-color: var(--primary);
@@ -135,7 +133,7 @@ header {
   color: var(--text);
 }
 
-/* PÁGINA INICIAL */
+/* Página inicial */
 
 .hero {
   min-height: calc(100vh - var(--header-height));
@@ -146,11 +144,6 @@ header {
   text-align: center;
   background:
     radial-gradient(circle at 50% 0%, rgba(40,120,232,.16), transparent 55%);
-}
-
-.hero-content {
-  width: 100%;
-  max-width: none;
 }
 
 .hero h1 {
@@ -230,7 +223,7 @@ footer {
   scroll-margin-top: calc(var(--header-height) + 16px);
 }
 
-/* LOGIN */
+/* Login */
 
 .page { display: none; }
 .page.active { display: block; }
@@ -279,7 +272,7 @@ footer {
   line-height: 1.5;
 }
 
-/* PAINEL */
+/* Painel */
 
 .dashboard {
   display: flex;
@@ -364,7 +357,7 @@ footer {
 
 .mobile-menu-button { display: none; }
 
-/* QUADRO DA AVALIAÇÃO */
+/* Quadro vermelho */
 
 .assessment-card {
   width: 100%;
@@ -372,9 +365,9 @@ footer {
   padding: 28px;
   margin: 0 0 24px;
   border-radius: 16px;
-  background: #fce7e7;
-  color: #7f1d1d;
-  border: 1px solid #f3baba;
+  background: #b91c1c;
+  color: white;
+  border: 1px solid #b91c1c;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -383,26 +376,27 @@ footer {
 .assessment-card h2 {
   margin: 0 0 18px;
   font-size: 30px;
+  color: white;
 }
 
 .assessment-card p {
   margin: 0 0 28px;
   font-size: 18px;
   line-height: 1.6;
-  max-width: 650px;
-  color: #843b3b;
+  max-width: 750px;
+  color: white;
 }
 
 .assessment-card button {
   margin-top: auto;
   padding: 14px 22px;
-  background: #b91c1c;
-  color: white;
+  background: white;
+  color: #991b1b;
 }
 
-.assessment-card button:hover { background: #991b1b; }
+.assessment-card button:hover { background: #fee2e2; }
 
-/* PERGUNTAS E RESULTADOS */
+/* Perguntas */
 
 .quiz-box {
   background: var(--card);
@@ -474,17 +468,12 @@ th, td {
   border-bottom: 1px solid var(--border);
 }
 
-.review-item {
-  padding: 15px 0;
-  border-bottom: 1px solid var(--border);
-  line-height: 1.6;
-}
-
-/* CRONOGRAMA */
+/* Cronograma */
 
 .planner {
   background: var(--card);
   padding: 22px;
+  margin-top: 18px;
   border-radius: 14px;
   border: 1px solid var(--border);
 }
@@ -517,7 +506,7 @@ th, td {
   outline-offset: 3px;
 }
 
-/* CELULAR */
+/* Celular */
 
 @media(max-width:760px) {
   .header-content {
@@ -607,11 +596,9 @@ th, td {
   </div>
 </header>
 
-<!-- SITE PÚBLICO -->
-
 <div id="publicSite">
   <section class="hero" id="inicio">
-    <div class="container hero-content">
+    <div class="container">
       <h1>Sua preparação começa com a <span>Rota certa.</span></h1>
 
       <p>
@@ -754,7 +741,7 @@ th, td {
   </div>
 </section>
 
-<!-- PAINEL -->
+<!-- PAINEL SEM ABA DE AVALIAÇÃO -->
 
 <section id="studentApp" class="page">
   <div class="container dashboard">
@@ -763,8 +750,6 @@ th, td {
 
       <button class="active"
         onclick="studentPage('student-home')">🏠 Visão geral</button>
-      <button
-        onclick="studentPage('student-assessment')">📋 Avaliação Inicial</button>
       <button
         onclick="studentPage('student-contests')">🎯 Concursos</button>
       <button
@@ -790,17 +775,20 @@ th, td {
 
       <section id="student-home" class="student-page active">
         <div class="assessment-card">
-          <h2>Avaliação Inicial</h2>
-          <p>
+          <h2 id="homeCardTitle">Avaliação Inicial</h2>
+          <p id="homeCardText">
             Descubra seus pontos fortes e o que precisa reforçar.
             Responda à avaliação e receba um cronograma de estudos
             personalizado para evoluir no seu ritmo.
           </p>
-          <button class="action-btn" type="button"
-            onclick="openAssessment()">Começar avaliação</button>
+          <button class="action-btn" id="homeCardButton"
+            type="button" onclick="openAssessment()">
+            Começar avaliação
+          </button>
         </div>
 
         <h2>Acesso rápido</h2>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>🎯 Concursos</h3>
@@ -826,6 +814,7 @@ th, td {
       <section id="student-contests" class="student-page">
         <h2>Concursos e instituições</h2>
         <p>Explore algumas opções para conhecer melhor.</p>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>Colégio Militar</h3>
@@ -849,6 +838,7 @@ th, td {
       <section id="student-questions" class="student-page">
         <h2>Questões</h2>
         <p>Área destinada à prática de exercícios por matéria.</p>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>Matemática</h3>
@@ -872,6 +862,7 @@ th, td {
       <section id="student-simulations" class="student-page">
         <h2>Simulados</h2>
         <p>Prepare-se com simulados organizados por instituição e matéria.</p>
+
         <div class="content-card">
           <h3>Meus simulados</h3>
           <p>Quando os simulados forem adicionados, eles aparecerão nesta área.</p>
@@ -881,6 +872,7 @@ th, td {
       <section id="student-materials" class="student-page">
         <h2>Materiais de estudo</h2>
         <p>Um espaço para reunir conteúdos e materiais de preparação.</p>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>📄 Apostilas</h3>
@@ -899,6 +891,7 @@ th, td {
 
       <section id="student-methods" class="student-page">
         <h2>Métodos de estudo</h2>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>Estudo ativo</h3>
@@ -915,37 +908,40 @@ th, td {
         </div>
       </section>
 
+      <!-- Tela interna, sem botão no menu lateral -->
       <section id="student-assessment" class="student-page">
         <h2>Avaliação Inicial</h2>
 
         <p class="notice">
-          20 perguntas de nível intermediário do ensino fundamental II.
-          Responda sem consultar para identificar o que revisar.
-          Não há limite de tempo.
+          Responda às 20 perguntas para criar seu cronograma personalizado.
+          São 4 de Matemática, 4 de Português e 3 de Ciências, Geografia,
+          História e Inglês.
         </p>
 
         <p class="notice">
-          São 4 questões de Matemática, 4 de Português e 3 de cada
-          uma das demais matérias. Esta avaliação curta orienta
-          os estudos; não é uma medida definitiva do seu conhecimento.
+          Nível intermediário do ensino fundamental II, sem limite de tempo.
+          Confira suas respostas antes de concluir: a avaliação inicial
+          não poderá ser refeita neste navegador.
         </p>
 
         <div id="quizArea"></div>
       </section>
 
       <section id="student-schedule" class="student-page">
-        <h2>Meu cronograma personalizado</h2>
+        <h2 id="scheduleTitle" tabindex="-1">
+          Meu cronograma semanal
+        </h2>
 
         <p class="notice">
-          Escolha seus dias e o tempo de estudo por dia.
-          O plano reserva mais tempo às matérias com maior proporção
-          de erros e mantém revisões das demais.
+          Seu plano é calculado a partir dos resultados da avaliação.
+          Você pode alterar os dias e o tempo disponível sempre que precisar.
         </p>
 
         <div id="scheduleGate"></div>
 
         <form class="planner" id="planner"
           onsubmit="generateSchedule(event)" hidden>
+
           <fieldset>
             <legend>Em quais dias você quer estudar?</legend>
             <div class="days" id="dayChoices"></div>
@@ -965,19 +961,20 @@ th, td {
           </p>
 
           <button class="action-btn" type="submit">
-            Gerar / atualizar cronograma
+            Salvar alterações do cronograma
           </button>
 
           <p id="planError" class="error" role="alert"></p>
+          <p id="planMessage" class="notice" role="status"></p>
         </form>
 
         <div id="scheduleOutput" aria-live="polite"></div>
 
         <p class="notice" id="storageNote">
-          Sua avaliação fica concluída neste navegador, e o cronograma
-          continua editável. O login ainda é demonstrativo: os dados
-          são compartilhados por quem usa este navegador. Limpar os
-          dados ou trocar de navegador permite uma nova avaliação.
+          A avaliação e o cronograma ficam salvos neste navegador.
+          O login ainda é demonstrativo: quem usar este navegador
+          compartilha os mesmos dados. Limpar os dados ou trocar
+          de navegador permite uma nova avaliação.
         </p>
       </section>
 
@@ -992,6 +989,7 @@ th, td {
 
       <section id="student-settings" class="student-page">
         <h2>Configurações</h2>
+
         <div class="content-card">
           <h3>Aparência</h3>
           <p>Escolha como deseja visualizar o Rota Aprova.</p>
@@ -1012,6 +1010,292 @@ th, td {
 </section>
 
 <script>
+/* PERGUNTAS */
+
+const questions = [
+  [
+    "Matemática", "Porcentagem",
+    "Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o novo preço?",
+    ["R$ 136", "R$ 144", "R$ 145", "R$ 150"],
+    0,
+    "15% de 160 são 24. Portanto, 160 − 24 = 136."
+  ],
+  [
+    "Matemática", "Equações",
+    "Qual é o valor de x em 3(x − 2) + 5 = 20?",
+    ["5", "6", "7", "9"],
+    2,
+    "3x − 6 + 5 = 20; 3x = 21; x = 7."
+  ],
+  [
+    "Matemática", "Frações",
+    "Uma turma tem 30 alunos. Dois quintos praticam natação. Quantos alunos são esses?",
+    ["10", "12", "15", "18"],
+    1,
+    "Divida 30 por 5 e multiplique por 2: 6 × 2 = 12."
+  ],
+  [
+    "Matemática", "Geometria",
+    "Um triângulo tem base de 12 cm e altura relativa a essa base de 7 cm. Qual é sua área?",
+    ["19 cm²", "84 cm²", "38 cm²", "42 cm²"],
+    3,
+    "A área é base × altura ÷ 2: 12 × 7 ÷ 2 = 42 cm²."
+  ],
+  [
+    "Português", "Conectivos",
+    "Em “Embora estivesse cansada, Ana terminou a tarefa”, a palavra “embora” expressa:",
+    ["Causa", "Conclusão", "Concessão", "Finalidade"],
+    2,
+    "A concessão apresenta uma dificuldade que não impediu a ação."
+  ],
+  [
+    "Português", "Concordância verbal",
+    "Qual frase apresenta concordância verbal adequada à norma-padrão?",
+    [
+      "Faz dois anos que estudo aqui.",
+      "Fazem dois anos que estudo aqui.",
+      "Houveram muitas dúvidas.",
+      "Existe muitos livros na sala."
+    ],
+    0,
+    "O verbo fazer indicando tempo decorrido é impessoal e fica no singular."
+  ],
+  [
+    "Português", "Interpretação",
+    "“Ao sair, Lia viu nuvens escuras e voltou para buscar o guarda-chuva.” O que se pode inferir?",
+    [
+      "Já estava chovendo dentro da casa.",
+      "Lia havia perdido o guarda-chuva.",
+      "Lia desistiu de sair.",
+      "Lia considerou que poderia chover."
+    ],
+    3,
+    "As nuvens motivaram uma precaução. O trecho não afirma que já chovia."
+  ],
+  [
+    "Português", "Sujeito",
+    "Em “Os alunos da turma organizaram uma feira”, qual é o núcleo do sujeito?",
+    ["Turma", "Alunos", "Feira", "Organizaram"],
+    1,
+    "O sujeito é “Os alunos da turma”; seu núcleo é “alunos”."
+  ],
+  [
+    "Ciências", "Ecologia",
+    "Na cadeia capim → gafanhoto → sapo → cobra, qual é o consumidor secundário?",
+    ["Capim", "Gafanhoto", "Sapo", "Cobra"],
+    2,
+    "O gafanhoto é consumidor primário. O sapo é consumidor secundário."
+  ],
+  [
+    "Ciências", "Transformações da matéria",
+    "Qual exemplo representa uma transformação química?",
+    [
+      "Um prego enferrujando.",
+      "Gelo derretendo.",
+      "Água evaporando.",
+      "Um papel sendo cortado."
+    ],
+    0,
+    "A ferrugem envolve a formação de novas substâncias."
+  ],
+  [
+    "Ciências", "Sistemas do corpo",
+    "Qual é a principal função dos alvéolos pulmonares?",
+    [
+      "Produzir células sanguíneas.",
+      "Digerir os alimentos.",
+      "Bombear sangue para o corpo.",
+      "Realizar trocas de gases entre o ar e o sangue."
+    ],
+    3,
+    "Nos alvéolos ocorrem as trocas de oxigênio e gás carbônico."
+  ],
+  [
+    "Geografia", "Escalas cartográficas",
+    "Em um mapa de escala 1:100.000, duas cidades estão separadas por 3 cm. Qual é a distância real representada?",
+    ["300 m", "3 km", "30 km", "300 km"],
+    1,
+    "Cada centímetro representa 1 km. Assim, 3 cm representam 3 km."
+  ],
+  [
+    "Geografia", "Tempo e clima",
+    "Qual afirmação descreve o clima, e não apenas o tempo atmosférico?",
+    [
+      "Choveu nesta manhã.",
+      "Hoje a temperatura chegou a 28 °C.",
+      "A região apresenta verões geralmente chuvosos ao longo de décadas.",
+      "Amanhã poderá ventar."
+    ],
+    2,
+    "Clima corresponde a padrões atmosféricos observados por longos períodos."
+  ],
+  [
+    "Geografia", "Urbanização",
+    "Uma cidade substituiu áreas verdes por asfalto. Qual consequência é mais provável?",
+    [
+      "Maior infiltração da chuva no solo.",
+      "Menor escoamento superficial.",
+      "Eliminação do risco de enchentes.",
+      "Maior escoamento superficial e risco de alagamentos."
+    ],
+    3,
+    "A impermeabilização reduz a infiltração e aumenta o escoamento superficial."
+  ],
+  [
+    "História", "Revolução Industrial",
+    "Qual mudança caracteriza a Revolução Industrial iniciada na Inglaterra no século XVIII?",
+    [
+      "Expansão da produção mecanizada em fábricas.",
+      "Substituição das fábricas por oficinas domésticas.",
+      "Fim imediato do trabalho infantil.",
+      "Abandono das cidades pela maioria dos operários."
+    ],
+    0,
+    "A mecanização e o sistema fabril transformaram a produção."
+  ],
+  [
+    "História", "Independência do Brasil",
+    "Qual característica permaneceu no Brasil após a Independência de 1822?",
+    [
+      "A subordinação política formal a Portugal.",
+      "A escravidão.",
+      "A condição de colônia portuguesa.",
+      "O governo republicano colonial."
+    ],
+    1,
+    "A escravidão continuou no Brasil até 1888."
+  ],
+  [
+    "História", "Iluminismo",
+    "Qual ideia está associada ao pensamento iluminista?",
+    [
+      "Poder absoluto do rei sem limites.",
+      "Proibição da investigação científica.",
+      "Defesa da razão e crítica ao absolutismo.",
+      "Obrigação de manter privilégios por nascimento."
+    ],
+    2,
+    "Pensadores iluministas valorizaram a razão e questionaram o poder absoluto."
+  ],
+  [
+    "Inglês", "Simple present",
+    "Complete: “She ___ to school by bus every day.”",
+    ["Go", "Going", "Gone", "Goes"],
+    3,
+    "No simple present, com she, o verbo go assume a forma goes."
+  ],
+  [
+    "Inglês", "Compreensão de texto",
+    "Leia: “Tom missed the bus, so he walked to school.” Por que Tom foi a pé para a escola?",
+    [
+      "Porque perdeu o ônibus.",
+      "Porque a escola estava fechada.",
+      "Porque comprou uma bicicleta.",
+      "Porque estava de férias."
+    ],
+    0,
+    "“Missed the bus” significa que ele perdeu o ônibus."
+  ],
+  [
+    "Inglês", "Comparativos",
+    "Complete: “This exercise is ___ than the previous one.”",
+    ["Easy", "Easier", "Easiest", "More easy"],
+    1,
+    "O comparativo de easy é easier."
+  ]
+];
+
+const subjects = [
+  "Matemática", "Português", "Ciências",
+  "Geografia", "História", "Inglês"
+];
+
+const dayNames = [
+  "Segunda", "Terça", "Quarta", "Quinta",
+  "Sexta", "Sábado", "Domingo"
+];
+
+const storageKey = "rotaAssessmentV1";
+
+let assessment = {
+  answers: Array(20).fill(null),
+  current: 0,
+  completed: false,
+  days: [0, 2, 4],
+  minutes: 60,
+  planned: false
+};
+
+/* RECUPERAR DADOS SALVOS */
+
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey));
+
+  if (
+    saved &&
+    Array.isArray(saved.answers) &&
+    saved.answers.length === questions.length &&
+    saved.answers.every(a =>
+      a === null || (Number.isInteger(a) && a >= 0 && a < 4)
+    )
+  ) {
+    assessment.answers = saved.answers;
+
+    assessment.current = Number.isInteger(saved.current)
+      ? Math.max(0, Math.min(questions.length - 1, saved.current))
+      : 0;
+
+    assessment.completed =
+      saved.completed === true &&
+      saved.answers.every(a => a !== null);
+
+    if (Array.isArray(saved.days)) {
+      assessment.days = [
+        ...new Set(saved.days.filter(d =>
+          Number.isInteger(d) && d >= 0 && d < 7
+        ))
+      ].sort((a, b) => a - b);
+    }
+
+    if (
+      Number.isInteger(saved.minutes) &&
+      saved.minutes >= 15 &&
+      saved.minutes <= 240 &&
+      saved.minutes % 15 === 0
+    ) {
+      assessment.minutes = saved.minutes;
+    }
+
+    assessment.planned =
+      saved.planned === true &&
+      assessment.completed &&
+      assessment.days.length > 0;
+  }
+} catch (error) {}
+
+function saveAssessment() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(assessment));
+    return true;
+  } catch (error) {
+    document.getElementById("storageNote").textContent =
+      "Não foi possível salvar neste navegador. " +
+      "Mantenha a página aberta para conservar os dados nesta sessão.";
+    return false;
+  }
+}
+
+function ensureInitialPlan() {
+  if (!assessment.completed || assessment.planned) return;
+
+  if (!assessment.days.length) {
+    assessment.days = [0, 2, 4];
+  }
+
+  assessment.planned = true;
+  saveAssessment();
+}
+
 /* NAVEGAÇÃO */
 
 function closeStudentMenu() {
@@ -1057,18 +1341,27 @@ function enterDemo() {
     input.value = "";
   });
 
-  studentPage("student-home");
-  renderAssessment();
-  renderPlanner();
+  ensureInitialPlan();
+  updateHomeCard();
+
+  studentPage(
+    assessment.completed ? "student-schedule" : "student-home"
+  );
+
   updatePublicNav();
 }
 
 function studentPage(id) {
+  if (assessment.completed && id === "student-assessment") {
+    id = "student-schedule";
+  }
+
   const target = document.getElementById(id);
   if (!target || !target.classList.contains("student-page")) return;
 
   if (id === "student-assessment") renderAssessment();
   if (id === "student-schedule") renderPlanner();
+  if (id === "student-home") updateHomeCard();
 
   document.querySelectorAll(".student-page").forEach(page => {
     page.classList.toggle("active", page === target);
@@ -1087,15 +1380,37 @@ function toggleStudentMenu() {
   document.getElementById("studentSidebar").classList.toggle("open");
 }
 
+function updateHomeCard() {
+  if (!assessment.completed) return;
+
+  document.getElementById("homeCardTitle").textContent =
+    "Seu cronograma semanal";
+
+  document.getElementById("homeCardText").textContent =
+    "Sua avaliação inicial já foi concluída. " +
+    "Acesse seu plano de estudos e ajuste os dias e o tempo " +
+    "disponível sempre que precisar.";
+
+  document.getElementById("homeCardButton").textContent =
+    "Abrir meu cronograma";
+}
+
+function openAssessment() {
+  studentPage(
+    assessment.completed ? "student-schedule" : "student-assessment"
+  );
+}
+
 /* TEMA */
 
 const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 let themePreference = "system";
 
 try {
-  const saved = localStorage.getItem("rotaAprovaTheme");
-  if (["system", "light", "dark"].includes(saved)) {
-    themePreference = saved;
+  const savedTheme = localStorage.getItem("rotaAprovaTheme");
+
+  if (["system", "light", "dark"].includes(savedTheme)) {
+    themePreference = savedTheme;
   }
 } catch (error) {}
 
@@ -1140,303 +1455,135 @@ if (systemTheme.addEventListener) {
   systemTheme.addListener(applyTheme);
 }
 
-document.querySelectorAll(".top-nav a").forEach(link => {
-  link.addEventListener("click", event => {
-    event.preventDefault();
-    showPublic();
-    document.querySelector(link.getAttribute("href")).scrollIntoView();
-    updatePublicNav();
-  });
-});
+/* AVALIAÇÃO */
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeStudentMenu();
-});
+function renderAssessment() {
+  if (assessment.completed) return;
 
-applyTheme();
+  const i = assessment.current;
+  const q = questions[i];
+  const answered = assessment.answers.filter(a => a !== null).length;
 
-/*
-PERGUNTAS:
-matéria, assunto, enunciado, alternativas,
-índice correto e explicação.
-*/
+  document.getElementById("quizArea").innerHTML = `
+    <div class="quiz-box">
+      <p id="quizProgressText">
+        Questão ${i + 1} de ${questions.length}
+        · ${q[0]} · ${answered} respondidas
+      </p>
 
-const questions = [
-  [
-    "Matemática", "Porcentagem",
-    "Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o novo preço?",
-    ["R$ 136", "R$ 144", "R$ 145", "R$ 150"],
-    0,
-    "15% de 160 são 24. Portanto, 160 − 24 = 136."
-  ],
-  [
-    "Matemática", "Equações",
-    "Qual é o valor de x em 3(x − 2) + 5 = 20?",
-    ["5", "6", "7", "9"],
-    2,
-    "3x − 6 + 5 = 20; 3x = 21; x = 7."
-  ],
-  [
-    "Matemática", "Frações",
-    "Uma turma tem 30 alunos. Dois quintos praticam natação. Quantos alunos são esses?",
-    ["10", "12", "15", "18"],
-    1,
-    "Divida 30 por 5 e multiplique por 2: 6 × 2 = 12."
-  ],
-  [
-    "Matemática", "Geometria",
-    "Um triângulo tem base de 12 cm e altura relativa a essa base de 7 cm. Qual é sua área?",
-    ["19 cm²", "84 cm²", "38 cm²", "42 cm²"],
-    3,
-    "A área do triângulo é base × altura ÷ 2: 12 × 7 ÷ 2 = 42 cm²."
-  ],
-  [
-    "Português", "Conectivos",
-    "Em “Embora estivesse cansada, Ana terminou a tarefa”, a palavra “embora” expressa:",
-    ["Causa", "Conclusão", "Concessão", "Finalidade"],
-    2,
-    "A concessão apresenta uma dificuldade que não impediu a ação: Ana terminou apesar do cansaço."
-  ],
-  [
-    "Português", "Concordância verbal",
-    "Qual frase apresenta concordância verbal adequada à norma-padrão?",
-    [
-      "Faz dois anos que estudo aqui.",
-      "Fazem dois anos que estudo aqui.",
-      "Houveram muitas dúvidas.",
-      "Existe muitos livros na sala."
-    ],
-    0,
-    "O verbo fazer indicando tempo decorrido é impessoal e fica no singular."
-  ],
-  [
-    "Português", "Interpretação",
-    "“Ao sair, Lia viu nuvens escuras e voltou para buscar o guarda-chuva.” O que se pode inferir?",
-    [
-      "Já estava chovendo dentro da casa.",
-      "Lia havia perdido o guarda-chuva.",
-      "Lia desistiu de sair.",
-      "Lia considerou que poderia chover."
-    ],
-    3,
-    "As nuvens motivaram uma precaução. O trecho não afirma que já chovia nem que Lia desistiu de sair."
-  ],
-  [
-    "Português", "Sujeito",
-    "Em “Os alunos da turma organizaram uma feira”, qual é o núcleo do sujeito?",
-    ["Turma", "Alunos", "Feira", "Organizaram"],
-    1,
-    "O sujeito é “Os alunos da turma”; seu núcleo é o substantivo “alunos”."
-  ],
-  [
-    "Ciências", "Ecologia",
-    "Na cadeia capim → gafanhoto → sapo → cobra, qual é o consumidor secundário?",
-    ["Capim", "Gafanhoto", "Sapo", "Cobra"],
-    2,
-    "O gafanhoto é consumidor primário. O sapo, que o come, é consumidor secundário."
-  ],
-  [
-    "Ciências", "Transformações da matéria",
-    "Qual exemplo representa uma transformação química?",
-    [
-      "Um prego enferrujando.",
-      "Gelo derretendo.",
-      "Água evaporando.",
-      "Um papel sendo cortado."
-    ],
-    0,
-    "A ferrugem envolve a formação de novas substâncias. Mudanças de estado e cortes são transformações físicas."
-  ],
-  [
-    "Ciências", "Sistemas do corpo",
-    "Qual é a principal função dos alvéolos pulmonares?",
-    [
-      "Produzir células sanguíneas.",
-      "Digerir os alimentos.",
-      "Bombear sangue para o corpo.",
-      "Realizar trocas de gases entre o ar e o sangue."
-    ],
-    3,
-    "Nos alvéolos, o oxigênio passa para o sangue e o gás carbônico passa do sangue para o ar."
-  ],
-  [
-    "Geografia", "Escalas cartográficas",
-    "Em um mapa de escala 1:100.000, duas cidades estão separadas por 3 cm. Qual é a distância real representada?",
-    ["300 m", "3 km", "30 km", "300 km"],
-    1,
-    "Cada centímetro representa 100.000 cm, ou 1 km. Assim, 3 cm representam 3 km."
-  ],
-  [
-    "Geografia", "Tempo e clima",
-    "Qual afirmação descreve o clima, e não apenas o tempo atmosférico?",
-    [
-      "Choveu nesta manhã.",
-      "Hoje a temperatura chegou a 28 °C.",
-      "A região apresenta verões geralmente chuvosos ao longo de décadas.",
-      "Amanhã poderá ventar."
-    ],
-    2,
-    "Clima corresponde aos padrões atmosféricos observados durante longos períodos."
-  ],
-  [
-    "Geografia", "Urbanização",
-    "Uma cidade substituiu áreas verdes por asfalto. Qual consequência é mais provável?",
-    [
-      "Maior infiltração da chuva no solo.",
-      "Menor escoamento superficial.",
-      "Eliminação do risco de enchentes.",
-      "Maior escoamento superficial e risco de alagamentos."
-    ],
-    3,
-    "A impermeabilização reduz a infiltração, aumentando o volume de água que escoa pela superfície."
-  ],
-  [
-    "História", "Revolução Industrial",
-    "Qual mudança caracteriza a Revolução Industrial iniciada na Inglaterra no século XVIII?",
-    [
-      "Expansão da produção mecanizada em fábricas.",
-      "Substituição das fábricas por oficinas domésticas.",
-      "Fim imediato do trabalho infantil.",
-      "Abandono das cidades pela maioria dos operários."
-    ],
-    0,
-    "A mecanização e o sistema fabril transformaram a produção e as relações de trabalho."
-  ],
-  [
-    "História", "Independência do Brasil",
-    "Qual característica permaneceu no Brasil após a Independência de 1822?",
-    [
-      "A subordinação política formal a Portugal.",
-      "A escravidão.",
-      "A condição de colônia portuguesa.",
-      "O governo republicano colonial."
-    ],
-    1,
-    "A Independência rompeu o vínculo político com Portugal, mas a escravidão continuou até 1888."
-  ],
-  [
-    "História", "Iluminismo",
-    "Qual ideia está associada ao pensamento iluminista?",
-    [
-      "Poder absoluto do rei sem limites.",
-      "Proibição da investigação científica.",
-      "Defesa da razão e crítica ao absolutismo.",
-      "Obrigação de manter privilégios por nascimento."
-    ],
-    2,
-    "Pensadores iluministas valorizaram a razão e questionaram o poder absoluto e os privilégios."
-  ],
-  [
-    "Inglês", "Simple present",
-    "Complete: “She ___ to school by bus every day.”",
-    ["Go", "Going", "Gone", "Goes"],
-    3,
-    "No simple present, com she, o verbo go assume a forma goes."
-  ],
-  [
-    "Inglês", "Compreensão de texto",
-    "Leia: “Tom missed the bus, so he walked to school.” Por que Tom foi a pé para a escola?",
-    [
-      "Porque perdeu o ônibus.",
-      "Porque a escola estava fechada.",
-      "Porque comprou uma bicicleta.",
-      "Porque estava de férias."
-    ],
-    0,
-    "“Missed the bus” significa que ele perdeu o ônibus; “so” introduz a consequência."
-  ],
-  [
-    "Inglês", "Comparativos",
-    "Complete: “This exercise is ___ than the previous one.”",
-    ["Easy", "Easier", "Easiest", "More easy"],
-    1,
-    "O comparativo de easy é easier; than introduz a comparação."
-  ]
-];
+      <progress value="${answered}" max="${questions.length}"
+        aria-label="Perguntas respondidas"></progress>
 
-const subjects = [
-  "Matemática", "Português", "Ciências",
-  "Geografia", "História", "Inglês"
-];
+      <fieldset>
+        <legend tabindex="-1" id="questionTitle">${q[2]}</legend>
 
-const dayNames = [
-  "Segunda", "Terça", "Quarta", "Quinta",
-  "Sexta", "Sábado", "Domingo"
-];
+        ${q[3].map((option, j) => `
+          <label class="answer">
+            <input type="radio" name="answer" value="${j}"
+              ${assessment.answers[i] === j ? "checked" : ""}
+              onchange="chooseAnswer(${j})">
+            <span>${option}</span>
+          </label>
+        `).join("")}
+      </fieldset>
 
-const storageKey = "rotaAssessmentV1";
+      <p class="error" id="quizError" role="alert"></p>
 
-let assessment = {
-  answers: Array(20).fill(null),
-  current: 0,
-  completed: false,
-  days: [0, 2, 4],
-  minutes: 60,
-  planned: false
-};
+      <div class="quiz-actions">
+        <button class="btn btn-outline"
+          ${i === 0 ? "disabled" : ""}
+          onclick="moveQuestion(-1)">
+          Anterior
+        </button>
 
-/* RECUPERAR PROGRESSO */
-
-try {
-  const saved = JSON.parse(localStorage.getItem(storageKey));
-
-  if (
-    saved &&
-    Array.isArray(saved.answers) &&
-    saved.answers.length === 20 &&
-    saved.answers.every(a =>
-      a === null || (Number.isInteger(a) && a >= 0 && a < 4)
-    )
-  ) {
-    assessment.answers = saved.answers;
-
-    assessment.current = Number.isInteger(saved.current)
-      ? Math.max(0, Math.min(19, saved.current))
-      : 0;
-
-    assessment.completed =
-      saved.completed === true &&
-      saved.answers.every(a => a !== null);
-
-    if (Array.isArray(saved.days)) {
-      assessment.days = [
-        ...new Set(saved.days.filter(d =>
-          Number.isInteger(d) && d >= 0 && d < 7
-        ))
-      ];
-    }
-
-    if (
-      Number.isInteger(saved.minutes) &&
-      saved.minutes >= 15 &&
-      saved.minutes <= 240 &&
-      saved.minutes % 15 === 0
-    ) {
-      assessment.minutes = saved.minutes;
-    }
-
-    assessment.planned =
-      saved.planned === true &&
-      assessment.completed &&
-      assessment.days.length > 0;
-  }
-} catch (error) {}
-
-function saveAssessment() {
-  try {
-    localStorage.setItem(storageKey, JSON.stringify(assessment));
-  } catch (error) {
-    document.getElementById("storageNote").textContent =
-      "Não foi possível salvar neste navegador. " +
-      "Mantenha a página aberta para conservar seu resultado nesta sessão.";
-  }
+        <button class="action-btn"
+          onclick="${
+            i === questions.length - 1
+              ? "finishAssessment()"
+              : "moveQuestion(1)"
+          }">
+          ${
+            i === questions.length - 1
+              ? "Concluir e criar cronograma"
+              : "Próxima"
+          }
+        </button>
+      </div>
+    </div>
+  `;
 }
 
-function openAssessment() {
-  studentPage("student-assessment");
+function chooseAnswer(value) {
+  if (assessment.completed) return;
+  if (!Number.isInteger(value) || value < 0 || value > 3) return;
+
+  assessment.answers[assessment.current] = value;
+  saveAssessment();
+
+  document.getElementById("quizError").textContent = "";
+
+  const answered = assessment.answers.filter(a => a !== null).length;
+
+  document.querySelector("#quizArea progress").value = answered;
+
+  document.getElementById("quizProgressText").textContent =
+    `Questão ${assessment.current + 1} de ${questions.length} · ` +
+    `${questions[assessment.current][0]} · ${answered} respondidas`;
 }
 
-/* CORREÇÃO */
+function moveQuestion(step) {
+  if (assessment.completed) return;
+
+  if (step > 0 && assessment.answers[assessment.current] === null) {
+    document.getElementById("quizError").textContent =
+      "Escolha uma alternativa para continuar.";
+    return;
+  }
+
+  assessment.current = Math.max(
+    0,
+    Math.min(questions.length - 1, assessment.current + step)
+  );
+
+  saveAssessment();
+  renderAssessment();
+  document.getElementById("questionTitle").focus();
+}
+
+function finishAssessment() {
+  if (assessment.completed) {
+    studentPage("student-schedule");
+    return;
+  }
+
+  const missing = assessment.answers.indexOf(null);
+
+  if (missing !== -1) {
+    assessment.current = missing;
+    renderAssessment();
+
+    document.getElementById("quizError").textContent =
+      "Responda esta pergunta antes de concluir.";
+    return;
+  }
+
+  assessment.completed = true;
+
+  if (!assessment.days.length) {
+    assessment.days = [0, 2, 4];
+  }
+
+  assessment.planned = true;
+  saveAssessment();
+
+  document.getElementById("quizArea").innerHTML = "";
+  updateHomeCard();
+
+  studentPage("student-schedule");
+  document.getElementById("scheduleTitle").focus();
+}
+
+/* RESULTADO POR MATÉRIA */
 
 function results() {
   return subjects.map(subject => {
@@ -1460,216 +1607,119 @@ function results() {
   });
 }
 
-/* EXIBIR PERGUNTAS */
-
-function renderAssessment() {
-  const area = document.getElementById("quizArea");
-
-  if (assessment.completed) {
-    renderResults();
-    return;
-  }
-
-  const i = assessment.current;
-  const q = questions[i];
-  const answered = assessment.answers.filter(a => a !== null).length;
-
-  area.innerHTML = `
-    <div class="quiz-box">
-      <p>Questão ${i + 1} de 20 · ${q[0]} · ${answered} respondidas</p>
-
-      <progress value="${answered}" max="20"
-        aria-label="Perguntas respondidas"></progress>
-
-      <fieldset>
-        <legend tabindex="-1" id="questionTitle">${q[2]}</legend>
-
-        ${q[3].map((option, j) => `
-          <label class="answer">
-            <input type="radio" name="answer" value="${j}"
-              ${assessment.answers[i] === j ? "checked" : ""}
-              onchange="chooseAnswer(${j})">
-            <span>${option}</span>
-          </label>
-        `).join("")}
-      </fieldset>
-
-      <p class="error" id="quizError" role="alert"></p>
-
-      <div class="quiz-actions">
-        <button class="btn btn-outline"
-          ${i === 0 ? "disabled" : ""}
-          onclick="moveQuestion(-1)">Anterior</button>
-
-        <button class="action-btn"
-          onclick="${i === 19 ? "finishAssessment()" : "moveQuestion(1)"}">
-          ${i === 19 ? "Concluir avaliação" : "Próxima"}
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function chooseAnswer(value) {
-  assessment.answers[assessment.current] = value;
-  saveAssessment();
-
-  document.getElementById("quizError").textContent = "";
-
-  const answered = assessment.answers.filter(a => a !== null).length;
-  document.querySelector("#quizArea progress").value = answered;
-
-  document.querySelector("#quizArea .quiz-box > p").textContent =
-    `Questão ${assessment.current + 1} de 20 · ` +
-    `${questions[assessment.current][0]} · ${answered} respondidas`;
-}
-
-function moveQuestion(step) {
-  if (step > 0 && assessment.answers[assessment.current] === null) {
-    document.getElementById("quizError").textContent =
-      "Escolha uma alternativa para continuar.";
-    return;
-  }
-
-  assessment.current = Math.max(
-    0, Math.min(19, assessment.current + step)
-  );
-
-  saveAssessment();
-  renderAssessment();
-  document.getElementById("questionTitle").focus();
-}
-
-function finishAssessment() {
-  const missing = assessment.answers.indexOf(null);
-
-  if (missing !== -1) {
-    assessment.current = missing;
-    renderAssessment();
-    document.getElementById("quizError").textContent =
-      "Responda esta pergunta antes de concluir.";
-    return;
-  }
-
-  assessment.completed = true;
-  assessment.planned = false;
-
-  saveAssessment();
-  renderResults();
-  renderPlanner();
-  document.getElementById("resultTitle").focus();
-}
-
-/* RESULTADOS */
-
-function renderResults() {
-  const rows = results();
-  const correct = rows.reduce((sum, r) => sum + r.correct, 0);
-
-  document.getElementById("quizArea").innerHTML = `
-    <div class="quiz-box">
-      <h3 id="resultTitle" tabindex="-1">
-        Seu resultado: ${correct} de 20 acertos
-      </h3>
-
-      <p>
-        <strong>${correct * 5}% de aproveitamento</strong>
-        · ${20 - correct} erros
-      </p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Matéria</th>
-              <th>Acertos</th>
-              <th>Erros</th>
-              <th>Aproveitamento</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map(r => `
-              <tr>
-                <td>${r.subject}</td>
-                <td>${r.correct}/${r.total}</td>
-                <td>${r.wrong}</td>
-                <td>${Math.round(100 * r.correct / r.total)}%</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-
-      <button class="action-btn"
-        onclick="studentPage('student-schedule')">
-        Abrir meu cronograma
-      </button>
-
-      <details>
-        <summary>Ver respostas e explicações</summary>
-        ${questions.map((q, i) => `
-          <div class="review-item">
-            <strong>${i + 1}. ${q[2]}</strong>
-            <p>
-              ${assessment.answers[i] === q[4] ? "✓ Acertou" : "✗ Errou"}
-              · Sua resposta: ${q[3][assessment.answers[i]]}
-              <br>
-              Resposta correta: ${q[3][q[4]]}
-            </p>
-            <p>${q[5]}</p>
-          </div>
-        `).join("")}
-      </details>
-
-      <p class="notice">
-        Avaliação inicial concluída. Você pode consultar suas respostas
-        e editar seu cronograma semanal a qualquer momento.
-      </p>
-    </div>
-  `;
-}
-
-/* CRONOGRAMA */
+/* FORMULÁRIO DO CRONOGRAMA */
 
 function renderPlanner() {
   const ready = assessment.completed;
-  document.getElementById("planner").hidden = !ready;
 
-  document.getElementById("scheduleGate").innerHTML = ready ? "" : `
+  document.getElementById("planner").hidden = !ready;
+  document.getElementById("planError").textContent = "";
+  document.getElementById("planMessage").textContent = "";
+  document.getElementById("scheduleOutput").innerHTML = "";
+
+  if (!ready) {
+    document.getElementById("scheduleGate").innerHTML = `
+      <div class="content-card">
+        <p>
+          Faça a avaliação inicial pelo quadro da Visão geral
+          para receber seu cronograma personalizado.
+        </p>
+        <button class="action-btn"
+          onclick="studentPage('student-home')">
+          Ir para Visão geral
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  ensureInitialPlan();
+
+  const rows = results();
+  const correct = rows.reduce((sum, row) => sum + row.correct, 0);
+  const wrong = questions.length - correct;
+  const percentage = Math.round(correct / questions.length * 100);
+
+  document.getElementById("scheduleGate").innerHTML = `
     <div class="content-card">
-      <p>Conclua a avaliação inicial para personalizar seu plano.</p>
-      <button class="action-btn" onclick="openAssessment()">
-        Fazer avaliação
-      </button>
+      <h3>Avaliação concluída</h3>
+
+      <p>
+        <strong>
+          ${correct} acertos · ${wrong} erros ·
+          ${percentage}% de aproveitamento
+        </strong>
+      </p>
+
+      <p>
+        Seu cronograma foi criado com base nesses resultados.
+        As matérias com maior proporção de erros recebem mais tempo.
+        Você pode ajustar os dias e os minutos de estudo abaixo.
+      </p>
+
+      <details>
+        <summary>Ver resultado por matéria</summary>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Matéria</th>
+                <th>Acertos</th>
+                <th>Erros</th>
+                <th>Aproveitamento</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(row => `
+                <tr>
+                  <td>${row.subject}</td>
+                  <td>${row.correct}/${row.total}</td>
+                  <td>${row.wrong}</td>
+                  <td>${Math.round(row.correct / row.total * 100)}%</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <p class="notice">
+        Esta avaliação curta orienta o planejamento;
+        não é uma medida definitiva do seu conhecimento.
+      </p>
     </div>
   `;
 
   document.getElementById("dayChoices").innerHTML =
-    dayNames.map((d, i) => `
+    dayNames.map((day, i) => `
       <label>
         <input type="checkbox" value="${i}"
           ${assessment.days.includes(i) ? "checked" : ""}>
-        ${d}
+        ${day}
       </label>
     `).join("");
 
   document.getElementById("dailyMinutes").value = assessment.minutes;
-  document.getElementById("scheduleOutput").innerHTML = "";
-  document.getElementById("planError").textContent = "";
-
-  if (assessment.planned && ready) displaySchedule();
+  displaySchedule();
 }
 
 /*
-Peso da matéria = 1 + 3 × proporção de erros.
-Distribuição em blocos de 15 minutos.
+DISTRIBUIÇÃO PERSONALIZADA
+
+Cada matéria recebe peso:
+1 + 3 × proporção de erros.
+
+A proporção permite comparar matérias com 3 ou 4 perguntas.
+O tempo é distribuído em blocos de 15 minutos.
 */
 
 function buildSchedule(rows, days, minutes) {
-  const weights = rows.map(r => 1 + 3 * r.wrong / r.total);
+  const weights = rows.map(row => 1 + 3 * row.wrong / row.total);
   const totalWeight = weights.reduce((a, b) => a + b, 0);
   const counts = rows.map(() => 0);
   const blocksPerDay = minutes / 15;
+
   let block = 0;
 
   return days.map(day => {
@@ -1692,7 +1742,7 @@ function buildSchedule(rows, days, minutes) {
       block++;
 
       const existing = sessions.find(
-        s => s.subject === rows[best].subject
+        session => session.subject === rows[best].subject
       );
 
       if (existing) {
@@ -1713,6 +1763,9 @@ function buildSchedule(rows, days, minutes) {
 function generateSchedule(event) {
   event.preventDefault();
   if (!assessment.completed) return;
+
+  document.getElementById("planError").textContent = "";
+  document.getElementById("planMessage").textContent = "";
 
   const days = Array.from(
     document.querySelectorAll("#dayChoices input:checked"),
@@ -1744,26 +1797,33 @@ function generateSchedule(event) {
   assessment.minutes = minutes;
   assessment.planned = true;
 
-  document.getElementById("planError").textContent = "";
-  saveAssessment();
+  const saved = saveAssessment();
   displaySchedule();
+
+  document.getElementById("planMessage").textContent = saved
+    ? "Cronograma atualizado e salvo!"
+    : "Cronograma atualizado nesta sessão, mas não foi possível salvá-lo.";
 }
 
 function displaySchedule() {
+  if (!assessment.completed) return;
+
   const rows = results();
 
   const plan = buildSchedule(
-    rows, assessment.days, assessment.minutes
+    rows,
+    assessment.days,
+    assessment.minutes
   );
 
   const included = new Set(
-    plan.flatMap(d => d.sessions.map(s => s.subject))
+    plan.flatMap(day => day.sessions.map(session => session.subject))
   );
 
-  const omitted = subjects.filter(s => !included.has(s));
+  const omitted = subjects.filter(subject => !included.has(subject));
 
   const freeDays = dayNames
-    .filter((d, i) => !assessment.days.includes(i))
+    .filter((day, i) => !assessment.days.includes(i))
     .join(", ");
 
   document.getElementById("scheduleOutput").innerHTML = `
@@ -1773,7 +1833,6 @@ function displaySchedule() {
     </h3>
 
     <p class="notice">
-      Prioridade calculada pela proporção de erros.
       Em cada bloco, revise a teoria e depois resolva exercícios.
       Nas matérias sem erros, faça revisão e novos desafios.
     </p>
@@ -1787,17 +1846,19 @@ function displaySchedule() {
     ` : ""}
 
     <div class="content-grid">
-      ${plan.map(d => `
+      ${plan.map(day => `
         <div class="content-card">
-          <h3>${dayNames[d.day]} · ${assessment.minutes} min</h3>
+          <h3>${dayNames[day.day]} · ${assessment.minutes} min</h3>
 
-          ${d.sessions.map(s => `
+          ${day.sessions.map(session => `
             <p>
-              <strong>${s.subject} — ${s.minutes} min</strong>
+              <strong>
+                ${session.subject} — ${session.minutes} min
+              </strong>
               <br>
               ${
-                s.topics.length
-                  ? "Reforçar: " + s.topics.join(", ")
+                session.topics.length
+                  ? "Reforçar: " + session.topics.join(", ")
                   : "Revisão geral e exercícios de fixação."
               }
             </p>
@@ -1809,12 +1870,12 @@ function displaySchedule() {
     <p class="notice">
       Dias livres:
       ${freeDays || "nenhum; reserve pausas e descanso na sua rotina"}.
-      Você pode ajustar o plano a qualquer momento.
+      Você pode editar este planejamento sempre que precisar.
     </p>
   `;
 }
 
-/* SEÇÃO ATUAL EM NEGRITO */
+/* MENU INICIAL EM NEGRITO */
 
 function updatePublicNav() {
   let active = "inicio";
@@ -1854,16 +1915,30 @@ function updatePublicNav() {
   });
 }
 
+document.querySelectorAll(".top-nav a").forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    showPublic();
+    document.querySelector(link.getAttribute("href")).scrollIntoView();
+    updatePublicNav();
+  });
+});
+
 window.addEventListener("scroll", updatePublicNav, { passive: true });
 window.addEventListener("resize", updatePublicNav);
 
-/* ALTURA DA TELA */
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeStudentMenu();
+});
+
+/* AJUSTAR ALTURA DA JANELA */
 
 function syncHeaderHeight() {
   document.documentElement.style.setProperty(
     "--header-height",
     document.getElementById("mainHeader").offsetHeight + "px"
   );
+
   updatePublicNav();
 }
 
@@ -1874,133 +1949,13 @@ if ("ResizeObserver" in window) {
 }
 
 window.addEventListener("resize", syncHeaderHeight);
+
+/* INICIALIZAÇÃO */
+
+applyTheme();
+ensureInitialPlan();
+updateHomeCard();
 syncHeaderHeight();
-
-/* AVALIAÇÃO ÚNICA NESTE NAVEGADOR */
-
-(function () {
-  const originalChooseAnswer = chooseAnswer;
-  const originalMoveQuestion = moveQuestion;
-  const originalFinishAssessment = finishAssessment;
-  const originalRenderAssessment = renderAssessment;
-  const originalRenderPlanner = renderPlanner;
-  const originalEnterDemo = enterDemo;
-
-  function updateAssessmentAccess() {
-    const card = document.querySelector(".assessment-card");
-    const navButton = document.querySelector(
-      '#studentSidebar button[onclick*="student-assessment"]'
-    );
-
-    if (assessment.completed) {
-      card.querySelector("h2").textContent = "Seu cronograma semanal";
-
-      card.querySelector("p").textContent =
-        "Sua avaliação inicial já foi concluída. " +
-        "Acesse seu plano de estudos e ajuste os dias e o tempo " +
-        "disponível sempre que precisar.";
-
-      card.querySelector("button").textContent = "Abrir meu cronograma";
-
-      if (navButton) {
-        navButton.textContent = "📋 Resultado da avaliação";
-      }
-    }
-  }
-
-  openAssessment = function () {
-    studentPage(
-      assessment.completed ? "student-schedule" : "student-assessment"
-    );
-  };
-
-  chooseAnswer = function (value) {
-    if (assessment.completed) return;
-    originalChooseAnswer(value);
-  };
-
-  moveQuestion = function (step) {
-    if (assessment.completed) return;
-    originalMoveQuestion(step);
-  };
-
-  renderAssessment = function () {
-    originalRenderAssessment();
-    updateAssessmentAccess();
-  };
-
-  renderPlanner = function () {
-    originalRenderPlanner();
-
-    if (assessment.completed) {
-      const correct = results().reduce(
-        (sum, row) => sum + row.correct, 0
-      );
-
-      document.getElementById("scheduleGate").innerHTML = `
-        <div class="content-card">
-          <h3>Avaliação concluída</h3>
-
-          <p>
-            <strong>
-              ${correct} acertos · ${20 - correct} erros ·
-              ${correct * 5}% de aproveitamento
-            </strong>
-          </p>
-
-          <p>
-            Seu plano abaixo considera esse resultado.
-            Altere os dias e os minutos de estudo e clique em
-            “Gerar / atualizar cronograma” para salvar os ajustes.
-          </p>
-
-          <button class="btn btn-outline"
-            onclick="studentPage('student-assessment')">
-            Ver resultado e respostas
-          </button>
-        </div>
-      `;
-    }
-
-    updateAssessmentAccess();
-  };
-
-  function ensureInitialPlan() {
-    if (!assessment.completed || assessment.planned) return;
-
-    if (!assessment.days.length) {
-      assessment.days = [0, 2, 4];
-    }
-
-    assessment.planned = true;
-    saveAssessment();
-  }
-
-  finishAssessment = function () {
-    if (!assessment.completed) {
-      originalFinishAssessment();
-    }
-
-    if (!assessment.completed) return;
-
-    ensureInitialPlan();
-    renderAssessment();
-    studentPage("student-schedule");
-  };
-
-  enterDemo = function () {
-    originalEnterDemo();
-
-    if (assessment.completed) {
-      ensureInitialPlan();
-      studentPage("student-schedule");
-    }
-  };
-
-  ensureInitialPlan();
-  renderAssessment();
-  renderPlanner();
-})();
 </script>
 </body>
 </html>
