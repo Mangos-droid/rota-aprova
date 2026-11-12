@@ -14,8 +14,9 @@
   --muted: #64748b;
   --border: #e1e7f0;
   --primary: #2878e8;
-  --header: rgba(255,255,255,.94);
+  --header: rgba(255,255,255,.96);
   --shadow: 0 8px 28px rgba(20,40,75,.07);
+  --header-height: 71px;
 }
 
 body.dark {
@@ -25,14 +26,16 @@ body.dark {
   --muted: #b8c5dc;
   --border: #263653;
   --primary: #4d9aff;
-  --header: rgba(13,23,45,.95);
+  --header: rgba(13,23,45,.96);
   --shadow: 0 8px 28px rgba(0,0,0,.16);
 }
 
 * { box-sizing: border-box; }
+html, body { min-height: 100%; }
 
 body {
   margin: 0;
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -45,8 +48,11 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 a { color: var(--primary); text-decoration: none; }
 
 .container {
-  width: min(1120px, 92%);
+  width: 100%;
+  max-width: none;
   margin: auto;
+  padding-left: clamp(16px, 3vw, 48px);
+  padding-right: clamp(16px, 3vw, 48px);
 }
 
 header {
@@ -60,9 +66,9 @@ header {
 
 .header-content {
   min-height: 70px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 15px;
 }
 
@@ -78,22 +84,29 @@ header {
 .top-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 28px;
 }
 
 .top-nav a {
+  display: inline-block;
+  padding: 12px 2px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 3px solid transparent;
 }
 
-.top-nav a.active {
-  font-weight: 800;
+.top-nav a.active,
+.top-nav a[aria-current="location"] {
+  font-weight: 900;
   color: var(--primary);
+  border-bottom-color: var(--primary);
 }
 
 .header-actions {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 9px;
 }
 
@@ -121,21 +134,23 @@ header {
 }
 
 .hero {
-  padding: 85px 0 75px;
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding: 48px 0;
   text-align: center;
   background:
     radial-gradient(circle at 50% 0%, rgba(40,120,232,.16), transparent 55%);
 }
 
-.hero-content {
-  max-width: 790px;
-  margin: auto;
-}
+.hero-content { width: 100%; max-width: none; }
 
 .hero h1 {
-  font-size: clamp(34px, 6vw, 57px);
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  font-size: clamp(34px, 6vw, 64px);
   line-height: 1.12;
-  margin: 0 0 20px;
   letter-spacing: -1.5px;
 }
 
@@ -146,7 +161,7 @@ header {
   font-size: 18px;
   line-height: 1.7;
   margin: 0 auto 28px;
-  max-width: 650px;
+  max-width: 850px;
 }
 
 .hero-actions {
@@ -160,7 +175,7 @@ header {
 
 .section-heading {
   text-align: center;
-  max-width: 650px;
+  max-width: 750px;
   margin: 0 auto 30px;
 }
 
@@ -204,10 +219,11 @@ footer {
   font-size: 13px;
 }
 
-#inicio, #recursos, #sobre { scroll-margin-top: 110px; }
+#inicio, #recursos, #sobre {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
 
-/* LOGIN E CADASTRO */
-
+/* Login */
 .page { display: none; }
 .page.active { display: block; }
 
@@ -255,13 +271,13 @@ footer {
   line-height: 1.5;
 }
 
-/* PAINEL DO ESTUDANTE */
-
+/* Painel */
 .dashboard {
   display: flex;
-  min-height: 75vh;
+  min-height: calc(100vh - var(--header-height));
   gap: 22px;
-  padding: 25px 0;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .sidebar {
@@ -273,7 +289,7 @@ footer {
   padding: 16px;
   align-self: flex-start;
   position: sticky;
-  top: 85px;
+  top: calc(var(--header-height) + 15px);
 }
 
 .sidebar h3 { margin: 5px 8px 15px; }
@@ -296,11 +312,8 @@ footer {
   color: var(--primary);
 }
 
-.dashboard-main {
-  flex: 1;
-  min-width: 0;
-}
-
+.sidebar button.active { font-weight: 800; }
+.dashboard-main { flex: 1; min-width: 0; }
 .student-page { display: none; }
 .student-page.active { display: block; }
 .student-page h2 { margin-top: 8px; }
@@ -342,8 +355,7 @@ footer {
 
 .mobile-menu-button { display: none; }
 
-/* QUADRO VERMELHO NA VISÃO GERAL */
-
+/* Quadro vermelho */
 .assessment-card {
   width: 100%;
   min-height: 330px;
@@ -376,8 +388,7 @@ footer {
   color: #991b1b;
 }
 
-/* PERGUNTAS E RESULTADOS */
-
+/* Avaliação */
 .quiz-box {
   background: var(--card);
   border: 1px solid var(--border);
@@ -454,8 +465,7 @@ th, td {
   line-height: 1.6;
 }
 
-/* CRONOGRAMA */
-
+/* Cronograma */
 .planner {
   background: var(--card);
   padding: 22px;
@@ -491,24 +501,40 @@ th, td {
   outline-offset: 3px;
 }
 
-/* CELULAR */
-
 @media(max-width:760px) {
   .header-content {
+    display: flex;
     flex-wrap: wrap;
-    padding: 12px 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
-  .top-nav { display: none; }
   .brand { font-size: 19px; }
-  .header-actions { gap: 6px; }
+
+  .header-actions {
+    margin-left: auto;
+    gap: 6px;
+  }
 
   .header-actions .btn {
     padding: 9px 10px;
     font-size: 12px;
   }
 
-  .hero { padding: 60px 0; }
+  .top-nav {
+    display: flex;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 26px;
+  }
+
+  .top-nav a {
+    font-size: 15px;
+    padding: 8px 2px;
+  }
+
+  .hero { padding: 36px 0; }
   .hero p { font-size: 16px; }
   .dashboard { display: block; }
 
@@ -516,7 +542,6 @@ th, td {
     display: none;
     position: fixed;
     z-index: 1000;
-    top: 65px;
     left: 10px;
     bottom: 10px;
     width: min(270px,80vw);
@@ -538,8 +563,6 @@ th, td {
 </head>
 
 <body>
-
-<!-- CABEÇALHO -->
 
 <header id="mainHeader">
   <div class="container header-content">
@@ -566,18 +589,14 @@ th, td {
   </div>
 </header>
 
-<!-- SITE PÚBLICO -->
-
 <div id="publicSite">
   <section class="hero" id="inicio">
     <div class="container hero-content">
       <h1>Sua preparação começa com a <span>Rota certa.</span></h1>
-
       <p>
         Organize seus estudos, conheça oportunidades e prepare-se
         para alcançar seus objetivos com o Rota Aprova.
       </p>
-
       <div class="hero-actions">
         <button class="btn" onclick="showPage('signup')">
           Começar agora
@@ -605,31 +624,26 @@ th, td {
           <h3>Concursos</h3>
           <p>Conheça instituições, oportunidades e informações importantes.</p>
         </div>
-
         <div class="card">
           <div class="card-icon">📝</div>
           <h3>Questões</h3>
           <p>Pratique seus conhecimentos com exercícios por matéria.</p>
         </div>
-
         <div class="card">
           <div class="card-icon">⏱️</div>
           <h3>Simulados</h3>
           <p>Prepare-se com atividades para testar seus conhecimentos.</p>
         </div>
-
         <div class="card">
           <div class="card-icon">📚</div>
           <h3>Materiais</h3>
           <p>Organize apostilas, resumos e conteúdos de estudo.</p>
         </div>
-
         <div class="card">
           <div class="card-icon">🧠</div>
           <h3>Métodos de estudo</h3>
           <p>Descubra maneiras de organizar sua rotina e revisar conteúdos.</p>
         </div>
-
         <div class="card">
           <div class="card-icon">📅</div>
           <h3>Cronograma</h3>
@@ -658,8 +672,6 @@ th, td {
   </footer>
 </div>
 
-<!-- LOGIN E CADASTRO -->
-
 <section id="authApp" class="page">
   <div class="auth-wrapper" id="loginPanel">
     <h2>Entrar na sua conta</h2>
@@ -677,12 +689,10 @@ th, td {
       Esta versão é apenas uma demonstração visual.
       Não use uma senha real.
     </p>
-
     <p>
       Não tem uma conta?
       <a href="#" onclick="showSignup();return false;">Criar conta</a>
     </p>
-
     <button class="secondary" type="button" onclick="showPublic()">
       Voltar ao início
     </button>
@@ -706,56 +716,41 @@ th, td {
     <p class="auth-note">
       Cadastro demonstrativo: os dados não serão enviados nem salvos.
     </p>
-
     <p>
       Já tem uma conta?
       <a href="#" onclick="showLogin();return false;">Entrar</a>
     </p>
-
     <button class="secondary" type="button" onclick="showPublic()">
       Voltar ao início
     </button>
   </div>
 </section>
 
-<!-- PAINEL DO ESTUDANTE -->
-
 <section id="studentApp" class="page">
   <div class="container dashboard">
-
     <aside class="sidebar" id="studentSidebar">
       <h3>📚 Rota Aprova</h3>
 
       <button class="active"
         onclick="studentPage('student-home')">🏠 Visão geral</button>
-
       <button
         onclick="studentPage('student-assessment')">📋 Avaliação Inicial</button>
-
       <button
         onclick="studentPage('student-contests')">🎯 Concursos</button>
-
       <button
         onclick="studentPage('student-questions')">📝 Questões</button>
-
       <button
         onclick="studentPage('student-simulations')">⏱️ Simulados</button>
-
       <button
         onclick="studentPage('student-materials')">📚 Materiais</button>
-
       <button
         onclick="studentPage('student-methods')">🧠 Métodos de estudo</button>
-
       <button
         onclick="studentPage('student-schedule')">📅 Cronograma</button>
-
       <button
         onclick="studentPage('student-profile')">👤 Perfil</button>
-
       <button
         onclick="studentPage('student-settings')">⚙️ Configurações</button>
-
       <button onclick="showPublic()">↩ Sair do painel</button>
     </aside>
 
@@ -763,25 +758,18 @@ th, td {
       <button class="mobile-menu-button action-btn"
         onclick="toggleStudentMenu()">☰ Menu</button>
 
-      <!-- VISÃO GERAL COM O QUADRO VERMELHO -->
-
       <section id="student-home" class="student-page active">
         <div class="assessment-card">
           <h2>Avaliação Inicial</h2>
-
           <p>
             Se autoavalia para testarmos seus conhecimentos e pôr
             em prática o que precisamos melhorar
           </p>
-
           <button class="action-btn" type="button"
-            onclick="openAssessment()">
-            Começar avaliação
-          </button>
+            onclick="openAssessment()">Começar avaliação</button>
         </div>
 
         <h2>Acesso rápido</h2>
-
         <div class="content-grid">
           <div class="content-card">
             <h3>🎯 Concursos</h3>
@@ -789,14 +777,12 @@ th, td {
             <button class="action-btn"
               onclick="studentPage('student-contests')">Acessar</button>
           </div>
-
           <div class="content-card">
             <h3>📝 Questões</h3>
             <p>Pratique seus conhecimentos com exercícios.</p>
             <button class="action-btn"
               onclick="studentPage('student-questions')">Acessar</button>
           </div>
-
           <div class="content-card">
             <h3>📅 Cronograma</h3>
             <p>Organize sua rotina de preparação.</p>
@@ -806,12 +792,9 @@ th, td {
         </div>
       </section>
 
-      <!-- CONCURSOS -->
-
       <section id="student-contests" class="student-page">
         <h2>Concursos e instituições</h2>
         <p>Explore algumas opções para conhecer melhor.</p>
-
         <div class="content-grid">
           <div class="content-card">
             <h3>Colégio Militar</h3>
@@ -832,12 +815,9 @@ th, td {
         </div>
       </section>
 
-      <!-- QUESTÕES -->
-
       <section id="student-questions" class="student-page">
         <h2>Questões</h2>
         <p>Área destinada à prática de exercícios por matéria.</p>
-
         <div class="content-grid">
           <div class="content-card">
             <h3>Matemática</h3>
@@ -858,24 +838,18 @@ th, td {
         </div>
       </section>
 
-      <!-- SIMULADOS -->
-
       <section id="student-simulations" class="student-page">
         <h2>Simulados</h2>
         <p>Prepare-se com simulados organizados por instituição e matéria.</p>
-
         <div class="content-card">
           <h3>Meus simulados</h3>
           <p>Quando os simulados forem adicionados, eles aparecerão nesta área.</p>
         </div>
       </section>
 
-      <!-- MATERIAIS -->
-
       <section id="student-materials" class="student-page">
         <h2>Materiais de estudo</h2>
         <p>Um espaço para reunir conteúdos e materiais de preparação.</p>
-
         <div class="content-grid">
           <div class="content-card">
             <h3>📄 Apostilas</h3>
@@ -892,11 +866,8 @@ th, td {
         </div>
       </section>
 
-      <!-- MÉTODOS -->
-
       <section id="student-methods" class="student-page">
         <h2>Métodos de estudo</h2>
-
         <div class="content-grid">
           <div class="content-card">
             <h3>Estudo ativo</h3>
@@ -913,31 +884,23 @@ th, td {
         </div>
       </section>
 
-      <!-- AVALIAÇÃO -->
-
       <section id="student-assessment" class="student-page">
         <h2>Avaliação Inicial</h2>
-
         <p class="notice">
           20 perguntas de nível intermediário do ensino fundamental II.
           Responda sem consultar para identificar o que revisar.
           Não há limite de tempo.
         </p>
-
         <p class="notice">
-          São 4 questões de Matemática, 4 de Português e 3 de cada
-          uma das demais matérias. Esta avaliação curta orienta
-          os estudos; não é uma medida definitiva do seu conhecimento.
+          São 4 questões de Matemática, 4 de Português e 3 de cada uma
+          das demais matérias. Esta avaliação curta orienta os estudos;
+          não é uma medida definitiva do seu conhecimento.
         </p>
-
         <div id="quizArea"></div>
       </section>
 
-      <!-- CRONOGRAMA -->
-
       <section id="student-schedule" class="student-page">
         <h2>Meu cronograma personalizado</h2>
-
         <p class="notice">
           Escolha seus dias e o tempo de estudo por dia.
           O plano reserva mais tempo às matérias com maior proporção
@@ -948,7 +911,6 @@ th, td {
 
         <form class="planner" id="planner"
           onsubmit="generateSchedule(event)" hidden>
-
           <fieldset>
             <legend>Em quais dias você quer estudar?</legend>
             <div class="days" id="dayChoices"></div>
@@ -957,7 +919,6 @@ th, td {
           <label for="dailyMinutes">
             Minutos de estudo por dia selecionado
           </label>
-
           <input id="dailyMinutes" type="number"
             min="15" max="240" step="15" value="60" required>
 
@@ -970,7 +931,6 @@ th, td {
           <button class="action-btn" type="submit">
             Gerar / atualizar cronograma
           </button>
-
           <p id="planError" class="error" role="alert"></p>
         </form>
 
@@ -978,16 +938,13 @@ th, td {
 
         <p class="notice" id="storageNote">
           Resultados e cronograma ficam neste navegador e aparelho.
-          O login ainda é demonstrativo: quem usar este mesmo
-          navegador poderá ver o resultado.
+          O login ainda é demonstrativo: quem usar este mesmo navegador
+          poderá ver o resultado.
         </p>
       </section>
 
-      <!-- PERFIL -->
-
       <section id="student-profile" class="student-page">
         <h2>Meu perfil</h2>
-
         <div class="content-card">
           <h3>Estudante</h3>
           <p>Esta é uma área demonstrativa do perfil do estudante.</p>
@@ -995,18 +952,13 @@ th, td {
         </div>
       </section>
 
-      <!-- CONFIGURAÇÕES -->
-
       <section id="student-settings" class="student-page">
         <h2>Configurações</h2>
-
         <div class="content-card">
           <h3>Aparência</h3>
           <p>Escolha como deseja visualizar o Rota Aprova.</p>
-
           <label for="themePreference">Tema do site</label>
           <br><br>
-
           <select id="themePreference" class="settings-select"
             onchange="setThemePreference(this.value)">
             <option value="system">Seguir o tema do aparelho</option>
@@ -1020,7 +972,7 @@ th, td {
 </section>
 
 <script>
-/* NAVEGAÇÃO */
+/* Navegação */
 
 function closeStudentMenu() {
   document.getElementById("studentSidebar").classList.remove("open");
@@ -1032,6 +984,7 @@ function showPublic() {
   document.getElementById("studentApp").classList.remove("active");
   closeStudentMenu();
   window.scrollTo(0, 0);
+  updatePublicNav();
 }
 
 function showPage(page) {
@@ -1049,15 +1002,11 @@ function showPage(page) {
 
   closeStudentMenu();
   window.scrollTo(0, 0);
+  updatePublicNav();
 }
 
-function showLogin() {
-  showPage("login");
-}
-
-function showSignup() {
-  showPage("signup");
-}
+function showLogin() { showPage("login"); }
+function showSignup() { showPage("signup"); }
 
 function enterDemo() {
   document.getElementById("publicSite").style.display = "none";
@@ -1071,11 +1020,11 @@ function enterDemo() {
   studentPage("student-home");
   renderAssessment();
   renderPlanner();
+  updatePublicNav();
 }
 
 function studentPage(id) {
   const target = document.getElementById(id);
-
   if (!target || !target.classList.contains("student-page")) return;
 
   if (id === "student-assessment") renderAssessment();
@@ -1098,14 +1047,13 @@ function toggleStudentMenu() {
   document.getElementById("studentSidebar").classList.toggle("open");
 }
 
-/* TEMA CLARO E ESCURO */
+/* Tema */
 
 const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 let themePreference = "system";
 
 try {
   const saved = localStorage.getItem("rotaAprovaTheme");
-
   if (["system", "light", "dark"].includes(saved)) {
     themePreference = saved;
   }
@@ -1132,7 +1080,6 @@ function setThemePreference(value) {
   if (!["system", "light", "dark"].includes(value)) return;
 
   themePreference = value;
-
   try {
     localStorage.setItem("rotaAprovaTheme", value);
   } catch (error) {}
@@ -1168,55 +1115,49 @@ document.addEventListener("keydown", event => {
 applyTheme();
 
 /*
-PERGUNTAS:
+Perguntas:
 matéria, assunto, enunciado, alternativas,
-índice da resposta correta e explicação.
+índice correto (0 a 3), explicação.
 */
 
 const questions = [
   [
-    "Matemática",
-    "Porcentagem",
+    "Matemática", "Porcentagem",
     "Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o novo preço?",
     ["R$ 136", "R$ 144", "R$ 145", "R$ 150"],
     0,
     "15% de 160 são 24. Portanto, 160 − 24 = 136."
   ],
   [
-    "Matemática",
-    "Equações",
+    "Matemática", "Equações",
     "Qual é o valor de x em 3(x − 2) + 5 = 20?",
     ["5", "6", "7", "9"],
     2,
     "3x − 6 + 5 = 20; 3x = 21; x = 7."
   ],
   [
-    "Matemática",
-    "Frações",
+    "Matemática", "Frações",
     "Uma turma tem 30 alunos. Dois quintos praticam natação. Quantos alunos são esses?",
     ["10", "12", "15", "18"],
     1,
     "Divida 30 por 5 e multiplique por 2: 6 × 2 = 12."
   ],
   [
-    "Matemática",
-    "Geometria",
+    "Matemática", "Geometria",
     "Um triângulo tem base de 12 cm e altura relativa a essa base de 7 cm. Qual é sua área?",
     ["19 cm²", "84 cm²", "38 cm²", "42 cm²"],
     3,
     "A área do triângulo é base × altura ÷ 2: 12 × 7 ÷ 2 = 42 cm²."
   ],
   [
-    "Português",
-    "Conectivos",
+    "Português", "Conectivos",
     "Em “Embora estivesse cansada, Ana terminou a tarefa”, a palavra “embora” expressa:",
     ["Causa", "Conclusão", "Concessão", "Finalidade"],
     2,
     "A concessão apresenta uma dificuldade que não impediu a ação: Ana terminou apesar do cansaço."
   ],
   [
-    "Português",
-    "Concordância verbal",
+    "Português", "Concordância verbal",
     "Qual frase apresenta concordância verbal adequada à norma-padrão?",
     [
       "Faz dois anos que estudo aqui.",
@@ -1228,8 +1169,7 @@ const questions = [
     "O verbo fazer indicando tempo decorrido é impessoal e fica no singular."
   ],
   [
-    "Português",
-    "Interpretação",
+    "Português", "Interpretação",
     "“Ao sair, Lia viu nuvens escuras e voltou para buscar o guarda-chuva.” O que se pode inferir?",
     [
       "Já estava chovendo dentro da casa.",
@@ -1241,24 +1181,21 @@ const questions = [
     "As nuvens motivaram uma precaução. O trecho não afirma que já chovia nem que Lia desistiu de sair."
   ],
   [
-    "Português",
-    "Sujeito",
+    "Português", "Sujeito",
     "Em “Os alunos da turma organizaram uma feira”, qual é o núcleo do sujeito?",
     ["Turma", "Alunos", "Feira", "Organizaram"],
     1,
     "O sujeito é “Os alunos da turma”; seu núcleo é o substantivo “alunos”."
   ],
   [
-    "Ciências",
-    "Ecologia",
+    "Ciências", "Ecologia",
     "Na cadeia capim → gafanhoto → sapo → cobra, qual é o consumidor secundário?",
     ["Capim", "Gafanhoto", "Sapo", "Cobra"],
     2,
     "O gafanhoto é consumidor primário. O sapo, que o come, é consumidor secundário."
   ],
   [
-    "Ciências",
-    "Transformações da matéria",
+    "Ciências", "Transformações da matéria",
     "Qual exemplo representa uma transformação química?",
     [
       "Um prego enferrujando.",
@@ -1270,8 +1207,7 @@ const questions = [
     "A ferrugem envolve a formação de novas substâncias. Mudanças de estado e cortes são transformações físicas."
   ],
   [
-    "Ciências",
-    "Sistemas do corpo",
+    "Ciências", "Sistemas do corpo",
     "Qual é a principal função dos alvéolos pulmonares?",
     [
       "Produzir células sanguíneas.",
@@ -1283,16 +1219,14 @@ const questions = [
     "Nos alvéolos, o oxigênio passa para o sangue e o gás carbônico passa do sangue para o ar."
   ],
   [
-    "Geografia",
-    "Escalas cartográficas",
+    "Geografia", "Escalas cartográficas",
     "Em um mapa de escala 1:100.000, duas cidades estão separadas por 3 cm. Qual é a distância real representada?",
     ["300 m", "3 km", "30 km", "300 km"],
     1,
     "Cada centímetro representa 100.000 cm, ou 1 km. Assim, 3 cm representam 3 km."
   ],
   [
-    "Geografia",
-    "Tempo e clima",
+    "Geografia", "Tempo e clima",
     "Qual afirmação descreve o clima, e não apenas o tempo atmosférico?",
     [
       "Choveu nesta manhã.",
@@ -1304,8 +1238,7 @@ const questions = [
     "Clima corresponde aos padrões atmosféricos observados durante longos períodos."
   ],
   [
-    "Geografia",
-    "Urbanização",
+    "Geografia", "Urbanização",
     "Uma cidade substituiu áreas verdes por asfalto. Qual consequência é mais provável?",
     [
       "Maior infiltração da chuva no solo.",
@@ -1317,8 +1250,7 @@ const questions = [
     "A impermeabilização reduz a infiltração, aumentando o volume de água que escoa pela superfície."
   ],
   [
-    "História",
-    "Revolução Industrial",
+    "História", "Revolução Industrial",
     "Qual mudança caracteriza a Revolução Industrial iniciada na Inglaterra no século XVIII?",
     [
       "Expansão da produção mecanizada em fábricas.",
@@ -1330,8 +1262,7 @@ const questions = [
     "A mecanização e o sistema fabril transformaram a produção e as relações de trabalho."
   ],
   [
-    "História",
-    "Independência do Brasil",
+    "História", "Independência do Brasil",
     "Qual característica permaneceu no Brasil após a Independência de 1822?",
     [
       "A subordinação política formal a Portugal.",
@@ -1343,8 +1274,7 @@ const questions = [
     "A Independência rompeu o vínculo político com Portugal, mas a escravidão continuou até 1888."
   ],
   [
-    "História",
-    "Iluminismo",
+    "História", "Iluminismo",
     "Qual ideia está associada ao pensamento iluminista?",
     [
       "Poder absoluto do rei sem limites.",
@@ -1356,16 +1286,14 @@ const questions = [
     "Pensadores iluministas valorizaram a razão e questionaram o poder absoluto e os privilégios."
   ],
   [
-    "Inglês",
-    "Simple present",
+    "Inglês", "Simple present",
     "Complete: “She ___ to school by bus every day.”",
     ["Go", "Going", "Gone", "Goes"],
     3,
     "No simple present, com she, o verbo go assume a forma goes."
   ],
   [
-    "Inglês",
-    "Compreensão de texto",
+    "Inglês", "Compreensão de texto",
     "Leia: “Tom missed the bus, so he walked to school.” Por que Tom foi a pé para a escola?",
     [
       "Porque perdeu o ônibus.",
@@ -1377,8 +1305,7 @@ const questions = [
     "“Missed the bus” significa que ele perdeu o ônibus; “so” introduz a consequência."
   ],
   [
-    "Inglês",
-    "Comparativos",
+    "Inglês", "Comparativos",
     "Complete: “This exercise is ___ than the previous one.”",
     ["Easy", "Easier", "Easiest", "More easy"],
     1,
@@ -1387,22 +1314,13 @@ const questions = [
 ];
 
 const subjects = [
-  "Matemática",
-  "Português",
-  "Ciências",
-  "Geografia",
-  "História",
-  "Inglês"
+  "Matemática", "Português", "Ciências",
+  "Geografia", "História", "Inglês"
 ];
 
 const dayNames = [
-  "Segunda",
-  "Terça",
-  "Quarta",
-  "Quinta",
-  "Sexta",
-  "Sábado",
-  "Domingo"
+  "Segunda", "Terça", "Quarta", "Quinta",
+  "Sexta", "Sábado", "Domingo"
 ];
 
 const storageKey = "rotaAssessmentV1";
@@ -1416,7 +1334,7 @@ let assessment = {
   planned: false
 };
 
-/* RECUPERAR PROGRESSO */
+/* Recuperar progresso */
 
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
@@ -1426,8 +1344,7 @@ try {
     Array.isArray(saved.answers) &&
     saved.answers.length === 20 &&
     saved.answers.every(a =>
-      a === null ||
-      (Number.isInteger(a) && a >= 0 && a < 4)
+      a === null || (Number.isInteger(a) && a >= 0 && a < 4)
     )
   ) {
     assessment.answers = saved.answers;
@@ -1442,11 +1359,9 @@ try {
 
     if (Array.isArray(saved.days)) {
       assessment.days = [
-        ...new Set(
-          saved.days.filter(d =>
-            Number.isInteger(d) && d >= 0 && d < 7
-          )
-        )
+        ...new Set(saved.days.filter(d =>
+          Number.isInteger(d) && d >= 0 && d < 7
+        ))
       ];
     }
 
@@ -1464,9 +1379,7 @@ try {
       assessment.completed &&
       assessment.days.length > 0;
   }
-} catch (error) {
-  /* Usa os valores iniciais se não houver dados válidos. */
-}
+} catch (error) {}
 
 function saveAssessment() {
   try {
@@ -1482,7 +1395,7 @@ function openAssessment() {
   studentPage("student-assessment");
 }
 
-/* CORREÇÃO */
+/* Correção */
 
 function results() {
   return subjects.map(subject => {
@@ -1506,7 +1419,7 @@ function results() {
   });
 }
 
-/* EXIBIR PERGUNTAS */
+/* Perguntas */
 
 function renderAssessment() {
   const area = document.getElementById("quizArea");
@@ -1522,28 +1435,18 @@ function renderAssessment() {
 
   area.innerHTML = `
     <div class="quiz-box">
-      <p>
-        Questão ${i + 1} de 20 · ${q[0]} · ${answered} respondidas
-      </p>
+      <p>Questão ${i + 1} de 20 · ${q[0]} · ${answered} respondidas</p>
 
-      <progress
-        value="${answered}"
-        max="20"
-        aria-label="Perguntas respondidas">
-      </progress>
+      <progress value="${answered}" max="20"
+        aria-label="Perguntas respondidas"></progress>
 
       <fieldset>
         <legend tabindex="-1" id="questionTitle">${q[2]}</legend>
-
         ${q[3].map((option, j) => `
           <label class="answer">
-            <input
-              type="radio"
-              name="answer"
-              value="${j}"
+            <input type="radio" name="answer" value="${j}"
               ${assessment.answers[i] === j ? "checked" : ""}
-              onchange="chooseAnswer(${j})"
-            >
+              onchange="chooseAnswer(${j})">
             <span>${option}</span>
           </label>
         `).join("")}
@@ -1552,15 +1455,11 @@ function renderAssessment() {
       <p class="error" id="quizError" role="alert"></p>
 
       <div class="quiz-actions">
-        <button
-          class="btn btn-outline"
+        <button class="btn btn-outline"
           ${i === 0 ? "disabled" : ""}
-          onclick="moveQuestion(-1)">
-          Anterior
-        </button>
+          onclick="moveQuestion(-1)">Anterior</button>
 
-        <button
-          class="action-btn"
+        <button class="action-btn"
           onclick="${i === 19 ? "finishAssessment()" : "moveQuestion(1)"}">
           ${i === 19 ? "Concluir avaliação" : "Próxima"}
         </button>
@@ -1576,7 +1475,6 @@ function chooseAnswer(value) {
   document.getElementById("quizError").textContent = "";
 
   const answered = assessment.answers.filter(a => a !== null).length;
-
   document.querySelector("#quizArea progress").value = answered;
 
   document.querySelector("#quizArea .quiz-box > p").textContent =
@@ -1592,8 +1490,7 @@ function moveQuestion(step) {
   }
 
   assessment.current = Math.max(
-    0,
-    Math.min(19, assessment.current + step)
+    0, Math.min(19, assessment.current + step)
   );
 
   saveAssessment();
@@ -1607,7 +1504,6 @@ function finishAssessment() {
   if (missing !== -1) {
     assessment.current = missing;
     renderAssessment();
-
     document.getElementById("quizError").textContent =
       "Responda esta pergunta antes de concluir.";
     return;
@@ -1619,11 +1515,10 @@ function finishAssessment() {
   saveAssessment();
   renderResults();
   renderPlanner();
-
   document.getElementById("resultTitle").focus();
 }
 
-/* RESULTADOS E EXPLICAÇÕES */
+/* Resultados */
 
 function renderResults() {
   const rows = results();
@@ -1663,26 +1558,22 @@ function renderResults() {
         </table>
       </div>
 
-      <button
-        class="action-btn"
+      <button class="action-btn"
         onclick="studentPage('student-schedule')">
         Montar meu cronograma
       </button>
 
       <details>
         <summary>Ver respostas e explicações</summary>
-
         ${questions.map((q, i) => `
           <div class="review-item">
             <strong>${i + 1}. ${q[2]}</strong>
-
             <p>
               ${assessment.answers[i] === q[4] ? "✓ Acertou" : "✗ Errou"}
               · Sua resposta: ${q[3][assessment.answers[i]]}
               <br>
               Resposta correta: ${q[3][q[4]]}
             </p>
-
             <p>${q[5]}</p>
           </div>
         `).join("")}
@@ -1714,11 +1605,10 @@ function restartAssessment() {
   renderPlanner();
 }
 
-/* FORMULÁRIO DO CRONOGRAMA */
+/* Cronograma */
 
 function renderPlanner() {
   const ready = assessment.completed;
-
   document.getElementById("planner").hidden = !ready;
 
   document.getElementById("scheduleGate").innerHTML = ready ? "" : `
@@ -1733,29 +1623,22 @@ function renderPlanner() {
   document.getElementById("dayChoices").innerHTML =
     dayNames.map((d, i) => `
       <label>
-        <input
-          type="checkbox"
-          value="${i}"
-          ${assessment.days.includes(i) ? "checked" : ""}
-        >
+        <input type="checkbox" value="${i}"
+          ${assessment.days.includes(i) ? "checked" : ""}>
         ${d}
       </label>
     `).join("");
 
   document.getElementById("dailyMinutes").value = assessment.minutes;
   document.getElementById("scheduleOutput").innerHTML = "";
+  document.getElementById("planError").textContent = "";
 
   if (assessment.planned && ready) displaySchedule();
 }
 
 /*
-DISTRIBUIÇÃO DO TEMPO
-
-Cada matéria recebe peso:
-1 + 3 × proporção de erros.
-
-O tempo é distribuído em blocos de 15 minutos.
-A proporção permite comparar matérias com 3 ou 4 perguntas.
+Peso da matéria = 1 + 3 × proporção de erros.
+Distribuição em blocos de 15 minutos.
 */
 
 function buildSchedule(rows, days, minutes) {
@@ -1763,7 +1646,6 @@ function buildSchedule(rows, days, minutes) {
   const totalWeight = weights.reduce((a, b) => a + b, 0);
   const counts = rows.map(() => 0);
   const blocksPerDay = minutes / 15;
-
   let block = 0;
 
   return days.map(day => {
@@ -1806,7 +1688,6 @@ function buildSchedule(rows, days, minutes) {
 
 function generateSchedule(event) {
   event.preventDefault();
-
   if (!assessment.completed) return;
 
   const days = Array.from(
@@ -1840,20 +1721,15 @@ function generateSchedule(event) {
   assessment.planned = true;
 
   document.getElementById("planError").textContent = "";
-
   saveAssessment();
   displaySchedule();
 }
-
-/* EXIBIR CRONOGRAMA */
 
 function displaySchedule() {
   const rows = results();
 
   const plan = buildSchedule(
-    rows,
-    assessment.days,
-    assessment.minutes
+    rows, assessment.days, assessment.minutes
   );
 
   const included = new Set(
@@ -1889,10 +1765,7 @@ function displaySchedule() {
     <div class="content-grid">
       ${plan.map(d => `
         <div class="content-card">
-          <h3>
-            ${dayNames[d.day]} · ${assessment.minutes} min
-          </h3>
-
+          <h3>${dayNames[d.day]} · ${assessment.minutes} min</h3>
           ${d.sessions.map(s => `
             <p>
               <strong>${s.subject} — ${s.minutes} min</strong>
@@ -1916,7 +1789,7 @@ function displaySchedule() {
   `;
 }
 
-/* DESTAQUE DO MENU INICIAL */
+/* Negrito na seção atual */
 
 function updatePublicNav() {
   let active = "inicio";
@@ -1946,7 +1819,6 @@ function updatePublicNav() {
 
   document.querySelectorAll(".top-nav a").forEach(link => {
     const selected = link.getAttribute("href") === "#" + active;
-
     link.classList.toggle("active", selected);
 
     if (selected) {
@@ -1960,15 +1832,25 @@ function updatePublicNav() {
 window.addEventListener("scroll", updatePublicNav, { passive: true });
 window.addEventListener("resize", updatePublicNav);
 
-new MutationObserver(updatePublicNav).observe(
-  document.getElementById("publicSite"),
-  {
-    attributes: true,
-    attributeFilter: ["style"]
-  }
-);
+/* Altura da tela e cabeçalho */
 
-updatePublicNav();
+function syncHeaderHeight() {
+  document.documentElement.style.setProperty(
+    "--header-height",
+    document.getElementById("mainHeader").offsetHeight + "px"
+  );
+  updatePublicNav();
+}
+
+if ("ResizeObserver" in window) {
+  new ResizeObserver(syncHeaderHeight).observe(
+    document.getElementById("mainHeader")
+  );
+}
+
+window.addEventListener("resize", syncHeaderHeight);
+
+syncHeaderHeight();
 renderAssessment();
 renderPlanner();
 </script>
