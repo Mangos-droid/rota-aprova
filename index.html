@@ -1,1961 +1,1218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d172d">
-<title>Rota Aprova</title>
-
-<style>
-:root {
-  --bg: #f4f7fc;
-  --card: #ffffff;
-  --text: #17243a;
-  --muted: #64748b;
-  --border: #e1e7f0;
-  --primary: #2878e8;
-  --header: rgba(255,255,255,.96);
-  --shadow: 0 8px 28px rgba(20,40,75,.07);
-  --header-height: 71px;
-}
-
-body.dark {
-  --bg: #0d172d;
-  --card: #162440;
-  --text: #ffffff;
-  --muted: #b8c5dc;
-  --border: #263653;
-  --primary: #4d9aff;
-  --header: rgba(13,23,45,.96);
-  --shadow: 0 8px 28px rgba(0,0,0,.16);
-}
-
-* { box-sizing: border-box; }
-html, body { min-height: 100%; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background .2s, color .2s;
-}
-
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-button:disabled { opacity: .5; cursor: not-allowed; }
-a { color: var(--primary); text-decoration: none; }
-
-.container {
-  width: 100%;
-  margin: auto;
-  padding-left: clamp(16px, 3vw, 48px);
-  padding-right: clamp(16px, 3vw, 48px);
-}
-
-/* Cabeçalho */
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--header);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-
-.header-content {
-  min-height: 70px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 15px;
-}
-
-.brand {
-  font-size: 21px;
-  font-weight: 800;
-  color: var(--text);
-  white-space: nowrap;
-}
-
-.brand span { color: var(--primary); }
-
-.top-nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.top-nav a {
-  display: inline-block;
-  padding: 12px 2px;
-  color: var(--text);
-  font-size: 16px;
-  font-weight: 400;
-  border-bottom: 3px solid transparent;
-}
-
-.top-nav a.active {
-  font-weight: 900;
-  color: var(--primary);
-  border-bottom-color: var(--primary);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  justify-self: end;
-  gap: 9px;
-}
-
-.btn {
-  border: 0;
-  padding: 11px 17px;
-  border-radius: 9px;
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-.theme-button {
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 9px 11px;
-  background: var(--card);
-  color: var(--text);
-}
-
-/* Página inicial */
-
-.hero {
-  min-height: calc(100vh - var(--header-height));
-  min-height: calc(100svh - var(--header-height));
-  display: flex;
-  align-items: center;
-  padding: 48px 0;
-  text-align: center;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(40,120,232,.16), transparent 55%);
-}
-
-.hero h1 {
-  max-width: 1100px;
-  margin: 0 auto 20px;
-  font-size: clamp(34px, 6vw, 64px);
-  line-height: 1.12;
-  letter-spacing: -1.5px;
-}
-
-.hero h1 span { color: var(--primary); }
-
-.hero p {
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.7;
-  margin: 0 auto 28px;
-  max-width: 850px;
-}
-
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.section { padding: 55px 0; }
-
-.section-heading {
-  text-align: center;
-  max-width: 750px;
-  margin: 0 auto 30px;
-}
-
-.section-heading h2 { font-size: 29px; }
-.section-heading p { color: var(--muted); line-height: 1.6; }
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 23px;
-  box-shadow: var(--shadow);
-}
-
-.card h3 { margin-top: 0; }
-.card p { color: var(--muted); line-height: 1.6; }
-.card-icon { font-size: 27px; margin-bottom: 12px; }
-
-.cta {
-  background: #174c91;
-  color: white;
-  border-radius: 18px;
-  padding: 38px 25px;
-  text-align: center;
-  margin: 35px auto 60px;
-}
-
-.cta p { color: #dceaff; line-height: 1.6; }
-
-footer {
-  border-top: 1px solid var(--border);
-  padding: 25px 0;
-  color: var(--muted);
-  text-align: center;
-  font-size: 13px;
-}
-
-#inicio, #recursos, #sobre {
-  scroll-margin-top: calc(var(--header-height) + 16px);
-}
-
-/* Login */
-
-.page { display: none; }
-.page.active { display: block; }
-
-.auth-wrapper {
-  max-width: 460px;
-  margin: 55px auto;
-  padding: 28px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-}
-
-.auth-wrapper h2 { margin-top: 0; }
-
-.auth-wrapper input {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0 16px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: var(--bg);
-  color: var(--text);
-}
-
-.auth-wrapper button {
-  border: 0;
-  border-radius: 9px;
-  padding: 12px 17px;
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
-  margin: 4px 0;
-}
-
-.auth-wrapper .secondary {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-.auth-note {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* Painel */
-
-.dashboard {
-  display: flex;
-  min-height: calc(100vh - var(--header-height));
-  gap: 22px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-.sidebar {
-  width: 230px;
-  flex-shrink: 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 16px;
-  align-self: flex-start;
-  position: sticky;
-  top: calc(var(--header-height) + 15px);
-}
-
-.sidebar h3 { margin: 5px 8px 15px; }
-
-.sidebar button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 11px 12px;
-  margin: 3px 0;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--text);
-}
-
-.sidebar button:hover,
-.sidebar button.active {
-  background: rgba(40,120,232,.16);
-  color: var(--primary);
-}
-
-.sidebar button.active { font-weight: 800; }
-.dashboard-main { flex: 1; min-width: 0; }
-.student-page { display: none; }
-.student-page.active { display: block; }
-.student-page h2 { margin-top: 8px; }
-
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-  gap: 15px;
-  margin: 18px 0;
-}
-
-.content-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  padding: 18px;
-}
-
-.content-card h3 { margin-top: 0; }
-.content-card p { color: var(--muted); line-height: 1.5; }
-
-.action-btn {
-  border: 0;
-  border-radius: 9px;
-  padding: 12px 17px;
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
-}
-
-.settings-select {
-  padding: 11px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--card);
-  color: var(--text);
-  max-width: 100%;
-}
-
-.mobile-menu-button { display: none; }
-
-/* Quadro vermelho */
-
-.assessment-card {
-  width: 100%;
-  min-height: 330px;
-  padding: 28px;
-  margin: 0 0 24px;
-  border-radius: 16px;
-  background: #b91c1c;
-  color: white;
-  border: 1px solid #b91c1c;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.assessment-card h2 {
-  margin: 0 0 18px;
-  font-size: 30px;
-  color: white;
-}
-
-.assessment-card p {
-  margin: 0 0 28px;
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 750px;
-  color: white;
-}
-
-.assessment-card button {
-  margin-top: auto;
-  padding: 14px 22px;
-  background: white;
-  color: #991b1b;
-}
-
-.assessment-card button:hover { background: #fee2e2; }
-
-/* Perguntas */
-
-.quiz-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 24px;
-  margin: 18px 0;
-}
-
-.quiz-box fieldset,
-.planner fieldset {
-  border: 0;
-  padding: 0;
-  margin: 18px 0;
-  min-width: 0;
-}
-
-.quiz-box legend {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-
-.answer {
-  display: flex;
-  gap: 12px;
-  padding: 15px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin: 10px 0;
-  cursor: pointer;
-}
-
-.answer:has(input:checked) {
-  border-color: var(--primary);
-  background: rgba(40,120,232,.12);
-}
-
-.answer input { accent-color: var(--primary); }
-
-.quiz-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-progress {
-  width: 100%;
-  accent-color: var(--primary);
-  height: 12px;
-}
-
-.notice { color: var(--muted); line-height: 1.6; }
-.error { color: #b91c1c; font-weight: 700; }
-body.dark .error { color: #fca5a5; }
-.table-wrap { overflow-x: auto; }
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 18px 0;
-}
-
-th, td {
-  text-align: left;
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* Cronograma */
-
-.planner {
-  background: var(--card);
-  padding: 22px;
-  margin-top: 18px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-}
-
-.days {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 12px 0;
-}
-
-.days label {
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.planner input[type=number] {
-  width: 100px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  background: var(--bg);
-}
-
-:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 3px;
-}
-
-/* Celular */
-
-@media(max-width:760px) {
-  .header-content {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  .brand { font-size: 19px; }
-
-  .header-actions {
-    margin-left: auto;
-    gap: 6px;
-  }
-
-  .header-actions .btn {
-    padding: 9px 10px;
-    font-size: 12px;
-  }
-
-  .top-nav {
-    display: flex;
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    gap: 26px;
-  }
-
-  .top-nav a {
-    font-size: 15px;
-    padding: 8px 2px;
-  }
-
-  .hero { padding: 36px 0; }
-  .hero p { font-size: 16px; }
-  .dashboard { display: block; }
-
-  .sidebar {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 10px;
-    bottom: 10px;
-    width: min(270px,80vw);
-    overflow-y: auto;
-    box-shadow: 0 10px 35px rgba(0,0,0,.3);
-  }
-
-  .sidebar.open { display: block; }
-
-  .mobile-menu-button {
-    display: inline-block;
-    margin-bottom: 15px;
-  }
-
-  .dashboard-main { width: 100%; }
-  .auth-wrapper { margin: 25px 10px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14223b">
+  <title>Rota Aprova | Painel de estudos</title>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #17263e;
+      --muted: #52647b;
+      --line: #d9e2ee;
+      --primary: #185bb5;
+      --soft: #eaf2ff;
+      --good: #126338;
+      --shadow: 0 8px 25px rgba(20, 39, 68, .06);
+    }
+
+    html.dark {
+      color-scheme: dark;
+      --bg: #0e192b;
+      --card: #182640;
+      --text: #edf3fe;
+      --muted: #b5c5db;
+      --line: #344662;
+      --primary: #87b9ff;
+      --soft: #203956;
+      --good: #8be0ad;
+      --shadow: none;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 Arial, Helvetica, sans-serif;
+    }
+
+    h1, h2, h3, p { margin: 0 0 12px; }
+    h1, h2, h3 { line-height: 1.18; }
+    h2 { font-size: clamp(26px, 4vw, 38px); }
+    h3 { font-size: 20px; }
+    a { color: var(--primary); }
+    button, select, input { font: inherit; }
+    button, select { cursor: pointer; }
+    button:disabled { opacity: .55; cursor: default; }
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+    .wrap { width: min(1180px, 94%); margin: auto; }
+    .muted { color: var(--muted); }
+    .small { font-size: 14px; }
+    .stack > * + * { margin-top: 16px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .topbar, .actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topbar { min-height: 66px; justify-content: space-between; }
+    .brand {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -.05em;
+    }
+    .brand span { color: var(--primary); }
+
+    .btn, .secondary {
+      border: 1px solid transparent;
+      border-radius: 9px;
+      padding: 10px 16px;
+      font-weight: 700;
+    }
+    .btn { color: white; background: #185bb5; }
+    .btn:hover { background: #104b99; }
+    .secondary {
+      color: var(--text);
+      background: var(--card);
+      border-color: var(--line);
+    }
+    .secondary:hover { background: var(--soft); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr .8fr;
+      gap: clamp(24px, 6vw, 90px);
+      align-items: center;
+      min-height: 54vh;
+      padding: 64px 0;
+    }
+    .hero h1 {
+      max-width: 720px;
+      font-size: clamp(40px, 6.4vw, 76px);
+      letter-spacing: -.06em;
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero p { max-width: 640px; }
+    .eyebrow {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .hero-note {
+      background: #173c50;
+      color: white;
+      border-radius: 18px;
+      padding: 30px;
+      border-left: 8px solid #65ae98;
+    }
+    .hero-note ol { margin: 12px 0 0; padding-left: 22px; }
+    .hero-note li { padding: 5px 0; }
+
+    .card {
+      padding: clamp(17px, 2.6vw, 28px);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: 15px;
+    }
+    .resources { padding-bottom: 50px; }
+    footer {
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+      padding: 24px 0 50px;
+    }
+    .sidebar { position: sticky; top: 82px; padding: 12px; }
+    .sidebar button {
+      display: block;
+      width: 100%;
+      padding: 10px 12px;
+      text-align: left;
+      background: transparent;
+      color: var(--text);
+      border: 0;
+      border-radius: 8px;
+    }
+    .sidebar button[aria-current="page"], .sidebar button:hover {
+      color: var(--primary);
+      background: var(--soft);
+    }
+    .sidebar button[aria-current="page"] { font-weight: 700; }
+    #mobileMenu { display: none; }
+
+    .banner {
+      border-radius: 16px;
+      padding: clamp(20px, 4vw, 38px);
+      background: #173e65;
+      color: white;
+    }
+    .banner p { color: #e1edfa; }
+
+    label.field { display: grid; gap: 5px; font-weight: 700; }
+    .fields {
+      display: flex;
+      gap: 14px;
+      align-items: end;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+    select, input[type="text"], input[type="number"] {
+      max-width: 100%;
+      padding: 9px 11px;
+      color: var(--text);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+    legend { font-size: 19px; font-weight: 700; padding: 0 0 10px; }
+    .choice {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 10px 12px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    .choice:has(input:checked) {
+      background: var(--soft);
+      border-color: var(--primary);
+    }
+    input[type="radio"], input[type="checkbox"] {
+      accent-color: var(--primary);
+    }
+    .days { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      background: var(--soft);
+      border-radius: 8px;
+    }
+    .good { color: var(--good); font-weight: 700; }
+    .session + .session {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .session p { margin: 3px 0; }
+    progress { width: 100%; accent-color: var(--primary); }
+    details { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 700; }
+    details p { margin: 8px 0 0; }
+
+    dialog {
+      width: min(420px, 92vw);
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--card);
+      color: var(--text);
+    }
+    dialog::backdrop { background: rgba(9, 18, 34, .55); }
+
+    @media (max-width: 760px) {
+      .hero, .layout { grid-template-columns: 1fr; }
+      .hero { padding: 38px 0; }
+      .layout { gap: 12px; padding-top: 12px; }
+      .sidebar { display: none; position: static; }
+      .sidebar.open { display: block; }
+      #mobileMenu { display: inline-block; justify-self: start; }
+      .topbar { gap: 6px; padding: 8px 0; }
+      .topbar .actions { gap: 5px; }
+      .topbar .btn, .topbar .secondary { padding: 8px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
 
 <body>
-
-<header id="mainHeader">
-  <div class="container header-content">
-    <a class="brand" href="#" onclick="showPublic();return false;">
-      📚 Rota <span>Aprova</span>
-    </a>
-
-    <nav class="top-nav">
-      <a href="#inicio">Início</a>
-      <a href="#recursos">Recursos</a>
-      <a href="#sobre">Sobre</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="theme-button" id="themeButton"
-        type="button" aria-label="Alternar tema">◐</button>
-
-      <button class="btn btn-outline" type="button"
-        onclick="showPage('login')">Entrar</button>
-
-      <button class="btn" type="button"
-        onclick="showPage('signup')">Criar conta</button>
-    </div>
-  </div>
-</header>
-
-<div id="publicSite">
-  <section class="hero" id="inicio">
-    <div class="container">
-      <h1>Sua preparação começa com a <span>Rota certa.</span></h1>
-
-      <p>
-        Organize seus estudos, conheça oportunidades e prepare-se
-        para alcançar seus objetivos com o Rota Aprova.
-      </p>
-
-      <div class="hero-actions">
-        <button class="btn" onclick="showPage('signup')">
-          Começar agora
-        </button>
-        <button class="btn btn-outline" onclick="showPage('login')">
-          Já tenho uma conta
-        </button>
+  <header>
+    <div class="wrap topbar">
+      <button class="brand" id="brand" aria-label="Rota Aprova, início">
+        Rota <span>Aprova</span>
+      </button>
+      <div class="actions">
+        <button class="secondary" id="theme" type="button">Tema escuro</button>
+        <button class="btn" id="profileButton" type="button">Entrar</button>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section class="section" id="recursos">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Tudo para sua preparação</h2>
-        <p>
-          Um espaço pensado para ajudar você a estudar,
-          praticar e acompanhar sua jornada.
+  <main id="landing" class="wrap">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Estudos para o 8º e 9º ano</p>
+        <h1>Sua preparação começa com a <span>rota certa.</span></h1>
+        <p class="muted">
+          Pratique com questões de escolas técnicas, descubra o que
+          precisa revisar e organize até duas matérias por dia.
         </p>
+        <button class="btn" id="start" type="button">Abrir meu painel →</button>
       </div>
+      <aside class="hero-note">
+        <h2>Por onde começar?</h2>
+        <ol>
+          <li>Responda à avaliação inicial.</li>
+          <li>Escolha seus dias e seu tempo de estudo.</li>
+          <li>Pratique por matéria ou por instituição.</li>
+        </ol>
+      </aside>
+    </section>
 
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">🎯</div>
-          <h3>Concursos</h3>
-          <p>Conheça instituições, oportunidades e informações importantes.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📝</div>
-          <h3>Questões</h3>
-          <p>Pratique seus conhecimentos com exercícios por matéria.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">⏱️</div>
-          <h3>Simulados</h3>
-          <p>Prepare-se com atividades para testar seus conhecimentos.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📚</div>
-          <h3>Materiais</h3>
-          <p>Organize apostilas, resumos e conteúdos de estudo.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🧠</div>
-          <h3>Métodos de estudo</h3>
-          <p>Descubra maneiras de organizar sua rotina e revisar conteúdos.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📅</div>
-          <h3>Cronograma</h3>
-          <p>Planeje sua preparação e acompanhe suas atividades.</p>
-        </div>
+    <section class="resources">
+      <h2>Recursos de estudo</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Banco de questões</h3>
+          <p class="muted">Questões adaptadas de seis instituições, com explicações e acesso à prova de origem.</p>
+        </article>
+        <article class="card">
+          <h3>Cronograma semanal</h3>
+          <p class="muted">Um plano que considera seus resultados, os dias disponíveis e o tempo que você tem.</p>
+        </article>
+        <article class="card">
+          <h3>Simulado geral</h3>
+          <p class="muted">Seis matérias em uma rodada. Ao terminar, confira sua pontuação e revise as respostas.</p>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <section class="section" id="sobre">
-    <div class="container">
-      <div class="cta">
-        <h2>Seu próximo objetivo começa hoje.</h2>
-        <p>Dê o primeiro passo e organize sua jornada de preparação.</p>
-        <button class="btn" onclick="showPage('signup')">
-          Conhecer o Rota Aprova
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      © 2026 Rota Aprova — Educação e preparação.
-    </div>
-  </footer>
-</div>
-
-<!-- LOGIN E CADASTRO -->
-
-<section id="authApp" class="page">
-  <div class="auth-wrapper" id="loginPanel">
-    <h2>Entrar na sua conta</h2>
-    <p class="auth-note">Acesse a área do estudante do Rota Aprova.</p>
-
-    <label for="loginEmail">E-mail</label>
-    <input id="loginEmail" type="email" placeholder="Seu e-mail">
-
-    <label for="loginPassword">Senha</label>
-    <input id="loginPassword" type="password" placeholder="Sua senha">
-
-    <button type="button" onclick="enterDemo()">Entrar</button>
-
-    <p class="auth-note">
-      Esta versão é apenas uma demonstração visual.
-      Não use uma senha real.
-    </p>
-
-    <p>
-      Não tem uma conta?
-      <a href="#" onclick="showSignup();return false;">Criar conta</a>
-    </p>
-
-    <button class="secondary" type="button" onclick="showPublic()">
-      Voltar ao início
-    </button>
+  <div id="app" class="wrap layout" hidden>
+    <button id="mobileMenu" class="secondary"
+            aria-controls="sidebar" aria-expanded="false">☰ Menu do estudante</button>
+    <nav id="sidebar" class="card sidebar" aria-label="Menu do estudante"></nav>
+    <main id="content" class="stack" tabindex="-1"></main>
   </div>
 
-  <div class="auth-wrapper" id="signupPanel" style="display:none">
-    <h2>Criar sua conta</h2>
-    <p class="auth-note">Comece sua jornada de preparação.</p>
-
-    <label for="signupName">Nome</label>
-    <input id="signupName" type="text" placeholder="Seu nome">
-
-    <label for="signupEmail">E-mail</label>
-    <input id="signupEmail" type="email" placeholder="Seu e-mail">
-
-    <label for="signupPassword">Senha</label>
-    <input id="signupPassword" type="password" placeholder="Crie uma senha">
-
-    <button type="button" onclick="enterDemo()">Criar conta</button>
-
-    <p class="auth-note">
-      Cadastro demonstrativo: os dados não serão enviados nem salvos.
-    </p>
-
-    <p>
-      Já tem uma conta?
-      <a href="#" onclick="showLogin();return false;">Entrar</a>
-    </p>
-
-    <button class="secondary" type="button" onclick="showPublic()">
-      Voltar ao início
-    </button>
-  </div>
-</section>
-
-<!-- PAINEL SEM ABA DE AVALIAÇÃO -->
-
-<section id="studentApp" class="page">
-  <div class="container dashboard">
-    <aside class="sidebar" id="studentSidebar">
-      <h3>📚 Rota Aprova</h3>
-
-      <button class="active"
-        onclick="studentPage('student-home')">🏠 Visão geral</button>
-      <button
-        onclick="studentPage('student-contests')">🎯 Concursos</button>
-      <button
-        onclick="studentPage('student-questions')">📝 Questões</button>
-      <button
-        onclick="studentPage('student-simulations')">⏱️ Simulados</button>
-      <button
-        onclick="studentPage('student-materials')">📚 Materiais</button>
-      <button
-        onclick="studentPage('student-methods')">🧠 Métodos de estudo</button>
-      <button
-        onclick="studentPage('student-schedule')">📅 Cronograma</button>
-      <button
-        onclick="studentPage('student-profile')">👤 Perfil</button>
-      <button
-        onclick="studentPage('student-settings')">⚙️ Configurações</button>
-      <button onclick="showPublic()">↩ Sair do painel</button>
-    </aside>
-
-    <main class="dashboard-main">
-      <button class="mobile-menu-button action-btn"
-        onclick="toggleStudentMenu()">☰ Menu</button>
-
-      <section id="student-home" class="student-page active">
-        <div class="assessment-card">
-          <h2 id="homeCardTitle">Avaliação Inicial</h2>
-          <p id="homeCardText">
-            Descubra seus pontos fortes e o que precisa reforçar.
-            Responda à avaliação e receba um cronograma de estudos
-            personalizado para evoluir no seu ritmo.
-          </p>
-          <button class="action-btn" id="homeCardButton"
-            type="button" onclick="openAssessment()">
-            Começar avaliação
-          </button>
-        </div>
-
-        <h2>Acesso rápido</h2>
-
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>🎯 Concursos</h3>
-            <p>Conheça as opções de concursos e processos seletivos.</p>
-            <button class="action-btn"
-              onclick="studentPage('student-contests')">Acessar</button>
-          </div>
-          <div class="content-card">
-            <h3>📝 Questões</h3>
-            <p>Pratique seus conhecimentos com exercícios.</p>
-            <button class="action-btn"
-              onclick="studentPage('student-questions')">Acessar</button>
-          </div>
-          <div class="content-card">
-            <h3>📅 Cronograma</h3>
-            <p>Organize sua rotina de preparação.</p>
-            <button class="action-btn"
-              onclick="studentPage('student-schedule')">Acessar</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="student-contests" class="student-page">
-        <h2>Concursos e instituições</h2>
-        <p>Explore algumas opções para conhecer melhor.</p>
-
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>Colégio Militar</h3>
-            <p>Informações sobre ingresso, preparação e conteúdos.</p>
-          </div>
-          <div class="content-card">
-            <h3>Colégio Naval</h3>
-            <p>Conheça o processo seletivo e as etapas de preparação.</p>
-          </div>
-          <div class="content-card">
-            <h3>EPCAR</h3>
-            <p>Informações gerais sobre a seleção e os estudos.</p>
-          </div>
-          <div class="content-card">
-            <h3>CEFET</h3>
-            <p>Conheça as oportunidades de ingresso e os conteúdos.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="student-questions" class="student-page">
-        <h2>Questões</h2>
-        <p>Área destinada à prática de exercícios por matéria.</p>
-
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>Matemática</h3>
-            <p>Exercícios e atividades de matemática.</p>
-          </div>
-          <div class="content-card">
-            <h3>Português</h3>
-            <p>Interpretação de texto e gramática.</p>
-          </div>
-          <div class="content-card">
-            <h3>Ciências</h3>
-            <p>Questões de ciências e conhecimentos gerais.</p>
-          </div>
-          <div class="content-card">
-            <h3>História e Geografia</h3>
-            <p>Pratique os conteúdos dessas matérias.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="student-simulations" class="student-page">
-        <h2>Simulados</h2>
-        <p>Prepare-se com simulados organizados por instituição e matéria.</p>
-
-        <div class="content-card">
-          <h3>Meus simulados</h3>
-          <p>Quando os simulados forem adicionados, eles aparecerão nesta área.</p>
-        </div>
-      </section>
-
-      <section id="student-materials" class="student-page">
-        <h2>Materiais de estudo</h2>
-        <p>Um espaço para reunir conteúdos e materiais de preparação.</p>
-
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>📄 Apostilas</h3>
-            <p>Materiais organizados por matéria.</p>
-          </div>
-          <div class="content-card">
-            <h3>📌 Resumos</h3>
-            <p>Revisões e conteúdos importantes.</p>
-          </div>
-          <div class="content-card">
-            <h3>🎥 Aulas</h3>
-            <p>Espaço para conteúdos em vídeo.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="student-methods" class="student-page">
-        <h2>Métodos de estudo</h2>
-
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>Estudo ativo</h3>
-            <p>Aprenda praticando, respondendo perguntas e explicando o conteúdo com suas palavras.</p>
-          </div>
-          <div class="content-card">
-            <h3>Gestão do tempo</h3>
-            <p>Divida o estudo em períodos e faça pausas para manter a organização.</p>
-          </div>
-          <div class="content-card">
-            <h3>Revisão</h3>
-            <p>Retome os assuntos estudados para reforçar a aprendizagem.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tela interna, sem botão no menu lateral -->
-      <section id="student-assessment" class="student-page">
-        <h2>Avaliação Inicial</h2>
-
-        <p class="notice">
-          Responda às 20 perguntas para criar seu cronograma personalizado.
-          São 4 de Matemática, 4 de Português e 3 de Ciências, Geografia,
-          História e Inglês.
-        </p>
-
-        <p class="notice">
-          Nível intermediário do ensino fundamental II, sem limite de tempo.
-          Confira suas respostas antes de concluir: a avaliação inicial
-          não poderá ser refeita neste navegador.
-        </p>
-
-        <div id="quizArea"></div>
-      </section>
-
-      <section id="student-schedule" class="student-page">
-        <h2 id="scheduleTitle" tabindex="-1">
-          Meu cronograma semanal
-        </h2>
-
-        <p class="notice">
-          Seu plano é calculado a partir dos resultados da avaliação.
-          Você pode alterar os dias e o tempo disponível sempre que precisar.
-        </p>
-
-        <div id="scheduleGate"></div>
-
-        <form class="planner" id="planner"
-          onsubmit="generateSchedule(event)" hidden>
-
-          <fieldset>
-            <legend>Em quais dias você quer estudar?</legend>
-            <div class="days" id="dayChoices"></div>
-          </fieldset>
-
-          <label for="dailyMinutes">
-            Minutos de estudo por dia selecionado
-          </label>
-
-          <input id="dailyMinutes" type="number"
-            min="15" max="240" step="15" value="60" required>
-
-          <p class="notice">
-            De 15 a 240 minutos, em blocos de 15 minutos.
-            O mesmo tempo vale para cada dia marcado.
-            Faça pausas fora desse tempo, quando precisar.
-          </p>
-
-          <button class="action-btn" type="submit">
-            Salvar alterações do cronograma
-          </button>
-
-          <p id="planError" class="error" role="alert"></p>
-          <p id="planMessage" class="notice" role="status"></p>
-        </form>
-
-        <div id="scheduleOutput" aria-live="polite"></div>
-
-        <p class="notice" id="storageNote">
-          A avaliação e o cronograma ficam salvos neste navegador.
-          O login ainda é demonstrativo: quem usar este navegador
-          compartilha os mesmos dados. Limpar os dados ou trocar
-          de navegador permite uma nova avaliação.
-        </p>
-      </section>
-
-      <section id="student-profile" class="student-page">
-        <h2>Meu perfil</h2>
-        <div class="content-card">
-          <h3>Estudante</h3>
-          <p>Esta é uma área demonstrativa do perfil do estudante.</p>
-          <p>Uma versão futura poderá permitir a personalização do perfil.</p>
-        </div>
-      </section>
-
-      <section id="student-settings" class="student-page">
-        <h2>Configurações</h2>
-
-        <div class="content-card">
-          <h3>Aparência</h3>
-          <p>Escolha como deseja visualizar o Rota Aprova.</p>
-
-          <label for="themePreference">Tema do site</label>
-          <br><br>
-
-          <select id="themePreference" class="settings-select"
-            onchange="setThemePreference(this.value)">
-            <option value="system">Seguir o tema do aparelho</option>
-            <option value="light">Modo claro</option>
-            <option value="dark">Modo escuro</option>
-          </select>
-        </div>
-      </section>
-    </main>
-  </div>
-</section>
-
-<script>
-/* PERGUNTAS */
-
-const questions = [
-  [
-    "Matemática", "Porcentagem",
-    "Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o novo preço?",
-    ["R$ 136", "R$ 144", "R$ 145", "R$ 150"],
-    0,
-    "15% de 160 são 24. Portanto, 160 − 24 = 136."
-  ],
-  [
-    "Matemática", "Equações",
-    "Qual é o valor de x em 3(x − 2) + 5 = 20?",
-    ["5", "6", "7", "9"],
-    2,
-    "3x − 6 + 5 = 20; 3x = 21; x = 7."
-  ],
-  [
-    "Matemática", "Frações",
-    "Uma turma tem 30 alunos. Dois quintos praticam natação. Quantos alunos são esses?",
-    ["10", "12", "15", "18"],
-    1,
-    "Divida 30 por 5 e multiplique por 2: 6 × 2 = 12."
-  ],
-  [
-    "Matemática", "Geometria",
-    "Um triângulo tem base de 12 cm e altura relativa a essa base de 7 cm. Qual é sua área?",
-    ["19 cm²", "84 cm²", "38 cm²", "42 cm²"],
-    3,
-    "A área é base × altura ÷ 2: 12 × 7 ÷ 2 = 42 cm²."
-  ],
-  [
-    "Português", "Conectivos",
-    "Em “Embora estivesse cansada, Ana terminou a tarefa”, a palavra “embora” expressa:",
-    ["Causa", "Conclusão", "Concessão", "Finalidade"],
-    2,
-    "A concessão apresenta uma dificuldade que não impediu a ação."
-  ],
-  [
-    "Português", "Concordância verbal",
-    "Qual frase apresenta concordância verbal adequada à norma-padrão?",
-    [
-      "Faz dois anos que estudo aqui.",
-      "Fazem dois anos que estudo aqui.",
-      "Houveram muitas dúvidas.",
-      "Existe muitos livros na sala."
-    ],
-    0,
-    "O verbo fazer indicando tempo decorrido é impessoal e fica no singular."
-  ],
-  [
-    "Português", "Interpretação",
-    "“Ao sair, Lia viu nuvens escuras e voltou para buscar o guarda-chuva.” O que se pode inferir?",
-    [
-      "Já estava chovendo dentro da casa.",
-      "Lia havia perdido o guarda-chuva.",
-      "Lia desistiu de sair.",
-      "Lia considerou que poderia chover."
-    ],
-    3,
-    "As nuvens motivaram uma precaução. O trecho não afirma que já chovia."
-  ],
-  [
-    "Português", "Sujeito",
-    "Em “Os alunos da turma organizaram uma feira”, qual é o núcleo do sujeito?",
-    ["Turma", "Alunos", "Feira", "Organizaram"],
-    1,
-    "O sujeito é “Os alunos da turma”; seu núcleo é “alunos”."
-  ],
-  [
-    "Ciências", "Ecologia",
-    "Na cadeia capim → gafanhoto → sapo → cobra, qual é o consumidor secundário?",
-    ["Capim", "Gafanhoto", "Sapo", "Cobra"],
-    2,
-    "O gafanhoto é consumidor primário. O sapo é consumidor secundário."
-  ],
-  [
-    "Ciências", "Transformações da matéria",
-    "Qual exemplo representa uma transformação química?",
-    [
-      "Um prego enferrujando.",
-      "Gelo derretendo.",
-      "Água evaporando.",
-      "Um papel sendo cortado."
-    ],
-    0,
-    "A ferrugem envolve a formação de novas substâncias."
-  ],
-  [
-    "Ciências", "Sistemas do corpo",
-    "Qual é a principal função dos alvéolos pulmonares?",
-    [
-      "Produzir células sanguíneas.",
-      "Digerir os alimentos.",
-      "Bombear sangue para o corpo.",
-      "Realizar trocas de gases entre o ar e o sangue."
-    ],
-    3,
-    "Nos alvéolos ocorrem as trocas de oxigênio e gás carbônico."
-  ],
-  [
-    "Geografia", "Escalas cartográficas",
-    "Em um mapa de escala 1:100.000, duas cidades estão separadas por 3 cm. Qual é a distância real representada?",
-    ["300 m", "3 km", "30 km", "300 km"],
-    1,
-    "Cada centímetro representa 1 km. Assim, 3 cm representam 3 km."
-  ],
-  [
-    "Geografia", "Tempo e clima",
-    "Qual afirmação descreve o clima, e não apenas o tempo atmosférico?",
-    [
-      "Choveu nesta manhã.",
-      "Hoje a temperatura chegou a 28 °C.",
-      "A região apresenta verões geralmente chuvosos ao longo de décadas.",
-      "Amanhã poderá ventar."
-    ],
-    2,
-    "Clima corresponde a padrões atmosféricos observados por longos períodos."
-  ],
-  [
-    "Geografia", "Urbanização",
-    "Uma cidade substituiu áreas verdes por asfalto. Qual consequência é mais provável?",
-    [
-      "Maior infiltração da chuva no solo.",
-      "Menor escoamento superficial.",
-      "Eliminação do risco de enchentes.",
-      "Maior escoamento superficial e risco de alagamentos."
-    ],
-    3,
-    "A impermeabilização reduz a infiltração e aumenta o escoamento superficial."
-  ],
-  [
-    "História", "Revolução Industrial",
-    "Qual mudança caracteriza a Revolução Industrial iniciada na Inglaterra no século XVIII?",
-    [
-      "Expansão da produção mecanizada em fábricas.",
-      "Substituição das fábricas por oficinas domésticas.",
-      "Fim imediato do trabalho infantil.",
-      "Abandono das cidades pela maioria dos operários."
-    ],
-    0,
-    "A mecanização e o sistema fabril transformaram a produção."
-  ],
-  [
-    "História", "Independência do Brasil",
-    "Qual característica permaneceu no Brasil após a Independência de 1822?",
-    [
-      "A subordinação política formal a Portugal.",
-      "A escravidão.",
-      "A condição de colônia portuguesa.",
-      "O governo republicano colonial."
-    ],
-    1,
-    "A escravidão continuou no Brasil até 1888."
-  ],
-  [
-    "História", "Iluminismo",
-    "Qual ideia está associada ao pensamento iluminista?",
-    [
-      "Poder absoluto do rei sem limites.",
-      "Proibição da investigação científica.",
-      "Defesa da razão e crítica ao absolutismo.",
-      "Obrigação de manter privilégios por nascimento."
-    ],
-    2,
-    "Pensadores iluministas valorizaram a razão e questionaram o poder absoluto."
-  ],
-  [
-    "Inglês", "Simple present",
-    "Complete: “She ___ to school by bus every day.”",
-    ["Go", "Going", "Gone", "Goes"],
-    3,
-    "No simple present, com she, o verbo go assume a forma goes."
-  ],
-  [
-    "Inglês", "Compreensão de texto",
-    "Leia: “Tom missed the bus, so he walked to school.” Por que Tom foi a pé para a escola?",
-    [
-      "Porque perdeu o ônibus.",
-      "Porque a escola estava fechada.",
-      "Porque comprou uma bicicleta.",
-      "Porque estava de férias."
-    ],
-    0,
-    "“Missed the bus” significa que ele perdeu o ônibus."
-  ],
-  [
-    "Inglês", "Comparativos",
-    "Complete: “This exercise is ___ than the previous one.”",
-    ["Easy", "Easier", "Easiest", "More easy"],
-    1,
-    "O comparativo de easy é easier."
-  ]
-];
-
-const subjects = [
-  "Matemática", "Português", "Ciências",
-  "Geografia", "História", "Inglês"
-];
-
-const dayNames = [
-  "Segunda", "Terça", "Quarta", "Quinta",
-  "Sexta", "Sábado", "Domingo"
-];
-
-const storageKey = "rotaAssessmentV1";
-
-let assessment = {
-  answers: Array(20).fill(null),
-  current: 0,
-  completed: false,
-  days: [0, 2, 4],
-  minutes: 60,
-  planned: false
-};
-
-/* RECUPERAR DADOS SALVOS */
-
-try {
-  const saved = JSON.parse(localStorage.getItem(storageKey));
-
-  if (
-    saved &&
-    Array.isArray(saved.answers) &&
-    saved.answers.length === questions.length &&
-    saved.answers.every(a =>
-      a === null || (Number.isInteger(a) && a >= 0 && a < 4)
-    )
-  ) {
-    assessment.answers = saved.answers;
-
-    assessment.current = Number.isInteger(saved.current)
-      ? Math.max(0, Math.min(questions.length - 1, saved.current))
-      : 0;
-
-    assessment.completed =
-      saved.completed === true &&
-      saved.answers.every(a => a !== null);
-
-    if (Array.isArray(saved.days)) {
-      assessment.days = [
-        ...new Set(saved.days.filter(d =>
-          Number.isInteger(d) && d >= 0 && d < 7
-        ))
-      ].sort((a, b) => a - b);
-    }
-
-    if (
-      Number.isInteger(saved.minutes) &&
-      saved.minutes >= 15 &&
-      saved.minutes <= 240 &&
-      saved.minutes % 15 === 0
-    ) {
-      assessment.minutes = saved.minutes;
-    }
-
-    assessment.planned =
-      saved.planned === true &&
-      assessment.completed &&
-      assessment.days.length > 0;
-  }
-} catch (error) {}
-
-function saveAssessment() {
-  try {
-    localStorage.setItem(storageKey, JSON.stringify(assessment));
-    return true;
-  } catch (error) {
-    document.getElementById("storageNote").textContent =
-      "Não foi possível salvar neste navegador. " +
-      "Mantenha a página aberta para conservar os dados nesta sessão.";
-    return false;
-  }
-}
-
-function ensureInitialPlan() {
-  if (!assessment.completed || assessment.planned) return;
-
-  if (!assessment.days.length) {
-    assessment.days = [0, 2, 4];
-  }
-
-  assessment.planned = true;
-  saveAssessment();
-}
-
-/* NAVEGAÇÃO */
-
-function closeStudentMenu() {
-  document.getElementById("studentSidebar").classList.remove("open");
-}
-
-function showPublic() {
-  document.getElementById("publicSite").style.display = "block";
-  document.getElementById("authApp").classList.remove("active");
-  document.getElementById("studentApp").classList.remove("active");
-  closeStudentMenu();
-  window.scrollTo(0, 0);
-  updatePublicNav();
-}
-
-function showPage(page) {
-  if (page !== "login" && page !== "signup") return;
-
-  document.getElementById("publicSite").style.display = "none";
-  document.getElementById("studentApp").classList.remove("active");
-  document.getElementById("authApp").classList.add("active");
-
-  document.getElementById("loginPanel").style.display =
-    page === "login" ? "block" : "none";
-
-  document.getElementById("signupPanel").style.display =
-    page === "signup" ? "block" : "none";
-
-  closeStudentMenu();
-  window.scrollTo(0, 0);
-  updatePublicNav();
-}
-
-function showLogin() { showPage("login"); }
-function showSignup() { showPage("signup"); }
-
-function enterDemo() {
-  document.getElementById("publicSite").style.display = "none";
-  document.getElementById("authApp").classList.remove("active");
-  document.getElementById("studentApp").classList.add("active");
-
-  document.querySelectorAll("#authApp input").forEach(input => {
-    input.value = "";
-  });
-
-  ensureInitialPlan();
-  updateHomeCard();
-
-  studentPage(
-    assessment.completed ? "student-schedule" : "student-home"
-  );
-
-  updatePublicNav();
-}
-
-function studentPage(id) {
-  if (assessment.completed && id === "student-assessment") {
-    id = "student-schedule";
-  }
-
-  const target = document.getElementById(id);
-  if (!target || !target.classList.contains("student-page")) return;
-
-  if (id === "student-assessment") renderAssessment();
-  if (id === "student-schedule") renderPlanner();
-  if (id === "student-home") updateHomeCard();
-
-  document.querySelectorAll(".student-page").forEach(page => {
-    page.classList.toggle("active", page === target);
-  });
-
-  document.querySelectorAll("#studentSidebar button").forEach(button => {
-    const action = button.getAttribute("onclick") || "";
-    button.classList.toggle("active", action.includes("'" + id + "'"));
-  });
-
-  closeStudentMenu();
-  window.scrollTo(0, 0);
-}
-
-function toggleStudentMenu() {
-  document.getElementById("studentSidebar").classList.toggle("open");
-}
-
-function updateHomeCard() {
-  if (!assessment.completed) return;
-
-  document.getElementById("homeCardTitle").textContent =
-    "Seu cronograma semanal";
-
-  document.getElementById("homeCardText").textContent =
-    "Sua avaliação inicial já foi concluída. " +
-    "Acesse seu plano de estudos e ajuste os dias e o tempo " +
-    "disponível sempre que precisar.";
-
-  document.getElementById("homeCardButton").textContent =
-    "Abrir meu cronograma";
-}
-
-function openAssessment() {
-  studentPage(
-    assessment.completed ? "student-schedule" : "student-assessment"
-  );
-}
-
-/* TEMA */
-
-const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-let themePreference = "system";
-
-try {
-  const savedTheme = localStorage.getItem("rotaAprovaTheme");
-
-  if (["system", "light", "dark"].includes(savedTheme)) {
-    themePreference = savedTheme;
-  }
-} catch (error) {}
-
-function applyTheme() {
-  const dark =
-    themePreference === "dark" ||
-    (themePreference === "system" && systemTheme.matches);
-
-  document.body.classList.toggle("dark", dark);
-  document.getElementById("themePreference").value = themePreference;
-
-  document.getElementById("themeButton").setAttribute(
-    "aria-label",
-    dark ? "Ativar modo claro" : "Ativar modo escuro"
-  );
-
-  document.querySelector('meta[name="theme-color"]').content =
-    dark ? "#0d172d" : "#f4f7fc";
-}
-
-function setThemePreference(value) {
-  if (!["system", "light", "dark"].includes(value)) return;
-
-  themePreference = value;
-
-  try {
-    localStorage.setItem("rotaAprovaTheme", value);
-  } catch (error) {}
-
-  applyTheme();
-}
-
-document.getElementById("themeButton").addEventListener("click", () => {
-  setThemePreference(
-    document.body.classList.contains("dark") ? "light" : "dark"
-  );
-});
-
-if (systemTheme.addEventListener) {
-  systemTheme.addEventListener("change", applyTheme);
-} else {
-  systemTheme.addListener(applyTheme);
-}
-
-/* AVALIAÇÃO */
-
-function renderAssessment() {
-  if (assessment.completed) return;
-
-  const i = assessment.current;
-  const q = questions[i];
-  const answered = assessment.answers.filter(a => a !== null).length;
-
-  document.getElementById("quizArea").innerHTML = `
-    <div class="quiz-box">
-      <p id="quizProgressText">
-        Questão ${i + 1} de ${questions.length}
-        · ${q[0]} · ${answered} respondidas
+  <footer><div class="wrap">Rota Aprova · Estudos e preparação</div></footer>
+
+  <dialog id="profileDialog">
+    <form id="profileForm" class="stack">
+      <h2>Perfil de estudo</h2>
+      <p class="muted">
+        Use um nome ou apelido. O progresso fica neste navegador.
+        Use o mesmo nome para continuar depois.
       </p>
-
-      <progress value="${answered}" max="${questions.length}"
-        aria-label="Perguntas respondidas"></progress>
-
-      <fieldset>
-        <legend tabindex="-1" id="questionTitle">${q[2]}</legend>
-
-        ${q[3].map((option, j) => `
-          <label class="answer">
-            <input type="radio" name="answer" value="${j}"
-              ${assessment.answers[i] === j ? "checked" : ""}
-              onchange="chooseAnswer(${j})">
-            <span>${option}</span>
-          </label>
-        `).join("")}
-      </fieldset>
-
-      <p class="error" id="quizError" role="alert"></p>
-
-      <div class="quiz-actions">
-        <button class="btn btn-outline"
-          ${i === 0 ? "disabled" : ""}
-          onclick="moveQuestion(-1)">
-          Anterior
-        </button>
-
-        <button class="action-btn"
-          onclick="${
-            i === questions.length - 1
-              ? "finishAssessment()"
-              : "moveQuestion(1)"
-          }">
-          ${
-            i === questions.length - 1
-              ? "Concluir e criar cronograma"
-              : "Próxima"
-          }
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function chooseAnswer(value) {
-  if (assessment.completed) return;
-  if (!Number.isInteger(value) || value < 0 || value > 3) return;
-
-  assessment.answers[assessment.current] = value;
-  saveAssessment();
-
-  document.getElementById("quizError").textContent = "";
-
-  const answered = assessment.answers.filter(a => a !== null).length;
-
-  document.querySelector("#quizArea progress").value = answered;
-
-  document.getElementById("quizProgressText").textContent =
-    `Questão ${assessment.current + 1} de ${questions.length} · ` +
-    `${questions[assessment.current][0]} · ${answered} respondidas`;
-}
-
-function moveQuestion(step) {
-  if (assessment.completed) return;
-
-  if (step > 0 && assessment.answers[assessment.current] === null) {
-    document.getElementById("quizError").textContent =
-      "Escolha uma alternativa para continuar.";
-    return;
-  }
-
-  assessment.current = Math.max(
-    0,
-    Math.min(questions.length - 1, assessment.current + step)
-  );
-
-  saveAssessment();
-  renderAssessment();
-  document.getElementById("questionTitle").focus();
-}
-
-function finishAssessment() {
-  if (assessment.completed) {
-    studentPage("student-schedule");
-    return;
-  }
-
-  const missing = assessment.answers.indexOf(null);
-
-  if (missing !== -1) {
-    assessment.current = missing;
-    renderAssessment();
-
-    document.getElementById("quizError").textContent =
-      "Responda esta pergunta antes de concluir.";
-    return;
-  }
-
-  assessment.completed = true;
-
-  if (!assessment.days.length) {
-    assessment.days = [0, 2, 4];
-  }
-
-  assessment.planned = true;
-  saveAssessment();
-
-  document.getElementById("quizArea").innerHTML = "";
-  updateHomeCard();
-
-  studentPage("student-schedule");
-  document.getElementById("scheduleTitle").focus();
-}
-
-/* RESULTADO POR MATÉRIA */
-
-function results() {
-  return subjects.map(subject => {
-    const items = questions
-      .map((q, i) => ({ q, i }))
-      .filter(item => item.q[0] === subject);
-
-    const correct = items.filter(
-      ({ q, i }) => assessment.answers[i] === q[4]
-    ).length;
-
-    return {
-      subject,
-      correct,
-      total: items.length,
-      wrong: items.length - correct,
-      topics: items
-        .filter(({ q, i }) => assessment.answers[i] !== q[4])
-        .map(({ q }) => q[1])
-    };
-  });
-}
-
-/* FORMULÁRIO DO CRONOGRAMA */
-
-function renderPlanner() {
-  const ready = assessment.completed;
-
-  document.getElementById("planner").hidden = !ready;
-  document.getElementById("planError").textContent = "";
-  document.getElementById("planMessage").textContent = "";
-  document.getElementById("scheduleOutput").innerHTML = "";
-
-  if (!ready) {
-    document.getElementById("scheduleGate").innerHTML = `
-      <div class="content-card">
-        <p>
-          Faça a avaliação inicial pelo quadro da Visão geral
-          para receber seu cronograma personalizado.
-        </p>
-        <button class="action-btn"
-          onclick="studentPage('student-home')">
-          Ir para Visão geral
-        </button>
-      </div>
-    `;
-    return;
-  }
-
-  ensureInitialPlan();
-
-  const rows = results();
-  const correct = rows.reduce((sum, row) => sum + row.correct, 0);
-  const wrong = questions.length - correct;
-  const percentage = Math.round(correct / questions.length * 100);
-
-  document.getElementById("scheduleGate").innerHTML = `
-    <div class="content-card">
-      <h3>Avaliação concluída</h3>
-
-      <p>
-        <strong>
-          ${correct} acertos · ${wrong} erros ·
-          ${percentage}% de aproveitamento
-        </strong>
-      </p>
-
-      <p>
-        Seu cronograma foi criado com base nesses resultados.
-        As matérias com maior proporção de erros recebem mais tempo.
-        Você pode ajustar os dias e os minutos de estudo abaixo.
-      </p>
-
-      <details>
-        <summary>Ver resultado por matéria</summary>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Matéria</th>
-                <th>Acertos</th>
-                <th>Erros</th>
-                <th>Aproveitamento</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rows.map(row => `
-                <tr>
-                  <td>${row.subject}</td>
-                  <td>${row.correct}/${row.total}</td>
-                  <td>${row.wrong}</td>
-                  <td>${Math.round(row.correct / row.total * 100)}%</td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <p class="notice">
-        Esta avaliação curta orienta o planejamento;
-        não é uma medida definitiva do seu conhecimento.
-      </p>
-    </div>
-  `;
-
-  document.getElementById("dayChoices").innerHTML =
-    dayNames.map((day, i) => `
-      <label>
-        <input type="checkbox" value="${i}"
-          ${assessment.days.includes(i) ? "checked" : ""}>
-        ${day}
+      <label class="field">
+        Nome do perfil
+        <input id="profileName" type="text" maxlength="40"
+               autocomplete="off" required>
       </label>
-    `).join("");
+      <div class="actions">
+        <button class="btn" type="submit">Entrar no painel</button>
+        <button class="secondary" id="closeDialog" type="button">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
 
-  document.getElementById("dailyMinutes").value = assessment.minutes;
-  displaySchedule();
-}
+  <script>
+    "use strict";
 
-/*
-DISTRIBUIÇÃO PERSONALIZADA
+    /* Utilitários de interface e armazenamento. */
+    const $ = id => document.getElementById(id);
 
-Cada matéria recebe peso:
-1 + 3 × proporção de erros.
+    function element(tag, text, className) {
+      const node = document.createElement(tag);
+      if (text !== undefined) node.textContent = text;
+      if (className) node.className = className;
+      return node;
+    }
 
-A proporção permite comparar matérias com 3 ou 4 perguntas.
-O tempo é distribuído em blocos de 15 minutos.
-*/
+    function button(text, action, secondary = false) {
+      const node = element("button", text, secondary ? "secondary" : "btn");
+      node.type = "button";
+      node.onclick = action;
+      return node;
+    }
 
-function buildSchedule(rows, days, minutes) {
-  const weights = rows.map(row => 1 + 3 * row.wrong / row.total);
-  const totalWeight = weights.reduce((a, b) => a + b, 0);
-  const counts = rows.map(() => 0);
-  const blocksPerDay = minutes / 15;
+    function link(text, url) {
+      const node = element("a", text);
+      node.href = url;
+      node.target = "_blank";
+      node.rel = "noopener noreferrer";
+      return node;
+    }
 
-  let block = 0;
-
-  return days.map(day => {
-    const sessions = [];
-
-    for (let n = 0; n < blocksPerDay; n++) {
-      let best = 0;
-
-      for (let j = 1; j < rows.length; j++) {
-        const deficitJ =
-          (block + 1) * weights[j] / totalWeight - counts[j];
-
-        const deficitBest =
-          (block + 1) * weights[best] / totalWeight - counts[best];
-
-        if (deficitJ > deficitBest) best = j;
-      }
-
-      counts[best]++;
-      block++;
-
-      const existing = sessions.find(
-        session => session.subject === rows[best].subject
-      );
-
-      if (existing) {
-        existing.minutes += 15;
-      } else {
-        sessions.push({
-          subject: rows[best].subject,
-          minutes: 15,
-          topics: rows[best].topics
-        });
+    function read(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value === null ? fallback : JSON.parse(value);
+      } catch {
+        return fallback;
       }
     }
 
-    return { day, sessions };
-  });
-}
-
-function generateSchedule(event) {
-  event.preventDefault();
-  if (!assessment.completed) return;
-
-  document.getElementById("planError").textContent = "";
-  document.getElementById("planMessage").textContent = "";
-
-  const days = Array.from(
-    document.querySelectorAll("#dayChoices input:checked"),
-    input => Number(input.value)
-  );
-
-  const minutes = Number(
-    document.getElementById("dailyMinutes").value
-  );
-
-  if (!days.length) {
-    document.getElementById("planError").textContent =
-      "Selecione pelo menos um dia da semana.";
-    return;
-  }
-
-  if (
-    !Number.isInteger(minutes) ||
-    minutes < 15 ||
-    minutes > 240 ||
-    minutes % 15 !== 0
-  ) {
-    document.getElementById("planError").textContent =
-      "Escolha de 15 a 240 minutos, em múltiplos de 15.";
-    return;
-  }
-
-  assessment.days = days;
-  assessment.minutes = minutes;
-  assessment.planned = true;
-
-  const saved = saveAssessment();
-  displaySchedule();
-
-  document.getElementById("planMessage").textContent = saved
-    ? "Cronograma atualizado e salvo!"
-    : "Cronograma atualizado nesta sessão, mas não foi possível salvá-lo.";
-}
-
-function displaySchedule() {
-  if (!assessment.completed) return;
-
-  const rows = results();
-
-  const plan = buildSchedule(
-    rows,
-    assessment.days,
-    assessment.minutes
-  );
-
-  const included = new Set(
-    plan.flatMap(day => day.sessions.map(session => session.subject))
-  );
-
-  const omitted = subjects.filter(subject => !included.has(subject));
-
-  const freeDays = dayNames
-    .filter((day, i) => !assessment.days.includes(i))
-    .join(", ");
-
-  document.getElementById("scheduleOutput").innerHTML = `
-    <h3>
-      Seu plano semanal ·
-      ${assessment.days.length * assessment.minutes} minutos
-    </h3>
-
-    <p class="notice">
-      Em cada bloco, revise a teoria e depois resolva exercícios.
-      Nas matérias sem erros, faça revisão e novos desafios.
-    </p>
-
-    ${omitted.length ? `
-      <p class="notice">
-        Com este tempo, ficaram fora desta semana:
-        ${omitted.join(", ")}.
-        Acrescente dias ou minutos para incluir todas as matérias.
-      </p>
-    ` : ""}
-
-    <div class="content-grid">
-      ${plan.map(day => `
-        <div class="content-card">
-          <h3>${dayNames[day.day]} · ${assessment.minutes} min</h3>
-
-          ${day.sessions.map(session => `
-            <p>
-              <strong>
-                ${session.subject} — ${session.minutes} min
-              </strong>
-              <br>
-              ${
-                session.topics.length
-                  ? "Reforçar: " + session.topics.join(", ")
-                  : "Revisão geral e exercícios de fixação."
-              }
-            </p>
-          `).join("")}
-        </div>
-      `).join("")}
-    </div>
-
-    <p class="notice">
-      Dias livres:
-      ${freeDays || "nenhum; reserve pausas e descanso na sua rotina"}.
-      Você pode editar este planejamento sempre que precisar.
-    </p>
-  `;
-}
-
-/* MENU INICIAL EM NEGRITO */
-
-function updatePublicNav() {
-  let active = "inicio";
-
-  if (document.getElementById("publicSite").style.display !== "none") {
-    const offset =
-      document.getElementById("mainHeader").offsetHeight + 30;
-
-    ["inicio", "recursos", "sobre"].forEach(id => {
-      if (
-        document.getElementById(id).getBoundingClientRect().top <= offset
-      ) {
-        active = id;
+    function write(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+      } catch {
+        return false;
       }
+    }
+
+    function card(title, description) {
+      const box = element("article", undefined, "card");
+      box.append(element("h3", title));
+      if (description) box.append(element("p", description, "muted"));
+      return box;
+    }
+
+    function title(text, description) {
+      const box = element("div");
+      box.append(element("h2", text));
+      if (description) box.append(element("p", description, "muted"));
+      $("content").append(box);
+    }
+
+    const subjects = [
+      "Matemática", "Português", "Ciências",
+      "Geografia", "História", "Inglês"
+    ];
+
+    const days = [
+      "Segunda", "Terça", "Quarta", "Quinta",
+      "Sexta", "Sábado", "Domingo"
+    ];
+
+    /* Formato: matéria, assunto, pergunta, alternativas,
+       índice da resposta correta e explicação. */
+    const diagnostic = [
+      ["Matemática","Porcentagem","Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o preço final?",["R$ 136","R$ 144","R$ 150"],0,"15% de 160 são 24. Subtraindo o desconto, 160 − 24 = 136."],
+      ["Matemática","Equações","Qual é o valor de x em 3(x − 2) + 5 = 20?",["5","7","9"],1,"Distribua o 3: 3x − 6 + 5 = 20. Logo, 3x = 21 e x = 7."],
+      ["Matemática","Frações","Dois quintos de uma turma de 30 alunos praticam natação. Quantos são?",["10","12","15"],1,"Um quinto de 30 é 6. Dois quintos correspondem a 12."],
+      ["Matemática","Área de triângulos","Um triângulo tem base de 12 cm e altura de 7 cm. Qual é a área?",["84 cm²","19 cm²","42 cm²"],2,"A área é base × altura ÷ 2. Assim, 12 × 7 ÷ 2 = 42 cm²."],
+      ["Português","Conectivos","Em “Embora chovesse, saímos”, que ideia a palavra “embora” expressa?",["Causa","Concessão","Finalidade"],1,"A chuva poderia dificultar a saída, mas não a impediu. Essa relação é de concessão."],
+      ["Português","Sujeito","Qual é o sujeito de “Chegaram cedo os estudantes”?",["Cedo","Chegaram","Os estudantes"],2,"Pergunte quem chegou. A resposta é “os estudantes”, mesmo vindo depois do verbo."],
+      ["Português","Coesão","Em “Ana comprou a revista e a leu”, o segundo “a” retoma qual palavra?",["Ana","Revista","Comprou"],1,"O pronome substitui “a revista”. A frase equivale a “Ana leu a revista”."],
+      ["Português","Inferência","Ao ouvir um trovão, Bia recolheu as roupas do varal. O que se pode inferir?",["Ela esperava chuva.","Ela já tinha lavado o varal.","O dia estava quente."],0,"O trovão e a retirada das roupas indicam que Bia quis evitar que elas se molhassem."],
+      ["Ciências","Fotossíntese","Qual gás é consumido pelas plantas durante a fotossíntese?",["Oxigênio","Hélio","Gás carbônico"],2,"A planta usa água, gás carbônico e energia luminosa para produzir matéria orgânica."],
+      ["Ciências","Sistema circulatório","Qual órgão impulsiona o sangue pelo corpo?",["Pulmão","Coração","Estômago"],1,"As contrações do coração movimentam o sangue pelos vasos."],
+      ["Ciências","Mudanças de estado","Como se chama a passagem do estado gasoso para o líquido?",["Fusão","Condensação","Solidificação"],1,"A condensação forma líquido a partir de vapor, como nas gotas do lado de fora de um copo gelado."],
+      ["Geografia","Escala cartográfica","Na escala 1:100.000, 1 cm no mapa representa qual distância real?",["1 km","10 km","100 km"],0,"100.000 cm correspondem a 1.000 metros, ou 1 km."],
+      ["Geografia","Tempo e clima","Qual frase descreve o tempo atmosférico?",["Os verões costumam ser secos.","A região tem clima tropical.","Está chovendo agora."],2,"O tempo descreve condições observadas em um momento. O clima considera padrões de longo prazo."],
+      ["Geografia","Urbanização","O que tende a ocorrer quando o asfalto substitui o solo permeável?",["Mais infiltração","Mais escoamento superficial","Menos alagamentos em todos os casos"],1,"O asfalto dificulta a infiltração e aumenta a quantidade de água que escoa pela superfície."],
+      ["História","Revolução Industrial","Qual mudança marcou a Revolução Industrial?",["Expansão das fábricas mecanizadas","Fim das cidades","Fim imediato do trabalho infantil"],0,"As máquinas e o sistema fabril transformaram a organização da produção."],
+      ["História","Independência do Brasil","Qual instituição permaneceu no Brasil após 1822?",["Administração colonial portuguesa","Escravidão","República presidencialista"],1,"A independência política ocorreu em 1822. A abolição legal da escravidão ocorreu em 1888."],
+      ["História","Iluminismo","Qual ideia se relaciona ao pensamento iluminista?",["Defesa do poder ilimitado dos reis","Proibição de pesquisas","Valorização da razão"],2,"Pensadores iluministas valorizaram a razão e questionaram o absolutismo."],
+      ["Inglês","Simple past","Complete: Yesterday, Julia ___ to school.",["go","went","goes"],1,"Yesterday indica passado. O passado simples de go é went."],
+      ["Inglês","Leitura","O aviso “Keep the door closed” pede para:",["Manter a porta fechada","Abrir a janela","Trancar o portão"],0,"Keep significa manter. The door closed significa a porta fechada."],
+      ["Inglês","Comparativos","Complete: This book is ___ than that one.",["cheapest","cheap","cheaper"],2,"A comparação com than pede o comparativo cheaper."]
+    ];
+
+    const practice = [
+      ["Matemática","Proporção","Três cadernos custam R$ 24. Quanto custam cinco?",["R$ 32","R$ 40","R$ 48"],1,"Um caderno custa 24 ÷ 3 = 8 reais. Cinco custam 5 × 8 = 40 reais."],
+      ["Matemática","Geometria","Um quadrado tem perímetro de 36 cm. Qual é sua área?",["9 cm²","36 cm²","81 cm²"],2,"Cada lado mede 36 ÷ 4 = 9 cm. A área é 9 × 9 = 81 cm²."],
+      ["Português","Coesão","Em “Luísa pegou o livro e o abriu”, o pronome antes de “abriu” substitui:",["Luísa","O livro","A ação de pegar"],1,"A oração pode ser reescrita como “Luísa abriu o livro”."],
+      ["Português","Conjunções","Em “Estudei, portanto consegui resolver a questão”, o termo “portanto” indica:",["Conclusão","Condição","Oposição"],0,"A segunda oração apresenta uma conclusão decorrente da primeira."],
+      ["Ciências","Ecologia","Qual é o produtor na cadeia capim → gafanhoto → sapo?",["Sapo","Gafanhoto","Capim"],2,"O capim produz matéria orgânica por fotossíntese."],
+      ["Ciências","Misturas","Como separar areia da água usando um filtro de papel?",["Destilação","Filtração","Fusão"],1,"O filtro retém a areia enquanto a água atravessa seus poros."],
+      ["Geografia","Escala","Em um mapa de escala 1:100.000, dois pontos estão separados por 3 cm. Qual é a distância real?",["3 km","30 km","300 km"],0,"Cada centímetro corresponde a 1 km. Portanto, 3 cm representam 3 km."],
+      ["Geografia","População","Uma região tem 12.000 habitantes em 300 km². Qual é sua densidade demográfica?",["4 hab./km²","40 hab./km²","400 hab./km²"],1,"Divida a população pela área: 12.000 ÷ 300 = 40 hab./km²."],
+      ["História","Fontes históricas","Qual fonte traz um relato direto de uma operária sobre seu próprio cotidiano em 1900?",["Uma novela atual","Um livro didático atual","Uma carta escrita por ela em 1900"],2,"A carta registra o ponto de vista da operária na época estudada."],
+      ["História","Brasil Império","Qual mudança ocorreu com a Lei Áurea?",["A abolição legal da escravidão","A proclamação da República","A independência do Brasil"],0,"A Lei Áurea aboliu legalmente a escravidão no Brasil em 1888."],
+      ["Inglês","Simple present","Complete: She ___ English every day.",["study","studies","studying"],1,"Com she no simple present, study passa a studies."],
+      ["Inglês","Leitura","O aviso “Return the books by Friday” pede para:",["Comprar livros na sexta","Ler apenas na sexta","Devolver os livros até sexta"],2,"Return significa devolver. By Friday estabelece o prazo."]
+    ];
+
+    /* Questões adaptadas. A numeração corresponde à prova de origem. */
+    const schools = [
+      {
+        name: "Escola Sesc de Ensino Médio", edition: "Ingresso 2024",
+        url: "https://www.poloeducacionalsesc.com.br/wp-content/uploads/2025/04/Prova-Admissional-de-Estudantes-2024.pdf",
+        items: [
+          ["Ciências","Questão 3","Que processo permite ao fitoplâncton liberar oxigênio no mar?",["Evaporação","Fotossíntese","Fermentação"],1,"Organismos fotossintetizantes do fitoplâncton usam luz para produzir matéria orgânica e liberam oxigênio."],
+          ["Matemática","Questão 4","Três regiões têm 16%, 18% e 22% do litoral. A quarta tem 3.256 km. Qual é a extensão total?",["5.400 km","6.800 km","7.400 km"],2,"As três primeiras somam 56%. Os 3.256 km representam os outros 44%. Portanto, 3.256 ÷ 0,44 = 7.400 km."]
+        ]
+      },
+      {
+        name: "FAETEC", edition: "2026/1 · Ensino médio integrado",
+        url: "https://portal.coseac.uff.br/wp-content/uploads/2025/12/Faetec_2026_edital_04_prova.pdf",
+        items: [
+          ["Matemática","Questão 24","Um paralelogramo possui diagonais iguais e perpendiculares. Qual é a classificação mais específica?",["Quadrado","Retângulo de lados desiguais","Losango de ângulos desiguais"],0,"As diagonais iguais caracterizam um retângulo. Por serem também perpendiculares, a figura é um losango. Reunindo as duas propriedades, temos um quadrado."],
+          ["Matemática","Questão 25","Quanto mede um ângulo interno de um octógono regular?",["120°","135°","145°"],1,"A soma dos ângulos é (8 − 2) × 180° = 1.080°. Como são oito ângulos iguais, cada um mede 135°."]
+        ]
+      },
+      {
+        name: "Instituto Federal Fluminense (IFF)", edition: "2026/1 · Integrados e concomitantes",
+        url: "https://pt.scribd.com/document/1034378948/IFF-2026-1",
+        items: [
+          ["Matemática","Questão 20","Um terreno retangular tem 98 m². As duas laterais e o fundo somam 28 m. Qual é a largura da frente?",["12 m","14 m","16 m"],1,"Se a lateral mede x, a frente mede 28 − 2x. Pela área, x(28 − 2x) = 98. A equação equivale a (x − 7)² = 0. Logo, a frente mede 14 m."],
+          ["Ciências","Questão 22","Por que o passageiro tende a continuar em movimento para a frente durante uma freada?",["Por inércia","Porque sua massa diminui","Porque a gravidade muda de direção"],0,"O carro desacelera. O corpo tende a conservar sua velocidade até que uma força, como a do cinto, o desacelere."]
+        ]
+      },
+      {
+        name: "Instituto Federal do Rio de Janeiro (IFRJ)", edition: "Ingresso 2024 · Cursos integrados",
+        url: "https://portal.ifrj.edu.br/sites/default/files/IFRJ/Arraial%20do%20Cabo/cursos-integrados-ingresso_em_2024.pdf",
+        items: [
+          ["Matemática","Questão 16","Uma razão de 35 mL por kg equivale a quantos litros por kg?",["0,035","0,35","3,5"],0,"Como 1 L = 1.000 mL, divida 35 por 1.000. O resultado é 0,035 L por kg."],
+          ["Matemática","Questão 17","No exercício, multiplica-se 100 kg por 35 mL/kg. A quantas garrafas de 1 L equivale o resultado?",["2 e meia","3 e meia","4"],1,"100 × 35 = 3.500 mL. Esse volume equivale a 3,5 L, ou três garrafas e meia."]
+        ]
+      },
+      {
+        name: "CEFET/RJ", edition: "Ingresso 2024 · Cursos técnicos",
+        url: "https://anexos.cdn.selecao.net.br/uploads/746/concursos/29/anexos/rvWelOX9df0cDiR3sUNUONCgWYH7yJcxkJkuHvHg.pdf",
+        items: [
+          ["Matemática","Questão 15","Mantida a distância, um veículo aumenta sua velocidade média em 25%. Como varia o tempo de viagem?",["Cai 25%","Cai 20%","Aumenta 20%"],1,"Divida o tempo inicial por 1,25. O novo tempo corresponde a 80% do anterior. A queda é de 20%."],
+          ["Matemática","Questão 17","O tempo para resolver um cubo mágico caiu de 3,47 s para 3,13 s. Qual foi a redução percentual aproximada?",["9,8%","10,2%","90,2%"],0,"A diferença é 0,34 s. Faça 0,34 ÷ 3,47 × 100 para obter aproximadamente 9,8%."]
+        ]
+      },
+      {
+        name: "Colégio Pedro II (CPII)", edition: "2023/2024 · Ensino médio regular diurno",
+        url: "https://dhuimigracao.cp2.g12.br/dhui_arquivos/ano_2023/certame_0412/oferta_0462/EM_REGULAR_DIURNO_2023_SEM_GABARITO.pdf",
+        items: [
+          ["Matemática","Questão 13","Como representar um dezesseis avos de um milhão em notação científica?",["6,25 × 10³","6,25 × 10⁴","6,25 × 10⁵"],1,"1.000.000 ÷ 16 = 62.500. Em notação científica, isso corresponde a 6,25 × 10⁴."],
+          ["Matemática","Questão 14","Em um grupo de 2 bilhões de usuários, o acesso diário caiu de 32% para 18%. Quantos usuários essa diferença representa?",["180 milhões","280 milhões","320 milhões"],1,"A diferença é de 14 pontos percentuais. Multiplicando 2 bilhões por 0,14, encontramos 280 milhões."]
+        ]
+      }
+    ];
+
+    /* Perfis locais. O perfil inicial também aproveita a avaliação
+       armazenada pela primeira versão do Rota Aprova, se disponível. */
+    const rootKey = "rota-aprova-perfis-v2";
+    const saved = read(rootKey, {});
+    const profiles = new Map(
+      Array.isArray(saved?.profiles) ? saved.profiles : []
+    );
+    let active = typeof saved?.active === "string" ? saved.active : "";
+    let data = null;
+    let pageId = "home";
+    let quiz = null;
+
+    function profileKey(name) {
+      return name.trim().normalize("NFC").toLocaleLowerCase("pt-BR");
+    }
+
+    function freshProfile(name) {
+      return {
+        name,
+        answers: Array(diagnostic.length).fill(null),
+        completed: false,
+        cursor: 0,
+        days: [0, 2, 4],
+        minutes: 60,
+        history: [],
+        oldResults: null
+      };
+    }
+
+    function save() {
+      if (active && data) profiles.set(active, data);
+      const ok = write(rootKey, {active, profiles: [...profiles]});
+      if (!ok && !$("saveWarning")) {
+        const warning = element("p",
+          "O navegador bloqueou o salvamento. Seu progresso ficará disponível apenas nesta sessão.",
+          "wrap");
+        warning.id = "saveWarning";
+        warning.setAttribute("role", "status");
+        document.querySelector("header").after(warning);
+      }
+    }
+
+    function importOldPreferences(profile) {
+      const old = read("rotaAssessmentV1", null);
+      if (!old || typeof old !== "object") return;
+
+      if (Array.isArray(old.days)) {
+        const valid = [...new Set(old.days)]
+          .filter(d => Number.isInteger(d) && d >= 0 && d < 7)
+          .sort((a, b) => a - b);
+        if (valid.length) profile.days = valid;
+      }
+
+      if (Number.isInteger(old.minutes) && old.minutes >= 15 &&
+          old.minutes <= 240 && old.minutes % 15 === 0) {
+        profile.minutes = old.minutes;
+      }
+
+      /*
+        O diagnóstico desta versão tem perguntas diferentes.
+        Só usamos resultados antigos quando correspondem ao
+        gabarito e à ordem da avaliação original do site.
+      */
+      if (old.completed && Array.isArray(old.answers) &&
+          old.answers.length === 20) {
+        profile.oldResults = true;
+      }
+    }
+
+    function openProfileDialog() {
+      $("profileName").value = data?.name || "";
+      $("profileDialog").showModal();
+      $("profileName").focus();
+    }
+
+    function enter(name) {
+      const key = profileKey(name);
+      if (!key) return;
+
+      if (!profiles.has(key)) {
+        const firstProfile = profiles.size === 0;
+        const profile = freshProfile(name.trim());
+        if (firstProfile) importOldPreferences(profile);
+        profiles.set(key, profile);
+      }
+
+      active = key;
+      data = profiles.get(key);
+      quiz = null;
+      save();
+      $("landing").hidden = true;
+      $("app").hidden = false;
+      $("profileButton").textContent = data.name;
+      navigate("home");
+    }
+
+    function leave() {
+      if (data) save();
+      active = "";
+      data = null;
+      quiz = null;
+      save();
+      $("app").hidden = true;
+      $("landing").hidden = false;
+      $("profileButton").textContent = "Entrar";
+      window.scrollTo(0, 0);
+    }
+
+    function applyTheme(dark) {
+      document.documentElement.classList.toggle("dark", dark);
+      $("theme").textContent = dark ? "Tema claro" : "Tema escuro";
+      $("theme").setAttribute("aria-pressed", String(dark));
+    }
+
+    $("theme").onclick = () => {
+      const dark = !document.documentElement.classList.contains("dark");
+      applyTheme(dark);
+      write("rota-aprova-tema", dark);
+    };
+
+    applyTheme(read("rota-aprova-tema",
+      window.matchMedia("(prefers-color-scheme: dark)").matches));
+
+    $("start").onclick = openProfileDialog;
+    $("profileButton").onclick = openProfileDialog;
+    $("closeDialog").onclick = () => $("profileDialog").close();
+    $("profileForm").onsubmit = event => {
+      event.preventDefault();
+      const name = $("profileName").value.trim();
+      if (!name) {
+        $("profileName").focus();
+        return;
+      }
+      $("profileDialog").close();
+      enter(name);
+    };
+    $("brand").onclick = () => data ? navigate("home") : window.scrollTo(0, 0);
+
+    /* Navegação. */
+    const pages = [
+      ["home", "Visão geral", home],
+      ["assessment", "Avaliação inicial", assessment],
+      ["schedule", "Cronograma", schedule],
+      ["questions", "Banco de questões", questionBank],
+      ["simulation", "Simulado", simulation],
+      ["schools", "Escolas e provas", schoolDirectory],
+      ["materials", "Materiais de revisão", materials],
+      ["methods", "Métodos de estudo", methods],
+      ["profile", "Meu perfil", profilePage]
+    ];
+
+    pages.forEach(([id, label]) => {
+      const item = button(label, () => navigate(id), true);
+      item.dataset.page = id;
+      $("sidebar").append(item);
     });
+    $("sidebar").append(button("Sair do perfil", leave, true));
 
-    if (
-      window.scrollY > 0 &&
-      window.innerHeight + window.scrollY >=
-      document.documentElement.scrollHeight - 4
-    ) {
-      active = "sobre";
+    $("mobileMenu").onclick = () => {
+      const open = $("sidebar").classList.toggle("open");
+      $("mobileMenu").setAttribute("aria-expanded", String(open));
+    };
+
+    function navigate(id) {
+      const page = pages.find(entry => entry[0] === id);
+      if (!page || !data) return;
+      pageId = id;
+      $("sidebar").classList.remove("open");
+      $("mobileMenu").setAttribute("aria-expanded", "false");
+
+      $("sidebar").querySelectorAll("[data-page]").forEach(item => {
+        if (item.dataset.page === id) item.setAttribute("aria-current", "page");
+        else item.removeAttribute("aria-current");
+      });
+
+      $("content").replaceChildren();
+      page[2]();
+      window.scrollTo(0, 0);
     }
-  } else {
-    active = "";
-  }
 
-  document.querySelectorAll(".top-nav a").forEach(link => {
-    const selected = link.getAttribute("href") === "#" + active;
-    link.classList.toggle("active", selected);
+    function home() {
+      title("Olá, " + data.name + "!", "Escolha a próxima atividade do seu plano.");
+      const banner = element("section", undefined, "banner");
+      const started = data.answers.some(value => value !== null);
+      banner.append(
+        element("h2", data.completed ? "Seu plano semanal" : "Avaliação inicial"),
+        element("p", data.completed
+          ? "Consulte as matérias de cada dia ou ajuste sua disponibilidade."
+          : "Responda a 20 perguntas para identificar os assuntos que merecem mais atenção."),
+        button(data.completed ? "Ver cronograma" :
+          started ? "Continuar avaliação" : "Começar avaliação",
+          () => navigate(data.completed ? "schedule" : "assessment"))
+      );
+      $("content").append(banner);
 
-    if (selected) {
-      link.setAttribute("aria-current", "location");
-    } else {
-      link.removeAttribute("aria-current");
+      const grid = element("div", undefined, "grid");
+      [
+        ["questions","Questões de provas","Escolha uma escola e confira a resolução."],
+        ["simulation","Simulado geral","Resolva seis questões e consulte o gabarito."],
+        ["materials","Revisão por matéria","Retome um conceito antes de praticar."]
+      ].forEach(([id, label, description]) => {
+        const box = card(label, description);
+        box.append(button("Acessar", () => navigate(id), true));
+        grid.append(box);
+      });
+      $("content").append(grid);
     }
-  });
-}
 
-document.querySelectorAll(".top-nav a").forEach(link => {
-  link.addEventListener("click", event => {
-    event.preventDefault();
-    showPublic();
-    document.querySelector(link.getAttribute("href")).scrollIntoView();
-    updatePublicNav();
-  });
-});
+    /* Formulário reutilizado pela avaliação, pelo banco e pelo simulado. */
+    function questionForm(parent, item, options) {
+      const form = element("form", undefined, "stack");
+      const field = element("fieldset");
+      field.append(element("legend", item[2]));
 
-window.addEventListener("scroll", updatePublicNav, { passive: true });
-window.addEventListener("resize", updatePublicNav);
+      item[3].forEach((answer, i) => {
+        const label = element("label", undefined, "choice");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "answer";
+        input.value = i;
+        input.required = true;
+        input.checked = i === options.selected;
+        if (options.onSelect) input.onchange = () => options.onSelect(i);
+        label.append(input, document.createTextNode(answer));
+        field.append(label);
+      });
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeStudentMenu();
-});
+      const controls = element("div", undefined, "actions");
+      if (options.back) controls.append(button("Voltar", options.back, true));
+      const submit = element("button", options.label || "Conferir resposta", "btn");
+      submit.type = "submit";
+      controls.append(submit);
+      form.append(field, controls);
 
-/* AJUSTAR ALTURA DA JANELA */
+      form.onsubmit = event => {
+        event.preventDefault();
+        const checked = form.querySelector('input[name="answer"]:checked');
+        if (!checked) return;
+        const selected = Number(checked.value);
+        if (options.explain) {
+          field.disabled = true;
+          submit.disabled = true;
+          const feedback = element("div", undefined, "result");
+          feedback.setAttribute("role", "status");
+          feedback.append(
+            element("strong", selected === item[4]
+              ? "Você acertou!"
+              : "Resposta correta: " + item[3][item[4]]),
+            element("p", item[5])
+          );
+          form.append(feedback);
+        }
+        if (options.submit) options.submit(selected);
+      };
+      parent.append(form);
+    }
 
-function syncHeaderHeight() {
-  document.documentElement.style.setProperty(
-    "--header-height",
-    document.getElementById("mainHeader").offsetHeight + "px"
-  );
+    function resultRows() {
+      return subjects.map(subject => {
+        const entries = diagnostic
+          .map((item, i) => ({item, i}))
+          .filter(entry => entry.item[0] === subject);
+        const missed = entries.filter(
+          entry => data.answers[entry.i] !== entry.item[4]
+        );
+        return {
+          subject,
+          total: entries.length,
+          correct: entries.length - missed.length,
+          wrong: missed.length,
+          topics: missed.map(entry => entry.item[1])
+        };
+      });
+    }
 
-  updatePublicNav();
-}
+    function assessment() {
+      title("Avaliação inicial", "20 questões de Matemática, Português, Ciências, Geografia, História e Inglês.");
 
-if ("ResizeObserver" in window) {
-  new ResizeObserver(syncHeaderHeight).observe(
-    document.getElementById("mainHeader")
-  );
-}
+      if (data.completed) {
+        const grid = element("div", undefined, "grid");
+        resultRows().forEach(row => {
+          grid.append(card(row.subject + " · " + row.correct + "/" + row.total,
+            row.wrong ? "Revisar: " + row.topics.join(", ") + "."
+                      : "Você acertou todas as questões desta matéria."));
+        });
+        $("content").append(grid, button("Abrir cronograma", () => navigate("schedule")));
+        return;
+      }
 
-window.addEventListener("resize", syncHeaderHeight);
+      const i = data.cursor;
+      const item = diagnostic[i];
+      const box = card("Questão " + (i + 1) + " de " + diagnostic.length,
+        item[0] + " · " + item[1]);
+      const progress = document.createElement("progress");
+      progress.max = diagnostic.length;
+      progress.value = data.answers.filter(value => value !== null).length;
+      progress.setAttribute("aria-label", "Questões respondidas");
+      box.append(progress);
 
-/* INICIALIZAÇÃO */
+      questionForm(box, item, {
+        selected: data.answers[i],
+        label: i === diagnostic.length - 1 ? "Concluir avaliação" : "Próxima questão",
+        onSelect(answer) {
+          data.answers[i] = answer;
+          save();
+          progress.value = data.answers.filter(value => value !== null).length;
+        },
+        back: i > 0 ? () => {
+          data.cursor--;
+          save();
+          navigate("assessment");
+        } : null,
+        submit(answer) {
+          data.answers[i] = answer;
+          if (i < diagnostic.length - 1) data.cursor++;
+          else {
+            const missing = data.answers.findIndex(value => value === null);
+            if (missing >= 0) data.cursor = missing;
+            else data.completed = true;
+          }
+          save();
+          navigate("assessment");
+        }
+      });
+      $("content").append(box);
+    }
 
-applyTheme();
-ensureInitialPlan();
-updateHomeCard();
-syncHeaderHeight();
-</script>
+    /* Cronograma. Um dia de 15 minutos recebe uma matéria.
+       A partir de 30 minutos, o dia comporta até duas matérias.
+       Matérias ainda sem sessão entram primeiro na distribuição. */
+    function buildSchedule(rows, chosenDays, minutes) {
+      const blocksPerDay = minutes / 15;
+      const entries = rows.map(row => ({
+        row,
+        weight: 1 + 3 * row.wrong / row.total,
+        used: 0
+      }));
+
+      return chosenDays.map(day => {
+        const selected = [...entries]
+          .sort((a, b) => a.used / a.weight - b.used / b.weight
+                         || b.weight - a.weight)
+          .slice(0, Math.min(2, blocksPerDay));
+
+        let first = blocksPerDay;
+        if (selected.length === 2) {
+          const weight = selected[0].weight + selected[1].weight;
+          first = Math.round(blocksPerDay * selected[0].weight / weight);
+          first = Math.max(1, Math.min(blocksPerDay - 1, first));
+        }
+
+        const sessions = selected.map((entry, i) => {
+          const blocks = i === 0 ? first : blocksPerDay - first;
+          entry.used += blocks;
+          return {
+            subject: entry.row.subject,
+            minutes: blocks * 15,
+            topics: entry.row.topics
+          };
+        });
+        return {day, sessions};
+      });
+    }
+
+    function schedule() {
+      title("Cronograma semanal",
+        "Escolha seus dias e seu tempo. Cada dia recebe no máximo duas matérias.");
+
+      const neutral = subjects.map(subject => ({
+        subject, wrong: 0, total: 1, topics: []
+      }));
+      const rows = data.completed ? resultRows() : neutral;
+      const box = card("Minha disponibilidade",
+        data.completed
+          ? "O plano considera a proporção de erros em cada matéria."
+          : "Você já pode montar um plano. Conclua a avaliação para priorizar suas dificuldades.");
+
+      const form = element("form", undefined, "stack");
+      const field = element("fieldset");
+      field.append(element("legend", "Dias de estudo"));
+      const choices = element("div", undefined, "days");
+
+      days.forEach((day, i) => {
+        const label = element("label");
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.name = "day";
+        check.value = i;
+        check.checked = data.days.includes(i);
+        label.append(check, document.createTextNode(" " + day));
+        choices.append(label);
+      });
+
+      field.append(choices);
+      const timeLabel = element("label", "Minutos por dia", "field");
+      const minutes = document.createElement("input");
+      minutes.type = "number";
+      minutes.min = "15";
+      minutes.max = "240";
+      minutes.step = "15";
+      minutes.required = true;
+      minutes.value = data.minutes;
+      timeLabel.append(minutes);
+
+      const submit = element("button", "Gerar / atualizar cronograma", "btn");
+      submit.type = "submit";
+      const message = element("p", "", "muted");
+      message.setAttribute("role", "status");
+      form.append(field, timeLabel, submit, message);
+      box.append(form);
+
+      const output = element("section", undefined, "stack");
+
+      function display() {
+        output.replaceChildren();
+        const plan = buildSchedule(rows, data.days, data.minutes);
+        output.append(element("h3",
+          "Seu plano semanal · " + data.days.length * data.minutes + " minutos"));
+        const grid = element("div", undefined, "grid");
+        const included = new Set();
+
+        plan.forEach(entry => {
+          const dayCard = card(days[entry.day] + " · " + data.minutes + " min");
+          entry.sessions.forEach(session => {
+            included.add(session.subject);
+            const part = element("div", undefined, "session");
+            part.append(
+              element("strong", session.subject + " — " + session.minutes + " min"),
+              element("p", session.topics.length
+                ? "Reforçar: " + session.topics.join(", ") + "."
+                : "Revisão e exercícios de fixação.", "muted small")
+            );
+            dayCard.append(part);
+          });
+          grid.append(dayCard);
+        });
+        output.append(grid);
+
+        const omitted = subjects.filter(subject => !included.has(subject));
+        if (omitted.length) {
+          output.append(element("p",
+            "Ficaram fora desta semana: " + omitted.join(", ") +
+            ". Para incluir as seis, escolha três dias com pelo menos 30 minutos cada ou seis dias de 15 minutos.",
+            "muted"));
+        }
+      }
+
+      form.onsubmit = event => {
+        event.preventDefault();
+        const selected = [...form.querySelectorAll('input[name="day"]:checked')]
+          .map(check => Number(check.value));
+        if (!selected.length) {
+          message.textContent = "Selecione pelo menos um dia.";
+          return;
+        }
+        const value = Number(minutes.value);
+        if (!Number.isInteger(value) || value < 15 || value > 240 || value % 15) {
+          message.textContent = "Use entre 15 e 240 minutos, em múltiplos de 15.";
+          return;
+        }
+        data.days = selected;
+        data.minutes = value;
+        save();
+        display();
+        message.textContent = "Cronograma atualizado.";
+      };
+
+      $("content").append(box, output);
+      display();
+    }
+
+    /* Banco de questões. */
+    function selectField(labelText, values) {
+      const label = element("label", labelText, "field");
+      const select = document.createElement("select");
+      values.forEach((value, i) => select.add(new Option(value, String(i))));
+      label.append(select);
+      return {label, select};
+    }
+
+    let bankMode = "school";
+    let schoolIndex = 0;
+    let subjectIndex = 0;
+    let bankIndex = 0;
+
+    function questionBank() {
+      title("Banco de questões", "Pratique por escola ou escolha uma matéria para o treino autoral.");
+      const actions = element("div", undefined, "actions");
+      actions.append(
+        button("Provas por escola", () => changeMode("school"), bankMode !== "school"),
+        button("Treino por matéria", () => changeMode("subject"), bankMode !== "subject")
+      );
+      $("content").append(actions);
+
+      function changeMode(mode) {
+        bankMode = mode;
+        bankIndex = 0;
+        navigate("questions");
+      }
+
+      const bySchool = bankMode === "school";
+      const school = schools[schoolIndex];
+      const items = bySchool ? school.items :
+        practice.filter(item => item[0] === subjects[subjectIndex]);
+
+      const fields = element("div", undefined, "fields");
+      const source = selectField(bySchool ? "Instituição" : "Matéria",
+        bySchool ? schools.map(item => item.name) : subjects);
+      source.select.value = String(bySchool ? schoolIndex : subjectIndex);
+
+      source.select.onchange = () => {
+        if (bySchool) schoolIndex = Number(source.select.value);
+        else subjectIndex = Number(source.select.value);
+        bankIndex = 0;
+        navigate("questions");
+      };
+
+      const question = selectField("Escolher questão", items.map((item, i) =>
+        bySchool ? item[1] + " · " + item[0] : (i + 1) + " · " + item[1]));
+      question.select.value = String(bankIndex);
+      question.select.onchange = () => {
+        bankIndex = Number(question.select.value);
+        navigate("questions");
+      };
+
+      fields.append(source.label, question.label);
+      $("content").append(fields);
+
+      const item = items[bankIndex];
+      const box = card(bySchool ? school.name : item[0],
+        bySchool ? school.edition + " · " + item[1] + " adaptada"
+                 : "Treino autoral · " + item[1]);
+      questionForm(box, item, {explain: true});
+
+      const bottom = element("div", undefined, "actions");
+      bottom.style.marginTop = "16px";
+      if (bankIndex + 1 < items.length) {
+        bottom.append(button("Próxima questão", () => {
+          bankIndex++;
+          navigate("questions");
+        }, true));
+      }
+      if (bySchool) bottom.append(link(
+        school === schools[2] ? "Abrir prova de origem no Scribd ↗" : "Abrir prova de origem ↗",
+        school.url
+      ));
+      box.append(bottom);
+      $("content").append(box);
+    }
+
+    /* Simulado. A correção aparece apenas depois da última questão. */
+    function simulation() {
+      title("Simulado geral", "Uma questão autoral por matéria, com gabarito comentado ao final.");
+
+      if (!quiz) {
+        const box = card("Rodada de seis questões",
+          "Você pode circular pelo painel e voltar ao simulado enquanto a página estiver aberta.");
+        box.append(button("Iniciar simulado", () => {
+          quiz = {
+            items: subjects.map(subject => {
+              const pool = practice.filter(item => item[0] === subject);
+              return pool[Math.floor(Math.random() * pool.length)];
+            }),
+            answers: []
+          };
+          navigate("simulation");
+        }));
+        $("content").append(box);
+        return;
+      }
+
+      const i = quiz.answers.length;
+      if (i < quiz.items.length) {
+        const item = quiz.items[i];
+        const box = card("Questão " + (i + 1) + " de " + quiz.items.length, item[0]);
+        questionForm(box, item, {
+          label: i + 1 === quiz.items.length ? "Ver resultado" : "Próxima questão",
+          submit(answer) {
+            quiz.answers.push(answer);
+            if (quiz.answers.length === quiz.items.length) {
+              const score = quiz.items.filter((q, j) => q[4] === quiz.answers[j]).length;
+              data.history.push({
+                date: new Date().toISOString(),
+                score,
+                total: quiz.items.length
+              });
+              save();
+            }
+            navigate("simulation");
+          }
+        });
+        $("content").append(box);
+        return;
+      }
+
+      const score = quiz.items.filter((item, j) => item[4] === quiz.answers[j]).length;
+      const result = card("Resultado · " + score + " de " + quiz.items.length,
+        "Abra cada matéria para conferir a explicação.");
+
+      quiz.items.forEach((item, j) => {
+        const correct = quiz.answers[j] === item[4];
+        const detail = element("details");
+        detail.append(
+          element("summary", item[0] + " · " + (correct ? "Acertou" : "Revisar")),
+          element("p", item[2]),
+          element("p", "Sua resposta: " + item[3][quiz.answers[j]]),
+          element("p", "Gabarito: " + item[3][item[4]]),
+          element("p", item[5], "muted")
+        );
+        result.append(detail);
+      });
+      $("content").append(result, button("Fazer outro simulado", () => {
+        quiz = null;
+        navigate("simulation");
+      }));
+    }
+
+    function schoolDirectory() {
+      title("Escolas e provas", "Escolha uma instituição para abrir o caderno ou praticar no painel.");
+      const grid = element("div", undefined, "grid");
+      schools.forEach((school, i) => {
+        const box = card(school.name, school.edition);
+        const actions = element("div", undefined, "actions");
+        actions.append(button("Praticar", () => {
+          schoolIndex = i;
+          bankIndex = 0;
+          bankMode = "school";
+          navigate("questions");
+        }), link("Abrir prova ↗", school.url));
+        box.append(actions);
+        grid.append(box);
+      });
+      $("content").append(grid);
+    }
+
+    function materials() {
+      title("Materiais de revisão", "Leia um resumo curto e aplique o conceito no treino da matéria.");
+      const summaries = [
+        "Porcentagem representa uma parte de 100. Para calcular 15% de um valor, multiplique por 0,15. Em um desconto, subtraia esse resultado do preço inicial.",
+        "Para descobrir a que um pronome se refere, substitua-o pelo termo anterior e releia a frase. Confira se o sentido e a concordância foram preservados.",
+        "Em uma cadeia alimentar, produtores fabricam matéria orgânica. Consumidores obtêm alimento de outros seres. Decompositores atuam na reciclagem de nutrientes.",
+        "A escala 1:100.000 indica que uma unidade no mapa vale 100.000 unidades reais. Se a medida for em centímetros, converta para metros ou quilômetros no final.",
+        "Ao analisar uma fonte histórica, identifique quem a produziu, quando, com qual finalidade e de que ponto de vista. Compare-a com outras fontes do período.",
+        "Procure marcadores de tempo antes de escolher o verbo. Yesterday indica passado. Every day costuma indicar uma ação habitual."
+      ];
+      const grid = element("div", undefined, "grid");
+      subjects.forEach((subject, i) => {
+        const box = card(subject, summaries[i]);
+        box.append(button("Praticar " + subject, () => {
+          bankMode = "subject";
+          subjectIndex = i;
+          bankIndex = 0;
+          navigate("questions");
+        }, true));
+        grid.append(box);
+      });
+      $("content").append(grid);
+    }
+
+    function methods() {
+      title("Métodos de estudo", "Use um dos métodos durante os blocos do seu cronograma.");
+      const grid = element("div", undefined, "grid");
+      [
+        ["Recordação ativa","Leia uma página, feche o material e escreva três ideias de memória. Reabra e confira o que ficou faltando."],
+        ["Caderno de erros","Depois de errar, anote o assunto, o motivo do erro e o primeiro passo correto. Refaça a questão alguns dias depois sem olhar a resolução."],
+        ["Revisão espaçada","Após aprender um assunto, marque uma revisão curta no dia seguinte e outra na semana seguinte. Use questões para verificar o que conseguiu lembrar."],
+        ["Bloco de 30 minutos","Use 5 minutos para recordar a teoria, 20 para resolver exercícios e 5 para corrigir e registrar suas dúvidas."]
+      ].forEach(([name, text]) => grid.append(card(name, text)));
+      $("content").append(grid);
+    }
+
+    function profilePage() {
+      title("Meu perfil", data.name);
+      const box = card("Progresso neste navegador",
+        data.completed ? "Avaliação inicial concluída."
+          : "Avaliação inicial: " + data.answers.filter(a => a !== null).length +
+            " de " + diagnostic.length + " respondidas.");
+      if (data.oldResults && !data.completed) {
+        box.append(element("p",
+          "Os dias e o tempo do plano anterior foram aproveitados. Responda à avaliação desta versão para atualizar as prioridades.",
+          "muted"));
+      }
+      box.append(button("Trocar de perfil", openProfileDialog, true));
+      $("content").append(box);
+
+      const history = card("Histórico de simulados");
+      if (!data.history.length) {
+        history.append(element("p", "Seus resultados aparecerão aqui ao concluir um simulado.", "muted"));
+      } else {
+        const list = element("ul");
+        [...data.history].reverse().forEach(entry => {
+          const date = new Date(entry.date).toLocaleDateString("pt-BR");
+          list.append(element("li", date + " · " + entry.score + " de " + entry.total + " acertos"));
+        });
+        history.append(list);
+      }
+      $("content").append(history);
+    }
+
+    /* Retoma o último perfil aberto neste navegador. */
+    if (active && profiles.has(active)) {
+      enter(profiles.get(active).name);
+    }
+  </script>
 </body>
 </html>
