@@ -55,6 +55,8 @@ a { color: var(--primary); text-decoration: none; }
   padding-right: clamp(16px, 3vw, 48px);
 }
 
+/* CABEÇALHO */
+
 header {
   position: sticky;
   top: 0;
@@ -133,6 +135,8 @@ header {
   color: var(--text);
 }
 
+/* PÁGINA INICIAL */
+
 .hero {
   min-height: calc(100vh - var(--header-height));
   min-height: calc(100svh - var(--header-height));
@@ -144,7 +148,10 @@ header {
     radial-gradient(circle at 50% 0%, rgba(40,120,232,.16), transparent 55%);
 }
 
-.hero-content { width: 100%; max-width: none; }
+.hero-content {
+  width: 100%;
+  max-width: none;
+}
 
 .hero h1 {
   max-width: 1100px;
@@ -223,7 +230,8 @@ footer {
   scroll-margin-top: calc(var(--header-height) + 16px);
 }
 
-/* Login */
+/* LOGIN */
+
 .page { display: none; }
 .page.active { display: block; }
 
@@ -271,7 +279,8 @@ footer {
   line-height: 1.5;
 }
 
-/* Painel */
+/* PAINEL */
+
 .dashboard {
   display: flex;
   min-height: calc(100vh - var(--header-height));
@@ -355,15 +364,17 @@ footer {
 
 .mobile-menu-button { display: none; }
 
-/* Quadro vermelho */
+/* QUADRO DA AVALIAÇÃO */
+
 .assessment-card {
   width: 100%;
   min-height: 330px;
   padding: 28px;
   margin: 0 0 24px;
   border-radius: 16px;
-  background: #b91c1c;
-  color: white;
+  background: #fce7e7;
+  color: #7f1d1d;
+  border: 1px solid #f3baba;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -379,16 +390,20 @@ footer {
   font-size: 18px;
   line-height: 1.6;
   max-width: 650px;
+  color: #843b3b;
 }
 
 .assessment-card button {
   margin-top: auto;
   padding: 14px 22px;
-  background: white;
-  color: #991b1b;
+  background: #b91c1c;
+  color: white;
 }
 
-/* Avaliação */
+.assessment-card button:hover { background: #991b1b; }
+
+/* PERGUNTAS E RESULTADOS */
+
 .quiz-box {
   background: var(--card);
   border: 1px solid var(--border);
@@ -465,7 +480,8 @@ th, td {
   line-height: 1.6;
 }
 
-/* Cronograma */
+/* CRONOGRAMA */
+
 .planner {
   background: var(--card);
   padding: 22px;
@@ -500,6 +516,8 @@ th, td {
   outline: 3px solid var(--primary);
   outline-offset: 3px;
 }
+
+/* CELULAR */
 
 @media(max-width:760px) {
   .header-content {
@@ -589,14 +607,18 @@ th, td {
   </div>
 </header>
 
+<!-- SITE PÚBLICO -->
+
 <div id="publicSite">
   <section class="hero" id="inicio">
     <div class="container hero-content">
       <h1>Sua preparação começa com a <span>Rota certa.</span></h1>
+
       <p>
         Organize seus estudos, conheça oportunidades e prepare-se
         para alcançar seus objetivos com o Rota Aprova.
       </p>
+
       <div class="hero-actions">
         <button class="btn" onclick="showPage('signup')">
           Começar agora
@@ -672,6 +694,8 @@ th, td {
   </footer>
 </div>
 
+<!-- LOGIN E CADASTRO -->
+
 <section id="authApp" class="page">
   <div class="auth-wrapper" id="loginPanel">
     <h2>Entrar na sua conta</h2>
@@ -689,10 +713,12 @@ th, td {
       Esta versão é apenas uma demonstração visual.
       Não use uma senha real.
     </p>
+
     <p>
       Não tem uma conta?
       <a href="#" onclick="showSignup();return false;">Criar conta</a>
     </p>
+
     <button class="secondary" type="button" onclick="showPublic()">
       Voltar ao início
     </button>
@@ -716,15 +742,19 @@ th, td {
     <p class="auth-note">
       Cadastro demonstrativo: os dados não serão enviados nem salvos.
     </p>
+
     <p>
       Já tem uma conta?
       <a href="#" onclick="showLogin();return false;">Entrar</a>
     </p>
+
     <button class="secondary" type="button" onclick="showPublic()">
       Voltar ao início
     </button>
   </div>
 </section>
+
+<!-- PAINEL -->
 
 <section id="studentApp" class="page">
   <div class="container dashboard">
@@ -762,8 +792,9 @@ th, td {
         <div class="assessment-card">
           <h2>Avaliação Inicial</h2>
           <p>
-            Se autoavalia para testarmos seus conhecimentos e pôr
-            em prática o que precisamos melhorar
+            Descubra seus pontos fortes e o que precisa reforçar.
+            Responda à avaliação e receba um cronograma de estudos
+            personalizado para evoluir no seu ritmo.
           </p>
           <button class="action-btn" type="button"
             onclick="openAssessment()">Começar avaliação</button>
@@ -886,21 +917,25 @@ th, td {
 
       <section id="student-assessment" class="student-page">
         <h2>Avaliação Inicial</h2>
+
         <p class="notice">
           20 perguntas de nível intermediário do ensino fundamental II.
           Responda sem consultar para identificar o que revisar.
           Não há limite de tempo.
         </p>
+
         <p class="notice">
-          São 4 questões de Matemática, 4 de Português e 3 de cada uma
-          das demais matérias. Esta avaliação curta orienta os estudos;
-          não é uma medida definitiva do seu conhecimento.
+          São 4 questões de Matemática, 4 de Português e 3 de cada
+          uma das demais matérias. Esta avaliação curta orienta
+          os estudos; não é uma medida definitiva do seu conhecimento.
         </p>
+
         <div id="quizArea"></div>
       </section>
 
       <section id="student-schedule" class="student-page">
         <h2>Meu cronograma personalizado</h2>
+
         <p class="notice">
           Escolha seus dias e o tempo de estudo por dia.
           O plano reserva mais tempo às matérias com maior proporção
@@ -919,6 +954,7 @@ th, td {
           <label for="dailyMinutes">
             Minutos de estudo por dia selecionado
           </label>
+
           <input id="dailyMinutes" type="number"
             min="15" max="240" step="15" value="60" required>
 
@@ -931,15 +967,17 @@ th, td {
           <button class="action-btn" type="submit">
             Gerar / atualizar cronograma
           </button>
+
           <p id="planError" class="error" role="alert"></p>
         </form>
 
         <div id="scheduleOutput" aria-live="polite"></div>
 
         <p class="notice" id="storageNote">
-          Resultados e cronograma ficam neste navegador e aparelho.
-          O login ainda é demonstrativo: quem usar este mesmo navegador
-          poderá ver o resultado.
+          Sua avaliação fica concluída neste navegador, e o cronograma
+          continua editável. O login ainda é demonstrativo: os dados
+          são compartilhados por quem usa este navegador. Limpar os
+          dados ou trocar de navegador permite uma nova avaliação.
         </p>
       </section>
 
@@ -957,8 +995,10 @@ th, td {
         <div class="content-card">
           <h3>Aparência</h3>
           <p>Escolha como deseja visualizar o Rota Aprova.</p>
+
           <label for="themePreference">Tema do site</label>
           <br><br>
+
           <select id="themePreference" class="settings-select"
             onchange="setThemePreference(this.value)">
             <option value="system">Seguir o tema do aparelho</option>
@@ -972,7 +1012,7 @@ th, td {
 </section>
 
 <script>
-/* Navegação */
+/* NAVEGAÇÃO */
 
 function closeStudentMenu() {
   document.getElementById("studentSidebar").classList.remove("open");
@@ -1047,7 +1087,7 @@ function toggleStudentMenu() {
   document.getElementById("studentSidebar").classList.toggle("open");
 }
 
-/* Tema */
+/* TEMA */
 
 const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 let themePreference = "system";
@@ -1080,6 +1120,7 @@ function setThemePreference(value) {
   if (!["system", "light", "dark"].includes(value)) return;
 
   themePreference = value;
+
   try {
     localStorage.setItem("rotaAprovaTheme", value);
   } catch (error) {}
@@ -1115,9 +1156,9 @@ document.addEventListener("keydown", event => {
 applyTheme();
 
 /*
-Perguntas:
+PERGUNTAS:
 matéria, assunto, enunciado, alternativas,
-índice correto (0 a 3), explicação.
+índice correto e explicação.
 */
 
 const questions = [
@@ -1334,7 +1375,7 @@ let assessment = {
   planned: false
 };
 
-/* Recuperar progresso */
+/* RECUPERAR PROGRESSO */
 
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
@@ -1395,7 +1436,7 @@ function openAssessment() {
   studentPage("student-assessment");
 }
 
-/* Correção */
+/* CORREÇÃO */
 
 function results() {
   return subjects.map(subject => {
@@ -1419,7 +1460,7 @@ function results() {
   });
 }
 
-/* Perguntas */
+/* EXIBIR PERGUNTAS */
 
 function renderAssessment() {
   const area = document.getElementById("quizArea");
@@ -1442,6 +1483,7 @@ function renderAssessment() {
 
       <fieldset>
         <legend tabindex="-1" id="questionTitle">${q[2]}</legend>
+
         ${q[3].map((option, j) => `
           <label class="answer">
             <input type="radio" name="answer" value="${j}"
@@ -1518,7 +1560,7 @@ function finishAssessment() {
   document.getElementById("resultTitle").focus();
 }
 
-/* Resultados */
+/* RESULTADOS */
 
 function renderResults() {
   const rows = results();
@@ -1560,7 +1602,7 @@ function renderResults() {
 
       <button class="action-btn"
         onclick="studentPage('student-schedule')">
-        Montar meu cronograma
+        Abrir meu cronograma
       </button>
 
       <details>
@@ -1580,32 +1622,14 @@ function renderResults() {
       </details>
 
       <p class="notice">
-        Ao refazer, seu resultado e o cronograma anterior serão substituídos.
+        Avaliação inicial concluída. Você pode consultar suas respostas
+        e editar seu cronograma semanal a qualquer momento.
       </p>
-
-      <button class="btn btn-outline" onclick="restartAssessment()">
-        Refazer avaliação
-      </button>
     </div>
   `;
 }
 
-function restartAssessment() {
-  if (!confirm(
-    "Refazer a avaliação e substituir o resultado e o cronograma atuais?"
-  )) return;
-
-  assessment.answers = Array(20).fill(null);
-  assessment.current = 0;
-  assessment.completed = false;
-  assessment.planned = false;
-
-  saveAssessment();
-  renderAssessment();
-  renderPlanner();
-}
-
-/* Cronograma */
+/* CRONOGRAMA */
 
 function renderPlanner() {
   const ready = assessment.completed;
@@ -1766,6 +1790,7 @@ function displaySchedule() {
       ${plan.map(d => `
         <div class="content-card">
           <h3>${dayNames[d.day]} · ${assessment.minutes} min</h3>
+
           ${d.sessions.map(s => `
             <p>
               <strong>${s.subject} — ${s.minutes} min</strong>
@@ -1789,7 +1814,7 @@ function displaySchedule() {
   `;
 }
 
-/* Negrito na seção atual */
+/* SEÇÃO ATUAL EM NEGRITO */
 
 function updatePublicNav() {
   let active = "inicio";
@@ -1832,7 +1857,7 @@ function updatePublicNav() {
 window.addEventListener("scroll", updatePublicNav, { passive: true });
 window.addEventListener("resize", updatePublicNav);
 
-/* Altura da tela e cabeçalho */
+/* ALTURA DA TELA */
 
 function syncHeaderHeight() {
   document.documentElement.style.setProperty(
@@ -1849,10 +1874,133 @@ if ("ResizeObserver" in window) {
 }
 
 window.addEventListener("resize", syncHeaderHeight);
-
 syncHeaderHeight();
-renderAssessment();
-renderPlanner();
+
+/* AVALIAÇÃO ÚNICA NESTE NAVEGADOR */
+
+(function () {
+  const originalChooseAnswer = chooseAnswer;
+  const originalMoveQuestion = moveQuestion;
+  const originalFinishAssessment = finishAssessment;
+  const originalRenderAssessment = renderAssessment;
+  const originalRenderPlanner = renderPlanner;
+  const originalEnterDemo = enterDemo;
+
+  function updateAssessmentAccess() {
+    const card = document.querySelector(".assessment-card");
+    const navButton = document.querySelector(
+      '#studentSidebar button[onclick*="student-assessment"]'
+    );
+
+    if (assessment.completed) {
+      card.querySelector("h2").textContent = "Seu cronograma semanal";
+
+      card.querySelector("p").textContent =
+        "Sua avaliação inicial já foi concluída. " +
+        "Acesse seu plano de estudos e ajuste os dias e o tempo " +
+        "disponível sempre que precisar.";
+
+      card.querySelector("button").textContent = "Abrir meu cronograma";
+
+      if (navButton) {
+        navButton.textContent = "📋 Resultado da avaliação";
+      }
+    }
+  }
+
+  openAssessment = function () {
+    studentPage(
+      assessment.completed ? "student-schedule" : "student-assessment"
+    );
+  };
+
+  chooseAnswer = function (value) {
+    if (assessment.completed) return;
+    originalChooseAnswer(value);
+  };
+
+  moveQuestion = function (step) {
+    if (assessment.completed) return;
+    originalMoveQuestion(step);
+  };
+
+  renderAssessment = function () {
+    originalRenderAssessment();
+    updateAssessmentAccess();
+  };
+
+  renderPlanner = function () {
+    originalRenderPlanner();
+
+    if (assessment.completed) {
+      const correct = results().reduce(
+        (sum, row) => sum + row.correct, 0
+      );
+
+      document.getElementById("scheduleGate").innerHTML = `
+        <div class="content-card">
+          <h3>Avaliação concluída</h3>
+
+          <p>
+            <strong>
+              ${correct} acertos · ${20 - correct} erros ·
+              ${correct * 5}% de aproveitamento
+            </strong>
+          </p>
+
+          <p>
+            Seu plano abaixo considera esse resultado.
+            Altere os dias e os minutos de estudo e clique em
+            “Gerar / atualizar cronograma” para salvar os ajustes.
+          </p>
+
+          <button class="btn btn-outline"
+            onclick="studentPage('student-assessment')">
+            Ver resultado e respostas
+          </button>
+        </div>
+      `;
+    }
+
+    updateAssessmentAccess();
+  };
+
+  function ensureInitialPlan() {
+    if (!assessment.completed || assessment.planned) return;
+
+    if (!assessment.days.length) {
+      assessment.days = [0, 2, 4];
+    }
+
+    assessment.planned = true;
+    saveAssessment();
+  }
+
+  finishAssessment = function () {
+    if (!assessment.completed) {
+      originalFinishAssessment();
+    }
+
+    if (!assessment.completed) return;
+
+    ensureInitialPlan();
+    renderAssessment();
+    studentPage("student-schedule");
+  };
+
+  enterDemo = function () {
+    originalEnterDemo();
+
+    if (assessment.completed) {
+      ensureInitialPlan();
+      studentPage("student-schedule");
+    }
+  };
+
+  ensureInitialPlan();
+  renderAssessment();
+  renderPlanner();
+})();
 </script>
 </body>
 </html>
