@@ -17,6 +17,7 @@
   --header: rgba(255,255,255,.94);
   --shadow: 0 8px 28px rgba(20,40,75,.07);
 }
+
 body.dark {
   --bg: #0d172d;
   --card: #162440;
@@ -27,7 +28,9 @@ body.dark {
   --header: rgba(13,23,45,.95);
   --shadow: 0 8px 28px rgba(0,0,0,.16);
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -35,11 +38,16 @@ body {
   color: var(--text);
   transition: background .2s, color .2s;
 }
+
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 button:disabled { opacity: .5; cursor: not-allowed; }
 a { color: var(--primary); text-decoration: none; }
-.container { width: min(1120px, 92%); margin: auto; }
+
+.container {
+  width: min(1120px, 92%);
+  margin: auto;
+}
 
 header {
   position: sticky;
@@ -49,6 +57,7 @@ header {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
+
 .header-content {
   min-height: 70px;
   display: flex;
@@ -56,17 +65,37 @@ header {
   justify-content: space-between;
   gap: 15px;
 }
+
 .brand {
   font-size: 21px;
   font-weight: 800;
   color: var(--text);
   white-space: nowrap;
 }
+
 .brand span { color: var(--primary); }
-.top-nav { display: flex; align-items: center; gap: 20px; }
-.top-nav a { color: var(--text); font-size: 14px; }
-.top-nav a.active { font-weight: 800; color: var(--primary); }
-.header-actions { display: flex; align-items: center; gap: 9px; }
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.top-nav a {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.top-nav a.active {
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
 
 .btn {
   border: 0;
@@ -76,11 +105,13 @@ header {
   color: white;
   font-weight: 700;
 }
+
 .btn-outline {
   background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
 }
+
 .theme-button {
   border: 1px solid var(--border);
   border-radius: 9px;
@@ -88,23 +119,28 @@ header {
   background: var(--card);
   color: var(--text);
 }
+
 .hero {
   padding: 85px 0 75px;
   text-align: center;
-  background: radial-gradient(
-    circle at 50% 0%,
-    rgba(40,120,232,.16),
-    transparent 55%
-  );
+  background:
+    radial-gradient(circle at 50% 0%, rgba(40,120,232,.16), transparent 55%);
 }
-.hero-content { max-width: 790px; margin: auto; }
+
+.hero-content {
+  max-width: 790px;
+  margin: auto;
+}
+
 .hero h1 {
   font-size: clamp(34px, 6vw, 57px);
   line-height: 1.12;
   margin: 0 0 20px;
   letter-spacing: -1.5px;
 }
+
 .hero h1 span { color: var(--primary); }
+
 .hero p {
   color: var(--muted);
   font-size: 18px;
@@ -112,25 +148,31 @@ header {
   margin: 0 auto 28px;
   max-width: 650px;
 }
+
 .hero-actions {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
 }
+
 .section { padding: 55px 0; }
+
 .section-heading {
   text-align: center;
   max-width: 650px;
   margin: 0 auto 30px;
 }
+
 .section-heading h2 { font-size: 29px; }
 .section-heading p { color: var(--muted); line-height: 1.6; }
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
 }
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -138,9 +180,11 @@ header {
   padding: 23px;
   box-shadow: var(--shadow);
 }
+
 .card h3 { margin-top: 0; }
 .card p { color: var(--muted); line-height: 1.6; }
 .card-icon { font-size: 27px; margin-bottom: 12px; }
+
 .cta {
   background: #174c91;
   color: white;
@@ -149,7 +193,9 @@ header {
   text-align: center;
   margin: 35px auto 60px;
 }
+
 .cta p { color: #dceaff; line-height: 1.6; }
+
 footer {
   border-top: 1px solid var(--border);
   padding: 25px 0;
@@ -157,12 +203,14 @@ footer {
   text-align: center;
   font-size: 13px;
 }
+
 #inicio, #recursos, #sobre { scroll-margin-top: 110px; }
 
-/* LOGIN */
+/* LOGIN E CADASTRO */
 
 .page { display: none; }
 .page.active { display: block; }
+
 .auth-wrapper {
   max-width: 460px;
   margin: 55px auto;
@@ -172,7 +220,9 @@ footer {
   border-radius: 18px;
   box-shadow: var(--shadow);
 }
+
 .auth-wrapper h2 { margin-top: 0; }
+
 .auth-wrapper input {
   width: 100%;
   padding: 13px;
@@ -182,6 +232,7 @@ footer {
   background: var(--bg);
   color: var(--text);
 }
+
 .auth-wrapper button {
   border: 0;
   border-radius: 9px;
@@ -191,18 +242,20 @@ footer {
   font-weight: 700;
   margin: 4px 0;
 }
+
 .auth-wrapper .secondary {
   background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
 }
+
 .auth-note {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
 }
 
-/* PAINEL */
+/* PAINEL DO ESTUDANTE */
 
 .dashboard {
   display: flex;
@@ -210,6 +263,7 @@ footer {
   gap: 22px;
   padding: 25px 0;
 }
+
 .sidebar {
   width: 230px;
   flex-shrink: 0;
@@ -221,7 +275,9 @@ footer {
   position: sticky;
   top: 85px;
 }
+
 .sidebar h3 { margin: 5px 8px 15px; }
+
 .sidebar button {
   display: block;
   width: 100%;
@@ -233,42 +289,39 @@ footer {
   background: transparent;
   color: var(--text);
 }
+
 .sidebar button:hover,
 .sidebar button.active {
   background: rgba(40,120,232,.16);
   color: var(--primary);
 }
-.dashboard-main { flex: 1; min-width: 0; }
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+}
+
 .student-page { display: none; }
 .student-page.active { display: block; }
-.welcome-card {
-  padding: 25px;
-  border-radius: 16px;
-  background: linear-gradient(120deg,#174c91,#2878e8);
-  color: white;
-  margin-bottom: 20px;
-}
-.welcome-card h2 { margin-top: 0; }
-.stats-grid, .content-grid {
+.student-page h2 { margin-top: 8px; }
+
+.content-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
   gap: 15px;
   margin: 18px 0;
 }
-.stat-card, .content-card {
+
+.content-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 13px;
   padding: 18px;
 }
-.stat-card strong {
-  display: block;
-  font-size: 25px;
-  margin-top: 8px;
-}
+
 .content-card h3 { margin-top: 0; }
 .content-card p { color: var(--muted); line-height: 1.5; }
-.student-page h2 { margin-top: 8px; }
+
 .action-btn {
   border: 0;
   border-radius: 9px;
@@ -277,6 +330,7 @@ footer {
   color: white;
   font-weight: 700;
 }
+
 .settings-select {
   padding: 11px;
   border: 1px solid var(--border);
@@ -285,29 +339,45 @@ footer {
   color: var(--text);
   max-width: 100%;
 }
+
 .mobile-menu-button { display: none; }
 
-/* AVALIAÇÃO */
+/* QUADRO VERMELHO NA VISÃO GERAL */
 
 .assessment-card {
+  width: 100%;
+  min-height: 330px;
+  padding: 28px;
+  margin: 0 0 24px;
+  border-radius: 16px;
   background: #b91c1c;
   color: white;
-  padding: 26px;
-  border-radius: 16px;
-  max-width: 420px;
-  min-height: 260px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px 0;
 }
-.assessment-card h2 { margin-top: 0; }
-.assessment-card p { line-height: 1.6; }
+
+.assessment-card h2 {
+  margin: 0 0 18px;
+  font-size: 30px;
+}
+
+.assessment-card p {
+  margin: 0 0 28px;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 650px;
+}
+
 .assessment-card button {
   margin-top: auto;
+  padding: 14px 22px;
   background: white;
   color: #991b1b;
 }
+
+/* PERGUNTAS E RESULTADOS */
+
 .quiz-box {
   background: var(--card);
   border: 1px solid var(--border);
@@ -315,18 +385,22 @@ footer {
   padding: 24px;
   margin: 18px 0;
 }
-.quiz-box fieldset, .planner fieldset {
+
+.quiz-box fieldset,
+.planner fieldset {
   border: 0;
   padding: 0;
   margin: 18px 0;
   min-width: 0;
 }
+
 .quiz-box legend {
   font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
   margin-bottom: 16px;
 }
+
 .answer {
   display: flex;
   gap: 12px;
@@ -336,36 +410,44 @@ footer {
   margin: 10px 0;
   cursor: pointer;
 }
+
 .answer:has(input:checked) {
   border-color: var(--primary);
   background: rgba(40,120,232,.12);
 }
+
 .answer input { accent-color: var(--primary); }
+
 .quiz-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
 }
+
 progress {
   width: 100%;
   accent-color: var(--primary);
   height: 12px;
 }
+
 .notice { color: var(--muted); line-height: 1.6; }
 .error { color: #b91c1c; font-weight: 700; }
 body.dark .error { color: #fca5a5; }
 .table-wrap { overflow-x: auto; }
+
 table {
   border-collapse: collapse;
   width: 100%;
   margin: 18px 0;
 }
+
 th, td {
   text-align: left;
   padding: 12px;
   border-bottom: 1px solid var(--border);
 }
+
 .review-item {
   padding: 15px 0;
   border-bottom: 1px solid var(--border);
@@ -380,17 +462,20 @@ th, td {
   border-radius: 14px;
   border: 1px solid var(--border);
 }
+
 .days {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin: 12px 0;
 }
+
 .days label {
   padding: 10px;
   border: 1px solid var(--border);
   border-radius: 8px;
 }
+
 .planner input[type=number] {
   width: 100px;
   padding: 10px;
@@ -400,6 +485,7 @@ th, td {
   color: var(--text);
   background: var(--bg);
 }
+
 :focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: 3px;
@@ -412,16 +498,20 @@ th, td {
     flex-wrap: wrap;
     padding: 12px 0;
   }
+
   .top-nav { display: none; }
   .brand { font-size: 19px; }
   .header-actions { gap: 6px; }
+
   .header-actions .btn {
     padding: 9px 10px;
     font-size: 12px;
   }
+
   .hero { padding: 60px 0; }
   .hero p { font-size: 16px; }
   .dashboard { display: block; }
+
   .sidebar {
     display: none;
     position: fixed;
@@ -433,11 +523,14 @@ th, td {
     overflow-y: auto;
     box-shadow: 0 10px 35px rgba(0,0,0,.3);
   }
+
   .sidebar.open { display: block; }
+
   .mobile-menu-button {
     display: inline-block;
     margin-bottom: 15px;
   }
+
   .dashboard-main { width: 100%; }
   .auth-wrapper { margin: 25px 10px; }
 }
@@ -445,6 +538,8 @@ th, td {
 </head>
 
 <body>
+
+<!-- CABEÇALHO -->
 
 <header id="mainHeader">
   <div class="container header-content">
@@ -471,16 +566,18 @@ th, td {
   </div>
 </header>
 
-<!-- PÁGINA INICIAL -->
+<!-- SITE PÚBLICO -->
 
 <div id="publicSite">
   <section class="hero" id="inicio">
     <div class="container hero-content">
       <h1>Sua preparação começa com a <span>Rota certa.</span></h1>
+
       <p>
         Organize seus estudos, conheça oportunidades e prepare-se
         para alcançar seus objetivos com o Rota Aprova.
       </p>
+
       <div class="hero-actions">
         <button class="btn" onclick="showPage('signup')">
           Começar agora
@@ -508,26 +605,31 @@ th, td {
           <h3>Concursos</h3>
           <p>Conheça instituições, oportunidades e informações importantes.</p>
         </div>
+
         <div class="card">
           <div class="card-icon">📝</div>
           <h3>Questões</h3>
           <p>Pratique seus conhecimentos com exercícios por matéria.</p>
         </div>
+
         <div class="card">
           <div class="card-icon">⏱️</div>
           <h3>Simulados</h3>
           <p>Prepare-se com atividades para testar seus conhecimentos.</p>
         </div>
+
         <div class="card">
           <div class="card-icon">📚</div>
           <h3>Materiais</h3>
           <p>Organize apostilas, resumos e conteúdos de estudo.</p>
         </div>
+
         <div class="card">
           <div class="card-icon">🧠</div>
           <h3>Métodos de estudo</h3>
           <p>Descubra maneiras de organizar sua rotina e revisar conteúdos.</p>
         </div>
+
         <div class="card">
           <div class="card-icon">📅</div>
           <h3>Cronograma</h3>
@@ -575,10 +677,12 @@ th, td {
       Esta versão é apenas uma demonstração visual.
       Não use uma senha real.
     </p>
+
     <p>
       Não tem uma conta?
       <a href="#" onclick="showSignup();return false;">Criar conta</a>
     </p>
+
     <button class="secondary" type="button" onclick="showPublic()">
       Voltar ao início
     </button>
@@ -602,10 +706,12 @@ th, td {
     <p class="auth-note">
       Cadastro demonstrativo: os dados não serão enviados nem salvos.
     </p>
+
     <p>
       Já tem uma conta?
       <a href="#" onclick="showLogin();return false;">Entrar</a>
     </p>
+
     <button class="secondary" type="button" onclick="showPublic()">
       Voltar ao início
     </button>
@@ -616,29 +722,40 @@ th, td {
 
 <section id="studentApp" class="page">
   <div class="container dashboard">
+
     <aside class="sidebar" id="studentSidebar">
       <h3>📚 Rota Aprova</h3>
 
       <button class="active"
-        onclick="studentPage('student-home',this)">🏠 Visão geral</button>
+        onclick="studentPage('student-home')">🏠 Visão geral</button>
+
       <button
-        onclick="studentPage('student-assessment',this)">📋 Avaliação Inicial</button>
+        onclick="studentPage('student-assessment')">📋 Avaliação Inicial</button>
+
       <button
-        onclick="studentPage('student-contests',this)">🎯 Concursos</button>
+        onclick="studentPage('student-contests')">🎯 Concursos</button>
+
       <button
-        onclick="studentPage('student-questions',this)">📝 Questões</button>
+        onclick="studentPage('student-questions')">📝 Questões</button>
+
       <button
-        onclick="studentPage('student-simulations',this)">⏱️ Simulados</button>
+        onclick="studentPage('student-simulations')">⏱️ Simulados</button>
+
       <button
-        onclick="studentPage('student-materials',this)">📚 Materiais</button>
+        onclick="studentPage('student-materials')">📚 Materiais</button>
+
       <button
-        onclick="studentPage('student-methods',this)">🧠 Métodos de estudo</button>
+        onclick="studentPage('student-methods')">🧠 Métodos de estudo</button>
+
       <button
-        onclick="studentPage('student-schedule',this)">📅 Cronograma</button>
+        onclick="studentPage('student-schedule')">📅 Cronograma</button>
+
       <button
-        onclick="studentPage('student-profile',this)">👤 Perfil</button>
+        onclick="studentPage('student-profile')">👤 Perfil</button>
+
       <button
-        onclick="studentPage('student-settings',this)">⚙️ Configurações</button>
+        onclick="studentPage('student-settings')">⚙️ Configurações</button>
+
       <button onclick="showPublic()">↩ Sair do painel</button>
     </aside>
 
@@ -646,43 +763,25 @@ th, td {
       <button class="mobile-menu-button action-btn"
         onclick="toggleStudentMenu()">☰ Menu</button>
 
-      <!-- VISÃO GERAL -->
+      <!-- VISÃO GERAL COM O QUADRO VERMELHO -->
 
       <section id="student-home" class="student-page active">
-        <div class="welcome-card">
-          <h2>Bem-vindo ao Rota Aprova!</h2>
-          <p>Sua jornada de preparação começa aqui.</p>
-          <p>Organize seus estudos, pratique e acompanhe sua evolução.</p>
-        </div>
-
         <div class="assessment-card">
           <h2>Avaliação Inicial</h2>
+
           <p>
             Se autoavalia para testarmos seus conhecimentos e pôr
             em prática o que precisamos melhorar
           </p>
-          <button class="action-btn" onclick="openAssessment()">
+
+          <button class="action-btn" type="button"
+            onclick="openAssessment()">
             Começar avaliação
           </button>
         </div>
 
-        <h2>Seu espaço de estudos</h2>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span>Questões respondidas</span>
-            <strong>0</strong>
-          </div>
-          <div class="stat-card">
-            <span>Simulados realizados</span>
-            <strong>0</strong>
-          </div>
-          <div class="stat-card">
-            <span>Matérias estudadas</span>
-            <strong>0</strong>
-          </div>
-        </div>
-
         <h2>Acesso rápido</h2>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>🎯 Concursos</h3>
@@ -690,12 +789,14 @@ th, td {
             <button class="action-btn"
               onclick="studentPage('student-contests')">Acessar</button>
           </div>
+
           <div class="content-card">
             <h3>📝 Questões</h3>
             <p>Pratique seus conhecimentos com exercícios.</p>
             <button class="action-btn"
               onclick="studentPage('student-questions')">Acessar</button>
           </div>
+
           <div class="content-card">
             <h3>📅 Cronograma</h3>
             <p>Organize sua rotina de preparação.</p>
@@ -710,6 +811,7 @@ th, td {
       <section id="student-contests" class="student-page">
         <h2>Concursos e instituições</h2>
         <p>Explore algumas opções para conhecer melhor.</p>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>Colégio Militar</h3>
@@ -735,6 +837,7 @@ th, td {
       <section id="student-questions" class="student-page">
         <h2>Questões</h2>
         <p>Área destinada à prática de exercícios por matéria.</p>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>Matemática</h3>
@@ -760,6 +863,7 @@ th, td {
       <section id="student-simulations" class="student-page">
         <h2>Simulados</h2>
         <p>Prepare-se com simulados organizados por instituição e matéria.</p>
+
         <div class="content-card">
           <h3>Meus simulados</h3>
           <p>Quando os simulados forem adicionados, eles aparecerão nesta área.</p>
@@ -771,6 +875,7 @@ th, td {
       <section id="student-materials" class="student-page">
         <h2>Materiais de estudo</h2>
         <p>Um espaço para reunir conteúdos e materiais de preparação.</p>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>📄 Apostilas</h3>
@@ -791,6 +896,7 @@ th, td {
 
       <section id="student-methods" class="student-page">
         <h2>Métodos de estudo</h2>
+
         <div class="content-grid">
           <div class="content-card">
             <h3>Estudo ativo</h3>
@@ -811,16 +917,19 @@ th, td {
 
       <section id="student-assessment" class="student-page">
         <h2>Avaliação Inicial</h2>
+
         <p class="notice">
           20 perguntas de nível intermediário do ensino fundamental II.
           Responda sem consultar para identificar o que revisar.
           Não há limite de tempo.
         </p>
+
         <p class="notice">
-          São 4 questões de Matemática, 4 de Português e 3 de cada uma
-          das demais matérias. Esta avaliação curta orienta os estudos;
-          não é uma medida definitiva do seu conhecimento.
+          São 4 questões de Matemática, 4 de Português e 3 de cada
+          uma das demais matérias. Esta avaliação curta orienta
+          os estudos; não é uma medida definitiva do seu conhecimento.
         </p>
+
         <div id="quizArea"></div>
       </section>
 
@@ -828,6 +937,7 @@ th, td {
 
       <section id="student-schedule" class="student-page">
         <h2>Meu cronograma personalizado</h2>
+
         <p class="notice">
           Escolha seus dias e o tempo de estudo por dia.
           O plano reserva mais tempo às matérias com maior proporção
@@ -838,6 +948,7 @@ th, td {
 
         <form class="planner" id="planner"
           onsubmit="generateSchedule(event)" hidden>
+
           <fieldset>
             <legend>Em quais dias você quer estudar?</legend>
             <div class="days" id="dayChoices"></div>
@@ -846,6 +957,7 @@ th, td {
           <label for="dailyMinutes">
             Minutos de estudo por dia selecionado
           </label>
+
           <input id="dailyMinutes" type="number"
             min="15" max="240" step="15" value="60" required>
 
@@ -858,6 +970,7 @@ th, td {
           <button class="action-btn" type="submit">
             Gerar / atualizar cronograma
           </button>
+
           <p id="planError" class="error" role="alert"></p>
         </form>
 
@@ -865,8 +978,8 @@ th, td {
 
         <p class="notice" id="storageNote">
           Resultados e cronograma ficam neste navegador e aparelho.
-          O login ainda é demonstrativo: quem usar este mesmo navegador
-          poderá ver o resultado.
+          O login ainda é demonstrativo: quem usar este mesmo
+          navegador poderá ver o resultado.
         </p>
       </section>
 
@@ -874,6 +987,7 @@ th, td {
 
       <section id="student-profile" class="student-page">
         <h2>Meu perfil</h2>
+
         <div class="content-card">
           <h3>Estudante</h3>
           <p>Esta é uma área demonstrativa do perfil do estudante.</p>
@@ -885,11 +999,14 @@ th, td {
 
       <section id="student-settings" class="student-page">
         <h2>Configurações</h2>
+
         <div class="content-card">
           <h3>Aparência</h3>
           <p>Escolha como deseja visualizar o Rota Aprova.</p>
+
           <label for="themePreference">Tema do site</label>
           <br><br>
+
           <select id="themePreference" class="settings-select"
             onchange="setThemePreference(this.value)">
             <option value="system">Seguir o tema do aparelho</option>
@@ -981,19 +1098,18 @@ function toggleStudentMenu() {
   document.getElementById("studentSidebar").classList.toggle("open");
 }
 
-/* TEMA */
+/* TEMA CLARO E ESCURO */
 
 const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 let themePreference = "system";
 
 try {
   const saved = localStorage.getItem("rotaAprovaTheme");
+
   if (["system", "light", "dark"].includes(saved)) {
     themePreference = saved;
   }
-} catch (error) {
-  /* Funciona mesmo sem armazenamento disponível. */
-}
+} catch (error) {}
 
 function applyTheme() {
   const dark =
@@ -1052,9 +1168,9 @@ document.addEventListener("keydown", event => {
 applyTheme();
 
 /*
-Cada pergunta contém:
+PERGUNTAS:
 matéria, assunto, enunciado, alternativas,
-índice da resposta correta (0 a 3), explicação.
+índice da resposta correta e explicação.
 */
 
 const questions = [
@@ -1280,8 +1396,13 @@ const subjects = [
 ];
 
 const dayNames = [
-  "Segunda", "Terça", "Quarta", "Quinta",
-  "Sexta", "Sábado", "Domingo"
+  "Segunda",
+  "Terça",
+  "Quarta",
+  "Quinta",
+  "Sexta",
+  "Sábado",
+  "Domingo"
 ];
 
 const storageKey = "rotaAssessmentV1";
@@ -1295,7 +1416,7 @@ let assessment = {
   planned: false
 };
 
-/* RECUPERAR PROGRESSO SALVO */
+/* RECUPERAR PROGRESSO */
 
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
@@ -1361,7 +1482,7 @@ function openAssessment() {
   studentPage("student-assessment");
 }
 
-/* CALCULAR ACERTOS E ERROS */
+/* CORREÇÃO */
 
 function results() {
   return subjects.map(subject => {
@@ -1385,7 +1506,7 @@ function results() {
   });
 }
 
-/* MOSTRAR PERGUNTA */
+/* EXIBIR PERGUNTAS */
 
 function renderAssessment() {
   const area = document.getElementById("quizArea");
@@ -1405,8 +1526,11 @@ function renderAssessment() {
         Questão ${i + 1} de 20 · ${q[0]} · ${answered} respondidas
       </p>
 
-      <progress value="${answered}" max="20"
-        aria-label="Perguntas respondidas"></progress>
+      <progress
+        value="${answered}"
+        max="20"
+        aria-label="Perguntas respondidas">
+      </progress>
 
       <fieldset>
         <legend tabindex="-1" id="questionTitle">${q[2]}</legend>
@@ -1428,13 +1552,15 @@ function renderAssessment() {
       <p class="error" id="quizError" role="alert"></p>
 
       <div class="quiz-actions">
-        <button class="btn btn-outline"
+        <button
+          class="btn btn-outline"
           ${i === 0 ? "disabled" : ""}
           onclick="moveQuestion(-1)">
           Anterior
         </button>
 
-        <button class="action-btn"
+        <button
+          class="action-btn"
           onclick="${i === 19 ? "finishAssessment()" : "moveQuestion(1)"}">
           ${i === 19 ? "Concluir avaliação" : "Próxima"}
         </button>
@@ -1497,7 +1623,7 @@ function finishAssessment() {
   document.getElementById("resultTitle").focus();
 }
 
-/* RESULTADO E GABARITO */
+/* RESULTADOS E EXPLICAÇÕES */
 
 function renderResults() {
   const rows = results();
@@ -1537,7 +1663,8 @@ function renderResults() {
         </table>
       </div>
 
-      <button class="action-btn"
+      <button
+        class="action-btn"
         onclick="studentPage('student-schedule')">
         Montar meu cronograma
       </button>
@@ -1548,12 +1675,14 @@ function renderResults() {
         ${questions.map((q, i) => `
           <div class="review-item">
             <strong>${i + 1}. ${q[2]}</strong>
+
             <p>
               ${assessment.answers[i] === q[4] ? "✓ Acertou" : "✗ Errou"}
               · Sua resposta: ${q[3][assessment.answers[i]]}
               <br>
               Resposta correta: ${q[3][q[4]]}
             </p>
+
             <p>${q[5]}</p>
           </div>
         `).join("")}
@@ -1604,8 +1733,11 @@ function renderPlanner() {
   document.getElementById("dayChoices").innerHTML =
     dayNames.map((d, i) => `
       <label>
-        <input type="checkbox" value="${i}"
-          ${assessment.days.includes(i) ? "checked" : ""}>
+        <input
+          type="checkbox"
+          value="${i}"
+          ${assessment.days.includes(i) ? "checked" : ""}
+        >
         ${d}
       </label>
     `).join("");
@@ -1617,14 +1749,13 @@ function renderPlanner() {
 }
 
 /*
-O tempo é dividido em blocos de 15 minutos.
+DISTRIBUIÇÃO DO TEMPO
 
 Cada matéria recebe peso:
 1 + 3 × proporção de erros.
 
-Assim, matérias com mais dificuldade recebem mais tempo.
-A comparação usa proporção, pois algumas matérias têm
-4 perguntas e outras têm 3.
+O tempo é distribuído em blocos de 15 minutos.
+A proporção permite comparar matérias com 3 ou 4 perguntas.
 */
 
 function buildSchedule(rows, days, minutes) {
@@ -1714,6 +1845,8 @@ function generateSchedule(event) {
   displaySchedule();
 }
 
+/* EXIBIR CRONOGRAMA */
+
 function displaySchedule() {
   const rows = results();
 
@@ -1783,7 +1916,7 @@ function displaySchedule() {
   `;
 }
 
-/* DESTACAR O LINK DA SEÇÃO ATUAL */
+/* DESTAQUE DO MENU INICIAL */
 
 function updatePublicNav() {
   let active = "inicio";
