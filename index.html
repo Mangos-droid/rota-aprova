@@ -5625,5 +5625,65 @@ else { loadDB(); render(); }
 
 <!-- FIM DA NOVA INTERFACE -->
 
+   
+<!-- ROTA APROVA — CORREÇÃO DE ESPAÇOS NO USUÁRIO -->
+<script>
+(() => {
+  "use strict";
+
+  // Aceita espaços digitados pelo usuário.
+  // Mantém compatibilidade com o cadastro e o login atuais.
+  const normalizeUsername = value =>
+    String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "_");
+
+  // CORRIGIR CADASTRO
+  const originalSignup = ACTIONS.signup;
+
+  ACTIONS.signup = async (form, event) => {
+    const field = form.querySelector("#username");
+
+    if (!field) {
+      return originalSignup(form, event);
+    }
+
+    const originalValue = field.value;
+
+    field.value = normalizeUsername(originalValue);
+
+    try {
+      return await originalSignup(form, event);
+    } finally {
+      // Se houver outro erro, mantém o texto digitado.
+      if (field.isConnected) {
+        field.value = originalValue;
+      }
+    }
+  };
+
+  // CORRIGIR LOGIN
+  const originalLogin = login;
+
+  login = (username, password) =>
+    originalLogin(
+      normalizeUsername(username),
+      password
+    );
+
+  // ATUALIZAR INSTRUÇÕES DO CAMPO
+  const originalSignupForm = signupForm;
+
+  signupForm = isAdmin =>
+    originalSignupForm(isAdmin).replace(
+      "Letras minúsculas, números, ponto ou traço. Ex.: bia.9ano",
+      "Espaços são aceitos. Ex.: Ana Maria (salvo como ana_maria)."
+    );
+
+})();
+</script>
+<!-- FIM DA CORREÇÃO -->
+
 </body>
 </html>
