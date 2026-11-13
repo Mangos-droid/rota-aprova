@@ -4690,5 +4690,939 @@ if (CLOUD_MODE) { db = freshDB(); cloudBoot().then(render, e => { console.error(
 else { loadDB(); render(); }
 
 </script>
+   
+<!-- =============================================
+     ROTA APROVA — NOVA INTERFACE
+     Cole antes de </body>
+============================================= -->
+
+<style>
+/* CORES ORIGINAIS */
+:root {
+  --bg: #f1f4fa;
+  --surface: #ffffff;
+  --text: #112348;
+  --muted: #5b6681;
+  --line: #dce3f0;
+  --brand: #1d48c9;
+  --brand-ink: #ffffff;
+  --accent: #f5b628;
+  --accent-soft: #fff3cf;
+  --r: 14px;
+  --shadow: 0 5px 18px #0b1d3a10;
+}
+
+/* TELA INTEIRA */
+.app {
+  display: grid;
+  grid-template-columns: 254px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.content {
+  max-width: none;
+  width: 100%;
+  padding: 28px clamp(16px, 3vw, 54px) 56px;
+}
+
+/* MENU LATERAL AZUL-MARINHO */
+.side {
+  background: linear-gradient(
+    160deg,
+    #142f66,
+    #091b3e 58%,
+    #06132e
+  );
+  border-right: 0;
+  color: white;
+  padding: 22px 15px;
+}
+
+.side .brand {
+  color: white;
+  font-size: 1.22rem;
+  padding: 6px 4px 22px;
+  border-bottom: 1px solid #ffffff24;
+}
+
+.brand-mark {
+  background: var(--accent);
+  color: #15254d;
+  border-radius: 10px;
+}
+
+.side .nav {
+  gap: 4px;
+}
+
+.side .nav a {
+  color: #e8efff;
+  font-weight: 650;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.side .nav a:hover {
+  background: #ffffff1b;
+  color: white;
+}
+
+.side .nav a.on {
+  background: var(--accent);
+  color: #142b56;
+  box-shadow: inset 4px 0 0 #ffe29a;
+  font-weight: 800;
+}
+
+.side .nav .sec {
+  color: #9eafe1;
+}
+
+.side .nav details.more {
+  border-color: #ffffff26;
+}
+
+.side .nav details.more summary {
+  color: #c2d2f2;
+}
+
+.side .nav details.more summary:hover {
+  background: #ffffff14;
+}
+
+.side .userbox {
+  background: #ffffff11;
+  border-color: #ffffff2a;
+}
+
+.side .userbox .muted {
+  color: #c3d0e9;
+}
+
+.side .userbox .btn.sec {
+  color: #102753;
+  background: white;
+}
+
+/* CABEÇALHO */
+.top {
+  background: #0b1c3d;
+  border-color: #0b1c3d;
+}
+
+.top .brand {
+  color: white;
+}
+
+.card, .q, .day {
+  border-radius: 15px;
+}
+
+.btn {
+  border-radius: 10px;
+}
+
+/* PÁGINA INICIAL */
+.landing {
+  width: 100%;
+  max-width: 1550px;
+  margin: auto;
+}
+
+.landing h1,
+.landing h2,
+.landing h3 {
+  font-family: var(--font-display);
+}
+
+/* CAPA PRINCIPAL */
+.ra-hero {
+  position: relative;
+  min-height: 530px;
+  border-radius: 22px;
+  overflow: hidden;
+  color: white;
+  isolation: isolate;
+  background: #081b3c;
+  box-shadow: 0 20px 44px #0a1c3840;
+}
+
+.ra-hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      #071a3a 0%,
+      #071a3add 37%,
+      #071a3a4d 100%
+    ),
+    url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1800&q=85")
+    center / cover no-repeat;
+}
+
+.ra-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    #ffe4a0,
+    transparent
+  );
+}
+
+.ra-hero-copy {
+  padding: clamp(30px, 5vw, 77px);
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+  min-height: 530px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ra-kicker {
+  color: #f6d481;
+  font-weight: 800;
+  letter-spacing: .14em;
+  font-size: .74rem;
+  text-transform: uppercase;
+}
+
+.ra-hero h1 {
+  font-size: clamp(3.6rem, 7vw, 7rem);
+  line-height: .9;
+  letter-spacing: -.065em;
+  margin: 23px 0;
+  color: white;
+}
+
+.ra-hero h1 span {
+  display: block;
+}
+
+.ra-hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.ra-hero .ra-slogan {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 12px;
+  color: white;
+}
+
+.ra-hero .ra-desc {
+  color: #d8e3f4;
+  max-width: 520px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 25px;
+}
+
+.ra-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ra-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #112750;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 800;
+  padding: 13px 20px;
+}
+
+.ra-button:hover {
+  filter: brightness(1.07);
+}
+
+.ra-button-alt {
+  border: 1px solid #ffffff95;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 12px 18px;
+  background: #ffffff13;
+}
+
+/* INDICADORES */
+.ra-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 16px;
+  padding: 22px 10px;
+  margin: 18px 0 46px;
+  box-shadow: var(--shadow);
+}
+
+.ra-stat {
+  padding: 5px 20px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+
+.ra-stat:last-child {
+  border: 0;
+}
+
+.ra-stat strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  line-height: 1.2;
+  color: #12284f;
+}
+
+.ra-stat span {
+  color: #69768c;
+  font-size: .84rem;
+  margin-top: 8px;
+}
+
+/* SEÇÃO SOBRE O SITE */
+.ra-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #08172f;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 65px;
+  min-height: 400px;
+}
+
+.ra-story-image {
+  min-height: 400px;
+  background:
+    url("https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=85")
+    center / cover;
+}
+
+.ra-story-text {
+  padding: clamp(26px, 4vw, 65px);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ra-story h2 {
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1.15;
+  margin: 15px 0 18px;
+  color: white;
+}
+
+.ra-story h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.ra-story p {
+  color: #d8e1ef;
+  font-size: 1rem;
+}
+
+.ra-story a {
+  color: #f7cc66;
+  font-weight: 800;
+  margin-top: 16px;
+}
+
+/* CARDS DE FUNCIONALIDADES */
+.ra-section-top {
+  margin-bottom: 23px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ra-section-top h2 {
+  font-size: clamp(1.9rem, 3vw, 3rem);
+  line-height: 1.15;
+  margin: 10px 0 0;
+  color: #0e244c;
+}
+
+.ra-section-top h2 em {
+  font-style: normal;
+  color: var(--brand);
+}
+
+.ra-section-top > p {
+  max-width: 300px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.ra-kicker-dark {
+  color: #966800;
+}
+
+.ra-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ra-feature {
+  display: flex;
+  flex-direction: column;
+  min-height: 215px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  text-decoration: none;
+  padding: 24px;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform .18s, border-color .18s;
+}
+
+.ra-feature:hover {
+  transform: translateY(-3px);
+  border-color: #a4b8e8;
+}
+
+.ra-feature-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: #eef2ff;
+  border-radius: 12px;
+  font-size: 1.6rem;
+  color: var(--brand);
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.ra-feature h3 {
+  font-size: 1.18rem;
+  margin: 0 0 9px;
+  color: #102448;
+}
+
+.ra-feature p {
+  color: var(--muted);
+  font-size: .92rem;
+  margin-bottom: 15px;
+}
+
+.ra-feature b {
+  margin-top: auto;
+  text-align: right;
+  color: var(--brand);
+}
+
+/* MATÉRIAS */
+.ra-subjects {
+  margin: 64px 0;
+}
+
+.ra-subject-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ra-subject {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 15px;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.ra-subject:hover {
+  border-color: var(--accent);
+  background: #fffaf0;
+}
+
+.ra-subject .ico {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  background: #fff0c7;
+  border-radius: 11px;
+  color: #19325e;
+  flex: none;
+  font-size: 1.25rem;
+}
+
+/* CHAMADA FINAL */
+.ra-finish {
+  background: linear-gradient(120deg, #13397b, #081b3f);
+  color: white;
+  border-radius: 19px;
+  padding: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.ra-finish h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: white;
+  margin: 13px 0;
+}
+
+.ra-finish p {
+  color: #d1dff2;
+  max-width: 520px;
+}
+
+.ra-finish .ra-button {
+  flex: none;
+}
+
+.ra-note {
+  color: var(--muted);
+  font-size: .85rem;
+  margin: 17px 0 0;
+}
+
+/* ADAPTAÇÃO PARA TABLETS */
+@media (max-width: 1150px) {
+  .ra-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ra-subject-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ADAPTAÇÃO PARA CELULAR */
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    position: fixed;
+    inset: 0 30% 0 0;
+    max-width: 300px;
+    z-index: 40;
+    transform: translateX(-105%);
+    height: 100%;
+    transition: transform .2s;
+  }
+
+  .side.open {
+    transform: none;
+  }
+
+  .top {
+    display: flex;
+  }
+
+  .content {
+    padding: 18px 16px 48px;
+  }
+}
+
+@media (max-width: 650px) {
+  .ra-hero {
+    min-height: 490px;
+    border-radius: 15px;
+  }
+
+  .ra-hero-copy {
+    padding: 25px 25px 55px;
+    min-height: 490px;
+    justify-content: flex-end;
+  }
+
+  .ra-hero h1 {
+    font-size: clamp(3.6rem, 16vw, 5.5rem);
+  }
+
+  .ra-hero-photo {
+    background:
+      linear-gradient(90deg, #071a3aef, #071a3a80),
+      url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85")
+      center / cover;
+  }
+
+  .ra-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px 0;
+  }
+
+  .ra-stat:nth-child(2) {
+    border: 0;
+  }
+
+  .ra-stat:nth-child(n+3) {
+    border-top: 1px solid var(--line);
+    padding-top: 17px;
+  }
+
+  .ra-story {
+    grid-template-columns: 1fr;
+  }
+
+  .ra-story-image {
+    min-height: 260px;
+  }
+
+  .ra-story-text {
+    padding: 30px 24px;
+  }
+
+  .ra-section-top {
+    display: block;
+  }
+
+  .ra-grid,
+  .ra-subject-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ra-subjects {
+    margin: 42px 0;
+  }
+
+  .ra-finish {
+    display: block;
+    padding: 27px;
+  }
+
+  .ra-finish .ra-button {
+    display: inline-block;
+    margin-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ra-feature {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+/* INTEGRAÇÃO COM O SITE ORIGINAL */
+(() => {
+  document.title = "Rota Aprova";
+
+  const oldShell = shell;
+
+  shell = function (content, routeName) {
+    return oldShell(content, routeName)
+      .replaceAll("Trilha Aprova", "Rota Aprova");
+  };
+
+  /* NOVA PÁGINA INICIAL */
+  route("inicio", () => {
+    const user = currentUser();
+    const logged = !!user;
+    const homeHref = !user ? "entrar" :
+      user.role === "admin" ? "admin" :
+      user.role === "professor" ? "professor" : "painel";
+
+    const questions = allQuestions().length;
+    const institutions = INSTITUICOES.length;
+    const subjects = MATERIAS.length;
+
+    const sign = logged
+      ? `<a class="ra-button" href="#${homeHref}">
+           Ir para meu painel →
+         </a>`
+      : `<a class="ra-button" href="#cadastro">
+           Começar gratuitamente →
+         </a>
+         <a class="ra-button-alt" href="#entrar">
+           Já tenho conta
+         </a>`;
+
+    const features = [
+      [
+        "◎", "Autoavaliação",
+        "Descubra seu nível e os conteúdos que precisam de reforço.",
+        "diagnostico"
+      ],
+      [
+        "▦", "Meu cronograma",
+        "Organize sua rotina com um plano personalizado de estudos.",
+        "cronograma"
+      ],
+      [
+        "✎", "Questões comentadas",
+        "Treine com questões de provas reais e confira a resolução.",
+        "questoes"
+      ],
+      [
+        "◷", "Simulados",
+        "Pratique com tempo de prova e analise seus resultados.",
+        "simulados"
+      ],
+      [
+        "▤", "Matérias e videoaulas",
+        "Revise conceitos com aulas e exercícios.",
+        "materias"
+      ],
+      [
+        "▥", "Minha evolução",
+        "Acompanhe seus acertos, dificuldades e progresso.",
+        "progresso"
+      ]
+    ];
+
+    return `
+    <div class="landing">
+
+      <!-- CAPA -->
+      <section class="ra-hero"
+        aria-label="Apresentação do Rota Aprova">
+
+        <div class="ra-hero-photo"
+          role="img"
+          aria-label="Mesa de estudos com material escolar">
+        </div>
+
+        <div class="ra-hero-copy">
+
+          <span class="ra-kicker">
+            ✦ Seu caminho para a aprovação
+          </span>
+
+          <h1>
+            <span>Rota</span>
+            <span>Aprova<em>.</em></span>
+          </h1>
+
+          <p class="ra-slogan">
+            Disciplina. Foco. Estudo.
+          </p>
+
+          <p class="ra-desc">
+            Aulas, exercícios, provas e um cronograma
+            pensado para você. Tudo em um só lugar,
+            para estudar com direção.
+          </p>
+
+          <div class="ra-actions">
+            ${sign}
+          </div>
+
+        </div>
+      </section>
+
+      <!-- INDICADORES -->
+      <div class="ra-stats"
+        aria-label="Recursos da plataforma">
+
+        <div class="ra-stat">
+          <strong>${questions}</strong>
+          <span>questões disponíveis</span>
+        </div>
+
+        <div class="ra-stat">
+          <strong>${subjects}</strong>
+          <span>matérias para estudar</span>
+        </div>
+
+        <div class="ra-stat">
+          <strong>${institutions}</strong>
+          <span>instituições acompanhadas</span>
+        </div>
+
+        <div class="ra-stat">
+          <strong>Gratuito</strong>
+          <span>acesso pelo navegador</span>
+        </div>
+
+      </div>
+
+      <!-- APRESENTAÇÃO -->
+      <section class="ra-story">
+
+        <div class="ra-story-image"
+          role="img"
+          aria-label="Alunos estudando com livros e notebooks">
+        </div>
+
+        <div class="ra-story-text">
+
+          <span class="ra-kicker">
+            01 / A sua jornada
+          </span>
+
+          <h2>
+            Uma rota clara para chegar
+            <em>mais longe.</em>
+          </h2>
+
+          <p>
+            Estudar para um concurso fica mais fácil
+            quando você sabe o próximo passo.
+            Descubra suas dificuldades, organize a
+            semana e acompanhe cada conquista.
+          </p>
+
+          <p>
+            Reforce as matérias do 8º e 9º ano e
+            prepare-se para escolas federais e
+            concursos de admissão.
+          </p>
+
+          <a href="#concursos">
+            Conhecer as instituições ↗
+          </a>
+
+        </div>
+      </section>
+
+      <!-- RECURSOS -->
+      <section aria-labelledby="ra-recursos">
+
+        <div class="ra-section-top">
+
+          <div>
+            <span class="ra-kicker ra-kicker-dark">
+              02 / Ferramentas de estudo
+            </span>
+
+            <h2 id="ra-recursos">
+              Tudo para você <em>evoluir.</em>
+            </h2>
+          </div>
+
+          <p>
+            Organização, prática e acompanhamento
+            na mesma plataforma.
+          </p>
+
+        </div>
+
+        <div class="ra-grid">
+
+          ${features.map(([icon, title, desc, href]) => `
+            <a class="ra-feature" href="#${href}">
+              <span class="ra-feature-icon"
+                aria-hidden="true">${icon}</span>
+              <h3>${title}</h3>
+              <p>${desc}</p>
+              <b aria-hidden="true">↗</b>
+            </a>
+          `).join("")}
+
+        </div>
+      </section>
+
+      <!-- MATÉRIAS -->
+      <section class="ra-subjects"
+        aria-labelledby="ra-materias">
+
+        <div class="ra-section-top">
+          <div>
+            <span class="ra-kicker ra-kicker-dark">
+              03 / Comece agora
+            </span>
+
+            <h2 id="ra-materias">
+              Seu próximo passo
+              <em>começa aqui.</em>
+            </h2>
+          </div>
+        </div>
+
+        <div class="ra-subject-grid">
+
+          <a href="#materias" class="ra-subject">
+            <span class="ico">∑</span>
+            Matemática
+          </a>
+
+          <a href="#materias" class="ra-subject">
+            <span class="ico">Aa</span>
+            Português
+          </a>
+
+          <a href="#materias" class="ra-subject">
+            <span class="ico">◉</span>
+            Ciências
+          </a>
+
+          <a href="#simulados" class="ra-subject">
+            <span class="ico">◷</span>
+            Simulados
+          </a>
+
+        </div>
+      </section>
+
+      <!-- CHAMADA FINAL -->
+      <section class="ra-finish">
+
+        <div>
+          <span class="ra-kicker">
+            Seu futuro começa com uma decisão
+          </span>
+
+          <h2>
+            Seu objetivo merece um plano.
+          </h2>
+
+          <p>
+            Crie uma conta, descubra seu nível
+            e organize uma rotina de estudos
+            com mais foco.
+          </p>
+        </div>
+
+        ${logged
+          ? `<a class="ra-button" href="#${homeHref}">
+               Acessar painel →
+             </a>`
+          : `<a class="ra-button" href="#cadastro">
+               Criar conta gratuita →
+             </a>`}
+
+      </section>
+
+      ${typeof hasAdmin === "function" && !hasAdmin()
+        ? `<p class="ra-note">
+             Primeiro acesso neste aparelho?
+             <a href="#cadastro-admin">
+               Criar conta de administrador
+             </a>.
+           </p>`
+        : ""}
+
+    </div>`;
+  }, false);
+
+  render();
+})();
+</script>
+
+<!-- FIM DA NOVA INTERFACE -->
+
 </body>
 </html>
