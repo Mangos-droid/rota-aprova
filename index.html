@@ -34,6 +34,7 @@
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       background: var(--bg);
@@ -50,6 +51,7 @@
     button, select { cursor: pointer; }
     button:disabled { opacity: .55; cursor: default; }
     :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
     .wrap { width: min(1180px, 94%); margin: auto; }
     .muted { color: var(--muted); }
     .small { font-size: 14px; }
@@ -71,6 +73,7 @@
     }
 
     .topbar { min-height: 66px; justify-content: space-between; }
+
     .brand {
       border: 0;
       background: transparent;
@@ -81,6 +84,7 @@
     }
 
     .brand span, .hero h1 span { color: var(--primary); }
+
     .btn, .secondary {
       border: 1px solid transparent;
       border-radius: 9px;
@@ -90,11 +94,7 @@
 
     .btn { color: white; background: #185bb5; }
     .btn:hover { background: #104b99; }
-    .secondary {
-      color: var(--text);
-      background: var(--card);
-      border-color: var(--line);
-    }
+    .secondary { color: var(--text); background: var(--card); border-color: var(--line); }
     .secondary:hover { background: var(--soft); }
 
     .hero {
@@ -113,6 +113,7 @@
     }
 
     .hero p { max-width: 640px; }
+
     .eyebrow {
       color: var(--primary);
       font-size: 13px;
@@ -120,6 +121,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
     }
+
     .hero-note {
       background: #173c50;
       color: white;
@@ -127,6 +129,7 @@
       padding: 30px;
       border-left: 8px solid #65ae98;
     }
+
     .hero-note ol { margin: 12px 0 0; padding-left: 22px; }
     .hero-note li { padding: 5px 0; }
 
@@ -138,12 +141,15 @@
       box-shadow: var(--shadow);
       min-width: 0;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
       gap: 15px;
     }
+
     .resources { padding-bottom: 50px; }
+
     footer {
       padding: 22px 0;
       border-top: 1px solid var(--line);
@@ -160,6 +166,7 @@
     }
 
     .sidebar { position: sticky; top: 82px; padding: 12px; }
+
     .sidebar button {
       display: block;
       width: 100%;
@@ -170,10 +177,12 @@
       border: 0;
       border-radius: 8px;
     }
+
     .sidebar button[aria-current="page"], .sidebar button:hover {
       color: var(--primary);
       background: var(--soft);
     }
+
     .sidebar button[aria-current="page"] { font-weight: 700; }
     #mobileMenu { display: none; }
 
@@ -183,9 +192,10 @@
       background: #173e65;
       color: white;
     }
-    .banner p { color: #e1edfa; }
 
+    .banner p { color: #e1edfa; }
     label.field { display: grid; gap: 5px; font-weight: 700; }
+
     .fields {
       display: flex;
       gap: 14px;
@@ -205,6 +215,7 @@
 
     fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
     legend { font-size: 19px; font-weight: 700; padding: 0 0 10px; }
+
     .choice {
       display: flex;
       align-items: baseline;
@@ -215,10 +226,8 @@
       margin: 8px 0;
       cursor: pointer;
     }
-    .choice:has(input:checked) {
-      background: var(--soft);
-      border-color: var(--primary);
-    }
+
+    .choice:has(input:checked) { background: var(--soft); border-color: var(--primary); }
     input[type="radio"], input[type="checkbox"] { accent-color: var(--primary); }
     .days { display: flex; flex-wrap: wrap; gap: 10px 18px; }
     .result { margin-top: 15px; padding: 12px; background: var(--soft); border-radius: 8px; }
@@ -235,8 +244,10 @@
       gap: 12px;
       margin: 16px 0;
     }
+
     .answer-grid small { font-size: 13px; color: var(--primary); }
     .paper-reader { border: 0; width: 100%; height: 66vh; margin-top: 12px; }
+    .question-nav { margin-top: 16px; }
 
     dialog {
       width: min(420px, 92vw);
@@ -246,6 +257,7 @@
       background: var(--card);
       color: var(--text);
     }
+
     dialog::backdrop { background: rgba(9,18,34,.55); }
 
     @media (max-width: 760px) {
@@ -259,6 +271,7 @@
       .topbar .actions { gap: 5px; }
       .topbar .btn, .topbar .secondary { padding: 8px 10px; }
     }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
@@ -353,25 +366,25 @@
     const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
 
     function element(tag, text, className) {
-      const el = document.createElement(tag);
-      if (text !== undefined) el.textContent = text;
-      if (className) el.className = className;
-      return el;
+      const node = document.createElement(tag);
+      if (text !== undefined) node.textContent = text;
+      if (className) node.className = className;
+      return node;
     }
 
     function button(text, action, secondary = false) {
-      const el = element("button", text, secondary ? "secondary" : "btn");
-      el.type = "button";
-      el.onclick = action;
-      return el;
+      const node = element("button", text, secondary ? "secondary" : "btn");
+      node.type = "button";
+      node.onclick = action;
+      return node;
     }
 
     function link(text, url) {
-      const el = element("a", text);
-      el.href = url;
-      el.target = "_blank";
-      el.rel = "noopener noreferrer";
-      return el;
+      const node = element("a", text);
+      node.href = url;
+      node.target = "_blank";
+      node.rel = "noopener noreferrer";
+      return node;
     }
 
     function card(heading, description) {
@@ -400,8 +413,8 @@
 
     function read(key, fallback) {
       try {
-        const text = localStorage.getItem(key);
-        return text === null ? fallback : JSON.parse(text);
+        const value = localStorage.getItem(key);
+        return value === null ? fallback : JSON.parse(value);
       } catch {
         return fallback;
       }
@@ -417,198 +430,295 @@
     }
 
     /*
-      Estrutura de cada questão:
-      [matéria, assunto, enunciado, alternativas, índice correto, comentário]
-      O índice da primeira alternativa é zero.
+      Estrutura usada em todas as atividades:
+      [matéria, assunto, enunciado, alternativas, índice correto, explicação].
+      O índice da primeira alternativa é 0.
     */
 
     const diagnostic = [
       ["Matemática","Porcentagem","Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o preço final?",["R$ 136","R$ 144","R$ 150"],0,"15% de 160 são 24. Subtraindo o desconto, 160 − 24 = 136."],
       ["Matemática","Equações","Qual é o valor de x em 3(x − 2) + 5 = 20?",["5","7","9"],1,"3x − 6 + 5 = 20. Logo, 3x = 21 e x = 7."],
       ["Matemática","Frações","Dois quintos de uma turma de 30 alunos praticam natação. Quantos são?",["10","12","15"],1,"Um quinto de 30 é 6. Dois quintos correspondem a 12."],
-      ["Matemática","Área de triângulos","Um triângulo tem base de 12 cm e altura de 7 cm. Qual é a área?",["84 cm²","19 cm²","42 cm²"],2,"A área é base × altura ÷ 2. Assim, 12 × 7 ÷ 2 = 42 cm²."],
-      ["Português","Conectivos","Em “Embora chovesse, saímos”, que ideia a palavra “embora” expressa?",["Causa","Concessão","Finalidade"],1,"A chuva poderia dificultar a saída, mas não a impediu. Essa relação é de concessão."],
-      ["Português","Sujeito","Qual é o sujeito de “Chegaram cedo os estudantes”?",["Cedo","Chegaram","Os estudantes"],2,"Pergunte quem chegou. A resposta é “os estudantes”."],
-      ["Português","Coesão","Em “Ana comprou a revista e a leu”, o segundo “a” retoma qual palavra?",["Ana","Revista","Comprou"],1,"O pronome substitui “a revista”."],
-      ["Português","Inferência","Ao ouvir um trovão, Bia recolheu as roupas do varal. O que se pode inferir?",["Ela esperava chuva.","Ela já tinha lavado o varal.","O dia estava quente."],0,"O trovão e a retirada das roupas sugerem que Bia quis evitar que elas se molhassem."],
-      ["Ciências","Fotossíntese","Qual gás é consumido pelas plantas durante a fotossíntese?",["Oxigênio","Hélio","Gás carbônico"],2,"A planta usa água, gás carbônico e energia luminosa para produzir matéria orgânica."],
+      ["Matemática","Área de triângulos","Um triângulo tem base de 12 cm e altura de 7 cm. Qual é a área?",["84 cm²","19 cm²","42 cm²"],2,"A área é 12 × 7 ÷ 2 = 42 cm²."],
+      ["Português","Conectivos","Em “Embora chovesse, saímos”, que ideia a palavra “embora” expressa?",["Causa","Concessão","Finalidade"],1,"A chuva poderia dificultar a saída, mas não a impediu."],
+      ["Português","Sujeito","Qual é o sujeito de “Chegaram cedo os estudantes”?",["Cedo","Chegaram","Os estudantes"],2,"Quem chegou? Os estudantes."],
+      ["Português","Coesão","Em “Ana comprou a revista e a leu”, o segundo “a” retoma qual palavra?",["Ana","Revista","Comprou"],1,"O pronome substitui a revista."],
+      ["Português","Inferência","Ao ouvir um trovão, Bia recolheu as roupas do varal. O que se pode inferir?",["Ela esperava chuva.","Ela já tinha lavado o varal.","O dia estava quente."],0,"Bia quis evitar que as roupas se molhassem."],
+      ["Ciências","Fotossíntese","Qual gás é consumido pelas plantas durante a fotossíntese?",["Oxigênio","Hélio","Gás carbônico"],2,"A planta utiliza água, gás carbônico e energia luminosa."],
       ["Ciências","Sistema circulatório","Qual órgão impulsiona o sangue pelo corpo?",["Pulmão","Coração","Estômago"],1,"As contrações do coração movimentam o sangue pelos vasos."],
       ["Ciências","Mudanças de estado","Como se chama a passagem do estado gasoso para o líquido?",["Fusão","Condensação","Solidificação"],1,"Na condensação, o vapor passa ao estado líquido."],
-      ["Geografia","Escala cartográfica","Na escala 1:100.000, 1 cm no mapa representa qual distância real?",["1 km","10 km","100 km"],0,"100.000 cm correspondem a 1.000 metros, ou 1 km."],
-      ["Geografia","Tempo e clima","Qual frase descreve o tempo atmosférico?",["Os verões costumam ser secos.","A região tem clima tropical.","Está chovendo agora."],2,"O tempo descreve as condições de um momento. O clima considera padrões de longo prazo."],
-      ["Geografia","Urbanização","O que tende a ocorrer quando o asfalto substitui o solo permeável?",["Mais infiltração","Mais escoamento superficial","Menos alagamentos em todos os casos"],1,"O asfalto dificulta a infiltração e aumenta o escoamento pela superfície."],
+      ["Geografia","Escala cartográfica","Na escala 1:100.000, 1 cm no mapa representa qual distância real?",["1 km","10 km","100 km"],0,"100.000 cm equivalem a 1 km."],
+      ["Geografia","Tempo e clima","Qual frase descreve o tempo atmosférico?",["Os verões costumam ser secos.","A região tem clima tropical.","Está chovendo agora."],2,"O tempo descreve as condições de um momento."],
+      ["Geografia","Urbanização","O que tende a ocorrer quando o asfalto substitui o solo permeável?",["Mais infiltração","Mais escoamento superficial","Menos alagamentos em todos os casos"],1,"O asfalto dificulta a infiltração e aumenta o escoamento."],
       ["História","Revolução Industrial","Qual mudança marcou a Revolução Industrial?",["Expansão das fábricas mecanizadas","Fim das cidades","Fim imediato do trabalho infantil"],0,"As máquinas e o sistema fabril transformaram a produção."],
-      ["História","Independência do Brasil","Qual instituição permaneceu no Brasil após 1822?",["Administração colonial portuguesa","Escravidão","República presidencialista"],1,"A independência ocorreu em 1822. A abolição legal da escravidão ocorreu em 1888."],
-      ["História","Iluminismo","Qual ideia se relaciona ao pensamento iluminista?",["Defesa do poder ilimitado dos reis","Proibição de pesquisas","Valorização da razão"],2,"Pensadores iluministas valorizaram a razão e questionaram o absolutismo."],
-      ["Inglês","Simple past","Complete: Yesterday, Julia ___ to school.",["go","went","goes"],1,"Yesterday indica passado. O passado simples de go é went."],
-      ["Inglês","Leitura","O aviso “Keep the door closed” pede para:",["Manter a porta fechada","Abrir a janela","Trancar o portão"],0,"Keep significa manter. The door closed significa a porta fechada."],
-      ["Inglês","Comparativos","Complete: This book is ___ than that one.",["cheapest","cheap","cheaper"],2,"A comparação com than pede o comparativo cheaper."]
+      ["História","Independência do Brasil","Qual instituição permaneceu no Brasil após 1822?",["Administração colonial portuguesa","Escravidão","República presidencialista"],1,"A independência ocorreu em 1822 e a abolição legal em 1888."],
+      ["História","Iluminismo","Qual ideia se relaciona ao pensamento iluminista?",["Defesa do poder ilimitado dos reis","Proibição de pesquisas","Valorização da razão"],2,"Os iluministas valorizaram a razão e questionaram o absolutismo."],
+      ["Inglês","Simple past","Complete: Yesterday, Julia ___ to school.",["go","went","goes"],1,"O passado simples de go é went."],
+      ["Inglês","Leitura","O aviso “Keep the door closed” pede para:",["Manter a porta fechada","Abrir a janela","Trancar o portão"],0,"Keep significa manter; closed significa fechada."],
+      ["Inglês","Comparativos","Complete: This book is ___ than that one.",["cheapest","cheap","cheaper"],2,"A comparação pede o comparativo cheaper."]
     ];
 
     const extraDiagnostic = [
-      ["Matemática","Razão","Uma receita usa 2 xícaras de arroz para 3 de água. Para 6 de arroz, quantas de água?",["6","9","12"],1,"A quantidade de arroz triplicou. Triplique também a água: 3 × 3 = 9."],
-      ["Matemática","Área de retângulos","Uma quadra mede 18 m por 9 m. Qual é a área?",["54 m²","81 m²","162 m²"],2,"Multiplique comprimento e largura: 18 × 9 = 162."],
+      ["Matemática","Razão","Uma receita usa 2 xícaras de arroz para 3 de água. Para 6 de arroz, quantas de água?",["6","9","12"],1,"A quantidade triplicou: 3 × 3 = 9."],
+      ["Matemática","Área de retângulos","Uma quadra retangular mede 18 m por 9 m. Qual é a área?",["54 m²","81 m²","162 m²"],2,"18 × 9 = 162 m²."],
       ["Português","Pontuação","Em qual frase a vírgula separa um vocativo?",["Pedro, feche a janela.","Ao amanhecer, saímos.","Li cartas, livros e jornais."],0,"Pedro é a pessoa a quem o pedido é dirigido."],
-      ["Português","Concordância","Qual frase tem concordância adequada?",["Fazem dois anos que estudo.","As meninas chegaram cedo.","Houveram muitos avisos."],1,"O sujeito plural “as meninas” concorda com “chegaram”."],
+      ["Português","Concordância","Qual frase tem concordância adequada?",["Fazem dois anos que estudo.","As meninas chegaram cedo.","Houveram muitos avisos."],1,"O sujeito plural concorda com chegaram."],
       ["Ciências","Cadeia alimentar","Ao comer sementes, um pássaro ocupa qual papel nessa relação?",["Produtor","Decompositor","Consumidor primário"],2,"Ele consome matéria orgânica produzida por uma planta."],
       ["Ciências","Energia","Qual transformação movimenta as pás de um ventilador elétrico?",["Elétrica em cinética","Térmica em química","Sonora em elétrica"],0,"O motor usa eletricidade para gerar movimento."],
-      ["Geografia","Orientação","Num mapa com o norte no alto, qual direção fica à direita?",["Oeste","Leste","Sul"],1,"Nessa orientação, o leste fica à direita."],
-      ["Geografia","Migração","Quem se muda de uma região do país para morar em outra realiza qual deslocamento?",["Migração interna","Migração internacional","Deslocamento pendular diário"],0,"A mudança de residência ocorre dentro do mesmo país."],
-      ["História","Fontes históricas","Que fonte permite estudar os preços de um mercado do século XIX?",["Um anúncio publicado hoje","Um livro de contas da época","Um romance atual sem fontes"],1,"O livro de contas registra transações e preços daquele período."],
+      ["Geografia","Orientação","Num mapa com o norte no alto, qual direção fica à direita?",["Oeste","Leste","Sul"],1,"O leste fica à direita nessa orientação."],
+      ["Geografia","Migração","Quem muda de residência entre duas regiões do mesmo país realiza:",["Migração interna","Migração internacional","Deslocamento pendular diário"],0,"A mudança ocorre dentro do mesmo país."],
+      ["História","Fontes históricas","Qual fonte registra preços de um mercado do século XIX?",["Um anúncio publicado hoje","Um livro de contas da época","Um romance atual sem fontes"],1,"O livro de contas documenta transações daquele período."],
       ["História","República","Em qual ano foi proclamada a República no Brasil?",["1822","1888","1889"],2,"A proclamação ocorreu em 15 de novembro de 1889."],
-      ["Inglês","Simple present","Complete: My sister ___ music every evening.",["listen","listens to","listening"],1,"Com my sister, usamos listens. A expressão é listen to music."],
-      ["Inglês","Leitura","O aviso “No food in the library” indica que:",["A biblioteca vende comida.","Alimentos são proibidos na biblioteca.","A biblioteca está fechada."],1,"No food indica uma restrição à presença de alimentos."]
+      ["Inglês","Simple present","Complete: My sister ___ music every evening.",["listen","listens to","listening"],1,"Na terceira pessoa do singular, usamos listens to."],
+      ["Inglês","Leitura","O aviso “No food in the library” indica que:",["A biblioteca vende comida.","Alimentos são proibidos na biblioteca.","A biblioteca está fechada."],1,"O aviso restringe alimentos naquele espaço."]
     ];
 
     const practice = [
-      ["Matemática","Proporção","Três cadernos custam R$ 24. Quanto custam cinco?",["R$ 32","R$ 40","R$ 48"],1,"Um caderno custa 24 ÷ 3 = 8 reais. Cinco custam 40 reais."],
-      ["Matemática","Geometria","Um quadrado tem perímetro de 36 cm. Qual é sua área?",["9 cm²","36 cm²","81 cm²"],2,"Cada lado mede 36 ÷ 4 = 9 cm. A área é 81 cm²."],
-      ["Português","Coesão","Em “Luísa pegou o livro e o abriu”, o pronome antes de “abriu” substitui:",["Luísa","O livro","A ação de pegar"],1,"A oração equivale a “Luísa abriu o livro”."],
-      ["Português","Conjunções","Em “Estudei, portanto consegui resolver a questão”, o termo “portanto” indica:",["Conclusão","Condição","Oposição"],0,"A segunda oração apresenta uma conclusão decorrente da primeira."],
+      ["Matemática","Proporção","Três cadernos custam R$ 24. Quanto custam cinco?",["R$ 32","R$ 40","R$ 48"],1,"Um custa R$ 8. Cinco custam R$ 40."],
+      ["Matemática","Geometria","Um quadrado tem perímetro de 36 cm. Qual é sua área?",["9 cm²","36 cm²","81 cm²"],2,"O lado mede 9 cm. A área é 9 × 9."],
+      ["Português","Coesão","Em “Luísa pegou o livro e o abriu”, o pronome antes de abriu substitui:",["Luísa","O livro","A ação de pegar"],1,"Luísa abriu o livro."],
+      ["Português","Conjunções","Em “Estudei, portanto consegui resolver a questão”, portanto indica:",["Conclusão","Condição","Oposição"],0,"A segunda oração apresenta uma conclusão."],
       ["Ciências","Ecologia","Qual é o produtor na cadeia capim → gafanhoto → sapo?",["Sapo","Gafanhoto","Capim"],2,"O capim produz matéria orgânica por fotossíntese."],
       ["Ciências","Misturas","Como separar areia da água usando um filtro de papel?",["Destilação","Filtração","Fusão"],1,"O filtro retém a areia e permite a passagem da água."],
-      ["Geografia","Escala","Em um mapa de escala 1:100.000, dois pontos estão a 3 cm. Qual é a distância real?",["3 km","30 km","300 km"],0,"Cada centímetro representa 1 km. Logo, 3 cm representam 3 km."],
-      ["Geografia","População","Uma região tem 12.000 habitantes em 300 km². Qual é a densidade demográfica?",["4 hab./km²","40 hab./km²","400 hab./km²"],1,"12.000 ÷ 300 = 40 hab./km²."],
-      ["História","Fontes históricas","Qual fonte traz um relato direto de uma operária de 1900?",["Uma novela atual","Um livro didático atual","Uma carta escrita por ela em 1900"],2,"A carta registra o ponto de vista da operária na época estudada."],
+      ["Geografia","Escala","Na escala 1:100.000, a que distância real correspondem 3 cm?",["3 km","30 km","300 km"],0,"Cada centímetro representa 1 km."],
+      ["Geografia","População","Qual a densidade de uma região com 12.000 habitantes em 300 km²?",["4 hab./km²","40 hab./km²","400 hab./km²"],1,"12.000 ÷ 300 = 40."],
+      ["História","Fontes históricas","Qual fonte traz um relato direto de uma operária de 1900?",["Uma novela atual","Um livro didático atual","Uma carta escrita por ela em 1900"],2,"A carta registra o ponto de vista da operária na época."],
       ["História","Brasil Império","Qual mudança ocorreu com a Lei Áurea?",["A abolição legal da escravidão","A proclamação da República","A independência do Brasil"],0,"A Lei Áurea aboliu legalmente a escravidão em 1888."],
-      ["Inglês","Simple present","Complete: She ___ English every day.",["study","studies","studying"],1,"Com she, o verbo study passa a studies."],
+      ["Inglês","Simple present","Complete: She ___ English every day.",["study","studies","studying"],1,"Com she, study passa a studies."],
       ["Inglês","Leitura","O aviso “Return the books by Friday” pede para:",["Comprar livros na sexta","Ler apenas na sexta","Devolver os livros até sexta"],2,"Return significa devolver. By Friday estabelece o prazo."]
     ];
 
-    /* As 30 questões dos cinco PDFs enviados. */
+    /* Os cinco cadernos enviados. O primeiro é compartilhado por IFF e Sesc. */
 
     const prepBooks = {
-      CEFET_RJ: [
-        ["Matemática","Geometria Plana","Um terreno retangular tem perímetro igual a 80 metros. Sabendo que o comprimento excede a largura em 10 metros, qual é a área desse terreno?",["350 m²","375 m²","400 m²","425 m²"],1,"Se a largura é x, o comprimento é x + 10. Então 2(x + x + 10) = 80. A largura mede 15 m e o comprimento, 25 m. Área: 15 × 25 = 375 m²."],
-        ["Matemática","Equação do 2º Grau","O produto de dois números inteiros positivos e consecutivos é igual a 156. Qual é a soma desses dois números?",["23","25","27","29"],1,"Os números são 12 e 13, pois 12 × 13 = 156. A soma é 25."],
-        ["Matemática","Porcentagem","Um equipamento eletrônico teve seu preço aumentado em 20% e, logo após, sofreu um desconto de 20% sobre o novo valor. Em relação ao preço inicial, o preço final teve:",["Redução de 4%","Aumento de 4%","Redução de 2%","Nenhuma alteração"],0,"Multiplique os fatores: 1,20 × 0,80 = 0,96. O preço final equivale a 96% do inicial, uma redução de 4%."],
-        ["Português","Sintaxe","Na frase “Alugam-se apartamentos perto da escola técnica”, o termo “apartamentos” exerce a função sintática de:",["Objeto direto","Sujeito paciente","Adjunto adnominal","Predicativo do sujeito"],1,"O “se” é partícula apassivadora. Na voz passiva analítica, a frase fica “Apartamentos são alugados”. Apartamentos é o sujeito paciente."],
-        ["Português","Crase","Assinale a alternativa em que o uso do acento grave indicativo de crase está CORRETO:",["O candidato dirigiu-se à secretaria do campus.","Começamos à estudar para a prova ontem.","O edital refere-se à todos os inscritos.","Entregamos o documento à ela."],0,"Dirigir-se exige a preposição “a”. Ela se une ao artigo feminino de “a secretaria”, formando “à secretaria”."],
-        ["Ciências","Física","Um automóvel percorre 180 km em 2 horas e 30 minutos. Qual é a sua velocidade escalar média em km/h?",["60 km/h","72 km/h","75 km/h","90 km/h"],1,"Converta 30 minutos para 0,5 hora. A velocidade média é 180 ÷ 2,5 = 72 km/h."]
-      ],
-
-      Colegio_Pedro_II: [
-        ["Matemática","Função Afim","Uma gráfica cobra R$ 40,00 de taxa fixa de arte mais R$ 0,50 por panfleto impresso. Se um cliente pagou R$ 190,00, quantos panfletos foram encomendados?",["250 panfletos","300 panfletos","350 panfletos","380 panfletos"],1,"Retire a taxa fixa: 190 − 40 = 150. Divida o restante pelo preço unitário: 150 ÷ 0,50 = 300 panfletos."],
-        ["Matemática","Trigonometria","Uma escada de 5 metros de comprimento está apoiada em um muro vertical, formando com o solo horizontal um ângulo cuja tangente vale 4/3. A que altura do solo está o topo da escada?",["3,0 metros","3,5 metros","4,0 metros","4,5 metros"],2,"A tangente é a razão altura/base. Os catetos estão na razão 4:3. Com hipotenusa de 5 m, o triângulo tem catetos de 4 m e 3 m. A altura é 4 m."],
-        ["Português","Interpretação e Coesão","No período “Embora tenha estudado muito, não conseguiu dormir bem antes da prova”, a conjunção “Embora” introduz uma ideia de:",["Causa","Consequência","Concessão","Condição"],2,"Embora é uma conjunção subordinativa adverbial concessiva."],
-        ["Português","Figuras de Linguagem","Na expressão “Ouvir o silêncio ensurdecedor da madrugada”, observa-se o emprego de:",["Paradoxo / Oxímoro","Eufemismo","Metonímia","Prosopopeia"],0,"Silêncio e ensurdecedor aproximam ideias opostas na mesma expressão."],
-        ["História","História do Brasil","A transferência da Corte Portuguesa para o Rio de Janeiro em 1808 teve como consequência imediata:",["A assinatura da Lei Áurea.","A Abertura dos Portos às Nações Amigas.","A Proclamação da República.","O fim do Pacto Colonial apenas na região Sul."],1,"A abertura dos portos foi decretada pelo príncipe regente D. João em janeiro de 1808."],
-        ["Geografia","Clima urbano","O fenômeno climático urbano caracterizado pelo aumento das temperaturas nas áreas centrais das grandes cidades em comparação às áreas periféricas arborizadas denomina-se:",["Inversão térmica","Chuva ácida","Ilha de calor","Efeito estufa natural"],2,"A ilha de calor está associada à impermeabilização, à concentração de construções e à baixa cobertura vegetal."]
-      ],
-
-      FAETEC: [
-        ["Matemática","Regra de Três","Uma máquina produz 120 peças em 4 horas de funcionamento contínuo. Mantendo o mesmo ritmo, quantas peças ela produzirá em 7 horas?",["180 peças","200 peças","210 peças","240 peças"],2,"A máquina produz 120 ÷ 4 = 30 peças por hora. Em sete horas, produz 30 × 7 = 210 peças."],
-        ["Matemática","Teorema de Pitágoras","Um triângulo retângulo possui catetos medindo 9 cm e 12 cm. Qual é a medida de sua hipotenusa?",["13 cm","14 cm","15 cm","18 cm"],2,"Pelo teorema de Pitágoras, h² = 9² + 12² = 81 + 144 = 225. Logo, h = 15 cm."],
-        ["Matemática","Frações","De um tanque cheio de água, retirou-se 1/3 de sua capacidade pela manhã e 1/4 à tarde. Que fração do tanque ainda resta com água?",["5/12","7/12","1/2","2/7"],0,"Foi retirado 1/3 + 1/4 = 4/12 + 3/12 = 7/12 da capacidade. Restam 12/12 − 7/12 = 5/12."],
-        ["Português","Ortografia e Acentuação","Assinale a palavra que recebe acento gráfico pela mesma regra de “saúde”:",["Café","Saída","Lâmpada","Fácil"],1,"Em sa-ú-de e sa-í-da, a vogal tônica u ou i está sozinha na sílaba e forma hiato com a vogal anterior."],
-        ["Português","Classes de Palavras","Na frase “O técnico resolveu rapidamente o defeito do computador”, a palavra “rapidamente” classifica-se como:",["Adjetivo","Substantivo","Advérbio","Preposição"],2,"Rapidamente modifica o verbo resolveu e informa o modo como a ação ocorreu."],
-        ["Português","Pontuação","Em “Alunos, entreguem os cadernos de prova ao fiscal”, a vírgula foi empregada para isolar:",["Um aposto explicativo","Um vocativo","Um adjunto adverbial deslocado","Uma oração intercalada"],1,"Alunos é o termo que chama os interlocutores. Essa é a função do vocativo."]
-      ],
-
       IFF_Sesc: [
-        ["Matemática","Geometria Espacial","Uma caixa d’água em formato de paralelepípedo reto-retângulo mede 2 m de comprimento, 1,5 m de largura e 1 m de altura. Qual é a sua capacidade em litros?",["300 litros","1.500 litros","3.000 litros","4.500 litros"],2,"O volume é 2 × 1,5 × 1 = 3 m³. Cada metro cúbico corresponde a 1.000 litros, portanto a capacidade é 3.000 litros."],
-        ["Matemática","Probabilidade","Ao lançar um dado comum de 6 faces não viciado, qual é a probabilidade de obter um número primo?",["1/6","1/3","1/2","2/3"],2,"Os primos entre 1 e 6 são 2, 3 e 5. Há três casos favoráveis em seis possíveis: 3/6 = 1/2."],
-        ["Português","Interpretação","Quando um texto utiliza linguagem figurada, subjetividade e plurissignificação para provocar emoção estética no leitor, predomina a função da linguagem:",["Referencial","Metalinguística","Fática","Poética"],3,"Na função poética, o foco está na elaboração estética da própria mensagem."],
-        ["Português","Pronomes","Assinale a alternativa em que o pronome relativo foi empregado adequadamente:",["A escola onde estudo fica no centro.","O livro que eu preciso está na biblioteca.","O professor cujo o nome esqueci chegou.","A cidade que nasci é muito acolhedora."],0,"Onde retoma um lugar físico: a escola em que estudo. Nas demais, a norma-padrão pede “de que preciso”, “cujo nome” e “em que nasci”."],
+        ["Matemática","Geometria Espacial","Uma caixa d’água em formato de paralelepípedo reto-retângulo mede 2 m de comprimento, 1,5 m de largura e 1 m de altura. Qual é a sua capacidade em litros?",["300 litros","1.500 litros","3.000 litros","4.500 litros"],2,"2 × 1,5 × 1 = 3 m³. Como 1 m³ equivale a 1.000 litros, a capacidade é 3.000 litros."],
+        ["Matemática","Probabilidade","Ao lançar um dado comum de 6 faces não viciado, qual é a probabilidade de obter um número primo?",["1/6","1/3","1/2","2/3"],2,"Os primos são 2, 3 e 5. São três resultados em seis: 3/6 = 1/2."],
+        ["Português","Interpretação","Quando um texto utiliza linguagem figurada, subjetividade e plurissignificação para provocar emoção estética no leitor, predomina a função da linguagem:",["Referencial","Metalinguística","Fática","Poética"],3,"O foco está na elaboração estética da mensagem."],
+        ["Português","Pronomes","Assinale a alternativa em que o pronome relativo foi empregado adequadamente:",["A escola onde estudo fica no centro.","O livro que eu preciso está na biblioteca.","O professor cujo o nome esqueci chegou.","A cidade que nasci é muito acolhedora."],0,"Onde retoma um lugar. Nas demais, a norma-padrão pede de que preciso, cujo nome e em que nasci."],
         ["História","História Geral","A Revolução Industrial, iniciada na Inglaterra na segunda metade do século XVIII, teve como uma de suas principais transformações sociais:",["O fortalecimento do sistema feudal no campo.","A consolidação da burguesia industrial e do proletariado urbano.","A extinção completa do comércio marítimo.","A redução da jornada de trabalho para 6 horas diárias imediatamente."],1,"A expansão das fábricas consolidou a burguesia industrial e o proletariado urbano."],
-        ["Ciências","Ecologia","Na cadeia alimentar representada por “Capim → Gafanhoto → Sapo → Cobra”, o sapo ocupa o nível trófico de:",["Produtor","Consumidor primário","Consumidor secundário","Consumidor terciário"],2,"O capim é produtor. O gafanhoto é consumidor primário. O sapo, ao comer o gafanhoto, é consumidor secundário."]
+        ["Ciências","Ecologia","Na cadeia alimentar capim → gafanhoto → sapo → cobra, o sapo ocupa o nível trófico de:",["Produtor","Consumidor primário","Consumidor secundário","Consumidor terciário"],2,"O gafanhoto consome o produtor. O sapo come o gafanhoto e é consumidor secundário."]
       ],
-
+      FAETEC: [
+        ["Matemática","Regra de Três","Uma máquina produz 120 peças em 4 horas de funcionamento contínuo. Mantendo o mesmo ritmo, quantas peças ela produzirá em 7 horas?",["180 peças","200 peças","210 peças","240 peças"],2,"120 ÷ 4 = 30 peças por hora. Em sete horas: 30 × 7 = 210 peças."],
+        ["Matemática","Teorema de Pitágoras","Um triângulo retângulo possui catetos medindo 9 cm e 12 cm. Qual é a medida de sua hipotenusa?",["13 cm","14 cm","15 cm","18 cm"],2,"h² = 9² + 12² = 225. Logo, h = 15 cm."],
+        ["Matemática","Frações","De um tanque cheio de água, retirou-se 1/3 de sua capacidade pela manhã e 1/4 à tarde. Que fração do tanque ainda resta com água?",["5/12","7/12","1/2","2/7"],0,"Foi retirado 1/3 + 1/4 = 7/12. Restam 5/12."],
+        ["Português","Ortografia e Acentuação","Assinale a palavra que recebe acento gráfico pela mesma regra de saúde:",["Café","Saída","Lâmpada","Fácil"],1,"Em sa-ú-de e sa-í-da, a vogal tônica forma hiato."],
+        ["Português","Classes de Palavras","Na frase “O técnico resolveu rapidamente o defeito do computador”, a palavra rapidamente classifica-se como:",["Adjetivo","Substantivo","Advérbio","Preposição"],2,"Rapidamente informa o modo como o técnico resolveu o defeito."],
+        ["Português","Pontuação","Em “Alunos, entreguem os cadernos de prova ao fiscal”, a vírgula foi empregada para isolar:",["Um aposto explicativo","Um vocativo","Um adjunto adverbial deslocado","Uma oração intercalada"],1,"Alunos chama os interlocutores e exerce a função de vocativo."]
+      ],
       IFRJ_Tipo_A: [
-        ["Matemática","Sistemas Lineares","Em uma lanchonete, 2 salgados e 1 suco custam R$ 17,00. Já 3 salgados e 2 sucos custam R$ 28,00. Qual é o preço de 1 salgado?",["R$ 5,00","R$ 6,00","R$ 7,00","R$ 8,00"],1,"Se x é o preço do salgado e y o do suco, então 2x + y = 17 e 3x + 2y = 28. Dobrando a primeira e subtraindo a segunda, obtemos x = 34 − 28 = 6."],
-        ["Matemática","Estatística","As notas de um aluno em quatro avaliações foram 6,5; 7,0; 8,5 e 8,0. Qual foi sua média aritmética?",["7,0","7,25","7,5","7,75"],2,"A soma é 30. Dividindo pelo número de avaliações: 30 ÷ 4 = 7,5."],
-        ["Ciências","Química","A passagem direta de uma substância do estado sólido para o estado gasoso, sem passar pelo estado líquido, é chamada de:",["Fusão","Vaporização","Condensação","Sublimação"],3,"A sublimação é a passagem direta de sólido para gás. Um exemplo é o gelo seco."],
-        ["Ciências","Biologia","Qual organela celular é responsável pela respiração celular e produção de energia (ATP) nas células eucariontes?",["Ribossomo","Mitocôndria","Complexo de Golgi","Lisossomo"],1,"A mitocôndria realiza etapas da respiração aeróbia responsáveis pela produção de grande parte do ATP."],
-        ["Português","Concordância","Assinale a alternativa correta quanto à concordância verbal:",["Fazem dois anos que entrei no curso técnico.","Houveram muitos inscritos no processo seletivo.","Existe várias oportunidades para técnicos em química.","Devem existir soluções mais sustentáveis para o lixo."],3,"Soluções mais sustentáveis é o sujeito plural de existir. Na locução verbal, o auxiliar concorda com ele: devem existir."],
-        ["Geografia","Rio de Janeiro","A Baía de Guanabara, importante ecossistema fluminense, enfrenta graves problemas ambientais associados principalmente:",["À atividade vulcânica submarina.","Ao despejo de esgoto doméstico e efluentes industriais sem tratamento.","À desertificação natural da Região Metropolitana.","À ausência de rios desaguando em sua bacia."],1,"Esgoto doméstico e efluentes industriais sem tratamento comprometem a qualidade das águas da baía."]
+        ["Matemática","Sistemas Lineares","Em uma lanchonete, 2 salgados e 1 suco custam R$ 17,00. Já 3 salgados e 2 sucos custam R$ 28,00. Qual é o preço de 1 salgado?",["R$ 5,00","R$ 6,00","R$ 7,00","R$ 8,00"],1,"Dobre a primeira compra: 4 salgados e 2 sucos custam R$ 34. Subtraindo a segunda compra, sobra 1 salgado por R$ 6."],
+        ["Matemática","Estatística","As notas de um aluno em quatro avaliações foram 6,5; 7,0; 8,5 e 8,0. Qual foi sua média aritmética?",["7,0","7,25","7,5","7,75"],2,"A soma é 30 e a média é 30 ÷ 4 = 7,5."],
+        ["Ciências","Química","A passagem direta de uma substância do estado sólido para o gasoso, sem passar pelo líquido, é chamada de:",["Fusão","Vaporização","Condensação","Sublimação"],3,"A sublimação ocorre, por exemplo, com o gelo seco."],
+        ["Ciências","Biologia","Qual organela celular é responsável pela respiração celular e produção de ATP nas células eucariontes?",["Ribossomo","Mitocôndria","Complexo de Golgi","Lisossomo"],1,"A mitocôndria realiza etapas da respiração aeróbia que produzem grande parte do ATP."],
+        ["Português","Concordância","Assinale a alternativa correta quanto à concordância verbal:",["Fazem dois anos que entrei no curso técnico.","Houveram muitos inscritos no processo seletivo.","Existe várias oportunidades para técnicos em química.","Devem existir soluções mais sustentáveis para o lixo."],3,"O sujeito soluções está no plural; o auxiliar também fica no plural: devem existir."],
+        ["Geografia","Rio de Janeiro","A Baía de Guanabara enfrenta graves problemas ambientais associados principalmente:",["À atividade vulcânica submarina.","Ao despejo de esgoto doméstico e efluentes industriais sem tratamento.","À desertificação natural da Região Metropolitana.","À ausência de rios desaguando em sua bacia."],1,"Esgoto e efluentes sem tratamento comprometem a qualidade das águas."]
+      ],
+      CEFET_RJ: [
+        ["Matemática","Geometria Plana","Um terreno retangular tem perímetro igual a 80 metros. O comprimento excede a largura em 10 metros. Qual é a área?",["350 m²","375 m²","400 m²","425 m²"],1,"2(x + x + 10) = 80. A largura é 15 m e o comprimento é 25 m. A área é 375 m²."],
+        ["Matemática","Equação do 2º Grau","O produto de dois números inteiros positivos e consecutivos é 156. Qual é a soma desses números?",["23","25","27","29"],1,"12 × 13 = 156 e 12 + 13 = 25."],
+        ["Matemática","Porcentagem","Um equipamento teve seu preço aumentado em 20% e, logo após, sofreu desconto de 20% sobre o novo valor. Em relação ao preço inicial, o preço final teve:",["Redução de 4%","Aumento de 4%","Redução de 2%","Nenhuma alteração"],0,"1,20 × 0,80 = 0,96. Restam 96% do preço original."],
+        ["Português","Sintaxe","Na frase “Alugam-se apartamentos perto da escola técnica”, apartamentos exerce a função de:",["Objeto direto","Sujeito paciente","Adjunto adnominal","Predicativo do sujeito"],1,"A frase equivale a apartamentos são alugados."],
+        ["Português","Crase","Assinale a alternativa em que o uso da crase está correto:",["O candidato dirigiu-se à secretaria do campus.","Começamos à estudar para a prova ontem.","O edital refere-se à todos os inscritos.","Entregamos o documento à ela."],0,"A preposição a, exigida por dirigir-se, une-se ao artigo feminino de a secretaria."],
+        ["Ciências","Física","Um automóvel percorre 180 km em 2 horas e 30 minutos. Qual é a velocidade escalar média?",["60 km/h","72 km/h","75 km/h","90 km/h"],1,"2 h 30 min = 2,5 h. A velocidade é 180 ÷ 2,5 = 72 km/h."]
+      ],
+      Colegio_Pedro_II: [
+        ["Matemática","Função Afim","Uma gráfica cobra R$ 40,00 de taxa fixa mais R$ 0,50 por panfleto. Se um cliente pagou R$ 190,00, quantos panfletos encomendou?",["250 panfletos","300 panfletos","350 panfletos","380 panfletos"],1,"(190 − 40) ÷ 0,50 = 300 panfletos."],
+        ["Matemática","Trigonometria","Uma escada de 5 metros está apoiada em um muro vertical. O ângulo com o solo tem tangente 4/3. A que altura está o topo?",["3,0 metros","3,5 metros","4,0 metros","4,5 metros"],2,"A razão altura/base é 4/3. O triângulo de hipotenusa 5 tem altura 4 e base 3."],
+        ["Português","Interpretação e Coesão","Em “Embora tenha estudado muito, não conseguiu dormir bem antes da prova”, a conjunção embora introduz:",["Causa","Consequência","Concessão","Condição"],2,"Embora é uma conjunção concessiva."],
+        ["Português","Figuras de Linguagem","Na expressão “Ouvir o silêncio ensurdecedor da madrugada”, observa-se:",["Paradoxo / Oxímoro","Eufemismo","Metonímia","Prosopopeia"],0,"Silêncio e ensurdecedor reúnem ideias opostas."],
+        ["História","História do Brasil","A transferência da Corte Portuguesa para o Rio de Janeiro em 1808 teve como consequência imediata:",["A assinatura da Lei Áurea.","A Abertura dos Portos às Nações Amigas.","A Proclamação da República.","O fim do Pacto Colonial apenas na região Sul."],1,"A abertura dos portos foi decretada pelo príncipe regente D. João em 1808."],
+        ["Geografia","Clima urbano","O aumento das temperaturas nas áreas centrais das grandes cidades em comparação às áreas periféricas arborizadas denomina-se:",["Inversão térmica","Chuva ácida","Ilha de calor","Efeito estufa natural"],2,"A concentração de construções, a impermeabilização e a baixa cobertura vegetal favorecem a ilha de calor."]
       ]
     };
 
-    /* Cadernos completos e exercícios adaptados das edições anteriores. */
+    /*
+      Novas questões autorais. Cada escola recebe 18 problemas matemáticos
+      com dados próprios e 6 questões de Português. Somadas às 6 do PDF,
+      são 30 questões disponíveis no seletor de cada instituição.
+    */
+
+    const portugueseSets = [
+      [
+        ["Inferência","O porteiro pegou o guarda-chuva ao ouvir o trovão. O que se pode inferir?",["Ele perdeu as chaves.","Ele previu chuva.","A chuva já terminou.","O portão quebrou."],1,"O trovão motivou uma precaução contra a chuva."],
+        ["Coesão","Em “As mudas cresceram. Elas já dão sombra”, a que se refere elas?",["Ao jardim","Às mudas","À sombra","Ao crescimento"],1,"O pronome feminino plural retoma mudas."],
+        ["Conectivos","“Replantamos as árvores para que a praça tivesse sombra.” O trecho iniciado por para que expressa:",["Oposição","Tempo","Comparação","Finalidade"],3,"Ter sombra é o objetivo do replantio."],
+        ["Leitura","Um aviso diz “Devolução até sexta, inclusive”. Quando ainda é possível devolver no prazo?",["No sábado","Na sexta-feira","Apenas na quinta","No domingo"],1,"Inclusive indica que a sexta faz parte do prazo."],
+        ["Sentido figurado","Em “A notícia correu pela vila”, o que significa correu?",["Fez exercício","Voltou à origem","Desapareceu","Espalhou-se rapidamente"],3,"O verbo descreve a rápida circulação da informação."],
+        ["Argumentação","Qual frase apresenta uma tese que pode ser defendida com argumentos?",["A porta tem dois metros.","Há cinco mesas na sala.","A escola deve ampliar o horário da biblioteca.","A biblioteca abre às oito."],2,"A frase defende uma proposta sobre o horário da biblioteca."]
+      ],
+      [
+        ["Vocativo","Em “Helena, confira as medidas”, qual é a função de Helena?",["Objeto direto","Predicativo","Objeto indireto","Vocativo"],3,"O nome identifica quem recebe o pedido."],
+        ["Concordância","Qual alternativa apresenta concordância adequada?",["Falta dois parafusos.","Os parafusos acabou.","As peças chegou.","Faltam dois parafusos."],3,"O sujeito dois parafusos exige o verbo no plural."],
+        ["Regência","Qual frase usa corretamente o verbo obedecer na norma-padrão?",["O aprendiz obedeceu às instruções.","O aprendiz obedeceu nas instruções.","O aprendiz obedeceu pelas instruções.","O aprendiz obedeceu com as instruções."],0,"Quem obedece, obedece a algo. A preposição se une ao artigo as."],
+        ["Ambiguidade","“Rui avisou a Leo que seu projeto venceu.” Qual expressão deixa incerta a autoria?",["Avisou","Seu projeto","Venceu","A Leo"],1,"Seu pode remeter a Rui ou a Leo."],
+        ["Voz passiva","Qual reescrita mantém o sentido de “A equipe revisou o circuito”?",["O circuito foi revisado pela equipe.","O circuito revisou a equipe.","A equipe será revisada.","A equipe revisará o circuito."],0,"Circuito passa a sujeito paciente e o tempo passado é preservado."],
+        ["Pontuação","Em “Trouxe três itens: fita, régua e lápis”, o que introduzem os dois-pontos?",["Uma pergunta","Uma oposição","Uma condição","Uma enumeração"],3,"A sequência identifica os três itens anunciados."]
+      ],
+      [
+        ["Interpretação","“A horta só será irrigada se o reservatório estiver cheio.” O enchimento é apresentado como:",["Comparação","Explicação histórica","Condição necessária","Consequência garantida"],2,"Só se introduz uma condição necessária para a irrigação."],
+        ["Coesão","Em “A enchente fechou a ponte. Isso atrasou os ônibus”, o que isso retoma?",["A cor dos ônibus","O motorista","Somente o nome ponte","O fechamento da ponte pela enchente"],3,"O demonstrativo resume o fato da oração anterior."],
+        ["Temporalidade","Em “Quando o rio baixou, a passagem foi aberta”, qual relação quando indica?",["Comparação","Finalidade","Causa obrigatória","Tempo"],3,"Quando situa um acontecimento em relação a outro."],
+        ["Sentido contextual","Um relatório descreve uma queda no consumo. O que queda significa?",["Acidente","Estabilidade","Redução","Aumento"],2,"Consumo é uma grandeza; queda indica diminuição."],
+        ["Progressão textual","Qual expressão introduz uma ilustração concreta de energia renovável?",["Contudo, o problema continua.","Portanto, concluímos.","Apesar disso, houve atraso.","Por exemplo, a energia solar."],3,"Por exemplo anuncia uma ilustração concreta."],
+        ["Fato e opinião","Qual frase expressa uma avaliação pessoal?",["A trilha tem 2 km.","O portão abre às nove.","A placa informa o percurso.","A trilha mais bonita é a do lago."],3,"Mais bonita expressa um julgamento de valor."]
+      ],
+      [
+        ["Pronome relativo","Complete segundo a norma-padrão: “Este é o tema ___ precisamos.”",["onde","de que","em cujo","aonde"],1,"Precisar, no sentido de necessitar, exige a preposição de."],
+        ["Conjunções","“O resultado era esperado, porém surpreendeu a turma.” Porém indica:",["Soma","Oposição","Causa","Finalidade"],1,"Porém põe as duas ideias em contraste."],
+        ["Sujeito","Em “Surgiram novas hipóteses”, qual é o sujeito?",["Surgiram","Oculto na primeira pessoa","Novas hipóteses","Inexistente"],2,"Pergunte o que surgiu. O verbo concorda com hipóteses."],
+        ["Registro","Qual saudação é adequada para um pedido formal à direção?",["Prezada equipe gestora,","E aí, galera!","Fala, chefia!","Oi, povo!"],0,"A saudação se ajusta ao destinatário institucional."],
+        ["Referência temporal","“O laboratório será reaberto amanhã.” Para saber a data exata, o leitor precisa conhecer:",["A área do laboratório","O dia da emissão do aviso","O número de alunos","A duração da obra"],1,"Amanhã é definido em relação ao momento da emissão."],
+        ["Modalização","Em “Talvez o experimento funcione”, qual ideia talvez expressa?",["Certeza","Obrigação","Possibilidade","Proibição"],2,"O advérbio indica incerteza sobre o resultado."]
+      ],
+      [
+        ["Instruções","O manual diz “Desligue o aparelho antes de limpar”. Qual ação vem primeiro?",["Limpar a superfície","Religar o aparelho","Desligar o aparelho","Guardar o pano"],2,"Antes de estabelece a ordem das ações."],
+        ["Formação de palavras","Em reutilizar, que sentido tem o prefixo re-?",["Repetição","Negação","Ausência","Oposição"],0,"Reutilizar significa utilizar novamente."],
+        ["Concordância nominal","Qual alternativa segue a norma-padrão?",["As ferramenta estavam organizadas.","As ferramentas estava organizado.","As ferramentas estavam organizadas.","As ferramentas estavam organizado."],2,"Artigo, substantivo e predicativo concordam no feminino plural."],
+        ["Causa","“A peça dilatou porque foi aquecida.” O aquecimento é apresentado como:",["Causa","Condição futura","Comparação","Conclusão do leitor"],0,"Porque apresenta o motivo da dilatação."],
+        ["Elipse","Em “João montou o suporte e Ana, a base”, qual verbo está subentendido depois de Ana?",["Comprou","Montou","Quebrou","Mediu"],1,"A segunda oração recupera o verbo da primeira."],
+        ["Gênero textual","Qual é a finalidade principal de um manual de montagem?",["Narrar uma aventura","Defender uma candidatura","Divulgar um poema","Orientar uma sequência de ações"],3,"O manual orienta a execução de uma tarefa."]
+      ],
+      [
+        ["Metáfora","Em “A memória é uma gaveta de retratos”, qual recurso predomina?",["Onomatopeia","Vocativo","Metáfora","Enumeração"],2,"A memória é identificada figuradamente com uma gaveta."],
+        ["Narrador","“Entrei no pátio e reconheci meus colegas.” Qual marca indica narrador participante?",["Ausência de personagens","Discurso exclusivamente indireto","Verbos na primeira pessoa","Verbos no infinitivo"],2,"Entrei e reconheci situam o narrador na ação."],
+        ["Concessão","Qual reescrita mantém o sentido de “Apesar da demora, ficamos até o fim”?",["Embora houvesse demora, ficamos até o fim.","Como não houve demora, saímos.","Ficamos para causar demora.","Saímos antes da demora."],0,"A concessão preserva o contraste entre demora e permanência."],
+        ["Ironia","Após esperar duas horas pelo ônibus, alguém diz “Que pontualidade!”. O contexto sugere:",["Elogio literal","Medida de distância","Previsão do tempo","Crítica irônica ao atraso"],3,"O elogio aparente contrasta com as duas horas de espera."],
+        ["Discurso direto","Qual trecho apresenta diretamente a fala de uma personagem?",["Lia disse: “Voltarei cedo”.","Lia disse que voltaria cedo.","Lia pensou na volta.","A volta de Lia foi cedo."],0,"As aspas delimitam as palavras atribuídas à personagem."],
+        ["Sinonímia","Em “O relato era conciso”, qual substituição preserva o sentido?",["Contraditório","Breve","Inventado","Incompreensível"],1,"Conciso significa sucinto, expresso com poucas palavras."]
+      ]
+    ];
+
+    /* Posições das alternativas, mantidas entre visitas ao mesmo perfil. */
+    const mathLayouts = [
+      "2103 3102 1320 3120 1302 1023 2031 1230 0231 0213 1230 3210 2310 3210 2130 3120 0132 1302",
+      "3021 2103 3210 0132 2103 3210 1023 0213 3120 3120 2301 1203 0132 1023 2130 2310 2310 3120",
+      "1203 3102 1320 1023 2301 0312 3210 3120 1320 1032 2301 2310 3012 1203 1203 0321 2031 2301",
+      "0132 0231 1203 0132 2310 1320 2301 2310 1320 0321 2310 3021 2301 3210 3021 1230 3021 2310",
+      "3021 0132 3012 1302 0213 1230 1203 3102 0213 3210 0231 3102 1320 1230 1032 0132 0132 1230",
+      "2301 0231 1320 3201 3021 1230 3210 3012 3102 1230 0123 2301 0321 1230 3210 1302 0231 3021"
+    ];
+
+    function makeAdditionalPractice(n) {
+      const a = 4 + n;
+      const b = 8 + n;
+      const price = 60 + 20 * n;
+      const layouts = mathLayouts[n].split(" ");
+
+      const problems = [
+        ["Porcentagem",`Um livro de R$ ${price} tem desconto de 15%. Quanto se paga, em reais?`,price * 85 / 100,`O desconto é de R$ ${price * 15 / 100}. Subtraia-o do preço inicial.`],
+        ["Escala",`Em um mapa de escala 1:200.000, uma estrada mede ${a} cm. Qual é a extensão real em quilômetros?`,2*a,`Cada centímetro equivale a 2 km. Multiplique ${a} por 2.`],
+        ["Equação do 1º grau",`Um passeio custa R$ ${b} de entrada mais R$ 3 por atividade. Quem gastou R$ ${b+3*a} participou de quantas atividades?`,a,`Retire a entrada de R$ ${b} e divida o restante por 3.`],
+        ["Área",`Um painel retangular de ${a} m por ${b} m tem uma abertura de 2 m². Quantos metros quadrados recebem pintura em uma face?`,a*b-2,`Área líquida: ${a} × ${b} − 2 = ${a*b-2} m².`],
+        ["Média",`Três equipes recolheram ${a}, ${b} e ${a+8} caixas. Qual foi a média de caixas por equipe?`,b,`A soma é ${3*b}. Divida por três.`],
+        ["Razões",`Para cada 2 litros de concentrado usam-se 5 litros de água. Com ${2*a} litros de concentrado, quantos litros de água são necessários?`,5*a,`Há ${a} grupos de 2 litros; cada grupo exige 5 litros de água.`],
+        ["Volume",`Um aquário retangular mede ${a} dm por 3 dm por 5 dm. Qual é a capacidade em litros?`,15*a,`O volume é ${a} × 3 × 5 dm³. Cada dm³ equivale a 1 litro.`],
+        ["Comparação de quantidades",`Uma urna tem ${a} fichas verdes e ${3*a} amarelas. Depois de acrescentar ${4*a} verdes, quantas amarelas é preciso acrescentar para igualar as quantidades?`,2*a,`Há ${5*a} verdes e ${3*a} amarelas. A diferença é ${2*a}.`],
+        ["Perímetro",`Uma praça quadrada de lado ${b} m terá cerca no contorno, exceto por uma entrada de 3 m. Quantos metros de cerca serão usados?`,4*b-3,`O perímetro é 4 × ${b}. Desconte 3 m.`],
+        ["Divisibilidade",`Duas luzes piscam a cada ${a} e ${3*a} segundos. Se piscam juntas agora, após quantos segundos voltarão a coincidir pela primeira vez?`,3*a,`Como ${3*a} é múltiplo de ${a}, o mínimo múltiplo comum é ${3*a}.`],
+        ["Sequências",`Uma arquibancada tem ${b} lugares na primeira fileira e quatro a mais em cada fileira seguinte. Quantos lugares há na sexta?`,b+20,`Entre a primeira e a sexta fileira há cinco acréscimos de quatro.`],
+        ["Proporção inversa",`Quatro impressoras iguais concluem um lote em ${3*a} minutos. Em quantos minutos seis impressoras iguais concluem o mesmo lote?`,2*a,`O trabalho exige 4 × ${3*a} impressora-minutos. Divida por 6.`],
+        ["Juros simples",`Um capital de R$ ${100*a} rende juros simples de 2% ao mês. Qual é o valor dos juros, em reais, após três meses?`,6*a,`Os juros equivalem a 6% de ${100*a}, ou ${6*a} reais.`],
+        ["Leitura de dados",`Uma biblioteca emprestou ${b*3} livros na segunda e ${b*5} na terça. Quantos empréstimos a mais ocorreram na terça?`,2*b,`Faça ${5*b} − ${3*b} = ${2*b}.`],
+        ["Ângulos",`Em um triângulo, dois ângulos internos medem ${40+n*3}° e 65°. Qual é a medida do terceiro, em graus?`,75-n*3,`A soma é 180°. Subtraia ${40+n*3}° e 65°.`],
+        ["Frações",`Uma turma leu 3/8 de um livro de ${8*(b+4)} páginas. Quantas páginas faltam?`,5*(b+4),`Faltam 5/8. Um oitavo corresponde a ${b+4} páginas.`],
+        ["Contagem",`Um uniforme permite escolher entre ${a} camisetas, 3 calças e 2 casacos. Quantas combinações existem escolhendo uma peça de cada tipo?`,6*a,`Multiplique as opções: ${a} × 3 × 2.`],
+        ["Mediana",`Os tempos, em minutos, foram ${b+3}, ${b-2}, ${b+8}, ${b} e ${b+1}. Qual é a mediana?`,b+1,`Em ordem: ${b-2}, ${b}, ${b+1}, ${b+3}, ${b+8}. A mediana é o terceiro valor.`]
+      ];
+
+      const math = problems.map(([topic, text, correct, why], i) => {
+        const values = [correct, correct + 2 + n, correct + 5 + n, correct + 9 + n];
+        const positions = [...layouts[i]].map(Number);
+        const options = [];
+        values.forEach((value, j) => { options[positions[j]] = String(value); });
+        return ["Matemática", topic, text, options, positions[0], why];
+      });
+
+      return math.concat(portugueseSets[n].map(row => ["Português", ...row]));
+    }
+
+    const additionalPractice = portugueseSets.map((_, i) => makeAdditionalPractice(i));
+
+    /* Provas completas e exercícios comentados de edições anteriores. */
 
     const schools = [
       {
-        name: "Escola Sesc de Ensino Médio", book: "IFF_Sesc",
-        edition: "2026", letters: "ABCDE",
-        key: "BDCEEDACBCEDCBBBDCADEAABACAECA",
-        paper: "https://www.sesc.com.br/poloeducacional/wp-content/uploads/2025/12/Prova-Processo-seletivo-estudantes-ESEM-2026.pdf",
-        answerKey: "https://www.sesc.com.br/poloeducacional/wp-content/uploads/2025/12/Gabarito-final-ESEM-2026.pdf",
-        practiceEdition: "Ingresso 2024",
-        practicePaper: "https://www.poloeducacionalsesc.com.br/wp-content/uploads/2025/04/Prova-Admissional-de-Estudantes-2024.pdf",
-        items: [
-          ["Ciências","Questão 3","Que processo permite ao fitoplâncton liberar oxigênio no mar?",["Evaporação","Fotossíntese","Fermentação"],1,"Organismos fotossintetizantes do fitoplâncton usam luz para produzir matéria orgânica e liberam oxigênio."],
-          ["Matemática","Questão 4","Três regiões têm 16%, 18% e 22% do litoral. A quarta tem 3.256 km. Qual é a extensão total?",["5.400 km","6.800 km","7.400 km"],2,"As três primeiras somam 56%. Os 3.256 km representam os outros 44%. Assim, 3.256 ÷ 0,44 = 7.400 km."]
+        name:"Escola Sesc de Ensino Médio", book:"IFF_Sesc",
+        edition:"2026", letters:"ABCDE", key:"BDCEEDACBCEDCBBBDCADEAABACAECA",
+        paper:"https://www.sesc.com.br/poloeducacional/wp-content/uploads/2025/12/Prova-Processo-seletivo-estudantes-ESEM-2026.pdf",
+        answerKey:"https://www.sesc.com.br/poloeducacional/wp-content/uploads/2025/12/Gabarito-final-ESEM-2026.pdf",
+        practiceEdition:"Ingresso 2024",
+        practicePaper:"https://www.poloeducacionalsesc.com.br/wp-content/uploads/2025/04/Prova-Admissional-de-Estudantes-2024.pdf",
+        items:[
+          ["Ciências","Questão 3","Que processo permite ao fitoplâncton liberar oxigênio no mar?",["Evaporação","Fotossíntese","Fermentação"],1,"Organismos fotossintetizantes usam luz para produzir matéria orgânica e liberam oxigênio."],
+          ["Matemática","Questão 4","Três regiões têm 16%, 18% e 22% do litoral. A quarta tem 3.256 km. Qual é a extensão total?",["5.400 km","6.800 km","7.400 km"],2,"As três somam 56%. Os 3.256 km são os 44% restantes. Divida 3.256 por 0,44."]
         ]
       },
       {
-        name: "FAETEC", book: "FAETEC",
-        edition: "2026/1 · Edital 4", letters: "ABCD",
-        key: "CADBDCADBBCADBCAXCDDBBCDCCADDCBAACBCCCDA",
-        paper: "https://portal.coseac.uff.br/wp-content/uploads/2025/12/Faetec_2026_edital_04_prova.pdf",
-        answerKey: "https://portal.coseac.uff.br/wp-content/uploads/2025/12/Concurso_Faetec_2026-1_Gabaritoaposrecursos__Edital_04.pdf",
-        practiceEdition: "2026/1 · Ensino médio integrado",
-        items: [
-          ["Matemática","Questão 24","Um paralelogramo possui diagonais iguais e perpendiculares. Qual é a classificação mais específica?",["Quadrado","Retângulo de lados desiguais","Losango de ângulos desiguais"],0,"As diagonais iguais caracterizam um retângulo. Por serem também perpendiculares, a figura é um losango. Ela reúne as propriedades de um quadrado."],
-          ["Matemática","Questão 25","Quanto mede um ângulo interno de um octógono regular?",["120°","135°","145°"],1,"A soma dos ângulos é 6 × 180° = 1.080°. Cada ângulo mede 1.080° ÷ 8 = 135°."]
+        name:"FAETEC", book:"FAETEC",
+        edition:"2026/1 · Edital 4", letters:"ABCD", key:"CADBDCADBBCADBCAXCDDBBCDCCADDCBAACBCCCDA",
+        paper:"https://portal.coseac.uff.br/wp-content/uploads/2025/12/Faetec_2026_edital_04_prova.pdf",
+        answerKey:"https://portal.coseac.uff.br/wp-content/uploads/2025/12/Concurso_Faetec_2026-1_Gabaritoaposrecursos__Edital_04.pdf",
+        practiceEdition:"2026/1 · Ensino médio integrado",
+        items:[
+          ["Matemática","Questão 24","Um paralelogramo tem diagonais iguais e perpendiculares. Qual é a classificação mais específica?",["Quadrado","Retângulo de lados desiguais","Losango de ângulos desiguais"],0,"As diagonais iguais e perpendiculares reúnem as propriedades de retângulo e losango."],
+          ["Matemática","Questão 25","Quanto mede um ângulo interno de um octógono regular?",["120°","135°","145°"],1,"A soma é 6 × 180° = 1.080°. Divida por 8."]
         ]
       },
       {
-        name: "Instituto Federal Fluminense (IFF)", book: "IFF_Sesc",
-        edition: "2026/1 · Integrados e concomitantes", letters: "ABCDE",
-        key: "BAABDEEDCXDEABCEBXADADBACCDDEBADCDEAADBC",
-        paper: "https://pt.scribd.com/document/1034378948/IFF-2026-1",
-        reader: "https://www.scribd.com/embeds/1034378948/content",
-        answerKey: "https://iff.edu.br/static/files/COM%2016%20Ref%20Ed%2079%202026_1%20Processo%20Seletivo%20-%20Gabarito%20Final.pdf",
-        practiceEdition: "2026/1 · Integrados e concomitantes",
-        items: [
-          ["Matemática","Questão 20","Um terreno retangular tem 98 m². As duas laterais e o fundo somam 28 m. Qual é a largura da frente?",["12 m","14 m","16 m"],1,"Se a lateral mede x, a frente mede 28 − 2x. Pela área, x(28 − 2x) = 98. Assim, (x − 7)² = 0, a lateral mede 7 m e a frente mede 14 m."],
-          ["Ciências","Questão 22","Por que o passageiro tende a continuar em movimento para a frente durante uma freada?",["Por inércia","Porque sua massa diminui","Porque a gravidade muda de direção"],0,"O corpo tende a conservar a velocidade até que uma força, como a do cinto, o desacelere."]
+        name:"Instituto Federal Fluminense (IFF)", book:"IFF_Sesc",
+        edition:"2026/1 · Integrados e concomitantes", letters:"ABCDE", key:"BAABDEEDCXDEABCEBXADADBACCDDEBADCDEAADBC",
+        paper:"https://pt.scribd.com/document/1034378948/IFF-2026-1",
+        reader:"https://www.scribd.com/embeds/1034378948/content",
+        answerKey:"https://iff.edu.br/static/files/COM%2016%20Ref%20Ed%2079%202026_1%20Processo%20Seletivo%20-%20Gabarito%20Final.pdf",
+        practiceEdition:"2026/1 · Integrados e concomitantes",
+        items:[
+          ["Matemática","Questão 20","Um terreno retangular tem 98 m². As duas laterais e o fundo somam 28 m. Qual é a largura da frente?",["12 m","14 m","16 m"],1,"Se a lateral mede x, a frente mede 28 − 2x. A área leva a (x − 7)² = 0. A frente mede 14 m."],
+          ["Ciências","Questão 22","Por que o passageiro tende a continuar em movimento para a frente durante uma freada?",["Por inércia","Porque sua massa diminui","Porque a gravidade muda de direção"],0,"O corpo tende a conservar a velocidade até que uma força o desacelere."]
         ]
       },
       {
-        name: "Instituto Federal do Rio de Janeiro (IFRJ)", book: "IFRJ_Tipo_A",
-        edition: "2026 · Tipo A", letters: "ABCD",
-        key: "DBACBCDDBBDCDCCDABDBBCACADCBBA",
-        paper: "https://drive.google.com/file/d/1ft-D0k7IG_njt_PkM357siTvpusD7yct/view",
-        reader: "https://drive.google.com/file/d/1ft-D0k7IG_njt_PkM357siTvpusD7yct/preview",
-        answerKey: "https://drive.google.com/file/d/1phmNGfVpwGEEvt_Gkelr7tqnEiRw2S2q/view",
-        practiceEdition: "Ingresso 2024",
-        practicePaper: "https://portal.ifrj.edu.br/sites/default/files/IFRJ/Arraial%20do%20Cabo/cursos-integrados-ingresso_em_2024.pdf",
-        items: [
-          ["Matemática","Questão 16","Uma razão de 35 mL por kg equivale a quantos litros por kg?",["0,035","0,35","3,5"],0,"Divida 35 por 1.000. O resultado é 0,035 L por kg."],
-          ["Matemática","Questão 17","No exercício, multiplica-se 100 kg por 35 mL/kg. A quantas garrafas de 1 L equivale o resultado?",["2 e meia","3 e meia","4"],1,"100 × 35 = 3.500 mL = 3,5 L, ou três garrafas e meia."]
+        name:"Instituto Federal do Rio de Janeiro (IFRJ)", book:"IFRJ_Tipo_A",
+        edition:"2026 · Tipo A", letters:"ABCD", key:"DBACBCDDBBDCDCCDABDBBCACADCBBA",
+        paper:"https://drive.google.com/file/d/1ft-D0k7IG_njt_PkM357siTvpusD7yct/view",
+        reader:"https://drive.google.com/file/d/1ft-D0k7IG_njt_PkM357siTvpusD7yct/preview",
+        answerKey:"https://drive.google.com/file/d/1phmNGfVpwGEEvt_Gkelr7tqnEiRw2S2q/view",
+        practiceEdition:"Ingresso 2024",
+        practicePaper:"https://portal.ifrj.edu.br/sites/default/files/IFRJ/Arraial%20do%20Cabo/cursos-integrados-ingresso_em_2024.pdf",
+        items:[
+          ["Matemática","Questão 16","Uma razão de 35 mL por kg equivale a quantos litros por kg?",["0,035","0,35","3,5"],0,"Divida 35 por 1.000."],
+          ["Matemática","Questão 17","No exercício, multiplica-se 100 kg por 35 mL/kg. A quantas garrafas de 1 L equivale o resultado?",["2 e meia","3 e meia","4"],1,"100 × 35 = 3.500 mL = 3,5 L."]
         ]
       },
       {
-        name: "CEFET/RJ", book: "CEFET_RJ",
-        edition: "2027 · Edital 05/2026", letters: "ABCD",
-        key: "BDBDDCBCBADACBDACBXCCDDACCABDC",
-        paper: "https://anexos-r2.selecao.net.br/uploads/746/concursos/72/anexos/4916c44c-24f5-440c-adb1-537666d01c22.pdf",
-        answerKey: "https://anexos-r2.selecao.net.br/uploads/746/concursos/72/anexos/509f5562-3ce8-4600-b8e2-a1ca1b9e805e.pdf",
-        practiceEdition: "Ingresso 2024",
-        practicePaper: "https://anexos.cdn.selecao.net.br/uploads/746/concursos/29/anexos/rvWelOX9df0cDiR3sUNUONCgWYH7yJcxkJkuHvHg.pdf",
-        items: [
-          ["Matemática","Questão 15","Mantida a distância, um veículo aumenta a velocidade média em 25%. Como varia o tempo de viagem?",["Cai 25%","Cai 20%","Aumenta 20%"],1,"O novo tempo é o inicial dividido por 1,25. Isso equivale a 80% do anterior, uma queda de 20%."],
-          ["Matemática","Questão 17","O tempo para resolver um cubo mágico caiu de 3,47 s para 3,13 s. Qual foi a redução percentual aproximada?",["9,8%","10,2%","90,2%"],0,"A diferença é 0,34 s. Calcule 0,34 ÷ 3,47 × 100 ≈ 9,8%."]
+        name:"CEFET/RJ", book:"CEFET_RJ",
+        edition:"2027 · Edital 05/2026", letters:"ABCD", key:"BDBDDCBCBADACBDACBXCCDDACCABDC",
+        paper:"https://anexos-r2.selecao.net.br/uploads/746/concursos/72/anexos/4916c44c-24f5-440c-adb1-537666d01c22.pdf",
+        answerKey:"https://anexos-r2.selecao.net.br/uploads/746/concursos/72/anexos/509f5562-3ce8-4600-b8e2-a1ca1b9e805e.pdf",
+        practiceEdition:"Ingresso 2024",
+        practicePaper:"https://anexos.cdn.selecao.net.br/uploads/746/concursos/29/anexos/rvWelOX9df0cDiR3sUNUONCgWYH7yJcxkJkuHvHg.pdf",
+        items:[
+          ["Matemática","Questão 15","Mantida a distância, um veículo aumenta a velocidade média em 25%. Como varia o tempo?",["Cai 25%","Cai 20%","Aumenta 20%"],1,"Divida o tempo inicial por 1,25. O novo tempo equivale a 80% do anterior."],
+          ["Matemática","Questão 17","O tempo para resolver um cubo caiu de 3,47 s para 3,13 s. Qual foi a redução percentual aproximada?",["9,8%","10,2%","90,2%"],0,"0,34 ÷ 3,47 × 100 ≈ 9,8%."]
         ]
       },
       {
-        name: "Colégio Pedro II (CPII)", book: "Colegio_Pedro_II",
-        edition: "2026 · Regular diurno", letters: "ABCD",
-        key: "ACDDBACDABDCCCADBBAB",
-        paper: "https://www.scribd.com/document/982820048/Pedro-II",
-        reader: "https://www.scribd.com/embeds/982820048/content",
-        answerKey: "https://dhui.cp2.g12.br/dhui_arquivos/ano_2025/certame_0497/oferta_0584/GABARITO_EMRD_PUBLICAR2025fim.pdf",
-        practiceEdition: "2023/2024 · Regular diurno",
-        practicePaper: "https://dhuimigracao.cp2.g12.br/dhui_arquivos/ano_2023/certame_0412/oferta_0462/EM_REGULAR_DIURNO_2023_SEM_GABARITO.pdf",
-        items: [
-          ["Matemática","Questão 13","Como representar um dezesseis avos de um milhão em notação científica?",["6,25 × 10³","6,25 × 10⁴","6,25 × 10⁵"],1,"1.000.000 ÷ 16 = 62.500. Em notação científica, 6,25 × 10⁴."],
-          ["Matemática","Questão 14","Em um grupo de 2 bilhões de usuários, o acesso diário caiu de 32% para 18%. Quantos usuários essa diferença representa?",["180 milhões","280 milhões","320 milhões"],1,"A queda foi de 14 pontos percentuais. 2 bilhões × 0,14 = 280 milhões."]
+        name:"Colégio Pedro II (CPII)", book:"Colegio_Pedro_II",
+        edition:"2026 · Regular diurno", letters:"ABCD", key:"ACDDBACDABDCCCADBBAB",
+        paper:"https://www.scribd.com/document/982820048/Pedro-II",
+        reader:"https://www.scribd.com/embeds/982820048/content",
+        answerKey:"https://dhui.cp2.g12.br/dhui_arquivos/ano_2025/certame_0497/oferta_0584/GABARITO_EMRD_PUBLICAR2025fim.pdf",
+        practiceEdition:"2023/2024 · Regular diurno",
+        practicePaper:"https://dhuimigracao.cp2.g12.br/dhui_arquivos/ano_2023/certame_0412/oferta_0462/EM_REGULAR_DIURNO_2023_SEM_GABARITO.pdf",
+        items:[
+          ["Matemática","Questão 13","Como representar um dezesseis avos de um milhão em notação científica?",["6,25 × 10³","6,25 × 10⁴","6,25 × 10⁵"],1,"1.000.000 ÷ 16 = 62.500 = 6,25 × 10⁴."],
+          ["Matemática","Questão 14","Em um grupo de 2 bilhões, o acesso diário caiu de 32% para 18%. Quantos usuários essa diferença representa?",["180 milhões","280 milhões","320 milhões"],1,"São 14 pontos percentuais. 2 bilhões × 0,14 = 280 milhões."]
         ]
       }
     ];
 
-    /* Perfis e progresso. A mesma chave mantém os perfis da versão anterior. */
+    /* Perfis e progresso local. */
 
     const rootKey = "rota-aprova-perfis-v2";
     const saved = read(rootKey, {});
@@ -632,11 +742,11 @@
 
     function drawAssessment() {
       const pool = diagnostic.concat(extraDiagnostic);
-      const chosen = [];
-      for (const subject of subjects) {
+      const chosen = subjects.flatMap(subject => {
         const count = diagnostic.filter(q => q[0] === subject).length;
-        chosen.push(...shuffled(pool.filter(q => q[0] === subject)).slice(0, count));
-      }
+        return shuffled(pool.filter(q => q[0] === subject)).slice(0, count);
+      });
+
       return shuffled(chosen).map(([subject, topic, text, options, correct, why]) => {
         const order = shuffled(options.map((_, i) => i));
         return [subject, topic, text, order.map(i => options[i]), order.indexOf(correct), why];
@@ -655,13 +765,13 @@
 
       if (!profiles.size) {
         const old = read("rotaAssessmentV1", null);
-        if (old && Array.isArray(old.days)) {
+        if (Array.isArray(old?.days)) {
           const valid = [...new Set(old.days)]
             .filter(i => Number.isInteger(i) && i >= 0 && i < 7)
             .sort((a, b) => a - b);
           if (valid.length) profile.days = valid;
         }
-        if (old && Number.isInteger(old.minutes) && old.minutes >= 15 &&
+        if (Number.isInteger(old?.minutes) && old.minutes >= 15 &&
             old.minutes <= 240 && old.minutes % 15 === 0) {
           profile.minutes = old.minutes;
         }
@@ -733,12 +843,14 @@
       applyTheme(dark);
       write("rota-aprova-tema", dark);
     };
+
     applyTheme(read("rota-aprova-tema",
       window.matchMedia("(prefers-color-scheme: dark)").matches));
 
     $("start").onclick = openProfile;
     $("profileButton").onclick = openProfile;
     $("closeDialog").onclick = () => $("profileDialog").close();
+
     $("profileForm").onsubmit = event => {
       event.preventDefault();
       const name = $("profileName").value.trim();
@@ -749,6 +861,7 @@
       $("profileDialog").close();
       enter(name);
     };
+
     $("brand").onclick = () => data ? navigate("home") : window.scrollTo(0, 0);
 
     const pages = [
@@ -790,32 +903,33 @@
 
     function home() {
       title("Olá, " + data.name + "!", "Escolha a próxima atividade do seu plano.");
-      const banner = element("section", undefined, "banner");
       const started = data.answers.some(value => value !== null);
+      const banner = element("section", undefined, "banner");
+
       banner.append(
         element("h2", data.completed ? "Seu plano semanal" : "Avaliação inicial"),
         element("p", data.completed
           ? "Consulte as matérias de cada dia ou ajuste sua disponibilidade."
           : "Responda a 20 perguntas para identificar os assuntos que merecem mais atenção."),
-        button(data.completed ? "Ver cronograma" :
-          started ? "Continuar avaliação" : "Começar avaliação",
+        button(data.completed ? "Ver cronograma" : started ? "Continuar avaliação" : "Começar avaliação",
           () => navigate(data.completed ? "schedule" : "assessment"))
       );
 
       const grid = element("div", undefined, "grid");
       [
-        ["questions","Questões de provas","Escolha uma escola e confira as questões."],
-        ["simulation","Simulado geral","Resolva seis questões e consulte o gabarito."],
-        ["materials","Revisão por matéria","Retome um conceito antes de praticar."]
+        ["questions", "Questões de provas", "Escolha uma escola e confira as questões."],
+        ["simulation", "Simulado geral", "Resolva seis questões e consulte o gabarito."],
+        ["materials", "Revisão por matéria", "Retome um conceito antes de praticar."]
       ].forEach(([id, heading, description]) => {
         const box = card(heading, description);
         box.append(button("Acessar", () => navigate(id), true));
         grid.append(box);
       });
+
       $("content").append(banner, grid);
     }
 
-    /* Formulário compartilhado pelas atividades com alternativas. */
+    /* Formulário de alternativas. */
 
     function questionForm(parent, item, options = {}) {
       const form = element("form", undefined, "stack");
@@ -865,34 +979,36 @@
         }
         options.submit?.(selected);
       };
+
       parent.append(form);
     }
 
     function resultRows() {
       const items = assessmentItems();
       return subjects.map(subject => {
-        const indices = items.map((q, i) => q[0] === subject ? i : -1).filter(i => i >= 0);
-        const missed = indices.filter(i => data.answers[i] !== items[i][4]);
+        const entries = items
+          .map((item, i) => ({ item, i }))
+          .filter(entry => entry.item[0] === subject);
+        const missed = entries.filter(entry => data.answers[entry.i] !== entry.item[4]);
+
         return {
-          subject,
-          total: indices.length,
-          correct: indices.length - missed.length,
+          subject, total: entries.length,
+          correct: entries.length - missed.length,
           wrong: missed.length,
-          topics: [...new Set(missed.map(i => items[i][1]))]
+          topics: [...new Set(missed.map(entry => entry.item[1]))]
         };
       });
     }
 
     function assessment() {
-      title("Avaliação inicial",
-        "20 questões de Matemática, Português, Ciências, Geografia, História e Inglês.");
+      title("Avaliação inicial", "20 questões de Matemática, Português, Ciências, Geografia, História e Inglês.");
 
       if (data.completed) {
         const grid = element("div", undefined, "grid");
         resultRows().forEach(row => {
           grid.append(card(row.subject + " · " + row.correct + "/" + row.total,
             row.wrong ? "Revisar: " + row.topics.join(", ") + "."
-                      : "Você acertou todas as questões desta matéria."));
+              : "Você acertou todas as questões desta matéria."));
         });
         $("content").append(grid, button("Abrir cronograma", () => navigate("schedule")));
         return;
@@ -923,9 +1039,8 @@
         } : null,
         submit(answer) {
           data.answers[i] = answer;
-          if (i + 1 < items.length) {
-            data.cursor++;
-          } else {
+          if (i + 1 < items.length) data.cursor++;
+          else {
             const missing = data.answers.findIndex(a => a === null);
             if (missing >= 0) data.cursor = missing;
             else data.completed = true;
@@ -934,10 +1049,11 @@
           navigate("assessment");
         }
       });
+
       $("content").append(box);
     }
 
-    /* Cronograma com uma ou duas matérias por dia. */
+    /* Cronograma de até duas matérias por dia. */
 
     function buildSchedule(rows, chosenDays, minutes) {
       const blocks = minutes / 15;
@@ -962,15 +1078,17 @@
           entry.used += count;
           return { subject: entry.row.subject, minutes: count * 15, topics: entry.row.topics };
         });
+
         return { day, sessions };
       });
     }
 
     function schedule() {
-      title("Cronograma semanal",
-        "Escolha seus dias e seu tempo. Cada dia recebe no máximo duas matérias.");
+      title("Cronograma semanal", "Escolha seus dias e seu tempo. Cada dia recebe no máximo duas matérias.");
+
       const rows = data.completed ? resultRows() :
         subjects.map(subject => ({ subject, wrong: 0, total: 1, topics: [] }));
+
       const box = card("Minha disponibilidade", data.completed
         ? "O plano considera a proporção de erros em cada matéria."
         : "Você já pode montar um plano. Conclua a avaliação para priorizar suas dificuldades.");
@@ -984,7 +1102,6 @@
         const label = element("label");
         const check = document.createElement("input");
         check.type = "checkbox";
-        check.name = "day";
         check.value = i;
         check.checked = data.days.includes(i);
         label.append(check, document.createTextNode(" " + day));
@@ -1008,8 +1125,8 @@
       message.setAttribute("role", "status");
       form.append(field, timeLabel, submit, message);
       box.append(form);
-
       const output = element("section", undefined, "stack");
+
       function display() {
         output.replaceChildren();
         output.append(element("h3", "Seu plano semanal · " +
@@ -1032,6 +1149,7 @@
           });
           grid.append(dayCard);
         });
+
         output.append(grid);
         const omitted = subjects.filter(subject => !included.has(subject));
         if (omitted.length) {
@@ -1063,7 +1181,7 @@
       display();
     }
 
-    /* Banco por escola e matéria. */
+    /* Banco interativo. */
 
     function openBank(mode, school = schoolIndex, subject = subjectIndex) {
       bankMode = mode;
@@ -1078,10 +1196,10 @@
       const actions = element("div", undefined, "actions");
 
       [
-        ["uploaded","Simulados preparatórios"],
-        ["papers","Provas completas"],
-        ["school","Questões comentadas"],
-        ["subject","Treino por matéria"]
+        ["uploaded", "Simulados preparatórios"],
+        ["papers", "Provas completas"],
+        ["school", "Questões comentadas"],
+        ["subject", "Treino por matéria"]
       ].forEach(([mode, label]) => {
         actions.append(button(label, () => openBank(mode), bankMode !== mode));
       });
@@ -1095,8 +1213,9 @@
       const school = schools[schoolIndex];
       const uploaded = bankMode === "uploaded";
       const bySubject = bankMode === "subject";
+
       let items;
-      if (uploaded) items = prepBooks[school.book];
+      if (uploaded) items = prepBooks[school.book].concat(additionalPractice[schoolIndex]);
       else if (bySubject) items = practice.filter(q => q[0] === subjects[subjectIndex]);
       else items = school.items;
 
@@ -1123,12 +1242,16 @@
       let answers;
 
       if (uploaded) {
-        const bookName = school.book === "IFF_Sesc" ? "IFF e Escola Sesc" : school.name;
+        const originalCount = prepBooks[school.book].length;
+        const isNew = bankIndex >= originalCount;
+        const bookName = !isNew && school.book === "IFF_Sesc" ? "IFF e Escola Sesc" : school.name;
         heading = "Simulado preparatório · " + bookName;
-        description = "Questão " + (bankIndex + 1) + " de " + items.length +
-          " · " + item[0] + " · " + item[1];
+        description = (isNew ? "Treino autoral · " : "") +
+          "Questão " + (bankIndex + 1) + " de " + items.length + " · " + item[0] + " · " + item[1];
+
         data.prepAnswers ||= {};
-        answers = data.prepAnswers[school.book] ||= {};
+        const answerBook = isNew ? "autoral-" + schoolIndex : school.book;
+        answers = data.prepAnswers[answerBook] ||= {};
       } else if (bySubject) {
         heading = item[0];
         description = "Treino autoral · " + item[1];
@@ -1139,6 +1262,7 @@
 
       const box = card(heading, description);
       const current = bankIndex;
+
       questionForm(box, item, {
         explain: true,
         letters: uploaded,
@@ -1151,8 +1275,7 @@
         }
       });
 
-      const bottom = element("div", undefined, "actions");
-      bottom.style.marginTop = "16px";
+      const bottom = element("div", undefined, "actions question-nav");
       if (bankIndex > 0) {
         bottom.append(button("Questão anterior", () => {
           bankIndex--;
@@ -1168,6 +1291,7 @@
       if (bankMode === "school") {
         bottom.append(link("Abrir prova de origem ↗", school.practicePaper || school.paper));
       }
+
       box.append(bottom);
       $("content").append(box);
     }
@@ -1176,6 +1300,7 @@
       const school = schools[schoolIndex];
       const select = picker("Instituição", schools.map(s => s.name), schoolIndex,
         value => openBank("papers", value));
+
       const box = card(school.name + " · " + school.edition,
         school.key.length + " questões objetivas. Leia o caderno e marque as alternativas no cartão.");
 
@@ -1213,6 +1338,7 @@
         const label = element("label", "Questão " + (i + 1), "field");
         const choice = document.createElement("select");
         const feedback = element("small");
+
         if (key === "X") {
           choice.add(new Option("Anulada", ""));
           choice.disabled = true;
@@ -1220,6 +1346,7 @@
           choice.add(new Option("Em branco", ""));
           for (const letter of school.letters) choice.add(new Option(letter, letter));
           choice.value = answers[i] || "";
+
           choice.onchange = () => {
             answers[i] = choice.value;
             report.hidden = true;
@@ -1227,6 +1354,7 @@
             save();
           };
         }
+
         labels.push(feedback);
         label.append(choice, feedback);
         grid.append(label);
@@ -1237,6 +1365,7 @@
         let errors = 0;
         let blank = 0;
         let cancelled = 0;
+
         [...school.key].forEach((key, i) => {
           if (key === "X") cancelled++;
           else if (!answers[i]) blank++;
@@ -1248,6 +1377,7 @@
             labels[i].textContent = "Gabarito: " + key;
           }
         });
+
         report.textContent = hits + " acertos · " + errors + " erros · " +
           blank + " em branco · " + cancelled + " anuladas.";
         report.hidden = false;
@@ -1278,6 +1408,7 @@
       if (i < quiz.items.length) {
         const item = quiz.items[i];
         const box = card("Questão " + (i + 1) + " de " + quiz.items.length, item[0]);
+
         questionForm(box, item, {
           label: i + 1 === quiz.items.length ? "Ver resultado" : "Próxima questão",
           submit(answer) {
@@ -1290,6 +1421,7 @@
             navigate("simulation");
           }
         });
+
         $("content").append(box);
         return;
       }
@@ -1297,6 +1429,7 @@
       const score = quiz.items.filter((q, j) => q[4] === quiz.answers[j]).length;
       const result = card("Resultado · " + score + " de " + quiz.items.length,
         "Abra cada matéria para conferir a explicação.");
+
       quiz.items.forEach((q, j) => {
         const detail = element("details");
         detail.append(
@@ -1308,6 +1441,7 @@
         );
         result.append(detail);
       });
+
       $("content").append(result, button("Fazer outro simulado", () => {
         quiz = null;
         navigate("simulation");
@@ -1317,6 +1451,7 @@
     function schoolDirectory() {
       title("Escolas e provas", "Escolha a instituição para praticar no painel ou consultar o caderno.");
       const grid = element("div", undefined, "grid");
+
       schools.forEach((school, i) => {
         const box = card(school.name, school.edition);
         const actions = element("div", undefined, "actions");
@@ -1328,11 +1463,13 @@
         box.append(actions);
         grid.append(box);
       });
+
       $("content").append(grid);
     }
 
     function materials() {
       title("Materiais de revisão", "Leia um resumo curto e aplique o conceito no treino da matéria.");
+
       const summaries = [
         "Porcentagem representa uma parte de 100. Para calcular 15% de um valor, multiplique por 0,15. Em um desconto, subtraia esse resultado do preço inicial.",
         "Para descobrir a que um pronome se refere, substitua-o pelo termo anterior e releia a frase. Confira se o sentido e a concordância foram preservados.",
@@ -1341,6 +1478,7 @@
         "Ao analisar uma fonte histórica, identifique quem a produziu, quando, com qual finalidade e de que ponto de vista. Compare-a com outras fontes do período.",
         "Procure marcadores de tempo antes de escolher o verbo. Yesterday indica passado. Every day costuma indicar uma ação habitual."
       ];
+
       const grid = element("div", undefined, "grid");
       subjects.forEach((subject, i) => {
         const box = card(subject, summaries[i]);
@@ -1360,15 +1498,18 @@
 
       const history = card("Histórico de simulados");
       if (!data.history.length) {
-        history.append(element("p", "Seus resultados aparecerão aqui ao concluir um simulado geral.", "muted"));
+        history.append(element("p",
+          "Seus resultados aparecerão aqui ao concluir um simulado geral.", "muted"));
       } else {
         const list = element("ul");
         [...data.history].reverse().forEach(entry => {
           const date = new Date(entry.date).toLocaleDateString("pt-BR");
-          list.append(element("li", date + " · " + entry.score + " de " + entry.total + " acertos"));
+          list.append(element("li",
+            date + " · " + entry.score + " de " + entry.total + " acertos"));
         });
         history.append(list);
       }
+
       $("content").append(box, history);
     }
 
