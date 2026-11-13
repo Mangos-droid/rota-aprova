@@ -10,14 +10,13 @@
     :root {
       color-scheme: light;
       --bg: #f4f7fb;
-      --card: #ffffff;
+      --card: #fff;
       --text: #17263e;
       --muted: #52647b;
       --line: #d9e2ee;
       --primary: #185bb5;
       --soft: #eaf2ff;
-      --good: #126338;
-      --shadow: 0 8px 25px rgba(20, 39, 68, .06);
+      --shadow: 0 8px 25px rgba(20,39,68,.06);
     }
 
     html.dark {
@@ -29,14 +28,12 @@
       --line: #344662;
       --primary: #87b9ff;
       --soft: #203956;
-      --good: #8be0ad;
       --shadow: none;
     }
 
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       background: var(--bg);
@@ -52,12 +49,7 @@
     button, select, input { font: inherit; }
     button, select { cursor: pointer; }
     button:disabled { opacity: .55; cursor: default; }
-
-    :focus-visible {
-      outline: 3px solid var(--primary);
-      outline-offset: 3px;
-    }
-
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
     .wrap { width: min(1180px, 94%); margin: auto; }
     .muted { color: var(--muted); }
     .small { font-size: 14px; }
@@ -78,11 +70,7 @@
       flex-wrap: wrap;
     }
 
-    .topbar {
-      min-height: 66px;
-      justify-content: space-between;
-    }
-
+    .topbar { min-height: 66px; justify-content: space-between; }
     .brand {
       border: 0;
       background: transparent;
@@ -92,8 +80,7 @@
       letter-spacing: -.05em;
     }
 
-    .brand span { color: var(--primary); }
-
+    .brand span, .hero h1 span { color: var(--primary); }
     .btn, .secondary {
       border: 1px solid transparent;
       border-radius: 9px;
@@ -103,13 +90,11 @@
 
     .btn { color: white; background: #185bb5; }
     .btn:hover { background: #104b99; }
-
     .secondary {
       color: var(--text);
       background: var(--card);
       border-color: var(--line);
     }
-
     .secondary:hover { background: var(--soft); }
 
     .hero {
@@ -127,9 +112,7 @@
       letter-spacing: -.06em;
     }
 
-    .hero h1 span { color: var(--primary); }
     .hero p { max-width: 640px; }
-
     .eyebrow {
       color: var(--primary);
       font-size: 13px;
@@ -137,7 +120,6 @@
       letter-spacing: .1em;
       text-transform: uppercase;
     }
-
     .hero-note {
       background: #173c50;
       color: white;
@@ -145,7 +127,6 @@
       padding: 30px;
       border-left: 8px solid #65ae98;
     }
-
     .hero-note ol { margin: 12px 0 0; padding-left: 22px; }
     .hero-note li { padding: 5px 0; }
 
@@ -157,15 +138,12 @@
       box-shadow: var(--shadow);
       min-width: 0;
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
       gap: 15px;
     }
-
     .resources { padding-bottom: 50px; }
-
     footer {
       padding: 22px 0;
       border-top: 1px solid var(--line);
@@ -182,7 +160,6 @@
     }
 
     .sidebar { position: sticky; top: 82px; padding: 12px; }
-
     .sidebar button {
       display: block;
       width: 100%;
@@ -193,13 +170,10 @@
       border: 0;
       border-radius: 8px;
     }
-
-    .sidebar button[aria-current="page"],
-    .sidebar button:hover {
+    .sidebar button[aria-current="page"], .sidebar button:hover {
       color: var(--primary);
       background: var(--soft);
     }
-
     .sidebar button[aria-current="page"] { font-weight: 700; }
     #mobileMenu { display: none; }
 
@@ -209,10 +183,9 @@
       background: #173e65;
       color: white;
     }
-
     .banner p { color: #e1edfa; }
-    label.field { display: grid; gap: 5px; font-weight: 700; }
 
+    label.field { display: grid; gap: 5px; font-weight: 700; }
     .fields {
       display: flex;
       gap: 14px;
@@ -232,7 +205,6 @@
 
     fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
     legend { font-size: 19px; font-weight: 700; padding: 0 0 10px; }
-
     .choice {
       display: flex;
       align-items: baseline;
@@ -243,31 +215,14 @@
       margin: 8px 0;
       cursor: pointer;
     }
-
     .choice:has(input:checked) {
       background: var(--soft);
       border-color: var(--primary);
     }
-
-    input[type="radio"], input[type="checkbox"] {
-      accent-color: var(--primary);
-    }
-
+    input[type="radio"], input[type="checkbox"] { accent-color: var(--primary); }
     .days { display: flex; flex-wrap: wrap; gap: 10px 18px; }
-
-    .result {
-      margin-top: 15px;
-      padding: 12px;
-      background: var(--soft);
-      border-radius: 8px;
-    }
-
-    .session + .session {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--line);
-    }
-
+    .result { margin-top: 15px; padding: 12px; background: var(--soft); border-radius: 8px; }
+    .session + .session { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
     .session p { margin: 3px 0; }
     progress { width: 100%; accent-color: var(--primary); }
     details { padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -280,15 +235,8 @@
       gap: 12px;
       margin: 16px 0;
     }
-
     .answer-grid small { font-size: 13px; color: var(--primary); }
-
-    .paper-reader {
-      border: 0;
-      width: 100%;
-      height: 66vh;
-      margin-top: 12px;
-    }
+    .paper-reader { border: 0; width: 100%; height: 66vh; margin-top: 12px; }
 
     dialog {
       width: min(420px, 92vw);
@@ -298,8 +246,7 @@
       background: var(--card);
       color: var(--text);
     }
-
-    dialog::backdrop { background: rgba(9, 18, 34, .55); }
+    dialog::backdrop { background: rgba(9,18,34,.55); }
 
     @media (max-width: 760px) {
       .hero, .layout { grid-template-columns: 1fr; }
@@ -312,7 +259,6 @@
       .topbar .actions { gap: 5px; }
       .topbar .btn, .topbar .secondary { padding: 8px 10px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
@@ -325,7 +271,6 @@
       <button class="brand" id="brand" aria-label="Rota Aprova, início">
         Rota <span>Aprova</span>
       </button>
-
       <div class="actions">
         <button class="secondary" id="theme" type="button">Tema escuro</button>
         <button class="btn" id="profileButton" type="button">Entrar</button>
@@ -344,7 +289,6 @@
         </p>
         <button class="btn" id="start" type="button">Abrir meu painel →</button>
       </div>
-
       <aside class="hero-note">
         <h2>Por onde começar?</h2>
         <ol>
@@ -376,9 +320,7 @@
 
   <div id="app" class="wrap layout" hidden>
     <button id="mobileMenu" class="secondary" type="button"
-            aria-controls="sidebar" aria-expanded="false">
-      ☰ Menu do estudante
-    </button>
+            aria-controls="sidebar" aria-expanded="false">☰ Menu do estudante</button>
     <nav id="sidebar" class="card sidebar" aria-label="Menu do estudante"></nav>
     <main id="content" class="stack" tabindex="-1"></main>
   </div>
@@ -407,33 +349,59 @@
     "use strict";
 
     const $ = id => document.getElementById(id);
+    const subjects = ["Matemática", "Português", "Ciências", "Geografia", "História", "Inglês"];
+    const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
 
     function element(tag, text, className) {
-      const node = document.createElement(tag);
-      if (text !== undefined) node.textContent = text;
-      if (className) node.className = className;
-      return node;
+      const el = document.createElement(tag);
+      if (text !== undefined) el.textContent = text;
+      if (className) el.className = className;
+      return el;
     }
 
     function button(text, action, secondary = false) {
-      const node = element("button", text, secondary ? "secondary" : "btn");
-      node.type = "button";
-      node.onclick = action;
-      return node;
+      const el = element("button", text, secondary ? "secondary" : "btn");
+      el.type = "button";
+      el.onclick = action;
+      return el;
     }
 
     function link(text, url) {
-      const node = element("a", text);
-      node.href = url;
-      node.target = "_blank";
-      node.rel = "noopener noreferrer";
-      return node;
+      const el = element("a", text);
+      el.href = url;
+      el.target = "_blank";
+      el.rel = "noopener noreferrer";
+      return el;
+    }
+
+    function card(heading, description) {
+      const box = element("article", undefined, "card");
+      box.append(element("h3", heading));
+      if (description) box.append(element("p", description, "muted"));
+      return box;
+    }
+
+    function title(heading, description) {
+      const box = element("div");
+      box.append(element("h2", heading));
+      if (description) box.append(element("p", description, "muted"));
+      $("content").append(box);
+    }
+
+    function picker(labelText, values, current, onChange) {
+      const label = element("label", labelText, "field");
+      const select = document.createElement("select");
+      values.forEach((text, i) => select.add(new Option(text, String(i))));
+      select.value = String(current);
+      select.onchange = () => onChange(Number(select.value));
+      label.append(select);
+      return label;
     }
 
     function read(key, fallback) {
       try {
-        const value = localStorage.getItem(key);
-        return value === null ? fallback : JSON.parse(value);
+        const text = localStorage.getItem(key);
+        return text === null ? fallback : JSON.parse(text);
       } catch {
         return fallback;
       }
@@ -448,61 +416,29 @@
       }
     }
 
-    function card(title, description) {
-      const box = element("article", undefined, "card");
-      box.append(element("h3", title));
-      if (description) box.append(element("p", description, "muted"));
-      return box;
-    }
-
-    function title(text, description) {
-      const box = element("div");
-      box.append(element("h2", text));
-      if (description) box.append(element("p", description, "muted"));
-      $("content").append(box);
-    }
-
-    function selectField(labelText, values) {
-      const label = element("label", labelText, "field");
-      const select = document.createElement("select");
-      values.forEach((value, i) => select.add(new Option(value, String(i))));
-      label.append(select);
-      return { label, select };
-    }
-
-    const subjects = [
-      "Matemática", "Português", "Ciências",
-      "Geografia", "História", "Inglês"
-    ];
-
-    const days = [
-      "Segunda", "Terça", "Quarta", "Quinta",
-      "Sexta", "Sábado", "Domingo"
-    ];
-
     /*
-      Cada questão contém:
-      matéria, assunto, enunciado, alternativas, índice correto e explicação.
-      A ordem das primeiras 20 questões mantém a compatibilidade com
-      avaliações iniciadas na versão anterior.
+      Estrutura de cada questão:
+      [matéria, assunto, enunciado, alternativas, índice correto, comentário]
+      O índice da primeira alternativa é zero.
     */
+
     const diagnostic = [
       ["Matemática","Porcentagem","Uma mochila de R$ 160 recebeu desconto de 15%. Qual é o preço final?",["R$ 136","R$ 144","R$ 150"],0,"15% de 160 são 24. Subtraindo o desconto, 160 − 24 = 136."],
-      ["Matemática","Equações","Qual é o valor de x em 3(x − 2) + 5 = 20?",["5","7","9"],1,"Distribua o 3: 3x − 6 + 5 = 20. Logo, 3x = 21 e x = 7."],
+      ["Matemática","Equações","Qual é o valor de x em 3(x − 2) + 5 = 20?",["5","7","9"],1,"3x − 6 + 5 = 20. Logo, 3x = 21 e x = 7."],
       ["Matemática","Frações","Dois quintos de uma turma de 30 alunos praticam natação. Quantos são?",["10","12","15"],1,"Um quinto de 30 é 6. Dois quintos correspondem a 12."],
       ["Matemática","Área de triângulos","Um triângulo tem base de 12 cm e altura de 7 cm. Qual é a área?",["84 cm²","19 cm²","42 cm²"],2,"A área é base × altura ÷ 2. Assim, 12 × 7 ÷ 2 = 42 cm²."],
       ["Português","Conectivos","Em “Embora chovesse, saímos”, que ideia a palavra “embora” expressa?",["Causa","Concessão","Finalidade"],1,"A chuva poderia dificultar a saída, mas não a impediu. Essa relação é de concessão."],
-      ["Português","Sujeito","Qual é o sujeito de “Chegaram cedo os estudantes”?",["Cedo","Chegaram","Os estudantes"],2,"Pergunte quem chegou. A resposta é “os estudantes”, mesmo vindo depois do verbo."],
-      ["Português","Coesão","Em “Ana comprou a revista e a leu”, o segundo “a” retoma qual palavra?",["Ana","Revista","Comprou"],1,"O pronome substitui “a revista”. A frase equivale a “Ana leu a revista”."],
-      ["Português","Inferência","Ao ouvir um trovão, Bia recolheu as roupas do varal. O que se pode inferir?",["Ela esperava chuva.","Ela já tinha lavado o varal.","O dia estava quente."],0,"O trovão e a retirada das roupas indicam que Bia quis evitar que elas se molhassem."],
+      ["Português","Sujeito","Qual é o sujeito de “Chegaram cedo os estudantes”?",["Cedo","Chegaram","Os estudantes"],2,"Pergunte quem chegou. A resposta é “os estudantes”."],
+      ["Português","Coesão","Em “Ana comprou a revista e a leu”, o segundo “a” retoma qual palavra?",["Ana","Revista","Comprou"],1,"O pronome substitui “a revista”."],
+      ["Português","Inferência","Ao ouvir um trovão, Bia recolheu as roupas do varal. O que se pode inferir?",["Ela esperava chuva.","Ela já tinha lavado o varal.","O dia estava quente."],0,"O trovão e a retirada das roupas sugerem que Bia quis evitar que elas se molhassem."],
       ["Ciências","Fotossíntese","Qual gás é consumido pelas plantas durante a fotossíntese?",["Oxigênio","Hélio","Gás carbônico"],2,"A planta usa água, gás carbônico e energia luminosa para produzir matéria orgânica."],
       ["Ciências","Sistema circulatório","Qual órgão impulsiona o sangue pelo corpo?",["Pulmão","Coração","Estômago"],1,"As contrações do coração movimentam o sangue pelos vasos."],
-      ["Ciências","Mudanças de estado","Como se chama a passagem do estado gasoso para o líquido?",["Fusão","Condensação","Solidificação"],1,"A condensação forma líquido a partir de vapor, como nas gotas do lado de fora de um copo gelado."],
+      ["Ciências","Mudanças de estado","Como se chama a passagem do estado gasoso para o líquido?",["Fusão","Condensação","Solidificação"],1,"Na condensação, o vapor passa ao estado líquido."],
       ["Geografia","Escala cartográfica","Na escala 1:100.000, 1 cm no mapa representa qual distância real?",["1 km","10 km","100 km"],0,"100.000 cm correspondem a 1.000 metros, ou 1 km."],
-      ["Geografia","Tempo e clima","Qual frase descreve o tempo atmosférico?",["Os verões costumam ser secos.","A região tem clima tropical.","Está chovendo agora."],2,"O tempo descreve condições observadas em um momento. O clima considera padrões de longo prazo."],
-      ["Geografia","Urbanização","O que tende a ocorrer quando o asfalto substitui o solo permeável?",["Mais infiltração","Mais escoamento superficial","Menos alagamentos em todos os casos"],1,"O asfalto dificulta a infiltração e aumenta a quantidade de água que escoa pela superfície."],
-      ["História","Revolução Industrial","Qual mudança marcou a Revolução Industrial?",["Expansão das fábricas mecanizadas","Fim das cidades","Fim imediato do trabalho infantil"],0,"As máquinas e o sistema fabril transformaram a organização da produção."],
-      ["História","Independência do Brasil","Qual instituição permaneceu no Brasil após 1822?",["Administração colonial portuguesa","Escravidão","República presidencialista"],1,"A independência política ocorreu em 1822. A abolição legal da escravidão ocorreu em 1888."],
+      ["Geografia","Tempo e clima","Qual frase descreve o tempo atmosférico?",["Os verões costumam ser secos.","A região tem clima tropical.","Está chovendo agora."],2,"O tempo descreve as condições de um momento. O clima considera padrões de longo prazo."],
+      ["Geografia","Urbanização","O que tende a ocorrer quando o asfalto substitui o solo permeável?",["Mais infiltração","Mais escoamento superficial","Menos alagamentos em todos os casos"],1,"O asfalto dificulta a infiltração e aumenta o escoamento pela superfície."],
+      ["História","Revolução Industrial","Qual mudança marcou a Revolução Industrial?",["Expansão das fábricas mecanizadas","Fim das cidades","Fim imediato do trabalho infantil"],0,"As máquinas e o sistema fabril transformaram a produção."],
+      ["História","Independência do Brasil","Qual instituição permaneceu no Brasil após 1822?",["Administração colonial portuguesa","Escravidão","República presidencialista"],1,"A independência ocorreu em 1822. A abolição legal da escravidão ocorreu em 1888."],
       ["História","Iluminismo","Qual ideia se relaciona ao pensamento iluminista?",["Defesa do poder ilimitado dos reis","Proibição de pesquisas","Valorização da razão"],2,"Pensadores iluministas valorizaram a razão e questionaram o absolutismo."],
       ["Inglês","Simple past","Complete: Yesterday, Julia ___ to school.",["go","went","goes"],1,"Yesterday indica passado. O passado simples de go é went."],
       ["Inglês","Leitura","O aviso “Keep the door closed” pede para:",["Manter a porta fechada","Abrir a janela","Trancar o portão"],0,"Keep significa manter. The door closed significa a porta fechada."],
@@ -511,43 +447,89 @@
 
     const extraDiagnostic = [
       ["Matemática","Razão","Uma receita usa 2 xícaras de arroz para 3 de água. Para 6 de arroz, quantas de água?",["6","9","12"],1,"A quantidade de arroz triplicou. Triplique também a água: 3 × 3 = 9."],
-      ["Matemática","Área de retângulos","Uma quadra retangular mede 18 m por 9 m. Qual é a área?",["54 m²","81 m²","162 m²"],2,"Multiplique comprimento e largura: 18 × 9 = 162."],
+      ["Matemática","Área de retângulos","Uma quadra mede 18 m por 9 m. Qual é a área?",["54 m²","81 m²","162 m²"],2,"Multiplique comprimento e largura: 18 × 9 = 162."],
       ["Português","Pontuação","Em qual frase a vírgula separa um vocativo?",["Pedro, feche a janela.","Ao amanhecer, saímos.","Li cartas, livros e jornais."],0,"Pedro é a pessoa a quem o pedido é dirigido."],
       ["Português","Concordância","Qual frase tem concordância adequada?",["Fazem dois anos que estudo.","As meninas chegaram cedo.","Houveram muitos avisos."],1,"O sujeito plural “as meninas” concorda com “chegaram”."],
       ["Ciências","Cadeia alimentar","Ao comer sementes, um pássaro ocupa qual papel nessa relação?",["Produtor","Decompositor","Consumidor primário"],2,"Ele consome matéria orgânica produzida por uma planta."],
-      ["Ciências","Energia","Qual transformação de energia movimenta as pás de um ventilador elétrico?",["Elétrica em cinética","Térmica em química","Sonora em elétrica"],0,"O motor usa eletricidade para gerar movimento."],
-      ["Geografia","Orientação","Num mapa com o norte no alto, qual direção fica à direita?",["Oeste","Leste","Sul"],1,"Nessa orientação, o leste fica à direita e o oeste à esquerda."],
+      ["Ciências","Energia","Qual transformação movimenta as pás de um ventilador elétrico?",["Elétrica em cinética","Térmica em química","Sonora em elétrica"],0,"O motor usa eletricidade para gerar movimento."],
+      ["Geografia","Orientação","Num mapa com o norte no alto, qual direção fica à direita?",["Oeste","Leste","Sul"],1,"Nessa orientação, o leste fica à direita."],
       ["Geografia","Migração","Quem se muda de uma região do país para morar em outra realiza qual deslocamento?",["Migração interna","Migração internacional","Deslocamento pendular diário"],0,"A mudança de residência ocorre dentro do mesmo país."],
       ["História","Fontes históricas","Que fonte permite estudar os preços de um mercado do século XIX?",["Um anúncio publicado hoje","Um livro de contas da época","Um romance atual sem fontes"],1,"O livro de contas registra transações e preços daquele período."],
-      ["História","República","Em qual ano foi proclamada a República no Brasil?",["1822","1888","1889"],2,"A proclamação da República ocorreu em 15 de novembro de 1889."],
-      ["Inglês","Simple present","Complete: My sister ___ music every evening.",["listen","listens to","listening"],1,"Com my sister, usamos listens. Antes do objeto, a expressão é listen to."],
-      ["Inglês","Leitura","O aviso “No food in the library” indica que:",["A biblioteca vende comida.","Alimentos são proibidos na biblioteca.","A biblioteca está fechada."],1,"No food indica uma restrição à presença de alimentos naquele espaço."]
+      ["História","República","Em qual ano foi proclamada a República no Brasil?",["1822","1888","1889"],2,"A proclamação ocorreu em 15 de novembro de 1889."],
+      ["Inglês","Simple present","Complete: My sister ___ music every evening.",["listen","listens to","listening"],1,"Com my sister, usamos listens. A expressão é listen to music."],
+      ["Inglês","Leitura","O aviso “No food in the library” indica que:",["A biblioteca vende comida.","Alimentos são proibidos na biblioteca.","A biblioteca está fechada."],1,"No food indica uma restrição à presença de alimentos."]
     ];
 
     const practice = [
-      ["Matemática","Proporção","Três cadernos custam R$ 24. Quanto custam cinco?",["R$ 32","R$ 40","R$ 48"],1,"Um caderno custa 24 ÷ 3 = 8 reais. Cinco custam 5 × 8 = 40 reais."],
-      ["Matemática","Geometria","Um quadrado tem perímetro de 36 cm. Qual é sua área?",["9 cm²","36 cm²","81 cm²"],2,"Cada lado mede 36 ÷ 4 = 9 cm. A área é 9 × 9 = 81 cm²."],
-      ["Português","Coesão","Em “Luísa pegou o livro e o abriu”, o pronome antes de “abriu” substitui:",["Luísa","O livro","A ação de pegar"],1,"A oração pode ser reescrita como “Luísa abriu o livro”."],
+      ["Matemática","Proporção","Três cadernos custam R$ 24. Quanto custam cinco?",["R$ 32","R$ 40","R$ 48"],1,"Um caderno custa 24 ÷ 3 = 8 reais. Cinco custam 40 reais."],
+      ["Matemática","Geometria","Um quadrado tem perímetro de 36 cm. Qual é sua área?",["9 cm²","36 cm²","81 cm²"],2,"Cada lado mede 36 ÷ 4 = 9 cm. A área é 81 cm²."],
+      ["Português","Coesão","Em “Luísa pegou o livro e o abriu”, o pronome antes de “abriu” substitui:",["Luísa","O livro","A ação de pegar"],1,"A oração equivale a “Luísa abriu o livro”."],
       ["Português","Conjunções","Em “Estudei, portanto consegui resolver a questão”, o termo “portanto” indica:",["Conclusão","Condição","Oposição"],0,"A segunda oração apresenta uma conclusão decorrente da primeira."],
       ["Ciências","Ecologia","Qual é o produtor na cadeia capim → gafanhoto → sapo?",["Sapo","Gafanhoto","Capim"],2,"O capim produz matéria orgânica por fotossíntese."],
-      ["Ciências","Misturas","Como separar areia da água usando um filtro de papel?",["Destilação","Filtração","Fusão"],1,"O filtro retém a areia enquanto a água atravessa seus poros."],
-      ["Geografia","Escala","Em um mapa de escala 1:100.000, dois pontos estão separados por 3 cm. Qual é a distância real?",["3 km","30 km","300 km"],0,"Cada centímetro corresponde a 1 km. Portanto, 3 cm representam 3 km."],
-      ["Geografia","População","Uma região tem 12.000 habitantes em 300 km². Qual é sua densidade demográfica?",["4 hab./km²","40 hab./km²","400 hab./km²"],1,"Divida a população pela área: 12.000 ÷ 300 = 40 hab./km²."],
-      ["História","Fontes históricas","Qual fonte traz um relato direto de uma operária sobre seu cotidiano em 1900?",["Uma novela atual","Um livro didático atual","Uma carta escrita por ela em 1900"],2,"A carta registra o ponto de vista da operária na época estudada."],
-      ["História","Brasil Império","Qual mudança ocorreu com a Lei Áurea?",["A abolição legal da escravidão","A proclamação da República","A independência do Brasil"],0,"A Lei Áurea aboliu legalmente a escravidão no Brasil em 1888."],
-      ["Inglês","Simple present","Complete: She ___ English every day.",["study","studies","studying"],1,"Com she no simple present, study passa a studies."],
+      ["Ciências","Misturas","Como separar areia da água usando um filtro de papel?",["Destilação","Filtração","Fusão"],1,"O filtro retém a areia e permite a passagem da água."],
+      ["Geografia","Escala","Em um mapa de escala 1:100.000, dois pontos estão a 3 cm. Qual é a distância real?",["3 km","30 km","300 km"],0,"Cada centímetro representa 1 km. Logo, 3 cm representam 3 km."],
+      ["Geografia","População","Uma região tem 12.000 habitantes em 300 km². Qual é a densidade demográfica?",["4 hab./km²","40 hab./km²","400 hab./km²"],1,"12.000 ÷ 300 = 40 hab./km²."],
+      ["História","Fontes históricas","Qual fonte traz um relato direto de uma operária de 1900?",["Uma novela atual","Um livro didático atual","Uma carta escrita por ela em 1900"],2,"A carta registra o ponto de vista da operária na época estudada."],
+      ["História","Brasil Império","Qual mudança ocorreu com a Lei Áurea?",["A abolição legal da escravidão","A proclamação da República","A independência do Brasil"],0,"A Lei Áurea aboliu legalmente a escravidão em 1888."],
+      ["Inglês","Simple present","Complete: She ___ English every day.",["study","studies","studying"],1,"Com she, o verbo study passa a studies."],
       ["Inglês","Leitura","O aviso “Return the books by Friday” pede para:",["Comprar livros na sexta","Ler apenas na sexta","Devolver os livros até sexta"],2,"Return significa devolver. By Friday estabelece o prazo."]
     ];
 
-    /*
-      Cada escola reúne a prova completa e duas questões comentadas.
-      Nos cartões-resposta das provas completas, X significa anulada.
-    */
+    /* As 30 questões dos cinco PDFs enviados. */
+
+    const prepBooks = {
+      CEFET_RJ: [
+        ["Matemática","Geometria Plana","Um terreno retangular tem perímetro igual a 80 metros. Sabendo que o comprimento excede a largura em 10 metros, qual é a área desse terreno?",["350 m²","375 m²","400 m²","425 m²"],1,"Se a largura é x, o comprimento é x + 10. Então 2(x + x + 10) = 80. A largura mede 15 m e o comprimento, 25 m. Área: 15 × 25 = 375 m²."],
+        ["Matemática","Equação do 2º Grau","O produto de dois números inteiros positivos e consecutivos é igual a 156. Qual é a soma desses dois números?",["23","25","27","29"],1,"Os números são 12 e 13, pois 12 × 13 = 156. A soma é 25."],
+        ["Matemática","Porcentagem","Um equipamento eletrônico teve seu preço aumentado em 20% e, logo após, sofreu um desconto de 20% sobre o novo valor. Em relação ao preço inicial, o preço final teve:",["Redução de 4%","Aumento de 4%","Redução de 2%","Nenhuma alteração"],0,"Multiplique os fatores: 1,20 × 0,80 = 0,96. O preço final equivale a 96% do inicial, uma redução de 4%."],
+        ["Português","Sintaxe","Na frase “Alugam-se apartamentos perto da escola técnica”, o termo “apartamentos” exerce a função sintática de:",["Objeto direto","Sujeito paciente","Adjunto adnominal","Predicativo do sujeito"],1,"O “se” é partícula apassivadora. Na voz passiva analítica, a frase fica “Apartamentos são alugados”. Apartamentos é o sujeito paciente."],
+        ["Português","Crase","Assinale a alternativa em que o uso do acento grave indicativo de crase está CORRETO:",["O candidato dirigiu-se à secretaria do campus.","Começamos à estudar para a prova ontem.","O edital refere-se à todos os inscritos.","Entregamos o documento à ela."],0,"Dirigir-se exige a preposição “a”. Ela se une ao artigo feminino de “a secretaria”, formando “à secretaria”."],
+        ["Ciências","Física","Um automóvel percorre 180 km em 2 horas e 30 minutos. Qual é a sua velocidade escalar média em km/h?",["60 km/h","72 km/h","75 km/h","90 km/h"],1,"Converta 30 minutos para 0,5 hora. A velocidade média é 180 ÷ 2,5 = 72 km/h."]
+      ],
+
+      Colegio_Pedro_II: [
+        ["Matemática","Função Afim","Uma gráfica cobra R$ 40,00 de taxa fixa de arte mais R$ 0,50 por panfleto impresso. Se um cliente pagou R$ 190,00, quantos panfletos foram encomendados?",["250 panfletos","300 panfletos","350 panfletos","380 panfletos"],1,"Retire a taxa fixa: 190 − 40 = 150. Divida o restante pelo preço unitário: 150 ÷ 0,50 = 300 panfletos."],
+        ["Matemática","Trigonometria","Uma escada de 5 metros de comprimento está apoiada em um muro vertical, formando com o solo horizontal um ângulo cuja tangente vale 4/3. A que altura do solo está o topo da escada?",["3,0 metros","3,5 metros","4,0 metros","4,5 metros"],2,"A tangente é a razão altura/base. Os catetos estão na razão 4:3. Com hipotenusa de 5 m, o triângulo tem catetos de 4 m e 3 m. A altura é 4 m."],
+        ["Português","Interpretação e Coesão","No período “Embora tenha estudado muito, não conseguiu dormir bem antes da prova”, a conjunção “Embora” introduz uma ideia de:",["Causa","Consequência","Concessão","Condição"],2,"Embora é uma conjunção subordinativa adverbial concessiva."],
+        ["Português","Figuras de Linguagem","Na expressão “Ouvir o silêncio ensurdecedor da madrugada”, observa-se o emprego de:",["Paradoxo / Oxímoro","Eufemismo","Metonímia","Prosopopeia"],0,"Silêncio e ensurdecedor aproximam ideias opostas na mesma expressão."],
+        ["História","História do Brasil","A transferência da Corte Portuguesa para o Rio de Janeiro em 1808 teve como consequência imediata:",["A assinatura da Lei Áurea.","A Abertura dos Portos às Nações Amigas.","A Proclamação da República.","O fim do Pacto Colonial apenas na região Sul."],1,"A abertura dos portos foi decretada pelo príncipe regente D. João em janeiro de 1808."],
+        ["Geografia","Clima urbano","O fenômeno climático urbano caracterizado pelo aumento das temperaturas nas áreas centrais das grandes cidades em comparação às áreas periféricas arborizadas denomina-se:",["Inversão térmica","Chuva ácida","Ilha de calor","Efeito estufa natural"],2,"A ilha de calor está associada à impermeabilização, à concentração de construções e à baixa cobertura vegetal."]
+      ],
+
+      FAETEC: [
+        ["Matemática","Regra de Três","Uma máquina produz 120 peças em 4 horas de funcionamento contínuo. Mantendo o mesmo ritmo, quantas peças ela produzirá em 7 horas?",["180 peças","200 peças","210 peças","240 peças"],2,"A máquina produz 120 ÷ 4 = 30 peças por hora. Em sete horas, produz 30 × 7 = 210 peças."],
+        ["Matemática","Teorema de Pitágoras","Um triângulo retângulo possui catetos medindo 9 cm e 12 cm. Qual é a medida de sua hipotenusa?",["13 cm","14 cm","15 cm","18 cm"],2,"Pelo teorema de Pitágoras, h² = 9² + 12² = 81 + 144 = 225. Logo, h = 15 cm."],
+        ["Matemática","Frações","De um tanque cheio de água, retirou-se 1/3 de sua capacidade pela manhã e 1/4 à tarde. Que fração do tanque ainda resta com água?",["5/12","7/12","1/2","2/7"],0,"Foi retirado 1/3 + 1/4 = 4/12 + 3/12 = 7/12 da capacidade. Restam 12/12 − 7/12 = 5/12."],
+        ["Português","Ortografia e Acentuação","Assinale a palavra que recebe acento gráfico pela mesma regra de “saúde”:",["Café","Saída","Lâmpada","Fácil"],1,"Em sa-ú-de e sa-í-da, a vogal tônica u ou i está sozinha na sílaba e forma hiato com a vogal anterior."],
+        ["Português","Classes de Palavras","Na frase “O técnico resolveu rapidamente o defeito do computador”, a palavra “rapidamente” classifica-se como:",["Adjetivo","Substantivo","Advérbio","Preposição"],2,"Rapidamente modifica o verbo resolveu e informa o modo como a ação ocorreu."],
+        ["Português","Pontuação","Em “Alunos, entreguem os cadernos de prova ao fiscal”, a vírgula foi empregada para isolar:",["Um aposto explicativo","Um vocativo","Um adjunto adverbial deslocado","Uma oração intercalada"],1,"Alunos é o termo que chama os interlocutores. Essa é a função do vocativo."]
+      ],
+
+      IFF_Sesc: [
+        ["Matemática","Geometria Espacial","Uma caixa d’água em formato de paralelepípedo reto-retângulo mede 2 m de comprimento, 1,5 m de largura e 1 m de altura. Qual é a sua capacidade em litros?",["300 litros","1.500 litros","3.000 litros","4.500 litros"],2,"O volume é 2 × 1,5 × 1 = 3 m³. Cada metro cúbico corresponde a 1.000 litros, portanto a capacidade é 3.000 litros."],
+        ["Matemática","Probabilidade","Ao lançar um dado comum de 6 faces não viciado, qual é a probabilidade de obter um número primo?",["1/6","1/3","1/2","2/3"],2,"Os primos entre 1 e 6 são 2, 3 e 5. Há três casos favoráveis em seis possíveis: 3/6 = 1/2."],
+        ["Português","Interpretação","Quando um texto utiliza linguagem figurada, subjetividade e plurissignificação para provocar emoção estética no leitor, predomina a função da linguagem:",["Referencial","Metalinguística","Fática","Poética"],3,"Na função poética, o foco está na elaboração estética da própria mensagem."],
+        ["Português","Pronomes","Assinale a alternativa em que o pronome relativo foi empregado adequadamente:",["A escola onde estudo fica no centro.","O livro que eu preciso está na biblioteca.","O professor cujo o nome esqueci chegou.","A cidade que nasci é muito acolhedora."],0,"Onde retoma um lugar físico: a escola em que estudo. Nas demais, a norma-padrão pede “de que preciso”, “cujo nome” e “em que nasci”."],
+        ["História","História Geral","A Revolução Industrial, iniciada na Inglaterra na segunda metade do século XVIII, teve como uma de suas principais transformações sociais:",["O fortalecimento do sistema feudal no campo.","A consolidação da burguesia industrial e do proletariado urbano.","A extinção completa do comércio marítimo.","A redução da jornada de trabalho para 6 horas diárias imediatamente."],1,"A expansão das fábricas consolidou a burguesia industrial e o proletariado urbano."],
+        ["Ciências","Ecologia","Na cadeia alimentar representada por “Capim → Gafanhoto → Sapo → Cobra”, o sapo ocupa o nível trófico de:",["Produtor","Consumidor primário","Consumidor secundário","Consumidor terciário"],2,"O capim é produtor. O gafanhoto é consumidor primário. O sapo, ao comer o gafanhoto, é consumidor secundário."]
+      ],
+
+      IFRJ_Tipo_A: [
+        ["Matemática","Sistemas Lineares","Em uma lanchonete, 2 salgados e 1 suco custam R$ 17,00. Já 3 salgados e 2 sucos custam R$ 28,00. Qual é o preço de 1 salgado?",["R$ 5,00","R$ 6,00","R$ 7,00","R$ 8,00"],1,"Se x é o preço do salgado e y o do suco, então 2x + y = 17 e 3x + 2y = 28. Dobrando a primeira e subtraindo a segunda, obtemos x = 34 − 28 = 6."],
+        ["Matemática","Estatística","As notas de um aluno em quatro avaliações foram 6,5; 7,0; 8,5 e 8,0. Qual foi sua média aritmética?",["7,0","7,25","7,5","7,75"],2,"A soma é 30. Dividindo pelo número de avaliações: 30 ÷ 4 = 7,5."],
+        ["Ciências","Química","A passagem direta de uma substância do estado sólido para o estado gasoso, sem passar pelo estado líquido, é chamada de:",["Fusão","Vaporização","Condensação","Sublimação"],3,"A sublimação é a passagem direta de sólido para gás. Um exemplo é o gelo seco."],
+        ["Ciências","Biologia","Qual organela celular é responsável pela respiração celular e produção de energia (ATP) nas células eucariontes?",["Ribossomo","Mitocôndria","Complexo de Golgi","Lisossomo"],1,"A mitocôndria realiza etapas da respiração aeróbia responsáveis pela produção de grande parte do ATP."],
+        ["Português","Concordância","Assinale a alternativa correta quanto à concordância verbal:",["Fazem dois anos que entrei no curso técnico.","Houveram muitos inscritos no processo seletivo.","Existe várias oportunidades para técnicos em química.","Devem existir soluções mais sustentáveis para o lixo."],3,"Soluções mais sustentáveis é o sujeito plural de existir. Na locução verbal, o auxiliar concorda com ele: devem existir."],
+        ["Geografia","Rio de Janeiro","A Baía de Guanabara, importante ecossistema fluminense, enfrenta graves problemas ambientais associados principalmente:",["À atividade vulcânica submarina.","Ao despejo de esgoto doméstico e efluentes industriais sem tratamento.","À desertificação natural da Região Metropolitana.","À ausência de rios desaguando em sua bacia."],1,"Esgoto doméstico e efluentes industriais sem tratamento comprometem a qualidade das águas da baía."]
+      ]
+    };
+
+    /* Cadernos completos e exercícios adaptados das edições anteriores. */
+
     const schools = [
       {
-        name: "Escola Sesc de Ensino Médio",
-        edition: "2026",
-        letters: "ABCDE",
+        name: "Escola Sesc de Ensino Médio", book: "IFF_Sesc",
+        edition: "2026", letters: "ABCDE",
         key: "BDCEEDACBCEDCBBBDCADEAABACAECA",
         paper: "https://www.sesc.com.br/poloeducacional/wp-content/uploads/2025/12/Prova-Processo-seletivo-estudantes-ESEM-2026.pdf",
         answerKey: "https://www.sesc.com.br/poloeducacional/wp-content/uploads/2025/12/Gabarito-final-ESEM-2026.pdf",
@@ -555,94 +537,86 @@
         practicePaper: "https://www.poloeducacionalsesc.com.br/wp-content/uploads/2025/04/Prova-Admissional-de-Estudantes-2024.pdf",
         items: [
           ["Ciências","Questão 3","Que processo permite ao fitoplâncton liberar oxigênio no mar?",["Evaporação","Fotossíntese","Fermentação"],1,"Organismos fotossintetizantes do fitoplâncton usam luz para produzir matéria orgânica e liberam oxigênio."],
-          ["Matemática","Questão 4","Três regiões têm 16%, 18% e 22% do litoral. A quarta tem 3.256 km. Qual é a extensão total?",["5.400 km","6.800 km","7.400 km"],2,"As três primeiras somam 56%. Os 3.256 km representam os outros 44%. Portanto, 3.256 ÷ 0,44 = 7.400 km."]
+          ["Matemática","Questão 4","Três regiões têm 16%, 18% e 22% do litoral. A quarta tem 3.256 km. Qual é a extensão total?",["5.400 km","6.800 km","7.400 km"],2,"As três primeiras somam 56%. Os 3.256 km representam os outros 44%. Assim, 3.256 ÷ 0,44 = 7.400 km."]
         ]
       },
       {
-        name: "FAETEC",
-        edition: "2026/1 · Edital 4",
-        letters: "ABCD",
+        name: "FAETEC", book: "FAETEC",
+        edition: "2026/1 · Edital 4", letters: "ABCD",
         key: "CADBDCADBBCADBCAXCDDBBCDCCADDCBAACBCCCDA",
         paper: "https://portal.coseac.uff.br/wp-content/uploads/2025/12/Faetec_2026_edital_04_prova.pdf",
         answerKey: "https://portal.coseac.uff.br/wp-content/uploads/2025/12/Concurso_Faetec_2026-1_Gabaritoaposrecursos__Edital_04.pdf",
         practiceEdition: "2026/1 · Ensino médio integrado",
         items: [
-          ["Matemática","Questão 24","Um paralelogramo possui diagonais iguais e perpendiculares. Qual é a classificação mais específica?",["Quadrado","Retângulo de lados desiguais","Losango de ângulos desiguais"],0,"As diagonais iguais caracterizam um retângulo. Por serem também perpendiculares, a figura é um losango. Reunindo as duas propriedades, temos um quadrado."],
-          ["Matemática","Questão 25","Quanto mede um ângulo interno de um octógono regular?",["120°","135°","145°"],1,"A soma dos ângulos é (8 − 2) × 180° = 1.080°. Como são oito ângulos iguais, cada um mede 135°."]
+          ["Matemática","Questão 24","Um paralelogramo possui diagonais iguais e perpendiculares. Qual é a classificação mais específica?",["Quadrado","Retângulo de lados desiguais","Losango de ângulos desiguais"],0,"As diagonais iguais caracterizam um retângulo. Por serem também perpendiculares, a figura é um losango. Ela reúne as propriedades de um quadrado."],
+          ["Matemática","Questão 25","Quanto mede um ângulo interno de um octógono regular?",["120°","135°","145°"],1,"A soma dos ângulos é 6 × 180° = 1.080°. Cada ângulo mede 1.080° ÷ 8 = 135°."]
         ]
       },
       {
-        name: "Instituto Federal Fluminense (IFF)",
-        edition: "2026/1 · Integrados e concomitantes",
-        letters: "ABCDE",
+        name: "Instituto Federal Fluminense (IFF)", book: "IFF_Sesc",
+        edition: "2026/1 · Integrados e concomitantes", letters: "ABCDE",
         key: "BAABDEEDCXDEABCEBXADADBACCDDEBADCDEAADBC",
         paper: "https://pt.scribd.com/document/1034378948/IFF-2026-1",
         reader: "https://www.scribd.com/embeds/1034378948/content",
         answerKey: "https://iff.edu.br/static/files/COM%2016%20Ref%20Ed%2079%202026_1%20Processo%20Seletivo%20-%20Gabarito%20Final.pdf",
         practiceEdition: "2026/1 · Integrados e concomitantes",
         items: [
-          ["Matemática","Questão 20","Um terreno retangular tem 98 m². As duas laterais e o fundo somam 28 m. Qual é a largura da frente?",["12 m","14 m","16 m"],1,"Se a lateral mede x, a frente mede 28 − 2x. Pela área, x(28 − 2x) = 98. A equação equivale a (x − 7)² = 0. Logo, a frente mede 14 m."],
-          ["Ciências","Questão 22","Por que o passageiro tende a continuar em movimento para a frente durante uma freada?",["Por inércia","Porque sua massa diminui","Porque a gravidade muda de direção"],0,"O carro desacelera. O corpo tende a conservar sua velocidade até que uma força, como a do cinto, o desacelere."]
+          ["Matemática","Questão 20","Um terreno retangular tem 98 m². As duas laterais e o fundo somam 28 m. Qual é a largura da frente?",["12 m","14 m","16 m"],1,"Se a lateral mede x, a frente mede 28 − 2x. Pela área, x(28 − 2x) = 98. Assim, (x − 7)² = 0, a lateral mede 7 m e a frente mede 14 m."],
+          ["Ciências","Questão 22","Por que o passageiro tende a continuar em movimento para a frente durante uma freada?",["Por inércia","Porque sua massa diminui","Porque a gravidade muda de direção"],0,"O corpo tende a conservar a velocidade até que uma força, como a do cinto, o desacelere."]
         ]
       },
       {
-        name: "Instituto Federal do Rio de Janeiro (IFRJ)",
-        edition: "2026 · Tipo A",
-        letters: "ABCD",
+        name: "Instituto Federal do Rio de Janeiro (IFRJ)", book: "IFRJ_Tipo_A",
+        edition: "2026 · Tipo A", letters: "ABCD",
         key: "DBACBCDDBBDCDCCDABDBBCACADCBBA",
         paper: "https://drive.google.com/file/d/1ft-D0k7IG_njt_PkM357siTvpusD7yct/view",
         reader: "https://drive.google.com/file/d/1ft-D0k7IG_njt_PkM357siTvpusD7yct/preview",
         answerKey: "https://drive.google.com/file/d/1phmNGfVpwGEEvt_Gkelr7tqnEiRw2S2q/view",
-        practiceEdition: "Ingresso 2024 · Cursos integrados",
+        practiceEdition: "Ingresso 2024",
         practicePaper: "https://portal.ifrj.edu.br/sites/default/files/IFRJ/Arraial%20do%20Cabo/cursos-integrados-ingresso_em_2024.pdf",
         items: [
-          ["Matemática","Questão 16","Uma razão de 35 mL por kg equivale a quantos litros por kg?",["0,035","0,35","3,5"],0,"Como 1 L = 1.000 mL, divida 35 por 1.000. O resultado é 0,035 L por kg."],
-          ["Matemática","Questão 17","No exercício, multiplica-se 100 kg por 35 mL/kg. A quantas garrafas de 1 L equivale o resultado?",["2 e meia","3 e meia","4"],1,"100 × 35 = 3.500 mL. Esse volume equivale a 3,5 L, ou três garrafas e meia."]
+          ["Matemática","Questão 16","Uma razão de 35 mL por kg equivale a quantos litros por kg?",["0,035","0,35","3,5"],0,"Divida 35 por 1.000. O resultado é 0,035 L por kg."],
+          ["Matemática","Questão 17","No exercício, multiplica-se 100 kg por 35 mL/kg. A quantas garrafas de 1 L equivale o resultado?",["2 e meia","3 e meia","4"],1,"100 × 35 = 3.500 mL = 3,5 L, ou três garrafas e meia."]
         ]
       },
       {
-        name: "CEFET/RJ",
-        edition: "2027 · Edital 05/2026",
-        letters: "ABCD",
+        name: "CEFET/RJ", book: "CEFET_RJ",
+        edition: "2027 · Edital 05/2026", letters: "ABCD",
         key: "BDBDDCBCBADACBDACBXCCDDACCABDC",
         paper: "https://anexos-r2.selecao.net.br/uploads/746/concursos/72/anexos/4916c44c-24f5-440c-adb1-537666d01c22.pdf",
         answerKey: "https://anexos-r2.selecao.net.br/uploads/746/concursos/72/anexos/509f5562-3ce8-4600-b8e2-a1ca1b9e805e.pdf",
-        practiceEdition: "Ingresso 2024 · Cursos técnicos",
+        practiceEdition: "Ingresso 2024",
         practicePaper: "https://anexos.cdn.selecao.net.br/uploads/746/concursos/29/anexos/rvWelOX9df0cDiR3sUNUONCgWYH7yJcxkJkuHvHg.pdf",
         items: [
-          ["Matemática","Questão 15","Mantida a distância, um veículo aumenta sua velocidade média em 25%. Como varia o tempo de viagem?",["Cai 25%","Cai 20%","Aumenta 20%"],1,"Divida o tempo inicial por 1,25. O novo tempo corresponde a 80% do anterior. A queda é de 20%."],
-          ["Matemática","Questão 17","O tempo para resolver um cubo mágico caiu de 3,47 s para 3,13 s. Qual foi a redução percentual aproximada?",["9,8%","10,2%","90,2%"],0,"A diferença é 0,34 s. Faça 0,34 ÷ 3,47 × 100 para obter aproximadamente 9,8%."]
+          ["Matemática","Questão 15","Mantida a distância, um veículo aumenta a velocidade média em 25%. Como varia o tempo de viagem?",["Cai 25%","Cai 20%","Aumenta 20%"],1,"O novo tempo é o inicial dividido por 1,25. Isso equivale a 80% do anterior, uma queda de 20%."],
+          ["Matemática","Questão 17","O tempo para resolver um cubo mágico caiu de 3,47 s para 3,13 s. Qual foi a redução percentual aproximada?",["9,8%","10,2%","90,2%"],0,"A diferença é 0,34 s. Calcule 0,34 ÷ 3,47 × 100 ≈ 9,8%."]
         ]
       },
       {
-        name: "Colégio Pedro II (CPII)",
-        edition: "2026 · Regular diurno",
-        letters: "ABCD",
+        name: "Colégio Pedro II (CPII)", book: "Colegio_Pedro_II",
+        edition: "2026 · Regular diurno", letters: "ABCD",
         key: "ACDDBACDABDCCCADBBAB",
         paper: "https://www.scribd.com/document/982820048/Pedro-II",
         reader: "https://www.scribd.com/embeds/982820048/content",
         answerKey: "https://dhui.cp2.g12.br/dhui_arquivos/ano_2025/certame_0497/oferta_0584/GABARITO_EMRD_PUBLICAR2025fim.pdf",
-        practiceEdition: "2023/2024 · Ensino médio regular diurno",
+        practiceEdition: "2023/2024 · Regular diurno",
         practicePaper: "https://dhuimigracao.cp2.g12.br/dhui_arquivos/ano_2023/certame_0412/oferta_0462/EM_REGULAR_DIURNO_2023_SEM_GABARITO.pdf",
         items: [
-          ["Matemática","Questão 13","Como representar um dezesseis avos de um milhão em notação científica?",["6,25 × 10³","6,25 × 10⁴","6,25 × 10⁵"],1,"1.000.000 ÷ 16 = 62.500. Em notação científica, isso corresponde a 6,25 × 10⁴."],
-          ["Matemática","Questão 14","Em um grupo de 2 bilhões de usuários, o acesso diário caiu de 32% para 18%. Quantos usuários essa diferença representa?",["180 milhões","280 milhões","320 milhões"],1,"A diferença é de 14 pontos percentuais. Multiplicando 2 bilhões por 0,14, encontramos 280 milhões."]
+          ["Matemática","Questão 13","Como representar um dezesseis avos de um milhão em notação científica?",["6,25 × 10³","6,25 × 10⁴","6,25 × 10⁵"],1,"1.000.000 ÷ 16 = 62.500. Em notação científica, 6,25 × 10⁴."],
+          ["Matemática","Questão 14","Em um grupo de 2 bilhões de usuários, o acesso diário caiu de 32% para 18%. Quantos usuários essa diferença representa?",["180 milhões","280 milhões","320 milhões"],1,"A queda foi de 14 pontos percentuais. 2 bilhões × 0,14 = 280 milhões."]
         ]
       }
     ];
 
-    /* Perfis locais e sorteio da avaliação. */
+    /* Perfis e progresso. A mesma chave mantém os perfis da versão anterior. */
 
     const rootKey = "rota-aprova-perfis-v2";
     const saved = read(rootKey, {});
-    const profiles = new Map(
-      Array.isArray(saved?.profiles) ? saved.profiles : []
-    );
-
+    const profiles = new Map(Array.isArray(saved?.profiles) ? saved.profiles : []);
     let active = typeof saved?.active === "string" ? saved.active : "";
     let data = null;
     let quiz = null;
-    let bankMode = "papers";
+    let bankMode = "uploaded";
     let schoolIndex = 0;
     let subjectIndex = 0;
     let bankIndex = 0;
@@ -659,21 +633,13 @@
     function drawAssessment() {
       const pool = diagnostic.concat(extraDiagnostic);
       const chosen = [];
-
       for (const subject of subjects) {
         const count = diagnostic.filter(q => q[0] === subject).length;
-        const candidates = pool.filter(q => q[0] === subject);
-        chosen.push(...shuffled(candidates).slice(0, count));
+        chosen.push(...shuffled(pool.filter(q => q[0] === subject)).slice(0, count));
       }
-
-      return shuffled(chosen).map(item => {
-        const [subject, topic, text, options, correct, why] = item;
-        const order = shuffled(options.map((_, index) => index));
-        return [
-          subject, topic, text,
-          order.map(index => options[index]),
-          order.indexOf(correct), why
-        ];
+      return shuffled(chosen).map(([subject, topic, text, options, correct, why]) => {
+        const order = shuffled(options.map((_, i) => i));
+        return [subject, topic, text, order.map(i => options[i]), order.indexOf(correct), why];
       });
     }
 
@@ -682,79 +648,55 @@
     }
 
     function freshProfile(name) {
-      return {
-        name,
-        answers: Array(diagnostic.length).fill(null),
-        completed: false,
-        cursor: 0,
-        days: [0, 2, 4],
-        minutes: 60,
-        history: [],
-        oldResults: null
+      const profile = {
+        name, answers: Array(20).fill(null), completed: false,
+        cursor: 0, days: [0, 2, 4], minutes: 60, history: []
       };
+
+      if (!profiles.size) {
+        const old = read("rotaAssessmentV1", null);
+        if (old && Array.isArray(old.days)) {
+          const valid = [...new Set(old.days)]
+            .filter(i => Number.isInteger(i) && i >= 0 && i < 7)
+            .sort((a, b) => a - b);
+          if (valid.length) profile.days = valid;
+        }
+        if (old && Number.isInteger(old.minutes) && old.minutes >= 15 &&
+            old.minutes <= 240 && old.minutes % 15 === 0) {
+          profile.minutes = old.minutes;
+        }
+      }
+
+      return profile;
     }
 
     function save() {
       if (active && data) profiles.set(active, data);
       const ok = write(rootKey, { active, profiles: [...profiles] });
-
       if (!ok && !$("saveWarning")) {
         const warning = element("p",
-          "O navegador bloqueou o salvamento. Seu progresso ficará disponível apenas nesta sessão.",
-          "wrap");
+          "O navegador bloqueou o salvamento. O progresso ficará disponível nesta sessão.", "wrap");
         warning.id = "saveWarning";
         warning.setAttribute("role", "status");
         document.querySelector("header").after(warning);
       }
     }
 
-    function importOldPreferences(profile) {
-      const old = read("rotaAssessmentV1", null);
-      if (!old || typeof old !== "object") return;
-
-      if (Array.isArray(old.days)) {
-        const valid = [...new Set(old.days)]
-          .filter(day => Number.isInteger(day) && day >= 0 && day < 7)
-          .sort((a, b) => a - b);
-        if (valid.length) profile.days = valid;
-      }
-
-      if (Number.isInteger(old.minutes) && old.minutes >= 15 &&
-          old.minutes <= 240 && old.minutes % 15 === 0) {
-        profile.minutes = old.minutes;
-      }
-
-      if (old.completed && Array.isArray(old.answers) &&
-          old.answers.length === diagnostic.length) {
-        profile.oldResults = true;
-      }
-    }
-
-    function openProfileDialog() {
-      $("profileName").value = data?.name || "";
-      $("profileDialog").showModal();
-      $("profileName").focus();
-    }
-
     function enter(name) {
       const key = name.trim().normalize("NFC").toLocaleLowerCase("pt-BR");
       if (!key) return;
-
-      if (!profiles.has(key)) {
-        const profile = freshProfile(name.trim());
-        if (profiles.size === 0) importOldPreferences(profile);
-        profiles.set(key, profile);
-      }
-
+      if (!profiles.has(key)) profiles.set(key, freshProfile(name.trim()));
       active = key;
       data = profiles.get(key);
 
-      if (!data.assessmentItems && !data.completed &&
-          data.answers.every(value => value === null)) {
+      if (!data.completed && !data.assessmentItems &&
+          data.answers.every(answer => answer === null)) {
         data.assessmentItems = drawAssessment();
       }
 
       quiz = null;
+      bankMode = "uploaded";
+      bankIndex = 0;
       save();
       $("landing").hidden = true;
       $("app").hidden = false;
@@ -763,7 +705,7 @@
     }
 
     function leave() {
-      if (data) save();
+      save();
       active = "";
       data = null;
       quiz = null;
@@ -772,6 +714,12 @@
       $("landing").hidden = false;
       $("profileButton").textContent = "Entrar";
       window.scrollTo(0, 0);
+    }
+
+    function openProfile() {
+      $("profileName").value = data?.name || "";
+      $("profileDialog").showModal();
+      $("profileName").focus();
     }
 
     function applyTheme(dark) {
@@ -785,14 +733,12 @@
       applyTheme(dark);
       write("rota-aprova-tema", dark);
     };
-
     applyTheme(read("rota-aprova-tema",
       window.matchMedia("(prefers-color-scheme: dark)").matches));
 
-    $("start").onclick = openProfileDialog;
-    $("profileButton").onclick = openProfileDialog;
+    $("start").onclick = openProfile;
+    $("profileButton").onclick = openProfile;
     $("closeDialog").onclick = () => $("profileDialog").close();
-
     $("profileForm").onsubmit = event => {
       event.preventDefault();
       const name = $("profileName").value.trim();
@@ -803,13 +749,7 @@
       $("profileDialog").close();
       enter(name);
     };
-
-    $("brand").onclick = () => {
-      if (data) navigate("home");
-      else window.scrollTo(0, 0);
-    };
-
-    /* Menu do estudante. */
+    $("brand").onclick = () => data ? navigate("home") : window.scrollTo(0, 0);
 
     const pages = [
       ["home", "Visão geral", home],
@@ -827,7 +767,6 @@
       item.dataset.page = id;
       $("sidebar").append(item);
     });
-
     $("sidebar").append(button("Sair do perfil", leave, true));
 
     $("mobileMenu").onclick = () => {
@@ -838,15 +777,12 @@
     function navigate(id) {
       const page = pages.find(entry => entry[0] === id);
       if (!page || !data) return;
-
       $("sidebar").classList.remove("open");
       $("mobileMenu").setAttribute("aria-expanded", "false");
-
       $("sidebar").querySelectorAll("[data-page]").forEach(item => {
         if (item.dataset.page === id) item.setAttribute("aria-current", "page");
         else item.removeAttribute("aria-current");
       });
-
       $("content").replaceChildren();
       page[2]();
       window.scrollTo(0, 0);
@@ -854,18 +790,16 @@
 
     function home() {
       title("Olá, " + data.name + "!", "Escolha a próxima atividade do seu plano.");
-
       const banner = element("section", undefined, "banner");
       const started = data.answers.some(value => value !== null);
-      const action = data.completed ? "Ver cronograma" :
-        started ? "Continuar avaliação" : "Começar avaliação";
-
       banner.append(
         element("h2", data.completed ? "Seu plano semanal" : "Avaliação inicial"),
         element("p", data.completed
           ? "Consulte as matérias de cada dia ou ajuste sua disponibilidade."
           : "Responda a 20 perguntas para identificar os assuntos que merecem mais atenção."),
-        button(action, () => navigate(data.completed ? "schedule" : "assessment"))
+        button(data.completed ? "Ver cronograma" :
+          started ? "Continuar avaliação" : "Começar avaliação",
+          () => navigate(data.completed ? "schedule" : "assessment"))
       );
 
       const grid = element("div", undefined, "grid");
@@ -873,18 +807,17 @@
         ["questions","Questões de provas","Escolha uma escola e confira as questões."],
         ["simulation","Simulado geral","Resolva seis questões e consulte o gabarito."],
         ["materials","Revisão por matéria","Retome um conceito antes de praticar."]
-      ].forEach(([id, label, description]) => {
-        const box = card(label, description);
+      ].forEach(([id, heading, description]) => {
+        const box = card(heading, description);
         box.append(button("Acessar", () => navigate(id), true));
         grid.append(box);
       });
-
       $("content").append(banner, grid);
     }
 
-    /* Formulário usado pelo diagnóstico, pelo treino e pelo simulado. */
+    /* Formulário compartilhado pelas atividades com alternativas. */
 
-    function questionForm(parent, item, options) {
+    function questionForm(parent, item, options = {}) {
       const form = element("form", undefined, "stack");
       const field = element("fieldset");
       field.append(element("legend", item[2]));
@@ -897,8 +830,9 @@
         input.value = i;
         input.required = true;
         input.checked = i === options.selected;
-        if (options.onSelect) input.onchange = () => options.onSelect(i);
-        label.append(input, document.createTextNode(answer));
+        input.onchange = () => options.onSelect?.(i);
+        const prefix = options.letters ? "ABCDE"[i] + ") " : "";
+        label.append(input, document.createTextNode(prefix + answer));
         field.append(label);
       });
 
@@ -911,46 +845,40 @@
 
       form.onsubmit = event => {
         event.preventDefault();
-        const checked = form.querySelector('input[name="answer"]:checked');
-        if (!checked) return;
-        const selected = Number(checked.value);
+        const radio = form.querySelector('input[name="answer"]:checked');
+        if (!radio) return;
+        const selected = Number(radio.value);
 
         if (options.explain) {
           field.disabled = true;
           submit.disabled = true;
           const feedback = element("div", undefined, "result");
           feedback.setAttribute("role", "status");
+          const prefix = options.letters ? "ABCDE"[item[4]] + ") " : "";
           feedback.append(
             element("strong", selected === item[4]
               ? "Você acertou!"
-              : "Resposta correta: " + item[3][item[4]]),
+              : "Resposta correta: " + prefix + item[3][item[4]]),
             element("p", item[5])
           );
           form.append(feedback);
         }
-
-        if (options.submit) options.submit(selected);
+        options.submit?.(selected);
       };
-
       parent.append(form);
     }
 
     function resultRows() {
+      const items = assessmentItems();
       return subjects.map(subject => {
-        const entries = assessmentItems()
-          .map((item, i) => ({ item, i }))
-          .filter(entry => entry.item[0] === subject);
-
-        const missed = entries.filter(
-          entry => data.answers[entry.i] !== entry.item[4]
-        );
-
+        const indices = items.map((q, i) => q[0] === subject ? i : -1).filter(i => i >= 0);
+        const missed = indices.filter(i => data.answers[i] !== items[i][4]);
         return {
           subject,
-          total: entries.length,
-          correct: entries.length - missed.length,
+          total: indices.length,
+          correct: indices.length - missed.length,
           wrong: missed.length,
-          topics: [...new Set(missed.map(entry => entry.item[1]))]
+          topics: [...new Set(missed.map(i => items[i][1]))]
         };
       });
     }
@@ -962,12 +890,9 @@
       if (data.completed) {
         const grid = element("div", undefined, "grid");
         resultRows().forEach(row => {
-          grid.append(card(
-            row.subject + " · " + row.correct + "/" + row.total,
-            row.wrong
-              ? "Revisar: " + row.topics.join(", ") + "."
-              : "Você acertou todas as questões desta matéria."
-          ));
+          grid.append(card(row.subject + " · " + row.correct + "/" + row.total,
+            row.wrong ? "Revisar: " + row.topics.join(", ") + "."
+                      : "Você acertou todas as questões desta matéria."));
         });
         $("content").append(grid, button("Abrir cronograma", () => navigate("schedule")));
         return;
@@ -976,40 +901,32 @@
       const items = assessmentItems();
       const i = data.cursor;
       const item = items[i];
-
-      const box = card(
-        "Questão " + (i + 1) + " de " + items.length,
-        item[0] + " · " + item[1]
-      );
-
+      const box = card("Questão " + (i + 1) + " de " + items.length, item[0] + " · " + item[1]);
       const progress = document.createElement("progress");
       progress.max = items.length;
-      progress.value = data.answers.filter(value => value !== null).length;
+      progress.value = data.answers.filter(a => a !== null).length;
       progress.setAttribute("aria-label", "Questões respondidas");
       box.append(progress);
 
       questionForm(box, item, {
         selected: data.answers[i],
-        label: i === items.length - 1 ? "Concluir avaliação" : "Próxima questão",
-
+        label: i + 1 === items.length ? "Concluir avaliação" : "Próxima questão",
         onSelect(answer) {
           data.answers[i] = answer;
+          progress.value = data.answers.filter(a => a !== null).length;
           save();
-          progress.value = data.answers.filter(value => value !== null).length;
         },
-
         back: i > 0 ? () => {
           data.cursor--;
           save();
           navigate("assessment");
         } : null,
-
         submit(answer) {
           data.answers[i] = answer;
-          if (i < items.length - 1) {
+          if (i + 1 < items.length) {
             data.cursor++;
           } else {
-            const missing = data.answers.findIndex(value => value === null);
+            const missing = data.answers.findIndex(a => a === null);
             if (missing >= 0) data.cursor = missing;
             else data.completed = true;
           }
@@ -1017,43 +934,34 @@
           navigate("assessment");
         }
       });
-
       $("content").append(box);
     }
 
-    /* Cronograma com até duas matérias por dia. */
+    /* Cronograma com uma ou duas matérias por dia. */
 
     function buildSchedule(rows, chosenDays, minutes) {
-      const blocksPerDay = minutes / 15;
+      const blocks = minutes / 15;
       const entries = rows.map(row => ({
-        row,
-        weight: 1 + 3 * row.wrong / row.total,
-        used: 0
+        row, weight: 1 + 3 * row.wrong / row.total, used: 0
       }));
 
       return chosenDays.map(day => {
-        const selected = [...entries]
-          .sort((a, b) => a.used / a.weight - b.used / b.weight
-                         || b.weight - a.weight)
-          .slice(0, Math.min(2, blocksPerDay));
+        const chosen = [...entries]
+          .sort((a, b) => a.used / a.weight - b.used / b.weight || b.weight - a.weight)
+          .slice(0, Math.min(2, blocks));
 
-        let first = blocksPerDay;
-        if (selected.length === 2) {
-          const totalWeight = selected[0].weight + selected[1].weight;
-          first = Math.round(blocksPerDay * selected[0].weight / totalWeight);
-          first = Math.max(1, Math.min(blocksPerDay - 1, first));
+        let first = blocks;
+        if (chosen.length === 2) {
+          const weight = chosen[0].weight + chosen[1].weight;
+          first = Math.round(blocks * chosen[0].weight / weight);
+          first = Math.max(1, Math.min(blocks - 1, first));
         }
 
-        const sessions = selected.map((entry, i) => {
-          const blocks = i === 0 ? first : blocksPerDay - first;
-          entry.used += blocks;
-          return {
-            subject: entry.row.subject,
-            minutes: blocks * 15,
-            topics: entry.row.topics
-          };
+        const sessions = chosen.map((entry, i) => {
+          const count = i === 0 ? first : blocks - first;
+          entry.used += count;
+          return { subject: entry.row.subject, minutes: count * 15, topics: entry.row.topics };
         });
-
         return { day, sessions };
       });
     }
@@ -1061,18 +969,16 @@
     function schedule() {
       title("Cronograma semanal",
         "Escolha seus dias e seu tempo. Cada dia recebe no máximo duas matérias.");
-
       const rows = data.completed ? resultRows() :
         subjects.map(subject => ({ subject, wrong: 0, total: 1, topics: [] }));
-
       const box = card("Minha disponibilidade", data.completed
         ? "O plano considera a proporção de erros em cada matéria."
         : "Você já pode montar um plano. Conclua a avaliação para priorizar suas dificuldades.");
 
       const form = element("form", undefined, "stack");
       const field = element("fieldset");
-      field.append(element("legend", "Dias de estudo"));
       const choices = element("div", undefined, "days");
+      field.append(element("legend", "Dias de estudo"));
 
       days.forEach((day, i) => {
         const label = element("label");
@@ -1084,42 +990,35 @@
         label.append(check, document.createTextNode(" " + day));
         choices.append(label);
       });
-
       field.append(choices);
 
       const timeLabel = element("label", "Minutos por dia", "field");
-      const minutes = document.createElement("input");
-      minutes.type = "number";
-      minutes.min = "15";
-      minutes.max = "240";
-      minutes.step = "15";
-      minutes.required = true;
-      minutes.value = data.minutes;
-      timeLabel.append(minutes);
+      const time = document.createElement("input");
+      time.type = "number";
+      time.min = "15";
+      time.max = "240";
+      time.step = "15";
+      time.required = true;
+      time.value = data.minutes;
+      timeLabel.append(time);
 
       const submit = element("button", "Gerar / atualizar cronograma", "btn");
       submit.type = "submit";
-
       const message = element("p", "", "muted");
       message.setAttribute("role", "status");
       form.append(field, timeLabel, submit, message);
       box.append(form);
 
       const output = element("section", undefined, "stack");
-
       function display() {
         output.replaceChildren();
-        const plan = buildSchedule(rows, data.days, data.minutes);
-
-        output.append(element("h3",
-          "Seu plano semanal · " + data.days.length * data.minutes + " minutos"));
-
+        output.append(element("h3", "Seu plano semanal · " +
+          data.days.length * data.minutes + " minutos"));
         const grid = element("div", undefined, "grid");
         const included = new Set();
 
-        plan.forEach(entry => {
+        buildSchedule(rows, data.days, data.minutes).forEach(entry => {
           const dayCard = card(days[entry.day] + " · " + data.minutes + " min");
-
           entry.sessions.forEach(session => {
             included.add(session.subject);
             const part = element("div", undefined, "session");
@@ -1131,39 +1030,30 @@
             );
             dayCard.append(part);
           });
-
           grid.append(dayCard);
         });
-
         output.append(grid);
-
         const omitted = subjects.filter(subject => !included.has(subject));
         if (omitted.length) {
-          output.append(element("p",
-            "Ficaram fora desta semana: " + omitted.join(", ") +
-            ". Para incluir as seis, escolha três dias com pelo menos 30 minutos cada ou seis dias de 15 minutos.",
-            "muted"));
+          output.append(element("p", "Ficaram fora desta semana: " + omitted.join(", ") +
+            ". Para incluir as seis matérias, reserve três dias com pelo menos 30 minutos cada ou seis dias de 15 minutos.", "muted"));
         }
       }
 
       form.onsubmit = event => {
         event.preventDefault();
-        const selected = [...form.querySelectorAll('input[name="day"]:checked')]
-          .map(check => Number(check.value));
-
+        const selected = [...choices.querySelectorAll("input:checked")].map(input => Number(input.value));
+        const minutes = Number(time.value);
         if (!selected.length) {
           message.textContent = "Selecione pelo menos um dia.";
           return;
         }
-
-        const value = Number(minutes.value);
-        if (!Number.isInteger(value) || value < 15 || value > 240 || value % 15) {
+        if (!Number.isInteger(minutes) || minutes < 15 || minutes > 240 || minutes % 15) {
           message.textContent = "Use entre 15 e 240 minutos, em múltiplos de 15.";
           return;
         }
-
         data.days = selected;
-        data.minutes = value;
+        data.minutes = minutes;
         save();
         display();
         message.textContent = "Cronograma atualizado.";
@@ -1173,24 +1063,126 @@
       display();
     }
 
-    /* Banco com as provas completas e cartões-resposta por perfil. */
+    /* Banco por escola e matéria. */
 
-    function paperBank() {
-      const picker = selectField("Instituição", schools.map(school => school.name));
-      picker.select.value = String(schoolIndex);
-      picker.select.onchange = () => {
-        schoolIndex = Number(picker.select.value);
-        navigate("questions");
-      };
+    function openBank(mode, school = schoolIndex, subject = subjectIndex) {
+      bankMode = mode;
+      schoolIndex = school;
+      subjectIndex = subject;
+      bankIndex = 0;
+      navigate("questions");
+    }
+
+    function questionBank() {
+      title("Banco de questões", "Escolha a escola ou a matéria que deseja praticar.");
+      const actions = element("div", undefined, "actions");
+
+      [
+        ["uploaded","Simulados preparatórios"],
+        ["papers","Provas completas"],
+        ["school","Questões comentadas"],
+        ["subject","Treino por matéria"]
+      ].forEach(([mode, label]) => {
+        actions.append(button(label, () => openBank(mode), bankMode !== mode));
+      });
+      $("content").append(actions);
+
+      if (bankMode === "papers") {
+        paperBank();
+        return;
+      }
 
       const school = schools[schoolIndex];
-      const box = card(school.name + " · " + school.edition,
-        school.key.length + " questões objetivas. Leia o caderno e marque a alternativa pelo número da questão.");
+      const uploaded = bankMode === "uploaded";
+      const bySubject = bankMode === "subject";
+      let items;
+      if (uploaded) items = prepBooks[school.book];
+      else if (bySubject) items = practice.filter(q => q[0] === subjects[subjectIndex]);
+      else items = school.items;
 
-      const controls = element("div", undefined, "actions");
-      controls.append(
-        link(school.paper.includes("scribd.com")
-          ? "Abrir caderno no Scribd ↗" : "Abrir caderno completo ↗", school.paper),
+      const fields = element("div", undefined, "fields");
+      if (bySubject) {
+        fields.append(picker("Matéria", subjects, subjectIndex,
+          value => openBank("subject", schoolIndex, value)));
+      } else {
+        fields.append(picker("Instituição", schools.map(s => s.name), schoolIndex,
+          value => openBank(bankMode, value)));
+      }
+
+      fields.append(picker("Escolher questão", items.map((q, i) =>
+        bankMode === "school" ? q[1] + " · " + q[0] : "Questão " + (i + 1) + " · " + q[1]),
+        bankIndex, value => {
+          bankIndex = value;
+          navigate("questions");
+        }));
+      $("content").append(fields);
+
+      const item = items[bankIndex];
+      let heading;
+      let description;
+      let answers;
+
+      if (uploaded) {
+        const bookName = school.book === "IFF_Sesc" ? "IFF e Escola Sesc" : school.name;
+        heading = "Simulado preparatório · " + bookName;
+        description = "Questão " + (bankIndex + 1) + " de " + items.length +
+          " · " + item[0] + " · " + item[1];
+        data.prepAnswers ||= {};
+        answers = data.prepAnswers[school.book] ||= {};
+      } else if (bySubject) {
+        heading = item[0];
+        description = "Treino autoral · " + item[1];
+      } else {
+        heading = school.name;
+        description = school.practiceEdition + " · " + item[1] + " adaptada";
+      }
+
+      const box = card(heading, description);
+      const current = bankIndex;
+      questionForm(box, item, {
+        explain: true,
+        letters: uploaded,
+        selected: answers?.[current],
+        submit(answer) {
+          if (answers) {
+            answers[current] = answer;
+            save();
+          }
+        }
+      });
+
+      const bottom = element("div", undefined, "actions");
+      bottom.style.marginTop = "16px";
+      if (bankIndex > 0) {
+        bottom.append(button("Questão anterior", () => {
+          bankIndex--;
+          navigate("questions");
+        }, true));
+      }
+      if (bankIndex + 1 < items.length) {
+        bottom.append(button("Próxima questão", () => {
+          bankIndex++;
+          navigate("questions");
+        }, true));
+      }
+      if (bankMode === "school") {
+        bottom.append(link("Abrir prova de origem ↗", school.practicePaper || school.paper));
+      }
+      box.append(bottom);
+      $("content").append(box);
+    }
+
+    function paperBank() {
+      const school = schools[schoolIndex];
+      const select = picker("Instituição", schools.map(s => s.name), schoolIndex,
+        value => openBank("papers", value));
+      const box = card(school.name + " · " + school.edition,
+        school.key.length + " questões objetivas. Leia o caderno e marque as alternativas no cartão.");
+
+      const links = element("div", undefined, "actions");
+      links.append(
+        link(school.paper.includes("scribd.com") ? "Abrir caderno no Scribd ↗" :
+          "Abrir caderno completo ↗", school.paper),
         link("Consultar gabarito ↗", school.answerKey)
       );
 
@@ -1200,51 +1192,43 @@
         if (!reader.open || reader.querySelector("iframe")) return;
         const frame = document.createElement("iframe");
         frame.className = "paper-reader";
-        frame.title = school.name + " · Caderno " + school.edition;
+        frame.title = school.name + " · " + school.edition;
         frame.src = school.reader || school.paper;
         reader.append(frame);
       };
-
-      box.append(controls, reader);
+      box.append(links, reader);
 
       const section = card("Cartão-resposta",
         "As marcações ficam salvas neste perfil. Você pode conferir uma tentativa parcial.");
-
       const storageId = schoolIndex + "/" + school.edition;
       data.paperAnswers ||= {};
       const answers = data.paperAnswers[storageId] ||= {};
-
       const grid = element("div", undefined, "answer-grid");
-      const feedbacks = [];
+      const labels = [];
       const report = element("p", "", "result");
       report.hidden = true;
       report.setAttribute("role", "status");
 
-      [...school.key].forEach((key, index) => {
-        const label = element("label", "Questão " + (index + 1), "field");
-        const select = document.createElement("select");
+      [...school.key].forEach((key, i) => {
+        const label = element("label", "Questão " + (i + 1), "field");
+        const choice = document.createElement("select");
         const feedback = element("small");
-
         if (key === "X") {
-          select.add(new Option("Anulada", ""));
-          select.disabled = true;
+          choice.add(new Option("Anulada", ""));
+          choice.disabled = true;
         } else {
-          select.add(new Option("Em branco", ""));
-          for (const letter of school.letters) {
-            select.add(new Option(letter, letter));
-          }
-          select.value = answers[index] || "";
-
-          select.onchange = () => {
-            answers[index] = select.value;
+          choice.add(new Option("Em branco", ""));
+          for (const letter of school.letters) choice.add(new Option(letter, letter));
+          choice.value = answers[i] || "";
+          choice.onchange = () => {
+            answers[i] = choice.value;
             report.hidden = true;
-            feedbacks.forEach(item => { item.textContent = ""; });
+            labels.forEach(msg => { msg.textContent = ""; });
             save();
           };
         }
-
-        label.append(select, feedback);
-        feedbacks.push(feedback);
+        labels.push(feedback);
+        label.append(choice, feedback);
         grid.append(label);
       });
 
@@ -1253,131 +1237,39 @@
         let errors = 0;
         let blank = 0;
         let cancelled = 0;
-
         [...school.key].forEach((key, i) => {
-          if (key === "X") {
-            cancelled++;
-          } else if (!answers[i]) {
-            blank++;
-          } else if (answers[i] === key) {
+          if (key === "X") cancelled++;
+          else if (!answers[i]) blank++;
+          else if (answers[i] === key) {
             hits++;
-            feedbacks[i].textContent = "Correta";
+            labels[i].textContent = "Correta";
           } else {
             errors++;
-            feedbacks[i].textContent = "Gabarito: " + key;
+            labels[i].textContent = "Gabarito: " + key;
           }
         });
-
         report.textContent = hits + " acertos · " + errors + " erros · " +
           blank + " em branco · " + cancelled + " anuladas.";
         report.hidden = false;
       }
 
       section.append(grid, button("Conferir cartão-resposta", correctPaper), report);
-      $("content").append(picker.label, box, section);
+      $("content").append(select, box, section);
     }
-
-    function questionBank() {
-      title("Banco de questões",
-        "Pratique por escola ou escolha uma matéria para o treino autoral.");
-
-      const actions = element("div", undefined, "actions");
-      [
-        ["papers", "Provas completas"],
-        ["school", "Questões comentadas"],
-        ["subject", "Treino por matéria"]
-      ].forEach(([mode, label]) => {
-        actions.append(button(label, () => {
-          bankMode = mode;
-          bankIndex = 0;
-          navigate("questions");
-        }, bankMode !== mode));
-      });
-
-      $("content").append(actions);
-
-      if (bankMode === "papers") {
-        paperBank();
-        return;
-      }
-
-      const bySchool = bankMode === "school";
-      const school = schools[schoolIndex];
-      const items = bySchool ? school.items :
-        practice.filter(item => item[0] === subjects[subjectIndex]);
-
-      const fields = element("div", undefined, "fields");
-      const source = selectField(
-        bySchool ? "Instituição" : "Matéria",
-        bySchool ? schools.map(item => item.name) : subjects
-      );
-      source.select.value = String(bySchool ? schoolIndex : subjectIndex);
-
-      source.select.onchange = () => {
-        if (bySchool) schoolIndex = Number(source.select.value);
-        else subjectIndex = Number(source.select.value);
-        bankIndex = 0;
-        navigate("questions");
-      };
-
-      const question = selectField("Escolher questão", items.map((item, i) =>
-        bySchool ? item[1] + " · " + item[0] : (i + 1) + " · " + item[1]));
-
-      question.select.value = String(bankIndex);
-      question.select.onchange = () => {
-        bankIndex = Number(question.select.value);
-        navigate("questions");
-      };
-
-      fields.append(source.label, question.label);
-      $("content").append(fields);
-
-      const item = items[bankIndex];
-      const box = card(bySchool ? school.name : item[0],
-        bySchool ? school.practiceEdition + " · " + item[1] + " adaptada"
-                 : "Treino autoral · " + item[1]);
-
-      questionForm(box, item, { explain: true });
-
-      const bottom = element("div", undefined, "actions");
-      bottom.style.marginTop = "16px";
-
-      if (bankIndex + 1 < items.length) {
-        bottom.append(button("Próxima questão", () => {
-          bankIndex++;
-          navigate("questions");
-        }, true));
-      }
-
-      if (bySchool) {
-        bottom.append(link("Abrir prova de origem ↗", school.practicePaper || school.paper));
-      }
-
-      box.append(bottom);
-      $("content").append(box);
-    }
-
-    /* Simulado com uma questão por matéria. */
 
     function simulation() {
-      title("Simulado geral",
-        "Uma questão autoral por matéria, com gabarito comentado ao final.");
+      title("Simulado geral", "Uma questão autoral por matéria, com gabarito comentado ao final.");
 
       if (!quiz) {
         const box = card("Rodada de seis questões",
           "Você pode circular pelo painel e voltar ao simulado enquanto a página estiver aberta.");
-
         box.append(button("Iniciar simulado", () => {
           quiz = {
-            items: subjects.map(subject => {
-              const pool = practice.filter(item => item[0] === subject);
-              return pool[Math.floor(Math.random() * pool.length)];
-            }),
+            items: subjects.map(subject => shuffled(practice.filter(q => q[0] === subject))[0]),
             answers: []
           };
           navigate("simulation");
         }));
-
         $("content").append(box);
         return;
       }
@@ -1386,49 +1278,36 @@
       if (i < quiz.items.length) {
         const item = quiz.items[i];
         const box = card("Questão " + (i + 1) + " de " + quiz.items.length, item[0]);
-
         questionForm(box, item, {
           label: i + 1 === quiz.items.length ? "Ver resultado" : "Próxima questão",
           submit(answer) {
             quiz.answers.push(answer);
-
             if (quiz.answers.length === quiz.items.length) {
               const score = quiz.items.filter((q, j) => q[4] === quiz.answers[j]).length;
-              data.history.push({
-                date: new Date().toISOString(),
-                score,
-                total: quiz.items.length
-              });
+              data.history.push({ date: new Date().toISOString(), score, total: quiz.items.length });
               save();
             }
-
             navigate("simulation");
           }
         });
-
         $("content").append(box);
         return;
       }
 
-      const score = quiz.items.filter((item, j) => item[4] === quiz.answers[j]).length;
+      const score = quiz.items.filter((q, j) => q[4] === quiz.answers[j]).length;
       const result = card("Resultado · " + score + " de " + quiz.items.length,
         "Abra cada matéria para conferir a explicação.");
-
-      quiz.items.forEach((item, j) => {
-        const correct = quiz.answers[j] === item[4];
+      quiz.items.forEach((q, j) => {
         const detail = element("details");
-
         detail.append(
-          element("summary", item[0] + " · " + (correct ? "Acertou" : "Revisar")),
-          element("p", item[2]),
-          element("p", "Sua resposta: " + item[3][quiz.answers[j]]),
-          element("p", "Gabarito: " + item[3][item[4]]),
-          element("p", item[5], "muted")
+          element("summary", q[0] + " · " + (q[4] === quiz.answers[j] ? "Acertou" : "Revisar")),
+          element("p", q[2]),
+          element("p", "Sua resposta: " + q[3][quiz.answers[j]]),
+          element("p", "Gabarito: " + q[3][q[4]]),
+          element("p", q[5], "muted")
         );
-
         result.append(detail);
       });
-
       $("content").append(result, button("Fazer outro simulado", () => {
         quiz = null;
         navigate("simulation");
@@ -1436,36 +1315,24 @@
     }
 
     function schoolDirectory() {
-      title("Escolas e provas",
-        "Escolha uma instituição para abrir o caderno ou praticar no painel.");
-
+      title("Escolas e provas", "Escolha a instituição para praticar no painel ou consultar o caderno.");
       const grid = element("div", undefined, "grid");
-
       schools.forEach((school, i) => {
         const box = card(school.name, school.edition);
         const actions = element("div", undefined, "actions");
-
         actions.append(
-          button("Praticar", () => {
-            schoolIndex = i;
-            bankIndex = 0;
-            bankMode = "papers";
-            navigate("questions");
-          }),
+          button("Praticar", () => openBank("uploaded", i)),
+          button("Cartão-resposta", () => openBank("papers", i), true),
           link("Abrir prova ↗", school.paper)
         );
-
         box.append(actions);
         grid.append(box);
       });
-
       $("content").append(grid);
     }
 
     function materials() {
-      title("Materiais de revisão",
-        "Leia um resumo curto e aplique o conceito no treino da matéria.");
-
+      title("Materiais de revisão", "Leia um resumo curto e aplique o conceito no treino da matéria.");
       const summaries = [
         "Porcentagem representa uma parte de 100. Para calcular 15% de um valor, multiplique por 0,15. Em um desconto, subtraia esse resultado do preço inicial.",
         "Para descobrir a que um pronome se refere, substitua-o pelo termo anterior e releia a frase. Confira se o sentido e a concordância foram preservados.",
@@ -1474,64 +1341,37 @@
         "Ao analisar uma fonte histórica, identifique quem a produziu, quando, com qual finalidade e de que ponto de vista. Compare-a com outras fontes do período.",
         "Procure marcadores de tempo antes de escolher o verbo. Yesterday indica passado. Every day costuma indicar uma ação habitual."
       ];
-
       const grid = element("div", undefined, "grid");
-
       subjects.forEach((subject, i) => {
         const box = card(subject, summaries[i]);
-
-        box.append(button("Praticar " + subject, () => {
-          bankMode = "subject";
-          subjectIndex = i;
-          bankIndex = 0;
-          navigate("questions");
-        }, true));
-
+        box.append(button("Praticar " + subject, () => openBank("subject", schoolIndex, i), true));
         grid.append(box);
       });
-
       $("content").append(grid);
     }
 
     function profilePage() {
       title("Meu perfil", data.name);
-
-      const box = card("Progresso neste navegador",
-        data.completed
-          ? "Avaliação inicial concluída."
-          : "Avaliação inicial: " + data.answers.filter(a => a !== null).length +
-            " de " + diagnostic.length + " respondidas.");
-
-      if (data.oldResults && !data.completed) {
-        box.append(element("p",
-          "Os dias e o tempo do plano anterior foram aproveitados. Responda à avaliação desta versão para atualizar as prioridades.",
-          "muted"));
-      }
-
-      box.append(button("Trocar de perfil", openProfileDialog, true));
-      $("content").append(box);
+      const answered = data.answers.filter(a => a !== null).length;
+      const box = card("Progresso neste navegador", data.completed
+        ? "Avaliação inicial concluída."
+        : "Avaliação inicial: " + answered + " de 20 respondidas.");
+      box.append(button("Trocar de perfil", openProfile, true));
 
       const history = card("Histórico de simulados");
-
       if (!data.history.length) {
-        history.append(element("p",
-          "Seus resultados aparecerão aqui ao concluir um simulado.", "muted"));
+        history.append(element("p", "Seus resultados aparecerão aqui ao concluir um simulado geral.", "muted"));
       } else {
         const list = element("ul");
-
         [...data.history].reverse().forEach(entry => {
           const date = new Date(entry.date).toLocaleDateString("pt-BR");
-          list.append(element("li",
-            date + " · " + entry.score + " de " + entry.total + " acertos"));
+          list.append(element("li", date + " · " + entry.score + " de " + entry.total + " acertos"));
         });
-
         history.append(list);
       }
-
-      $("content").append(history);
+      $("content").append(box, history);
     }
 
-    /* Retoma o último perfil aberto neste navegador. */
     if (active && profiles.has(active)) {
       enter(profiles.get(active).name);
     }
